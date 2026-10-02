@@ -1,0 +1,2 @@
+[functions.portrait-import]
+verify_jwt = false
