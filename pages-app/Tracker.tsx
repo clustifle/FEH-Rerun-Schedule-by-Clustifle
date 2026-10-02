@@ -9,6 +9,8 @@ const categories=['Legendary','Mythic','Emblem','Chosen Hero'];
 const monthName=(v:string)=>new Date(v+'-01T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'});
 export default function Home(){
  const [activeSchedule,setActiveSchedule]=useState('General');
+ const [mobileLayout,setMobileLayout]=useState(false);
+ useEffect(()=>{const media=window.matchMedia('(max-width: 600px)');const update=()=>setMobileLayout(media.matches);update();media.addEventListener('change',update);return()=>media.removeEventListener('change',update);},[]);
  const [heroSchedule,setHeroSchedule]=useState('General');
  const [heroCategory,setHeroCategory]=useState('Legendary'),[blessing,setBlessing]=useState('');
  const blessingDialog=useRef<HTMLDialogElement>(null);
@@ -47,9 +49,9 @@ export default function Home(){
  const selectedIndex=Math.max(0,months.indexOf(selectedMonth));
  const monthSpaces=(m:string)=>Math.max(2,...colors.map(c=>visible.filter(h=>h.month===m&&h.color===c).length));
  const revivalSpaces=(m:string,type:string)=>Math.max(2,...colors.map(c=>visible.filter(h=>h.month===m&&h.color===c&&h.category===type).length));
- const revivalWidth=(m:string,type:string)=>revivalSpaces(m,type)*118+24;
- const monthWidth=(m:string)=>activeSchedule==='Monthly Revival'?revivalWidth(m,'Legendary')+revivalWidth(m,'Mythic'):Math.max(260,monthSpaces(m)*118+24);
- const heights=colors.map(()=>238);
+ const revivalWidth=(m:string,type:string)=>revivalSpaces(m,type)*(mobileLayout?96:118)+(mobileLayout?20:24);
+ const monthWidth=(m:string)=>activeSchedule==='Monthly Revival'?revivalWidth(m,'Legendary')+revivalWidth(m,'Mythic'):Math.max(mobileLayout?220:260,monthSpaces(m)*(mobileLayout?96:118)+(mobileLayout?20:24));
+ const heights=colors.map(()=>mobileLayout?196:238);
  const gridRows=(activeSchedule==='Monthly Revival'?'104px ':'56px ')+heights.map(h=>h+'px').join(' ');
  function jump(index:number){const next=Math.max(0,Math.min(months.length-1,index));setSelectedMonth(months[next]);const el=board.current?.children[next] as HTMLElement|undefined;if(el&&board.current)board.current.scrollTo({left:el.offsetLeft,behavior:'smooth'});}
  useEffect(()=>{const i=months.indexOf(selectedMonth);const el=board.current?.children[i] as HTMLElement|undefined;if(el&&board.current)board.current.scrollLeft=el.offsetLeft;},[monthKey]);
