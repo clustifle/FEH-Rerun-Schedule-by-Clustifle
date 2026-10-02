@@ -9,7 +9,7 @@ create table if not exists public.heroes (
  month text check(month ~ '^[0-9]{4}-(0[1-9]|1[0-2])$'),
  status text not null check(status in ('Confirmed','Predicted','Uncertain','Unknown')),
  notes text not null default '' check(char_length(notes)<=2000),
- pool text check(pool in ('General Pool','Special Heroes Pool')),
+ pool text check(pool in ('General Pool','Limited Pool')),
  portrait text,
  blessing text,
  updated timestamptz not null default now(),
