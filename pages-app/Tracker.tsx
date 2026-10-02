@@ -68,7 +68,7 @@ export default function Home(){
    const offset=container.scrollLeft-state.target,omega=14,decay=Math.exp(-omega*dt),momentum=state.velocity+omega*offset;
    const position=state.target+(offset+momentum*dt)*decay;state.velocity=(state.velocity-omega*momentum*dt)*decay;
    container.scrollLeft=position;
-   if(Math.abs(position-state.target)<1.5&&Math.abs(state.velocity)<20){container.scrollLeft=state.target;stopMonthMotion();return;}
+   if(Math.abs(position-state.target)<3&&Math.abs(state.velocity)<45){container.scrollLeft=state.target;stopMonthMotion();return;}
    state.frame=requestAnimationFrame(animate);
   };
   state.frame=requestAnimationFrame(animate);
