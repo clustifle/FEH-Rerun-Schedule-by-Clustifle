@@ -3,18 +3,20 @@ create table if not exists public.heroes (
  id uuid primary key,
  name text not null check(char_length(name) between 1 and 100),
  title text not null default '' check(char_length(title)<=150),
- category text not null check(category in ('Legendary','Mythic','Emblem','Chosen Hero')),
- schedule text not null default 'General' check(schedule in ('General','Remix','Monthly Revival')),
+ category text not null check(category in ('Legendary','Mythic','Emblem','Chosen Hero','Rearmed','Attuned','Aided','Entwined','Duo','Harmonized','Vista')),
+ schedule text not null default 'General' check(schedule in ('General','Remix','Monthly Revival','Waitlist')),
  color text not null check(color in ('Red','Blue','Green','Colorless')),
  month text check(month ~ '^[0-9]{4}-(0[1-9]|1[0-2])$'),
  status text not null check(status in ('Confirmed','Predicted','Uncertain','Unknown')),
  notes text not null default '' check(char_length(notes)<=2000),
+ pool text check(pool in ('General Pool','Special Heroes Pool')),
  portrait text,
  blessing text,
  updated timestamptz not null default now(),
- check(status='Unknown' or month is not null),
+ check(schedule='Waitlist' or status='Unknown' or month is not null),
+ check(schedule<>'Waitlist' or month is null),
  check(schedule<>'Monthly Revival' or category in ('Legendary','Mythic')),
- check((category='Emblem' and blessing is null) or (category in ('Legendary','Chosen Hero') and (blessing is null or blessing in ('Wind','Earth','Fire','Water'))) or (category='Mythic' and (blessing is null or blessing in ('Anima','Astra','Light','Dark'))))
+ check((category not in ('Legendary','Mythic','Chosen Hero') and blessing is null) or (category in ('Legendary','Chosen Hero') and (blessing is null or blessing in ('Wind','Earth','Fire','Water'))) or (category='Mythic' and (blessing is null or blessing in ('Anima','Astra','Light','Dark'))))
 );
 alter table public.heroes enable row level security;
 revoke all on public.heroes from anon, authenticated;

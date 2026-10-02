@@ -1,0 +1,12 @@
+begin;
+alter table public.heroes add column if not exists pool text check(pool in ('General Pool','Special Heroes Pool'));
+alter table public.heroes drop constraint heroes_category_check;
+alter table public.heroes add constraint heroes_category_check check(category in ('Legendary','Mythic','Emblem','Chosen Hero','Rearmed','Attuned','Aided','Entwined','Duo','Harmonized','Vista'));
+alter table public.heroes drop constraint heroes_schedule_check;
+alter table public.heroes add constraint heroes_schedule_check check(schedule in ('General','Remix','Monthly Revival','Waitlist'));
+alter table public.heroes drop constraint heroes_check;
+alter table public.heroes add constraint heroes_check check(schedule='Waitlist' or status='Unknown' or month is not null);
+alter table public.heroes add constraint heroes_waitlist_month_check check(schedule<>'Waitlist' or month is null);
+alter table public.heroes drop constraint heroes_check2;
+alter table public.heroes add constraint heroes_check2 check((category not in ('Legendary','Mythic','Chosen Hero') and blessing is null) or (category in ('Legendary','Chosen Hero') and (blessing is null or blessing in ('Wind','Earth','Fire','Water'))) or (category='Mythic' and (blessing is null or blessing in ('Anima','Astra','Light','Dark'))));
+commit;
