@@ -1,0 +1,25 @@
+{
+  "id": "./",
+  "name": "Fire Emblem Heroes: Rerun Schedule",
+  "short_name": "FEH Rerun",
+  "description": "Rerun schedules and waitlist by Clustifle.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#234b59",
+  "theme_color": "#234b59",
+  "icons": [
+    {
+      "src": "icons/app-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/app-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
