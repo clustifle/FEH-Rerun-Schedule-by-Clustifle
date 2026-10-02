@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1790928392742,
+      "tag": "0000_material_zuras",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1790948930850,
+      "tag": "0001_predicted_status",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1790949393415,
+      "tag": "0002_hero_blessing",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1790951550061,
+      "tag": "0003_schedule_space",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+import { portraits } from '@/lib/storage';
+export async function GET(_r:Request,{params}:{params:Promise<{id:string}>}){try{const {id}=await params;const o=await portraits().get(id);if(!o)return new Response('Not found',{status:404});return new Response(o.body,{headers:{'Content-Type':o.httpMetadata?.contentType||'image/png','Cache-Control':'private, max-age=86400','X-Content-Type-Options':'nosniff'}});}catch(e){console.error(e);return new Response('Portrait unavailable',{status:503});}}
