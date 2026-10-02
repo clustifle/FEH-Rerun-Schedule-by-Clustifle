@@ -1,7 +1,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {X,LockKeyhole} from 'lucide-react';
 import {supabase,ownerSession} from './static-data';
-const ownerEmail='shyguyvn@gmail.com';
+
 export default function OwnerLogin(){
  const dialog=useRef<HTMLDialogElement>(null);
  const [email,setEmail]=useState('');
@@ -21,12 +21,12 @@ export default function OwnerLogin(){
   const form=new FormData(event.currentTarget);
   try{
    if(mode==='forgot'){
-    if(email.trim().toLowerCase()!==ownerEmail)throw new Error('Enter the owner account email to reset your password.');
+    
     const {error}=await supabase.auth.resetPasswordForEmail(email.trim().toLowerCase(),{redirectTo:location.origin+import.meta.env.BASE_URL});
-    if(error)throw error;setMessage('Check your owner email for the password reset link.');
+    if(error)throw error;setMessage('Check your email for the password reset link.');
    }else if(mode==='recovery'){
     const password=String(form.get('password'));if(password!==form.get('confirm'))throw new Error('Passwords do not match.');
-    const {data:{user}}=await supabase.auth.getUser();if(!user||user.email?.toLowerCase()!==ownerEmail)throw new Error('This reset link is not for the owner account.');
+    const {data:{user}}=await supabase.auth.getUser();if(!user||!await ownerSession())throw new Error('This reset link is not for an authorized editor account.');
     const {error}=await supabase.auth.updateUser({password});if(error)throw error;setMessage('Password updated. You can close this window.');setMode('login');history.replaceState(null,'',location.pathname);
    }else{
     const {error}=await supabase.auth.signInWithPassword({email:email.trim().toLowerCase(),password:String(form.get('password'))});
@@ -36,5 +36,5 @@ export default function OwnerLogin(){
    }
   }catch(e){setError(e instanceof Error?e.message:'Could not complete this request.');}finally{setBusy(false);}
  }
- return <dialog ref={dialog} className="owner-login-popup" aria-labelledby="owner-login-title" onCancel={e=>{if(busy)e.preventDefault();}}><form onSubmit={submit} key={mode}><div className="dialog-top"><LockKeyhole/><button type="button" className="icon-button" aria-label="Close owner login" disabled={busy} onClick={()=>dialog.current?.close()}><X/></button></div><h2 id="owner-login-title">{mode==='recovery'?'Choose a new password':mode==='forgot'?'Reset owner password':'Owner sign in'}</h2><p className="owner-login-intro">Only the owner account can manage this schedule.</p>{mode!=='recovery'&&<label>Email<input type="email" name="email" value={email} onChange={event=>setEmail(event.target.value)} required autoComplete="off" placeholder="Enter your email" disabled={busy}/></label>}{mode!=='forgot'&&<label>{mode==='recovery'?'New password':'Password'}<input type="password" name="password" required minLength={mode==='recovery'?12:undefined} autoComplete={mode==='recovery'?'new-password':'current-password'} disabled={busy}/></label>}{mode==='recovery'&&<label>Confirm new password<input type="password" name="confirm" required minLength={12} autoComplete="new-password" disabled={busy}/></label>}{error&&<p role="alert" className="error">{error}</p>}{message&&<p role="status" className="import-success">{message}</p>}<button className="primary" disabled={busy}>{busy?'Please wait…':mode==='recovery'?'Update password':mode==='forgot'?'Send reset link':'Sign in'}</button><button type="button" className="owner-forgot" disabled={busy} onClick={()=>{setMode(mode==='forgot'?'login':'forgot');setError('');setMessage('');}}>{mode==='forgot'?'Back to sign in':mode==='login'?'Forgot password?':'Back to sign in'}</button></form></dialog>;
+ return <dialog ref={dialog} className="owner-login-popup" aria-labelledby="owner-login-title" onCancel={e=>{if(busy)e.preventDefault();}}><form onSubmit={submit} key={mode}><div className="dialog-top"><LockKeyhole/><button type="button" className="icon-button" aria-label="Close owner login" disabled={busy} onClick={()=>dialog.current?.close()}><X/></button></div><h2 id="owner-login-title">{mode==='recovery'?'Choose a new password':mode==='forgot'?'Reset owner password':'Owner sign in'}</h2><p className="owner-login-intro">Only authorized editor accounts can manage this schedule.</p>{mode!=='recovery'&&<label>Email<input type="email" name="email" value={email} onChange={event=>setEmail(event.target.value)} required autoComplete="off" placeholder="Enter your email" disabled={busy}/></label>}{mode!=='forgot'&&<label>{mode==='recovery'?'New password':'Password'}<input type="password" name="password" required minLength={mode==='recovery'?12:undefined} autoComplete={mode==='recovery'?'new-password':'current-password'} disabled={busy}/></label>}{mode==='recovery'&&<label>Confirm new password<input type="password" name="confirm" required minLength={12} autoComplete="new-password" disabled={busy}/></label>}{error&&<p role="alert" className="error">{error}</p>}{message&&<p role="status" className="import-success">{message}</p>}<button className="primary" disabled={busy}>{busy?'Please wait…':mode==='recovery'?'Update password':mode==='forgot'?'Send reset link':'Sign in'}</button><button type="button" className="owner-forgot" disabled={busy} onClick={()=>{setMode(mode==='forgot'?'login':'forgot');setError('');setMessage('');}}>{mode==='forgot'?'Back to sign in':mode==='login'?'Forgot password?':'Back to sign in'}</button></form></dialog>;
 }

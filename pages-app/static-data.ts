@@ -38,7 +38,7 @@ async function importImage(url:string){
 }
 export async function apiFetch(input:string,init?:RequestInit){
  try{
-  if(input==='/api/session')return Response.json({canEdit:await ownerSession()});
+  if(input==='/api/session'){const {data:role}=await supabase.rpc('tracker_role');return Response.json({canEdit:role==='Owner'||role==='Manager',role});}
   if(input==='/api/heroes'&&(!init?.method||init.method==='GET')){
    const {data,error}=await supabase.from('heroes').select('*').order('month',{nullsFirst:false}).order('name');
    if(error)throw new Error('Schedule unavailable. '+error.message);
