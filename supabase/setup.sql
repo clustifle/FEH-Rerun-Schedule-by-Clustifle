@@ -3,7 +3,7 @@ create table if not exists public.heroes (
  id uuid primary key,
  name text not null check(char_length(name) between 1 and 100),
  title text not null default '' check(char_length(title)<=150),
- category text not null check(category in ('Legendary','Mythic','Emblem','Chosen Hero','Rearmed','Attuned','Aided','Entwined','Duo','Harmonized','Vista')),
+ category text not null check(category in ('Legendary','Mythic','Emblem','Chosen Hero','Rearmed','Attuned','Aided','Entwined','Duo','Harmonized','Vista','General','Special')),
  schedule text not null default 'General' check(schedule in ('General','Remix','Monthly Revival','Waitlist')),
  color text not null check(color in ('Red','Blue','Green','Colorless')),
  month text check(month ~ '^[0-9]{4}-(0[1-9]|1[0-2])$'),
