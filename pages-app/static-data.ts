@@ -4,12 +4,37 @@ export const assetUrl=(value:string)=>import.meta.env.BASE_URL+value.replace(/^\
 export const portraitUrl=(value:string)=>value.startsWith('data/')?assetUrl(value):supabase.storage.from('portraits').getPublicUrl(value).data.publicUrl;
 export async function ownerSession(){const {data:{session}}=await supabase.auth.getSession();if(!session)return false;const {data,error}=await supabase.rpc('is_tracker_owner');return !error&&data===true;}
 const fail=(error:unknown,status=400)=>Response.json({error:error instanceof Error?error.message:String(error)},{status});
+function portraitCandidates(value:string){
+ const url=new URL(value.trim());const host=url.hostname.toLowerCase();
+ if(url.protocol!=='https:'||url.username||url.password||(url.port&&url.port!=='443')||!(host==='wikia.nocookie.net'||host.endsWith('.wikia.nocookie.net')||host==='cdn.wikimg.net'||host==='upload.wikimedia.org'))throw new Error('Use a direct HTTPS image link from FEH Wiki, Fandom/Wikia, or Wikimedia.');
+ const candidates=[url.href];
+ if(host==='wikia.nocookie.net'||host.endsWith('.wikia.nocookie.net')){const canonical=new URL(url.href);canonical.hostname='static.wikia.nocookie.net';candidates.push(canonical.href);canonical.pathname=canonical.pathname.split('/revision/')[0];canonical.search='';candidates.push(canonical.href);}
+ return [...new Set(candidates)];
+}
+async function browserPortrait(url:string){
+ const response=await fetch(url,{credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(12000)});
+ if(!response.ok)throw new Error('Image host returned '+response.status);
+ if(Number(response.headers.get('content-length')||0)>3145728)throw new Error('Choose a portrait under 3 MB.');
+ const reader=response.body?.getReader();if(!reader)throw new Error('Empty portrait');
+ const chunks:Uint8Array[]=[];let size=0;
+ try{while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>3145728){await reader.cancel();throw new Error('Choose a portrait under 3 MB.');}chunks.push(value);}}finally{reader.releaseLock();}
+ const bytes=new Uint8Array(size);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}
+ const png=bytes.length>=8&&bytes[0]===137&&bytes[1]===80&&bytes[2]===78&&bytes[3]===71&&bytes[4]===13&&bytes[5]===10&&bytes[6]===26&&bytes[7]===10;
+ const jpg=bytes.length>=3&&bytes[0]===255&&bytes[1]===216&&bytes[2]===255;
+ const webp=bytes.length>=12&&String.fromCharCode(...bytes.slice(0,4))==='RIFF'&&String.fromCharCode(...bytes.slice(8,12))==='WEBP';
+ if(!png&&!jpg&&!webp)throw new Error('The link must contain a PNG, JPG, or WebP image.');
+ return new Blob([bytes],{type:png?'image/png':jpg?'image/jpeg':'image/webp'});
+}
 async function importImage(url:string){
+ const candidates=portraitCandidates(url);
  const {data:{session}}=await supabase.auth.getSession();
  if(!session)throw new Error('Sign in as the owner first.');
  const response=await fetch('https://aknsqeqykjgdyhdroqcx.supabase.co/functions/v1/portrait-import',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+session.access_token},body:JSON.stringify({url})});
- if(!response.ok){const d=await response.json();throw new Error(d.error||'Could not import portrait.');}
- return response.blob();
+ if(response.ok)return response.blob();
+ const d=await response.json();
+ if(response.status===401||response.status===403)throw new Error(d.error||'Owner sign-in required.');
+ for(const candidate of candidates){try{return await browserPortrait(candidate);}catch{/* Try the canonical wiki URL if the legacy host fails. */}}
+ throw new Error(d.error||'Could not import portrait. Check the direct image link.');
 }
 export async function apiFetch(input:string,init?:RequestInit){
  try{
