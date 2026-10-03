@@ -1,8 +1,7 @@
-const DAY=86400000;
-// Date-only banner end dates include the whole UTC day.
-export function bannerTiming(startsOn:string,endsOn:string,now:number){
- const start=Date.parse(startsOn+'T00:00:00Z');
- const end=Date.parse(endsOn+'T00:00:00Z')+DAY;
+// Banner dates and times are explicitly UTC.
+export function bannerTiming(startsOn:string,endsOn:string,now:number,startTime='07:00',endTime='06:59'){
+ const start=Date.parse(startsOn+'T'+startTime+'Z');
+ const end=Date.parse(endsOn+'T'+endTime+'Z');
  const remaining=Math.max(0,end-now);
  const minutes=Math.ceil(remaining/60000);
  const days=Math.floor(minutes/1440),hours=Math.floor(minutes%1440/60),mins=minutes%60;

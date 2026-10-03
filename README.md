@@ -48,7 +48,7 @@ Legendary and Chosen entries offer Wind, Earth, Fire, and Water tags. Mythic ent
 
 ## Homepage banners
 
-Owners and Managers can use **+ Add new…** on The Homepage to save a banner name, start and end dates, and select existing heroes for its slots. Dates use UTC and include both endpoints. Ongoing banners appear automatically; upcoming and ended entries remain available to editors. **Edit banner / slots** updates a lineup, and **Create hero in banner** adds a new hero directly. Banner membership does not change the hero’s rerun schedule.
+Owners and Managers can use **+ Add new…** on The Homepage to save a banner name, start and end dates, and select existing heroes for its slots. Editors enter UTC dates and times, with FEH defaults of 07:00 for the start and 06:59 for the end. Visitors see these times automatically converted to their local timezone. Ongoing banners appear automatically; upcoming and ended entries remain available to editors. **Edit banner / slots** updates a lineup, and **Create hero in banner** adds a new hero directly. Banner membership does not change the hero’s rerun schedule.
 
 ## Add or edit heroes
 
