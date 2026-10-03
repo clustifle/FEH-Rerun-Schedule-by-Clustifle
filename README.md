@@ -56,7 +56,7 @@ Editing requires an authorized **Owner** or **Manager** account. Public visitors
 
 1. Open **Owner sign in** and enter your own account email and password manually. Use **Forgot password?** if needed.
 2. Choose **Add hero**, or open a hero's details and select its edit action.
-3. Select the schedule, hero type, color, pool, and blessing where applicable. Enter the name and title.
+3. Select the schedule, hero type, color, pool, and blessing where applicable. Enter the name and title. Check **Demote · 4–5★ summonable** when applicable; this is shown in Hero Details and hover previews.
 4. Add a rerun month for a dated entry, or select Rerun Waitlist when no month is available. **Skip next rerun month** also saves the hero to Waitlist when an EoM return is uncertain; homepage banner membership stays intact. To move a waitlisted hero into a dated view, select its schedule and month.
 5. Add a portrait and a note explaining the announcement, prediction, or other context.
 6. Select **Save hero**. Changes are stored in Supabase and do not require a frontend rebuild.
