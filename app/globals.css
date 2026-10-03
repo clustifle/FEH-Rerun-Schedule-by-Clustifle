@@ -149,3 +149,7 @@ html:has(.density-preparing)::view-transition-group(*){animation-duration:.64s;a
 @media(max-width:760px){.tracker .masthead{grid-template-columns:minmax(0,1fr) 44px;grid-template-rows:auto auto;gap:10px;padding:18px 16px 12px}.tracker .masthead .feh-wordmark{grid-column:1;grid-row:1}.tracker .masthead .feh-wordmark img{width:240px;max-width:100%}.tracker .masthead .owner-tools{grid-column:1/-1;grid-row:2;justify-content:flex-start}.tracker .header-navigation{display:none}.mobile-menu-toggle{display:flex;grid-column:2;grid-row:1;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid #a6dfea30;border-radius:12px;background:#a2deea0c;color:#edfaff;cursor:pointer}}
 @media(prefers-reduced-motion:reduce){.mobile-navigation-drawer[open],.mobile-navigation-drawer.is-closing,.mobile-navigation-drawer::backdrop,.mobile-navigation-drawer.is-closing::backdrop{animation:none}}
 body:has(.mobile-navigation-drawer[open]){overflow:hidden}
+/* Frosted mobile navigation and title-case desktop labels. */
+.header-navigation button{text-transform:none}
+.mobile-navigation-drawer{background:linear-gradient(155deg,#193b4870,#0a202ba6);backdrop-filter:blur(22px) saturate(115%);-webkit-backdrop-filter:blur(22px) saturate(115%);border-left-color:#c9f2fa20;box-shadow:-20px 0 60px #03121d35}
+.mobile-navigation-drawer::backdrop{background:#04121e70;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
