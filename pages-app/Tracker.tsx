@@ -13,6 +13,7 @@ const kindClass=(h:Hero)=>['Legendary','Mythic','Chosen Hero'].includes(h.catego
 const blessingIcon=(category:string,blessing:string)=>assetUrl((category==='Chosen Hero'?'chosen/':'blessings/')+blessing.toLowerCase()+(category==='Chosen Hero'?'.png':'.webp'));
 function HeroTypeTag({hero}:{hero:Hero}){
  const label=hero.category==='Chosen Hero'?'Chosen':hero.category;
+ if(['General','Special'].includes(hero.category))return <span className={'hero-type-signature '+hero.category.toLowerCase()+'-signature'}><img src={assetUrl('pools/'+(hero.category==='General'?'general':'special')+'.webp')} alt="" width={32} height={32}/><span className="hero-type-copy"><strong>{label}</strong></span></span>;
  if(['Emblem','Duo','Harmonized','Rearmed','Attuned','Aided','Entwined','Vista'].includes(hero.category))return <span className={'hero-type-signature '+hero.category.toLowerCase()+'-signature'}><img src={assetUrl('hero-types/'+hero.category.toLowerCase()+'.webp')} alt="" width={32} height={32}/><span className="hero-type-copy"><strong>{label}</strong></span></span>;
  if(!['Legendary','Mythic','Chosen Hero'].includes(hero.category))return <span className={'hero-kind '+kindClass(hero)}>{label}</span>;
  return <span className={'hero-type-signature '+(hero.blessing?.toLowerCase()||'unblessed')}>
@@ -21,9 +22,9 @@ function HeroTypeTag({hero}:{hero:Hero}){
  </span>;
 }
 
-const pools=['General Pool','Special Heroes Pool','L/M/E Pool'];
-const defaultPool=(category:string)=>['Legendary','Mythic','Emblem'].includes(category)?'L/M/E Pool':['Special','Duo','Harmonized'].includes(category)?'Special Heroes Pool':'General Pool';
-function PoolTag({pool}:{pool:string}){const kind=pool==='L/M/E Pool'?'lme':pool==='Special Heroes Pool'?'special':'general';return <span className={'pool-signature '+kind}><img src={assetUrl('pools/'+kind+'.webp')} alt="" width={24} height={24}/><strong>{pool}</strong></span>;}
+const pools=['General Pool','Limited Pool','L/M/E Pool'];
+const defaultPool=(category:string)=>['Legendary','Mythic','Emblem'].includes(category)?'L/M/E Pool':['Special','Duo','Harmonized','Rearmed','Attuned','Aided','Entwined','Vista','Chosen Hero'].includes(category)?'Limited Pool':'General Pool';
+function PoolTag({pool}:{pool:string}){const kind=pool==='L/M/E Pool'?'lme':pool==='Limited Pool'?'special':'general';return <span className={'pool-signature '+kind}><img src={assetUrl('pools/'+kind+'.webp')} alt="" width={24} height={24}/><strong>{pool}</strong></span>;}
 const categories=['Legendary','Mythic','Emblem','Chosen Hero','Rearmed','Attuned','Aided','Entwined','Duo','Harmonized','Vista','General','Special'];
 const monthName=(v:string)=>new Date(v+'-01T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'});
 export default function Home(){
@@ -88,7 +89,7 @@ export default function Home(){
  function viewHero(h:Hero){hideHeroPreview();setViewedHero(h);heroDetails.current?.showModal();}
  function closeHeroDetails(){heroDetails.current?.close();}
  const dialog=useRef<HTMLDialogElement>(null),fileRef=useRef<HTMLInputElement>(null);
- async function load(quiet=false){if(!quiet)setLoading(true);setError('');try{const r=await apiFetch('/api/heroes');const d=await r.json() as Hero[] & {error?:string};if(!r.ok)throw new Error(d.error);setHeroes(d.map(h=>({...h,pool:!h.pool||h.pool==='Limited Pool'?defaultPool(h.category):h.pool,status:h.status==='Estimated'?'Predicted':h.status}))); }catch(e){setError((e as Error).message);}finally{setLoading(false);}}
+ async function load(quiet=false){if(!quiet)setLoading(true);setError('');try{const r=await apiFetch('/api/heroes');const d=await r.json() as Hero[] & {error?:string};if(!r.ok)throw new Error(d.error);setHeroes(d.map(h=>({...h,pool:h.pool==='Special Heroes Pool'?'Limited Pool':h.pool||defaultPool(h.category),status:h.status==='Estimated'?'Predicted':h.status}))); }catch(e){setError((e as Error).message);}finally{setLoading(false);}}
  useEffect(()=>{load();},[]);
  function open(h:Hero|null){if(!canEdit)return;setImportedUrl('');setPortraitUrl('');setImportedPortrait(null);setPortraitMessage('');setHeroSchedule(h?.status==='Unknown'?'Waitlist':h?.schedule||activeSchedule);setHeroCategory(h?.category||(activeSchedule==='Waitlist'?'Rearmed':'Legendary'));setHeroPool(h?.pool||defaultPool(h?.category||(activeSchedule==='Waitlist'?'Rearmed':'Legendary')));setBlessing(h?.blessing||'');setEditing(h);setStatus(h?.status||'Confirmed');setPreview(h?.portrait?heroPortraitUrl(h.portrait):'');setError('');dialog.current?.showModal();}
  function close(){dialog.current?.close();setImportedPortrait(null);setPortraitMessage('');setEditing(undefined);setPreview('');}
