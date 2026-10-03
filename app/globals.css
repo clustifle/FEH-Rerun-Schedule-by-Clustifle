@@ -194,3 +194,7 @@ body:has(.mobile-navigation-drawer[open]){overflow:hidden}
 /* Readable type signatures in the four-hero feature layout. */
 .tracker .featured-banner-hero .hero-type-signature{gap:8px;min-height:38px;max-width:100%;white-space:normal}.tracker .featured-banner-hero .hero-type-signature img{width:36px;height:36px;flex-shrink:0}.tracker .featured-banner-hero .hero-type-copy strong{font-size:17px;line-height:1.2}.tracker .featured-banner-hero .hero-type-copy>span{font-size:15px;line-height:1.2}.tracker .featured-banner-hero .hero-kind{font-size:17px;line-height:1.2}.tracker .featured-banner-hero .hero-tile{gap:14px}
 @media(max-width:760px){.tracker .featured-banner-hero .hero-type-signature{gap:7px}.tracker .featured-banner-hero .hero-type-signature img{width:34px;height:34px}.tracker .featured-banner-hero .hero-type-copy strong{font-size:16px}.tracker .featured-banner-hero .hero-type-copy>span{font-size:14px}.tracker .featured-banner-hero .hero-kind{font-size:16px}}
+/* Fade neighboring cards at the carousel edges without covering controls. */
+.banner-carousel{mask-image:linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%)}
+.banner-carousel:has(.single-banner){mask-image:none;-webkit-mask-image:none}
+@media(max-width:760px){.banner-carousel{mask-image:linear-gradient(to right,transparent 0%,#000 3%,#000 97%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 3%,#000 97%,transparent 100%)}}
