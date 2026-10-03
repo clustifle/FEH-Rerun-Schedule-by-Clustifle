@@ -93,7 +93,7 @@ export default function Home(){
  const revivalSpaces=(m:string,type:string)=>Math.max(2,...colors.map(c=>visible.filter(h=>h.month===m&&h.color===c&&h.category===type).length));
  const revivalWidth=(m:string,type:string)=>revivalSpaces(m,type)*(compact?64:mobileLayout?84:92)+(mobileLayout?20:24);
  const monthWidth=(m:string)=>activeSchedule==='Monthly Revival'?revivalWidth(m,'Legendary')+revivalWidth(m,'Mythic'):Math.max(compact?148:mobileLayout?188:208,monthSpaces(m)*(compact?64:mobileLayout?84:92)+(mobileLayout?20:24));
- const heights=colors.map(()=>compact?88:mobileLayout?152:144);
+ const heights=colors.map(()=>compact?88:mobileLayout?152:120);
  const gridRows=(activeSchedule==='Monthly Revival'?(compact?'60px ':'76px '):(compact?'34px ':'42px '))+heights.map(h=>h+'px').join(' ');
  const motion=useRef<{frame:number|null;target:number;velocity:number;time:number}>({frame:null,target:0,velocity:0,time:0});
  function stopMonthMotion(){const state=motion.current;if(state.frame!==null)cancelAnimationFrame(state.frame);state.frame=null;state.velocity=0;board.current?.removeAttribute('data-moving');}
