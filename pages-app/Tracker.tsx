@@ -49,11 +49,23 @@ export default function Home(){
   if(densityPhase!=='idle')return;
   hideHeroPreview();stopMonthMotion();
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){setCompact(v=>!v);return;}
-  const settle=()=>new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve())));
   if(document.startViewTransition){
    flushSync(()=>setDensityPhase('preparing'));
    try{
-    const transition=document.startViewTransition(async()=>{flushSync(()=>setCompact(v=>!v));await settle();});
+    const transition=document.startViewTransition(()=>{
+     const nextCompact=!savedCompact;
+     flushSync(()=>setCompact(nextCompact));
+     const root=document.querySelector('.tracker');if(!root)return;
+     const viewport=window.visualViewport?.height||window.innerHeight;
+     const overhead=['.masthead','.toolbar','.month-control','footer'].reduce((sum,selector)=>sum+(root.querySelector(selector)?.getBoundingClientRect().height||0),0);
+     const mobile=window.innerWidth<=600;
+     const heading=activeSchedule==='Waitlist'?0:activeSchedule==='Monthly Revival'?(nextCompact?60:76):(nextCompact?34:42);
+     const row=mobile?(nextCompact?88:152):Math.round(Math.max(nextCompact?76:activeSchedule==='Waitlist'?116:106,Math.min(nextCompact?120:190,(viewport-overhead-heading-38)/4)));
+     const portrait=nextCompact?Math.max(38,Math.min(64,row-30)):Math.max(44,Math.min(104,row-(activeSchedule==='Waitlist'?68:52)));
+     const step=Math.max(nextCompact?58:88,portrait+24);
+     flushSync(()=>setViewportFit({row,portrait,step}));
+    });
+    void transition.ready.catch(()=>{});void transition.updateCallbackDone.catch(()=>{});
     await transition.finished;
    }catch{/* Keep the selected density if a browser cancels the visual transition. */}
    finally{setDensityPhase('idle');}
