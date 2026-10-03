@@ -8,8 +8,6 @@ The website was originally made on ChatGPT Sites and later migrated to GitHub Pa
 
 ## Browse the tracker
 
-No account is required to view schedules.
-
 1. Click the schedule heading at the top to open the schedule selector.
 2. Choose a view from the table below.
 3. Search by hero name or title using **Find a hero**. Use **Hero type** and **Advanced filters** to narrow by type, color, rerun status, and pool.
@@ -90,61 +88,31 @@ Installation adds a home-screen icon and standalone window. An internet connecti
 
 ## Hosting and development
 
-- **Frontend:** React + TypeScript + Vite, deployed to GitHub Pages.
-- **Backend:** Supabase database, Authentication, Storage, and a portrait-import Edge Function.
-- **Deployment:** Pushes to `main` run type checks, build the frontend, and deploy through [GitHub Actions](https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/actions). Repository Settings → Pages uses **GitHub Actions**.
-- **Data:** Public reads; database and storage policies restrict writes to the owner and authorized managers.
+The frontend uses **React, TypeScript, and Vite** on **GitHub Pages**. **Supabase** provides the database, sign-in, portrait storage, and image import. The tracker is publicly viewable; only the owner and authorized managers can edit.
 
-Use Node 24 and pnpm 11, matching the deployment workflow:
+Pushes to `main` automatically check, build, and deploy through [GitHub Actions](https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/actions). Hero edits are saved directly to Supabase without rebuilding the website.
+
+For local development, use **Node 24** and **pnpm 11**:
 
 ```sh
 pnpm install --frozen-lockfile
 pnpm dev:pages
 ```
 
-Validation and preview:
+To check and build:
 
 ```sh
 pnpm exec tsc -p tsconfig.pages.json
 pnpm build:pages
-pnpm preview:pages
 ```
 
-### Backend configuration
-
-The current backend is already configured. Do not rerun historical migrations on the live database indiscriminately.
-
-For a separate installation, review the SQL and replace the pinned owner identity and Supabase project configuration with your own before applying them:
-
-1. Create the database/storage setup using `supabase/setup.sql`. Optionally restore the original exported heroes using `supabase/import-heroes.sql`; this import preserves existing hero IDs.
-2. Configure a confirmed owner account, disable public sign-ups, and set the Authentication Site URL and allowed redirect URL to your deployed URL, including its trailing slash.
-3. Apply `supabase/manager-roles.sql` after setup. See `supabase/MANAGERS.md`. The legacy `lock-owner.sql` must not be applied after enabling managers.
-4. Apply `supabase/unknown-waitlist.sql` once to enable database-side routing of Unknown entries. Its trigger creation is a one-time migration.
-5. Deploy `supabase/functions/portrait-import`. Gateway JWT verification is disabled for this function because it performs its own user JWT and editor authorization checks.
-6. Update `pages-app/static-data.ts` with your project URL and publishable key. Update the Vite base path, Authentication redirects, and owner identity references to match your deployment.
-
-`waitlist-migration.sql`, `limited-pool-migration.sql`, and `general-special-types.sql` document upgrades to the existing project; the current `setup.sql` already includes their final type/pool/schedule definitions. `add-authorized-editor.sql` is specific to the original project's initial manager.
-
-The Supabase publishable key is public frontend configuration. Never commit passwords, service-role keys, secret keys, or access tokens. Free hosting depends on the providers' ongoing plans and availability.
-
-### Source layout
-
-| Path | Purpose |
-| --- | --- |
-| `pages-app/` | Active React frontend, Supabase adapter, sign-in, managers, FAQ, and installation UI. |
-| `app/globals.css` | Shared website styling and responsive layouts. |
-| `lib/blessings.ts` | Blessing options used by the editor. |
-| `public/` | Logo, fonts, original portraits, app icons, manifest, service worker, and offline page. |
-| `supabase/` | Database setup, migrations, role policies, and portrait-import function. |
-| `.github/workflows/pages.yml` | Automatic GitHub Pages deployment. |
-| `migration-data/` | Original exported data. |
-| `app/`, `drizzle/`, and legacy build files | Retained portions of the former Sites application; GitHub Pages uses the `pages-app` entry point. |
+The active frontend is in `pages-app/`, styles are in `app/globals.css`, and assets are in `public/`. Backend setup and migrations are in `supabase/`; see [Owner and Managers](supabase/MANAGERS.md) for editor access. Historical migrations should not be rerun on the live database without review. Keep passwords, secret keys, and service-role keys out of the repository.
 
 ## Credits
 
 - **Website, design, and tracker:** Clustifle © 2026.
 - **Fire Emblem Heroes and artwork:** © Nintendo / INTELLIGENT SYSTEMS.
-- **Typography:** Champions font files supplied by Clustifle. Included assets remain subject to their respective rights and licenses.
+- **Typography:** Champions font from UEFA. Font assets remain subject to their respective rights and licenses.
 - **Information references:** [Official FEH news](https://fire-emblem-heroes.com/en/topics/), [Learn with Sharena](https://new-guide.fire-emblem-heroes.com/en-US/feh-1170.html), and [Fire Emblem Heroes Wiki](https://feheroes.fandom.com/). Specific references are linked in the website's FAQ.
 - **Project history:** Originally created with ChatGPT Sites; migrated to GitHub Pages and Supabase.
 
