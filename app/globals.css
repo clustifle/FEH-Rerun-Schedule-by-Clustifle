@@ -153,3 +153,10 @@ body:has(.mobile-navigation-drawer[open]){overflow:hidden}
 .header-navigation button{text-transform:none}
 .mobile-navigation-drawer{background:linear-gradient(155deg,#193b4870,#0a202ba6);backdrop-filter:blur(22px) saturate(115%);-webkit-backdrop-filter:blur(22px) saturate(115%);border-left-color:#c9f2fa20;box-shadow:-20px 0 60px #03121d35}
 .mobile-navigation-drawer::backdrop{background:#04121e70;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+/* Mobile navigation is a full-screen overlay, with no sidebar surface. */
+.mobile-navigation-drawer{inset:0;margin:0;width:100vw;height:100dvh;max-width:none;max-height:none;box-sizing:border-box;border:0;box-shadow:none;border-radius:0;background:transparent!important;backdrop-filter:none;-webkit-backdrop-filter:none;padding:28px 24px}
+.mobile-navigation-drawer::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.mobile-navigation-top,.mobile-navigation-drawer nav{width:100%;max-width:480px;margin-left:auto;margin-right:auto}.mobile-navigation-top{margin-bottom:42px}.mobile-navigation-drawer nav{gap:12px}.mobile-navigation-drawer nav button{min-height:60px;background:transparent;font-size:20px}.mobile-navigation-drawer nav button.is-active{background:#ffffff08;border-color:#ffffff24;box-shadow:inset 3px 0 #30c6e7}
+.mobile-navigation-drawer[open]{animation:mobile-overlay-in .3s cubic-bezier(.22,1,.36,1) both}.mobile-navigation-drawer.is-closing{animation:mobile-overlay-out .2s ease both}
+@keyframes mobile-overlay-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}@keyframes mobile-overlay-out{to{opacity:0;transform:translateY(6px)}}
+@media(prefers-reduced-motion:reduce){.mobile-navigation-drawer[open],.mobile-navigation-drawer.is-closing{animation:none}}
