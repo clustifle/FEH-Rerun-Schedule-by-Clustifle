@@ -44,7 +44,11 @@ export async function apiFetch(input:string,init?:RequestInit){
    if(error)throw new Error('Schedule unavailable. '+error.message);
    return Response.json(data);
   }
+  if(input==='/api/banners'&&(!init?.method||init.method==='GET')){const {data,error}=await supabase.from('tracker_banners').select('*,tracker_banner_heroes(hero_id)').order('starts_on');if(error)throw new Error(error.message);return Response.json(data);}
   if(!await ownerSession())return fail('Only the owner can edit the schedule.',403);
+  if(input==='/api/banners'&&init?.method==='POST'){const body=JSON.parse(String(init.body));const {data,error}=await supabase.rpc('save_tracker_banner',{banner_id:body.id||null,banner_name:body.name,start_date:body.starts_on,end_date:body.ends_on,hero_ids:body.hero_ids||[]});if(error)throw new Error(error.message);return Response.json({id:data});}
+  if(input==='/api/banner-heroes'&&init?.method==='POST'){const body=JSON.parse(String(init.body));const {error}=await supabase.from('tracker_banner_heroes').upsert({banner_id:body.bannerId,hero_id:body.heroId});if(error)throw new Error(error.message);return Response.json({ok:true});}
+
   if(input==='/api/portrait-import'){
    const body=JSON.parse(String(init?.body));const blob=await importImage(body.url);
    return new Response(blob,{headers:{'Content-Type':blob.type}});
@@ -71,7 +75,7 @@ export async function apiFetch(input:string,init?:RequestInit){
    const {error}=await supabase.from('heroes').upsert(row);
    if(error){if(uploaded)await supabase.storage.from('portraits').remove([uploaded]);throw new Error(error.message);}
    if(uploaded&&old?.portrait&&!old.portrait.startsWith('data/'))await supabase.storage.from('portraits').remove([old.portrait]);
-   return Response.json({ok:true});
+   return Response.json({ok:true,id});
   }
   return fail('Unknown operation',404);
  }catch(error){return fail(error);}

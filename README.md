@@ -21,6 +21,7 @@ The footer contains **FAQ**, with searchable explanations and source links, and 
 
 | View | What it tracks |
 | --- | --- |
+| **The Homepage** | Currently running banners, active dates, and featured heroes in four color lanes. |
 | **General Schedule** | The end-of-month banner schedule for Legendary, Mythic, Emblem, and Chosen Heroes. |
 | **Remix Schedule** | Older heroes returning on Remix banners, kept separate from General Schedule. |
 | **Monthly Revival Schedule** | Older Legendary and Mythic reruns, grouped by month with separate Legendary Revival and Mythic Revival columns. |
@@ -44,6 +45,10 @@ For heroes without a specific type:
 Legendary, Mythic, and Emblem default to **L/M/E Pool**. Rearmed, Attuned, Aided, Entwined, Vista, Chosen, Duo, and Harmonized default to Limited Pool. Editors can choose the pool independently of hero type. Pool labels are tracker groupings; they do not replace the game's banner-specific appearance rates or eligibility.
 
 Legendary and Chosen entries offer Wind, Earth, Fire, and Water tags. Mythic entries offer Anima, Astra, Light, and Dark. Emblem and other types have their own colored tags. General and Special do not require a blessing.
+
+## Homepage banners
+
+Owners and Managers can use **+ Add new…** on The Homepage to save a banner name, start and end dates, and select existing heroes for its slots. Dates use UTC and include both endpoints. Ongoing banners appear automatically; upcoming and ended entries remain available to editors. **Edit banner / slots** updates a lineup, and **Create hero in banner** adds a new hero directly. Banner membership does not change the hero’s rerun schedule.
 
 ## Add or edit heroes
 
