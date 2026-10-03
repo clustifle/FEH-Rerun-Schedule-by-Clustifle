@@ -44,7 +44,7 @@ export default function Home(){
  const mobileMenu=useRef<HTMLDialogElement>(null);
  const mobileMenuTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
  const [mobileMenuClosing,setMobileMenuClosing]=useState(false);
- function closeMobileMenu(){if(mobileMenuClosing)return;setMobileMenuClosing(true);mobileMenuTimer.current=setTimeout(()=>{mobileMenu.current?.close();setMobileMenuClosing(false);},window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:220);}
+ function closeMobileMenu(){if(mobileMenuClosing)return;setMobileMenuClosing(true);mobileMenuTimer.current=setTimeout(()=>{mobileMenu.current?.close();setMobileMenuClosing(false);},window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:260);}
  function openMobileMenu(){if(mobileMenuTimer.current)clearTimeout(mobileMenuTimer.current);setMobileMenuClosing(false);mobileMenu.current?.showModal();}
  useEffect(()=>()=>{if(mobileMenuTimer.current)clearTimeout(mobileMenuTimer.current);},[]);
  const compact=activeSchedule!=='Homepage'&&savedCompact;
