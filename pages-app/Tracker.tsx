@@ -13,7 +13,7 @@ const kindClass=(h:Hero)=>['Legendary','Mythic','Chosen Hero'].includes(h.catego
 const blessingIcon=(category:string,blessing:string)=>assetUrl((category==='Chosen Hero'?'chosen/':'blessings/')+blessing.toLowerCase()+(category==='Chosen Hero'?'.png':'.webp'));
 function HeroTypeTag({hero}:{hero:Hero}){
  const label=hero.category==='Chosen Hero'?'Chosen':hero.category;
- if(hero.category==='Emblem')return <span className="hero-type-signature emblem-signature"><img src={assetUrl('hero-types/emblem.webp')} alt="" width={32} height={32}/><span className="hero-type-copy"><strong>Emblem</strong></span></span>;
+ if(['Emblem','Duo','Harmonized','Rearmed','Attuned','Aided','Entwined','Vista'].includes(hero.category))return <span className={'hero-type-signature '+hero.category.toLowerCase()+'-signature'}><img src={assetUrl('hero-types/'+hero.category.toLowerCase()+'.webp')} alt="" width={32} height={32}/><span className="hero-type-copy"><strong>{label}</strong></span></span>;
  if(!['Legendary','Mythic','Chosen Hero'].includes(hero.category))return <span className={'hero-kind '+kindClass(hero)}>{label}</span>;
  return <span className={'hero-type-signature '+(hero.blessing?.toLowerCase()||'unblessed')}>
  {hero.blessing&&<img src={blessingIcon(hero.category,hero.blessing)} alt="" width={32} height={32}/>}
