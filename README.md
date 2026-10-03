@@ -46,9 +46,9 @@ Supported specific types are **Legendary, Mythic, Emblem, Chosen, Rearmed, Attun
 For heroes without a specific type:
 
 - **General** uses **General Pool**.
-- **Special** uses **Limited Pool**.
+- **Special** defaults to **Special Heroes Pool**.
 
-Specific hero types use Limited Pool. Pool labels are tracker groupings; they do not replace the game's banner-specific appearance rates or eligibility.
+Legendary, Mythic, and Emblem default to **L/M/E Pool**. Other New Heroes types default to General Pool; Duo and Harmonized default to Special Heroes Pool. Editors can choose the pool independently of hero type. Pool labels are tracker groupings; they do not replace the game's banner-specific appearance rates or eligibility.
 
 Legendary and Chosen entries offer Wind, Earth, Fire, and Water tags. Mythic entries offer Anima, Astra, Light, and Dark. Emblem and other types have their own colored tags. General and Special do not require a blessing.
 
