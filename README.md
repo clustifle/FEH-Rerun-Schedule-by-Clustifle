@@ -10,12 +10,12 @@ The website was originally made on ChatGPT Sites and later migrated to GitHub Pa
 
 1. Click the schedule heading at the top to open the schedule selector.
 2. Choose a view from the table below.
-3. Search by hero name or title using **Find a hero**. Use **Hero type** and **Advanced filters** to narrow by type, color, rerun status, and pool.
+3. Search by hero name or title using **Find a hero**. Use **Hero type** and **Advanced filters** to narrow by type, color, and pool.
 4. On dated schedules, use the month slider and navigation buttons to browse months. On **Rerun Waitlist**, scroll horizontally or swipe on mobile; the rows expand as heroes are added.
 5. Hover over a hero on desktop for a mini preview. Click or tap to open **Hero Details**, including portrait, name, title, tags, editor note, and update information.
 6. Enable **Compact view** for smaller portraits and columns with card tags hidden. Full information remains in previews and Hero Details.
 
-The footer contains **FAQ Help**, with searchable explanations and source links, and **About this page**, with credits.
+The footer contains **FAQ**, with searchable explanations and source links, and **About this page**, with credits.
 
 ### Schedule views
 
@@ -28,16 +28,9 @@ The footer contains **FAQ Help**, with searchable explanations and source links,
 
 These are the website's organizational views. A Waitlist entry is not an official promise of a future banner.
 
-### Rerun status
+### Rerun timing
 
-| Status | Meaning in this tracker |
-| --- | --- |
-| **Confirmed** | An editor has recorded announced information. |
-| **Predicted** | An expected return based on patterns or an informed guess. |
-| **Uncertain** | Information or timing remains doubtful. |
-| **Unknown** | No rerun timing is recorded. Selecting this status switches the hero to Rerun Waitlist; saving clears the month. |
-
-Months identify rerun windows rather than exact start dates. Entries are maintained manually by the owner and managers. Check in-game announcements for final dates, lineups, and summoning availability.
+Dated views show recorded rerun months. Use **Rerun Waitlist** when no month is available. Editor notes provide announcement sources or other context; check in-game notices for final banner dates and availability.
 
 ### Hero types, pools, and blessings
 
@@ -58,8 +51,8 @@ Editing requires an authorized **Owner** or **Manager** account. Public visitors
 
 1. Open **Owner sign in** and enter your own account email and password manually. Use **Forgot password?** if needed.
 2. Choose **Add hero**, or open a hero's details and select its edit action.
-3. Select the schedule, hero type, color, status, and blessing where applicable. Enter the name and title.
-4. Add a rerun month for a dated entry, or choose Unknown to place it in Waitlist. To move an Unknown hero back to a dated schedule, first choose another status, then select a schedule and month.
+3. Select the schedule, hero type, color, pool, and blessing where applicable. Enter the name and title.
+4. Add a rerun month for a dated entry, or select Rerun Waitlist when no month is available. To move a waitlisted hero into a dated view, select its schedule and month.
 5. Add a portrait and a note explaining the announcement, prediction, or other context.
 6. Select **Save hero**. Changes are stored in Supabase and do not require a frontend rebuild.
 
