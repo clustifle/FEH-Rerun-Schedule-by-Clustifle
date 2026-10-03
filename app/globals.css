@@ -111,3 +111,5 @@ dialog.schedule-chooser[open]:not(.is-closing){animation:schedule-menu-enter .5s
 @media(min-width:701px){.tracker .home-banner-row .hero-tile .portrait{max-width:clamp(56px,var(--fit-portrait),80px)}.banner-empty-slot{width:clamp(56px,var(--fit-portrait),80px);height:clamp(56px,var(--fit-portrait),80px)}}
 
 .hero-editor label.demote-choice{display:flex;flex-direction:row;align-items:center;gap:10px;margin-top:16px}.hero-editor .demote-choice input{width:18px;height:18px;accent-color:#80d4e5;flex:none}.demote-help{font-size:13px;line-height:1.5;color:#abc9d5;margin:4px 0 16px}.hero-demote-note{color:#d3e8eb;font-size:12px;margin:8px 0}
+
+.live-sync{display:inline-flex;align-items:center;gap:6px;color:#bad8df;font-size:11px}.live-sync:before{content:"";width:5px;height:5px;border-radius:50%;background:#a0e4c2}

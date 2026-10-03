@@ -15,6 +15,8 @@ The website was originally made on ChatGPT Sites and later migrated to GitHub Pa
 5. Hover over a hero on desktop for a mini preview. Click or tap to open **Hero Details**, including portrait, name, title, tags, editor note, and update information.
 6. Enable **Compact view** for smaller portraits and columns with card tags hidden. Full information remains in previews and Hero Details.
 
+Open pages refresh hero and banner data every 30 seconds while visible, and when returning to the tab or reconnecting. Unsaved forms pause updates. New website versions load automatically when idle, preserving the selected view and month.
+
 The footer contains **FAQ**, with searchable explanations and source links, and **About this page**, with credits.
 
 ### Schedule views

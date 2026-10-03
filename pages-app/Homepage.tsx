@@ -2,6 +2,7 @@ import {useEffect,useRef,useState,type ReactNode} from 'react';
 import {Plus,Pencil,X,CalendarDays,Clock3} from 'lucide-react';
 import {apiFetch} from './static-data';
 import {bannerTiming} from './banner-time';
+import {useAutoRefresh} from './useAutoRefresh';
 export type BannerHero={id:string;name:string;title:string;color:string};
 type Banner={id:string;name:string;starts_on:string;ends_on:string;starts_time:string;ends_time:string;tracker_banner_heroes:{hero_id:string}[]};
 const colors=['Red','Blue','Green','Colorless'];
@@ -17,8 +18,9 @@ export default function Homepage({heroes,visible,canEdit,card,addHero}:{heroes:B
  const today=new Date(clockNow).toISOString().slice(0,10);
  const dialog=useRef<HTMLDialogElement>(null);
  const [editing,setEditing]=useState<Banner|null>(null),[name,setName]=useState(''),[start,setStart]=useState(today),[end,setEnd]=useState(new Date(Date.now()+86400000).toISOString().slice(0,10)),[startTime,setStartTime]=useState('07:00'),[endTime,setEndTime]=useState('06:59'),[members,setMembers]=useState<string[]>([]),[search,setSearch]=useState(''),[saving,setSaving]=useState(false),[formError,setFormError]=useState('');
- async function load(){try{const response=await apiFetch('/api/banners');const data=await response.json();if(!response.ok)throw new Error(data.error||'Could not load banners.');setBanners(data);setError('');}catch(e){setError((e as Error).message);}finally{setLoading(false);}}
+ async function load(quiet=false){try{const response=await apiFetch('/api/banners');const data=await response.json();if(!response.ok)throw new Error(data.error||'Could not load banners.');setBanners(old=>JSON.stringify(old)===JSON.stringify(data)?old:data);setError('');}catch(e){if(!quiet)setError((e as Error).message);}finally{if(!quiet)setLoading(false);}}
  useEffect(()=>{void load();const refresh=()=>{void load();};window.addEventListener('banners-change',refresh);const tick=()=>setClockNow(Date.now());const timer=setInterval(tick,60000);window.addEventListener('focus',tick);document.addEventListener('visibilitychange',tick);return()=>{clearInterval(timer);window.removeEventListener('banners-change',refresh);window.removeEventListener('focus',tick);document.removeEventListener('visibilitychange',tick);};},[]);
+ useAutoRefresh(()=>load(true));
  useEffect(()=>{if(!canEdit)dialog.current?.close();},[canEdit]);
  function open(banner:Banner|null){setEditing(banner);setName(banner?.name||'');setStart(banner?.starts_on||today);setEnd(banner?.ends_on||new Date(Date.now()+86400000).toISOString().slice(0,10));setStartTime(banner?.starts_time?.slice(0,5)||'07:00');setEndTime(banner?.ends_time?.slice(0,5)||'06:59');setMembers(banner?.tracker_banner_heroes.map(h=>h.hero_id)||[]);setSearch('');setFormError('');dialog.current?.showModal();}
  async function save(e:React.FormEvent<HTMLFormElement>){e.preventDefault();const fields=new FormData(e.currentTarget);const savedStart=String(fields.get('starts_on')),savedEnd=String(fields.get('ends_on'));const savedStartTime=String(fields.get('starts_time')),savedEndTime=String(fields.get('ends_time'));if(savedEnd+'T'+savedEndTime<=savedStart+'T'+savedStartTime){setFormError('End date and time must be after the start date and time.');return;}setSaving(true);setFormError('');try{const response=await apiFetch('/api/banners',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:editing?.id,name,starts_on:savedStart,ends_on:savedEnd,starts_time:savedStartTime,ends_time:savedEndTime,hero_ids:members})});const data=await response.json();if(!response.ok)throw new Error(data.error||'Could not save banner.');dialog.current?.close();await load();}catch(e){setFormError((e as Error).message);}finally{setSaving(false);}}
