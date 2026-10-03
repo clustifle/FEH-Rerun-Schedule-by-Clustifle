@@ -1,28 +1,153 @@
-# Clustifle's FEH Rerun Tracker
+# Fire Emblem Heroes: Rerun Tracker
 
-Public FEH rerun tracker for General, Remix, and Monthly Revival schedules. Visitors can browse without an account; only the confirmed owner account can add or edit heroes.
+**Website made by Clustifle** — an unofficial, publicly accessible tracker for hero reruns.
 
-## Hosting
+[Open the tracker](https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/) · [YouTube](https://www.youtube.com/@Clustifle) · [Twitter / X](https://x.com/Clustifle)
 
-Frontend: GitHub Pages at https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/ . Pushes to main deploy automatically with GitHub Actions. Repository Settings → Pages must use GitHub Actions.
+The website was originally made on ChatGPT Sites and later migrated to GitHub Pages with Supabase. The original Sites deployment has been removed. GitHub Pages is the active website.
 
-Backend: Supabase project aknsqeqykjgdyhdroqcx, with public read access and database/storage policies restricting changes to the confirmed owner email. The publishable key is public by design; never commit service-role keys, passwords, or access tokens.
+## Browse the tracker
 
-## Local development
+No account or ChatGPT subscription is required to view schedules.
 
-Use Node 24 and pnpm 11. Run `pnpm install --frozen-lockfile`, then `pnpm dev:pages`. Build with `pnpm build:pages`; type-check with `pnpm exec tsc -p tsconfig.pages.json`.
+1. Click the schedule heading at the top to open the schedule selector.
+2. Choose a view from the table below.
+3. Search by hero name or title using **Find a hero**. Use **Hero type** and **Advanced filters** to narrow by type, color, rerun status, and pool.
+4. On dated schedules, use the month slider and navigation buttons to browse months. On **Rerun Waitlist**, scroll horizontally or swipe on mobile; the rows expand as heroes are added.
+5. Hover over a hero on desktop for a mini preview. Click or tap to open **Hero Details**, including portrait, name, title, tags, editor note, and update information.
+6. Enable **Compact view** for smaller portraits and columns with card tags hidden. Full information remains in previews and Hero Details.
 
-## Backend setup
+The footer contains **FAQ Help**, with searchable explanations and source links, and **About this page**, with credits.
 
-1. Execute supabase/setup.sql in Supabase SQL Editor, then supabase/import-heroes.sql to restore the original export. Imports do not overwrite existing hero IDs.
-2. Create the owner user shyguyvn@gmail.com in Authentication → Users, with a fresh password entered privately. Auto-confirm the user. Disable public sign-ups in Sign In / Providers.
-3. Set Authentication Site URL and allowed redirect URL to the GitHub Pages URL above, including the trailing slash. Forgot password sends a recovery email and opens the password form on the website.
-4. Deploy supabase/functions/portrait-import as the Edge Function portrait-import. Disable gateway JWT verification for this function: it verifies the user JWT and owner authorization itself. This preserves FEH Wiki/Fandom image-link imports without browser CORS restrictions.
+### Schedule views
 
-New portraits use Supabase Storage. The initial 16 portraits remain under public/data/portraits, and the initial data export is in migration-data. Editing data does not require rebuilding the frontend.
+| View | What it tracks |
+| --- | --- |
+| **General Schedule** | The end-of-month banner schedule for Legendary, Mythic, Emblem, and Chosen Heroes. |
+| **Remix Schedule** | Older heroes returning on Remix banners, kept separate from General Schedule. |
+| **Monthly Revival Schedule** | Older Legendary and Mythic reruns, grouped by month with separate Legendary Revival and Mythic Revival columns. |
+| **Rerun Waitlist** | Heroes awaiting a recorded rerun month, including New Heroes and Special Heroes banner entries. No month is assigned in this view. |
 
-## Source layout
+These are the website's organizational views. A Waitlist entry is not an official promise of a future banner.
 
-pages-app/ contains the portable React frontend and Supabase adapter. app/, lib/, drizzle/, and the original build scripts retain the previous Sites application source for reference. The original deployment remains https://feh-rerun-ledger.clustifle.chatgpt.site/ . Changes made there after this export are not synchronized automatically.
+### Rerun status
 
-Artwork belongs to Nintendo / INTELLIGENT SYSTEMS. This is an unofficial fan tracker.
+| Status | Meaning in this tracker |
+| --- | --- |
+| **Confirmed** | An editor has recorded announced information. |
+| **Predicted** | An expected return based on patterns or an informed guess. |
+| **Uncertain** | Information or timing remains doubtful. |
+| **Unknown** | No rerun timing is recorded. Selecting this status switches the hero to Rerun Waitlist; saving clears the month. |
+
+Months identify rerun windows rather than exact start dates. Entries are maintained manually by the owner and managers. Check in-game announcements for final dates, lineups, and summoning availability.
+
+### Hero types, pools, and blessings
+
+Supported specific types are **Legendary, Mythic, Emblem, Chosen, Rearmed, Attuned, Aided, Entwined, Duo, Harmonized, and Vista**.
+
+For heroes without a specific type:
+
+- **General** uses **General Pool**.
+- **Special** uses **Limited Pool**.
+
+Specific hero types use Limited Pool. Pool labels are tracker groupings; they do not replace the game's banner-specific appearance rates or eligibility.
+
+Legendary and Chosen entries offer Wind, Earth, Fire, and Water tags. Mythic entries offer Anima, Astra, Light, and Dark. Emblem and other types have their own colored tags. General and Special do not require a blessing.
+
+## Add or edit heroes
+
+Editing requires an authorized **Owner** or **Manager** account. Public visitors have read-only access.
+
+1. Open **Owner sign in** and enter your own account email and password manually. Use **Forgot password?** if needed.
+2. Choose **Add hero**, or open a hero's details and select its edit action.
+3. Select the schedule, hero type, color, status, and blessing where applicable. Enter the name and title.
+4. Add a rerun month for a dated entry, or choose Unknown to place it in Waitlist. To move an Unknown hero back to a dated schedule, first choose another status, then select a schedule and month.
+5. Add a portrait and a note explaining the announcement, prediction, or other context.
+6. Select **Save hero**. Changes are stored in Supabase and do not require a frontend rebuild.
+
+Monthly Revival accepts Legendary and Mythic entries only. Both the owner and managers can write hero notes. Deleting a hero is also available to authorized editors.
+
+### Portrait uploads
+
+Use **PNG, JPG, or WebP**, up to **3 MB**. You can choose a file, drag and drop an image, or paste a copied image into the editor.
+
+Direct HTTPS image links from supported FEH Wiki / Fandom / Wikia or Wikimedia hosts can be imported. Paste the image URL, not the wiki article URL, and wait for the preview. If a host blocks import, download the image and upload the file instead.
+
+### Manager access
+
+Only the owner can manage editor access through **Managers**. A manager must already have a confirmed Supabase Authentication account before the owner adds its email. The panel does not create accounts or send invitations. Managers sign in with their own credentials.
+
+See [Owner and Managers setup](supabase/MANAGERS.md) for authorization details.
+
+## Install on a phone
+
+Use **Install app** in the footer:
+
+- **Android:** Open in Chrome and use the install prompt when available, or the browser's Install app / Add to Home screen option.
+- **iPhone / iPad:** Open in Safari, choose Share → Add to Home Screen, and enable Open as Web App if offered.
+
+Installation adds a home-screen icon and standalone window. An internet connection is needed for current schedules and editing. Offline mode provides a reconnect screen rather than a cached schedule.
+
+## Hosting and development
+
+- **Frontend:** React + TypeScript + Vite, deployed to GitHub Pages.
+- **Backend:** Supabase database, Authentication, Storage, and a portrait-import Edge Function.
+- **Deployment:** Pushes to `main` run type checks, build the frontend, and deploy through [GitHub Actions](https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/actions). Repository Settings → Pages uses **GitHub Actions**.
+- **Data:** Public reads; database and storage policies restrict writes to the owner and authorized managers.
+
+Use Node 24 and pnpm 11, matching the deployment workflow:
+
+```sh
+pnpm install --frozen-lockfile
+pnpm dev:pages
+```
+
+Validation and preview:
+
+```sh
+pnpm exec tsc -p tsconfig.pages.json
+pnpm build:pages
+pnpm preview:pages
+```
+
+### Backend configuration
+
+The current backend is already configured. Do not rerun historical migrations on the live database indiscriminately.
+
+For a separate installation, review the SQL and replace the pinned owner identity and Supabase project configuration with your own before applying them:
+
+1. Create the database/storage setup using `supabase/setup.sql`. Optionally restore the original exported heroes using `supabase/import-heroes.sql`; this import preserves existing hero IDs.
+2. Configure a confirmed owner account, disable public sign-ups, and set the Authentication Site URL and allowed redirect URL to your deployed URL, including its trailing slash.
+3. Apply `supabase/manager-roles.sql` after setup. See `supabase/MANAGERS.md`. The legacy `lock-owner.sql` must not be applied after enabling managers.
+4. Apply `supabase/unknown-waitlist.sql` once to enable database-side routing of Unknown entries. Its trigger creation is a one-time migration.
+5. Deploy `supabase/functions/portrait-import`. Gateway JWT verification is disabled for this function because it performs its own user JWT and editor authorization checks.
+6. Update `pages-app/static-data.ts` with your project URL and publishable key. Update the Vite base path, Authentication redirects, and owner identity references to match your deployment.
+
+`waitlist-migration.sql`, `limited-pool-migration.sql`, and `general-special-types.sql` document upgrades to the existing project; the current `setup.sql` already includes their final type/pool/schedule definitions. `add-authorized-editor.sql` is specific to the original project's initial manager.
+
+The Supabase publishable key is public frontend configuration. Never commit passwords, service-role keys, secret keys, or access tokens. Free hosting depends on the providers' ongoing plans and availability.
+
+### Source layout
+
+| Path | Purpose |
+| --- | --- |
+| `pages-app/` | Active React frontend, Supabase adapter, sign-in, managers, FAQ, and installation UI. |
+| `app/globals.css` | Shared website styling and responsive layouts. |
+| `lib/blessings.ts` | Blessing options used by the editor. |
+| `public/` | Logo, fonts, original portraits, app icons, manifest, service worker, and offline page. |
+| `supabase/` | Database setup, migrations, role policies, and portrait-import function. |
+| `.github/workflows/pages.yml` | Automatic GitHub Pages deployment. |
+| `migration-data/` | Original exported data. |
+| `app/`, `drizzle/`, and legacy build files | Retained portions of the former Sites application; GitHub Pages uses the `pages-app` entry point. |
+
+## Credits
+
+- **Website, design, and tracker:** Clustifle © 2026.
+- **Fire Emblem Heroes and artwork:** © Nintendo / INTELLIGENT SYSTEMS.
+- **Typography:** Champions font files supplied by Clustifle. Included assets remain subject to their respective rights and licenses.
+- **Information references:** [Official FEH news](https://fire-emblem-heroes.com/en/topics/), [Learn with Sharena](https://new-guide.fire-emblem-heroes.com/en-US/feh-1170.html), and [Fire Emblem Heroes Wiki](https://feheroes.fandom.com/). Specific references are linked in the website's FAQ.
+- **Project history:** Originally created with ChatGPT Sites; migrated to GitHub Pages and Supabase.
+
+This is an unofficial fan website, unaffiliated with Nintendo or INTELLIGENT SYSTEMS. Artwork, branding, fonts, and third-party dependencies retain their respective rights. No blanket license is granted for those assets by this README.
+
+For a missing entry or correction, include the hero's name and title, schedule, month if known, and announcement source when contacting Clustifle through the linked social pages or reporting it in this repository.
