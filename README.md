@@ -8,7 +8,7 @@ The website was originally made on ChatGPT Sites and later migrated to GitHub Pa
 
 ## Browse the tracker
 
-No account or ChatGPT subscription is required to view schedules.
+No account is required to view schedules.
 
 1. Click the schedule heading at the top to open the schedule selector.
 2. Choose a view from the table below.
