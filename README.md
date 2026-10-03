@@ -8,7 +8,7 @@ The website was originally made on ChatGPT Sites and later migrated to GitHub Pa
 
 ## Browse the tracker
 
-1. Click the schedule heading at the top to open the schedule selector.
+1. Use the header navigation to switch between Home and the four schedule views.
 2. Choose a view from the table below.
 3. Search by hero name or title using **Find a hero**. Use **Hero type** and **Advanced filters** to narrow by type, color, and pool.
 4. On dated schedules, use the month slider and navigation buttons to browse months. On **Rerun Waitlist**, scroll horizontally or swipe on mobile; the rows expand as heroes are added.
@@ -23,7 +23,7 @@ The footer contains **FAQ**, with searchable explanations and source links, and 
 
 | View | What it tracks |
 | --- | --- |
-| **The Homepage** | Currently running banners, active dates, and featured heroes in four color lanes. |
+| **Home** | Currently running banners, active dates, and featured heroes in four color lanes. |
 | **General Schedule** | The end-of-month banner schedule for Legendary, Mythic, Emblem, and Chosen Heroes. |
 | **Remix Schedule** | Older heroes returning on Remix banners, kept separate from General Schedule. |
 | **Monthly Revival Schedule** | Older Legendary and Mythic reruns, grouped by month with separate Legendary Revival and Mythic Revival columns. |
@@ -50,7 +50,7 @@ Legendary and Chosen entries offer Wind, Earth, Fire, and Water tags. Mythic ent
 
 ## Homepage banners
 
-Owners and Managers can use **+ Add new…** on The Homepage to save a banner name, start and end dates, and select existing heroes for its slots. Editors enter UTC dates and times, with FEH defaults of 07:00 for the start and 06:59 for the end. Visitors see these times automatically converted to their local timezone. Ongoing banners appear automatically; upcoming and ended entries remain available to editors. **Edit banner / slots** updates a lineup, and **Create hero in banner** adds a new hero directly. Banner membership does not change the hero’s rerun schedule. Multiple active banners rotate in a looping carousel every 10 seconds, with arrows, slide indicators, swipe support, and a pause control. The active navigation indicator fills over 10 seconds. Rotation pauses with the Pause control, touch interactions, open dialogs, or a hidden tab.
+Owners and Managers can use **+ Add new…** on Home to save a banner name, start and end dates, and select existing heroes for its slots. Editors enter UTC dates and times, with FEH defaults of 07:00 for the start and 06:59 for the end. Visitors see these times automatically converted to their local timezone. Ongoing banners appear automatically; upcoming and ended entries remain available to editors. **Edit banner / slots** updates a lineup, and **Create hero in banner** adds a new hero directly. Banner membership does not change the hero’s rerun schedule. Multiple active banners rotate in a looping carousel every 10 seconds, with arrows, slide indicators, swipe support, and a pause control. The active navigation indicator fills over 10 seconds. Rotation pauses with the Pause control, touch interactions, open dialogs, or a hidden tab.
 
 ## Add or edit heroes
 
