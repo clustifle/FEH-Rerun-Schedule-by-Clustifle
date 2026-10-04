@@ -255,3 +255,10 @@ dialog.hero-details{padding:0!important;overflow:hidden}.hero-details[open]{disp
 .tracker .month-column h2,.tracker .revival-subheads{background:linear-gradient(120deg,#102f40b3,#294e5b70);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:inset 0 1px 0 #ffffff12}
 .tracker .revival-month-heading{background:transparent}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.tracker .color-slot.red{background:linear-gradient(125deg,#753442,#4e293f)}.tracker .color-slot.blue{background:linear-gradient(125deg,#335078,#233758)}.tracker .color-slot.green{background:linear-gradient(125deg,#326652,#264e46)}.tracker .color-slot.colorless{background:linear-gradient(125deg,#536b79,#3c5567)}}
+
+/* Keep carousel progress on its compositor layer and trim redundant blur layers. */
+.carousel-indicator-fill{transition:transform .1s linear;will-change:transform}
+.tracker .color-label,.tracker .month-column h2,.tracker .revival-subheads{-webkit-backdrop-filter:none;backdrop-filter:none}
+.home-banner[inert] .home-banner-countdown,.home-banner[inert] .home-banner-countdown::after{animation-play-state:paused}
+@media(max-width:600px),(pointer:coarse){.home-banner{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}.tracker .color-slot{-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}.home-banner-scroll{-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media(prefers-reduced-motion:reduce){.carousel-indicator-fill{transition:none}}

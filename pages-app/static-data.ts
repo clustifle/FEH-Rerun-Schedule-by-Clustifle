@@ -41,7 +41,17 @@ async function importImage(url:string){
  for(const candidate of candidates){try{return await browserPortrait(candidate);}catch{/* Try the canonical wiki URL if the legacy host fails. */}}
  throw new Error(d.error||'Could not import portrait. Check the direct image link.');
 }
+const pendingReads=new Map<string,Promise<Response>>();
 export async function apiFetch(input:string,init?:RequestInit){
+ if((!init?.method||init.method==='GET')&&['/api/heroes','/api/banners'].includes(input)){
+  let pending=pendingReads.get(input);
+  if(!pending){pending=runApiFetch(input,init);pendingReads.set(input,pending);const request=pending;void pending.finally(()=>{if(pendingReads.get(input)===request)pendingReads.delete(input);}).catch(()=>{});}
+  return (await pending).clone();
+ }
+ if(init?.method&&init.method!=='GET')pendingReads.clear();
+ return runApiFetch(input,init);
+}
+async function runApiFetch(input:string,init?:RequestInit){
  try{
   if(input==='/api/session'){const {data:role}=await supabase.rpc('tracker_role');return jsonResponse({canEdit:role==='Owner'||role==='Manager',role});}
   if(input==='/api/heroes'&&(!init?.method||init.method==='GET')){
