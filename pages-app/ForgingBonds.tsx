@@ -1,3 +1,5 @@
+import {recordUpdate,getPreferences,usePreferences} from './preferences';
+import {reduceMotion} from './preferences';
 import {useEffect,useRef,useState} from 'react';
 import {Pencil,Plus,X} from 'lucide-react';
 import {supabase,portraitUrl} from './static-data';
@@ -10,18 +12,20 @@ type Event={ongoing:boolean;starts_on:string|null;ends_on:string|null;starts_tim
 const keys=['hero_1','hero_2','hero_3','hero_4'] as const;
 const short=(month:string)=>new Date(month+'T12:00:00').toLocaleDateString('en-US',{month:'short',year:'2-digit'});
 export default function ForgingBonds({heroes,canEdit,onHero,onCreate,onHover,onLeave,hallOfForms=false}:{hallOfForms?:boolean;heroes:Hero[];canEdit:boolean;onHero:(id:string)=>void;onCreate:(month:string,slot:string)=>void;onHover:(id:string,event:{pointerType?:string;currentTarget:HTMLButtonElement})=>void;onLeave:()=>void}){
+ const preferences=usePreferences();
  const table=hallOfForms?'hall_of_forms_revivals':'forging_bonds_revivals';
  const label=hallOfForms?'Hall of Forms Revival':'New Heroes Revival';
- const [events,setEvents]=useState<Event[]>([]),[error,setError]=useState(''),[loading,setLoading]=useState(true),[selected,setSelected]=useState(()=>{const now=new Date();return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;}),[editing,setEditing]=useState<Event|null>(null),[saving,setSaving]=useState(false);
+ const [events,setEvents]=useState<Event[]>([]),[error,setError]=useState(''),[loading,setLoading]=useState(true),[selected,setSelected]=useState(()=>{try{const saved=getPreferences().rememberMonth&&localStorage.getItem('feh-revival-month-'+table);if(saved)return saved;}catch{}const now=new Date();return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;}),[editing,setEditing]=useState<Event|null>(null),[saving,setSaving]=useState(false);
  const [clockNow,setClockNow]=useState(Date.now);
  useEffect(()=>{const update=()=>{if(document.visibilityState==='visible')setClockNow(Date.now());};const timer=setInterval(update,60000);document.addEventListener('visibilitychange',update);return()=>{clearInterval(timer);document.removeEventListener('visibilitychange',update);};},[]);
  const [pickerSlot,setPickerSlot]=useState<typeof keys[number]|null>(null);
  const list=useRef<HTMLDivElement>(null);
  const editor=useRef<HTMLDialogElement>(null),rows=useRef(new Map<string,HTMLElement>());
- async function load(){const {data,error}=await supabase.from(table).select('*').gte('month','2025-10-01').lte('month','2029-10-01').order('month');if(error){setError('Could not load revivals. Please try again.');}else{setEvents(data||[]);setError('');}setLoading(false);}
+ async function load(){const {data,error}=await supabase.from(table).select('*').gte('month','2025-10-01').lte('month','2029-10-01').order('month');if(error){setError('Could not load revivals. Please try again.');}else{setEvents(data||[]);setError('');recordUpdate();}setLoading(false);}
  useEffect(()=>{void load();const refresh=()=>void load();window.addEventListener('revivals-change',refresh);return()=>window.removeEventListener('revivals-change',refresh);},[]);useAutoRefresh(load);
+ useEffect(()=>{if(getPreferences().rememberMonth)try{localStorage.setItem('feh-revival-month-'+table,selected);}catch{}},[selected,table,preferences.rememberMonth]);
  const months=events.map(e=>e.month.slice(0,7));
- function select(index:number){const month=months[index];if(!month)return;setSelected(month);const row=rows.current.get(month);if(row&&list.current)list.current.scrollTo({top:row.offsetTop,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
+ function select(index:number){const month=months[index];if(!month)return;setSelected(month);const row=rows.current.get(month);if(row&&list.current)list.current.scrollTo({top:row.offsetTop,behavior:reduceMotion()?'instant':'smooth'});}
  useEffect(()=>{const row=rows.current.get(selected);if(row&&list.current)list.current.scrollTop=row.offsetTop;},[events.length]);
  function edit(event:Event){setEditing({...event,starts_time:event.starts_time||'07:00',ends_time:event.ends_time||'06:59'});setError('');editor.current?.showModal();}
  async function save(e:React.FormEvent){e.preventDefault();if(!editing)return;if(editing.ongoing&&(!editing.starts_on||!editing.ends_on||Date.parse(editing.ends_on+'T'+editing.ends_time+'Z')<=Date.parse(editing.starts_on+'T'+editing.starts_time+'Z'))){setError('Set an end date and time after the start.');return;}const ids=keys.map(k=>editing[k]).filter(Boolean);if(new Set(ids).size!==ids.length){setError('Choose each hero only once.');return;}setSaving(true);const {error}=await supabase.from(table).update({title:editing.title.trim(),ongoing:editing.ongoing,starts_on:editing.starts_on,ends_on:editing.ends_on,starts_time:editing.starts_time,ends_time:editing.ends_time,hero_1:editing.hero_1,hero_2:editing.hero_2,hero_3:editing.hero_3,hero_4:editing.hero_4}).eq('month',editing.month);if(error)setError('Could not save the revival. Please try again.');else{editor.current?.close();setEditing(null);window.dispatchEvent(new Event('revivals-change'));await load();}setSaving(false);}

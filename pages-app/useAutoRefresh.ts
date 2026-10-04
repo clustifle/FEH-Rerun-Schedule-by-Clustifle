@@ -1,4 +1,5 @@
 import {useEffect,useRef} from 'react';
+import {getPreferences} from './preferences';
 import {assetUrl} from './static-data';
 
 export function useAutoRefresh(refresh:()=>Promise<void>,watchWebsite=false){
@@ -6,8 +7,8 @@ export function useAutoRefresh(refresh:()=>Promise<void>,watchWebsite=false){
  useEffect(()=>{
   let busy=false,disposed=false,lastVersionCheck=0,pendingVersion=false;
   const currentScript=document.querySelector<HTMLScriptElement>('script[type="module"][src]')?.src;
-  const tick=async()=>{
-   if(disposed||busy||document.visibilityState==='hidden'||!navigator.onLine)return;
+  const tick=async(force=false)=>{
+   if((!force&&!getPreferences().autoRefresh)||disposed||busy||document.visibilityState==='hidden'||!navigator.onLine)return;
    // Keep every unsaved editor form intact, including sign-in and manager dialogs.
    if(document.querySelector('dialog[open] form'))return;
    busy=true;
@@ -27,10 +28,10 @@ export function useAutoRefresh(refresh:()=>Promise<void>,watchWebsite=false){
    finally{busy=false;}
   };
   const timer=setInterval(()=>{void tick();},30000);
-  const resume=()=>{void tick();};
+  const resume=()=>{void tick();};const manual=()=>{void tick(true);};window.addEventListener('refresh-now',manual);
   window.addEventListener('focus',resume);window.addEventListener('online',resume);
   document.addEventListener('visibilitychange',resume);
   document.addEventListener('close',resume,true);
-  return()=>{disposed=true;clearInterval(timer);window.removeEventListener('focus',resume);window.removeEventListener('online',resume);document.removeEventListener('visibilitychange',resume);document.removeEventListener('close',resume,true);};
+  return()=>{window.removeEventListener('refresh-now',manual);disposed=true;clearInterval(timer);window.removeEventListener('focus',resume);window.removeEventListener('online',resume);document.removeEventListener('visibilitychange',resume);document.removeEventListener('close',resume,true);};
  },[watchWebsite]);
 }

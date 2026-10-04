@@ -1,3 +1,4 @@
+import {reduceMotion} from './preferences';
 import {useEffect,useRef,useState} from 'react';
 import {SlidersHorizontal,X,Search,RotateCcw,ArrowRight,Check} from 'lucide-react';
 import {assetUrl} from './static-data';
@@ -14,7 +15,7 @@ export default function AdvancedFilters(p:Props){
  function close(){
   if(closing)return;
   setClosing(true);
-  timer.current=setTimeout(()=>{dialog.current?.close();setClosing(false);},window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:180);
+  timer.current=setTimeout(()=>{dialog.current?.close();setClosing(false);},reduceMotion()?0:180);
  }
  return <>
   <button className={'filter-launch'+(active?' has-filters':'')} aria-haspopup="dialog" aria-expanded={open} onClick={()=>{setClosing(false);setOpen(true);dialog.current?.showModal();if(body.current)body.current.scrollTop=0;}}><SlidersHorizontal size={17}/><span>Advanced filters</span>{active>0&&<span className="filter-active-count" aria-label={active+' active filters'}>{active}</span>}</button>
