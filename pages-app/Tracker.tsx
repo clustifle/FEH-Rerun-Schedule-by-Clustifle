@@ -49,7 +49,7 @@ export default function Home(){
  useEffect(()=>()=>{if(aboutTimer.current)clearTimeout(aboutTimer.current);},[]);
  function openAbout(){if(aboutTimer.current)clearTimeout(aboutTimer.current);setAboutClosing(false);aboutDialog.current?.showModal();}
  function closeAbout(){if(aboutClosing)return;setAboutClosing(true);aboutTimer.current=setTimeout(()=>{aboutDialog.current?.close();setAboutClosing(false);},reduceMotion()?0:220);}
- const [activeSchedule,setActiveSchedule]=useState(()=>{try{if(new URLSearchParams(location.search).has('profile'))return 'Profile';const p=getPreferences();const saved=p.rememberView?(localStorage.getItem('feh-last-view')||sessionStorage.getItem('feh-current-view')):null;return saved&&schedules.includes(saved)?saved:p.startPage;}catch{return 'Homepage';}});
+ const [activeSchedule,setActiveSchedule]=useState(()=>{try{const params=new URLSearchParams(location.search);if(params.has('profile'))return 'Profile';const requested=params.get('schedule');if(requested&&schedules.includes(requested))return requested;const p=getPreferences();const saved=p.rememberView?(localStorage.getItem('feh-last-view')||sessionStorage.getItem('feh-current-view')):null;return saved&&schedules.includes(saved)?saved:p.startPage;}catch{return 'Homepage';}});
  useEffect(()=>{try{sessionStorage.setItem('feh-current-view',activeSchedule);if(getPreferences().rememberView)localStorage.setItem('feh-last-view',activeSchedule);}catch{}},[activeSchedule,preferences.rememberView]);
  const [settingsOpen,setSettingsOpen]=useState(false);
  const mobileMenu=useRef<HTMLDialogElement>(null);
@@ -100,7 +100,7 @@ export default function Home(){
  const viewTimers=useRef<ReturnType<typeof setTimeout>[]>([]);
  useEffect(()=>()=>{viewTimers.current.forEach(clearTimeout);},[]);
  function chooseSchedule(next:string){
-  if(next!=='Profile'&&new URLSearchParams(location.search).has('profile')){const url=new URL(location.href);url.searchParams.delete('profile');history.replaceState(null,'',url);}
+  {const url=new URL(location.href);for(const key of ['profile','schedule','month'])url.searchParams.delete(key);history.replaceState(null,'',url);}
   if(viewPhase==='leaving')return;
   if(next===activeSchedule)return;
   hideHeroPreview();viewTimers.current.forEach(clearTimeout);
@@ -178,7 +178,7 @@ export default function Home(){
  const heroIndex=useMemo(()=>buildScheduleIndex(visible),[visible]);
  const unscheduled=heroIndex.unscheduled;
  const heroesInMonth=(month:string,color:string,type?:string)=>type?heroIndex.byRevival.get(month+'|'+color+'|'+type)||[]:heroIndex.byMonthColor.get(month+'|'+color)||[];
- const [selectedMonth,setSelectedMonth]=useState(()=>{try{return getPreferences().rememberMonth?(localStorage.getItem('feh-last-month')||sessionStorage.getItem('feh-current-month')||currentMonth):currentMonth;}catch{return currentMonth;}});
+ const [selectedMonth,setSelectedMonth]=useState(()=>{const requested=new URLSearchParams(location.search).get('month');if(requested&&/^20[0-9]{2}-[0-1][0-9]$/.test(requested)&&requested>='2025-10'&&requested<='2029-10')return requested;try{return getPreferences().rememberMonth?(localStorage.getItem('feh-last-month')||sessionStorage.getItem('feh-current-month')||currentMonth):currentMonth;}catch{return currentMonth;}});
  useEffect(()=>{try{sessionStorage.setItem('feh-current-month',selectedMonth);if(getPreferences().rememberMonth)localStorage.setItem('feh-last-month',selectedMonth);}catch{}},[selectedMonth,preferences.rememberMonth]);
  const board=useRef<HTMLDivElement>(null);
  const colors=['Red','Blue','Green','Colorless'];
