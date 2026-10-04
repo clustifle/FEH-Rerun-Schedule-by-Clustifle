@@ -1,14 +1,16 @@
-# Fire Emblem Heroes: Rerun Tracker
+# Fire Emblem Heroes Rerun Schedule
+
+![Fire Emblem Heroes Rerun Schedule by Clustifle](public/clustifle-feh-rerun-logo.png)
 
 **Website made by Clustifle** — an unofficial, publicly accessible tracker for hero reruns.
 
-[Open the tracker](https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/) · [YouTube](https://www.youtube.com/@Clustifle) · [Twitter / X](https://x.com/Clustifle)
+[Open the tracker](https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/) · [YouTube](https://www.youtube.com/@Clustifle) · [X](https://x.com/Clustifle)
 
 The website was originally made on ChatGPT Sites and later migrated to GitHub Pages with Supabase. The original Sites deployment has been removed. GitHub Pages is the active website.
 
 ## Browse the tracker
 
-1. Use the header navigation to switch between Home and the four schedule views.
+1. Use the header navigation to switch between Home, all schedule views, Profile, Find Users, Settings, and FAQ.
 2. Choose a view from the table below.
 3. Search by hero name or title using **Find a hero**. Use **Hero type** and **Advanced filters** to narrow by type, color, and pool.
 4. On dated schedules, use the month slider and navigation buttons to browse months. On **Rerun Waitlist**, scroll horizontally or swipe on mobile; the rows expand as heroes are added.
@@ -17,17 +19,19 @@ The website was originally made on ChatGPT Sites and later migrated to GitHub Pa
 
 Open pages refresh hero and banner data every 30 seconds while visible, and when returning to the tab or reconnecting. Unsaved forms pause updates. New website versions load automatically when idle, preserving the selected view and month.
 
-The footer contains **FAQ**, with searchable explanations and source links, and **About this page**, with credits.
+**FAQ** opens inside the navigation menu, with searchable schedule explanations and editor instructions for authorized accounts. **Settings → About** contains project information, credits, special thanks, YouTube, X, GitHub, and the install-app control. The footer keeps only the site name, creator credit, and artwork attribution.
 
 ### Schedule views
 
 | View | What it tracks |
 | --- | --- |
-| **Home** | Currently running banners, active dates, and featured heroes in four color lanes. |
+| **Home** | Active banners and dates, using four featured portraits, L/M/E color lanes, or two heroes per color for New Heroes Return / Double Special Heroes. |
 | **General Schedule** | The end-of-month banner schedule for Legendary, Mythic, Emblem, and Chosen Heroes. |
 | **Remix Schedule** | Older heroes returning on Remix banners, kept separate from General Schedule. |
 | **Monthly Revival Schedule** | Older Legendary and Mythic reruns, grouped by month with separate Legendary Revival and Mythic Revival columns. |
-| **Rerun Waitlist** | Heroes awaiting a recorded rerun month, including New Heroes and Special Heroes banner entries. No month is assigned in this view. |
+| **New Heroes Revival Schedule** | New Heroes revival lineups in a compact month list with up to four portraits. |
+| **Hall of Forms Revival Schedule** | Hall of Forms revival lineups in their own compact month list. |
+| **Rerun Waitlist** | A manually managed list populated by editors with Add Hero or Choose a Hero. Banner membership does not automatically add or remove entries. |
 
 These are the website's organizational views. A Waitlist entry is not an official promise of a future banner.
 
@@ -79,7 +83,7 @@ See [Owner and Managers setup](supabase/MANAGERS.md) for authorization details.
 
 ## Install on a phone
 
-Use **Install app** in the footer:
+Use **Install app** in **Settings → About**:
 
 - **Android:** Open in Chrome and use the install prompt when available, or the browser's Install app / Add to Home screen option.
 - **iPhone / iPad:** Open in Safari, choose Share → Add to Home Screen, and enable Open as Web App if offered.

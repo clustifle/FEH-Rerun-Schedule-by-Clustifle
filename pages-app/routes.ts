@@ -4,9 +4,10 @@ export const uuidPattern=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a
 export function readRoute(){
  const base=import.meta.env.BASE_URL;const path=location.pathname.startsWith(base)?location.pathname.slice(base.length).replace(/\/$/,''):'';
  const params=new URLSearchParams(location.search);const profile=path.startsWith('profile/')?path.slice(8).replace(/^id=/,''):params.get('profile')||'';
- const settings=path==='account'||path==='settings'||path.startsWith('settings/');
+ const faq=path==='faq';
+ const settings=faq||path==='account'||path==='settings'||path.startsWith('settings/');
  const view=profile?'Profile':Object.keys(viewPaths).find(key=>viewPaths[key]===path)||params.get('schedule')||null;
- return {view,profile,settings,section:path==='account'?'Account':path.split('/')[1]||'',explicit:!!path||params.has('profile')||params.has('schedule')};
+ return {view,profile,settings,faq,section:path==='account'?'Account':path.split('/')[1]||'',explicit:!!path||params.has('profile')||params.has('schedule')};
 }
 export function viewUrl(view:string,month='',profile=''){return import.meta.env.BASE_URL+(viewPaths[view]||'home')+(view==='Profile'&&profile?'/'+encodeURIComponent(profile):'')+(month?'?month='+encodeURIComponent(month):'');}
 export function goTo(url:string,replace=false){if(location.pathname+location.search===url)return;history[replace?'replaceState':'pushState'](null,'',url+location.hash);window.dispatchEvent(new Event('route-change'));}
