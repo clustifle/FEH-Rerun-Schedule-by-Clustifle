@@ -1,16 +1,11 @@
-export type RerunBanner={banner_type?:string;name:string;tracker_banner_heroes:{hero_id:string}[]};
+export type RerunBanner={banner_type?:string;name:string;starts_on?:string;starts_time?:string;tracker_banner_heroes:{hero_id:string}[]};
 const rerunTypes=new Set(['Duo','Harmonized','Rearmed','Attuned','Aided','Entwined','Vista','Special','General']);
-
-export function listedRerunHeroes(banners:RerunBanner[]){
- const ids=new Set<string>();
- for(const banner of banners){
-  const layout=banner.banner_type||(/new heroes (?:return|revival)|double special heroes/i.test(banner.name)?'revival':/new heroes|special heroes/i.test(banner.name)?'featured':'lme');
-  // Keep completed reruns out of Waitlist too, until their lineup is edited.
-  if(layout==='lme'||layout==='revival')for(const hero of banner.tracker_banner_heroes)ids.add(hero.hero_id);
- }
- return ids;
-}
-
-export function hiddenFromWaitlist(hero:{id:string;category:string},listed:Set<string>){
- return rerunTypes.has(hero.category)&&listed.has(hero.id);
-}
+function layout(b:RerunBanner){return b.banner_type||(/new heroes (?:return|revival)|double special heroes/i.test(b.name)?'revival':/new heroes|special heroes/i.test(b.name)?'featured':'lme');}
+function started(b:RerunBanner,now:number){if(!b.starts_on)return false;const time=b.starts_time||'07:00:00';const start=Date.parse(b.starts_on+'T'+(time.length===5?time+':00':time)+'Z');return Number.isFinite(start)&&start<=now;}
+export function listedLmeHeroes(banners:RerunBanner[],now=Date.now()){const ids=new Set<string>();for(const b of banners)if(layout(b)==='lme'&&started(b,now))for(const h of b.tracker_banner_heroes)ids.add(h.hero_id);return ids;}
+export function listedRerunHeroes(banners:RerunBanner[],now=Date.now()){const ids=listedLmeHeroes(banners,now);for(const b of banners)if(layout(b)==='revival'&&!/new heroes (?:return|revival)/i.test(b.name))for(const h of b.tracker_banner_heroes)ids.add(h.hero_id);return ids;}
+export function hiddenFromWaitlist(hero:{id:string;category:string},listed:Set<string>){return rerunTypes.has(hero.category)&&listed.has(hero.id);}
+// Launch and return memberships persist after end dates; only a released L/M/E removes revival heroes.
+export function releasedFeaturedHeroes(banners:RerunBanner[],now=Date.now()){const releases=new Map<string,string>();for(const b of banners)if(layout(b)==='featured'&&started(b,now))for(const {hero_id} of b.tracker_banner_heroes){const month=b.starts_on!.slice(0,7);if(!releases.has(hero_id)||month>releases.get(hero_id)!)releases.set(hero_id,month);}return releases;}
+export function releasedNewHeroesReturns(banners:RerunBanner[],now=Date.now()){const ids=new Set<string>();for(const b of banners)if(layout(b)==='revival'&&/new heroes (?:return|revival)/i.test(b.name)&&started(b,now))for(const h of b.tracker_banner_heroes)ids.add(h.hero_id);return ids;}
+export function belongsInWaitlist(hero:{id:string;schedule?:string|null;month?:string|null},released:Map<string,string>){if(hero.schedule==='Waitlist')return true;const debut=released.get(hero.id);return !!debut&&(!hero.month||hero.month.slice(0,7)<=debut);}

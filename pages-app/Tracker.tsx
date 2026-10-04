@@ -14,7 +14,7 @@ import ForgingBonds from './ForgingBonds';
 import {upscalePortrait} from './portrait-upscale';
 import {buildScheduleIndex} from './schedule-index';
 import {pools,defaultPool,normalizePool} from './hero-pools';
-import {listedRerunHeroes,hiddenFromWaitlist,type RerunBanner} from './rerun-waitlist';
+import {listedRerunHeroes,listedLmeHeroes,hiddenFromWaitlist,releasedFeaturedHeroes,releasedNewHeroesReturns,belongsInWaitlist,type RerunBanner} from './rerun-waitlist';
 import {usePreferences,getPreferences,setPreferences,reduceMotion,recordUpdate} from './preferences';
 import {useAutoRefresh} from './useAutoRefresh';
 import {ChevronDown,Menu,CalendarDays,Plus,Shield,Swords,Sparkles,X,Pencil,Search,Upload,LockKeyhole,ChevronLeft,ChevronRight} from 'lucide-react';
@@ -170,8 +170,11 @@ export default function Home(){
  }
  async function importLink(link=portraitUrl){setImporting(true);setError('');setPortraitMessage('');try{const r=await apiFetch('/api/portrait-import',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:link.trim()})});if(!r.ok){const d=await r.json() as {error?:string};throw new Error(d.error||'Could not import this portrait.');}const blob=await r.blob();const result=await upscalePortrait(new File([blob],'imported-portrait.'+(blob.type==='image/png'?'png':blob.type==='image/jpeg'?'jpg':'webp'),{type:blob.type}));const file=result.file;const image=await new Promise<string>((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(new Error('Could not preview this portrait.'));reader.readAsDataURL(file);});setImportedPortrait(file);setImportedUrl(link.trim());if(fileRef.current)fileRef.current.value='';setPreview(image);setPortraitMessage((result.upscaled?'HD resized':'Original resolution')+' · '+result.width+' × '+result.height+'. Save the hero to keep it.');}catch(e){setError((e as Error).message);}finally{setImporting(false);}}
  useEffect(()=>{const link=portraitUrl.trim();if(saving||!link||!link.toLowerCase().startsWith('https://')||importedUrl===link)return;const timer=setTimeout(()=>{void importLink(link);},600);return()=>clearTimeout(timer);},[portraitUrl,saving]);
+ const releasedLme=useMemo(()=>listedLmeHeroes(rerunBanners),[rerunBanners]);
+ const returnHeroes=useMemo(()=>releasedNewHeroesReturns(rerunBanners),[rerunBanners]);
+ const releasedHeroes=useMemo(()=>releasedFeaturedHeroes(rerunBanners),[rerunBanners]);
  const listedReruns=useMemo(()=>listedRerunHeroes(rerunBanners),[rerunBanners]);
- const scheduleHeroes=useMemo(()=>activeSchedule==='Homepage'?heroes:heroes.filter(h=>(h.schedule||'General')===activeSchedule&&(activeSchedule!=='Waitlist'||!hiddenFromWaitlist(h,listedReruns)&&!revivalHeroes.has(h.id))),[heroes,activeSchedule,listedReruns,revivalHeroes]);
+ const scheduleHeroes=useMemo(()=>activeSchedule==='Homepage'?heroes:heroes.filter(h=>activeSchedule==='Waitlist'?(belongsInWaitlist(h,releasedHeroes)||revivalHeroes.has(h.id)||returnHeroes.has(h.id))&&!hiddenFromWaitlist(h,revivalHeroes.has(h.id)||returnHeroes.has(h.id)?releasedLme:listedReruns):(h.schedule||'General')===activeSchedule),[heroes,activeSchedule,listedReruns,revivalHeroes,releasedHeroes,releasedLme,returnHeroes]);
  const visible=useMemo(()=>activeSchedule==='Homepage'?scheduleHeroes:scheduleHeroes.filter(h=>(filter==='All heroes'||h.category===filter)&&(colorFilter==='All'||h.color===colorFilter)&&(poolFilter==='All'||h.pool===poolFilter)&&(`${h.name} ${h.title}`.toLowerCase().includes(search.toLowerCase()))),[scheduleHeroes,activeSchedule,filter,colorFilter,poolFilter,search]);
  const heroOrder=useMemo(()=>{const order=new Map<string,number>(),groups=new Map<string,number>();for(const h of visible){const group=h.month+'|'+h.color,index=groups.get(group)||0;order.set(h.id,index);groups.set(group,index+1);}return order;},[visible]);
  const now=new Date(),currentMonth=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;

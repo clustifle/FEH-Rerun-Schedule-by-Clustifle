@@ -2,7 +2,7 @@ begin;
 alter table public.tracker_profiles add column username text check (username is null or username ~ '^[a-z0-9_]{3,24}$'), add column about text not null default '' check (char_length(about)<=1500), add column favorite_heroes uuid[] not null default '{}' check (cardinality(favorite_heroes)<=6), add column favorite_games text[] not null default '{}' check (cardinality(favorite_games)<=12), add column visibility jsonb not null default '{"bio":true,"social_links":true,"about":true,"favorite_heroes":true,"favorite_games":true}'::jsonb check (jsonb_typeof(visibility)='object');
 create unique index tracker_profiles_username_unique on public.tracker_profiles(username) where username is not null;
 drop policy "Public profiles readable" on public.tracker_profiles;
-revoke select on public.tracker_profiles from anon;
+revoke all on public.tracker_profiles from anon,public;
 create policy "Read own full profile" on public.tracker_profiles for select to authenticated using (id=auth.uid());
 create or replace function public.get_public_tracker_profile(profile_id uuid) returns jsonb language sql stable security definer set search_path='' as $$
  select jsonb_build_object('id',p.id,'display_name',p.display_name,'username',p.username,'avatar_path',p.avatar_path,
@@ -18,6 +18,7 @@ revoke all on function public.get_public_tracker_profile(uuid) from public;
 grant execute on function public.get_public_tracker_profile(uuid) to anon,authenticated;
 create table public.tracker_personal_tracking(id uuid primary key references auth.users(id) on delete cascade,followed_heroes uuid[] not null default '{}' check (cardinality(followed_heroes)<=100),saved_schedules jsonb not null default '[]'::jsonb check (jsonb_typeof(saved_schedules)='array' and jsonb_array_length(saved_schedules)<=20));
 alter table public.tracker_personal_tracking enable row level security;
+revoke all on public.tracker_personal_tracking from anon,public;
 grant select,insert,update on public.tracker_personal_tracking to authenticated;
 create policy "Read own personal tracking" on public.tracker_personal_tracking for select to authenticated using (id=auth.uid());
 create policy "Create own personal tracking" on public.tracker_personal_tracking for insert to authenticated with check (id=auth.uid());
