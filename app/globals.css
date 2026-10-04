@@ -264,10 +264,6 @@ dialog.hero-details{padding:0!important;overflow:hidden}.hero-details[open]{disp
 @media(prefers-reduced-motion:reduce){.carousel-indicator-fill{transition:none}}
 
 /* Paint only visible months; their reserved height keeps scrolling stable. */
-.schedule .month-column{content-visibility:auto;contain-intrinsic-block-size:auto calc(var(--fit-row)*4 + 42px)}
-.compact-view .schedule .month-column{contain-intrinsic-block-size:auto calc(var(--fit-row)*4 + 34px)}
-.schedule .month-column.revival-month{contain-intrinsic-block-size:auto calc(var(--fit-row)*4 + 76px)}
-.compact-view .schedule .month-column.revival-month{contain-intrinsic-block-size:auto calc(var(--fit-row)*4 + 60px)}
 /* Tinted glass surfaces need no separate blur layer when nothing sits behind them. */
 .tracker .schedule .color-slot,.tracker .waitlist-slot,.home-banner-scroll,.home-banner-row .color-slot{-webkit-backdrop-filter:none;backdrop-filter:none}
 .home-banner[inert]{-webkit-backdrop-filter:none;backdrop-filter:none}
