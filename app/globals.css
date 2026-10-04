@@ -232,3 +232,10 @@ dialog.hero-details{padding:0!important;overflow:hidden}.hero-details[open]{disp
 /* Keep the Home link hit area fitted to the logo, not its header column. */
 .masthead .feh-wordmark.logo-home-link{width:fit-content;max-width:100%;justify-self:start;align-self:center;flex:0 0 auto}
 
+
+/* Frosted glass for the active-banner carousel. */
+.home-banner{position:relative;isolation:isolate;background:linear-gradient(135deg,#d1f0f21c 0%,#b9e1e80a 48%,#12344138 100%);border:1px solid #ddf8fa38;backdrop-filter:blur(18px) saturate(125%);-webkit-backdrop-filter:blur(18px) saturate(125%);box-shadow:0 18px 48px #06232e2e,inset 0 1px 0 #ffffff24,inset 0 -1px 0 #8bd4e00a}
+.home-banner::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse at 12% 0%,#eefeff15,transparent 58%),linear-gradient(115deg,#ffffff08,transparent 45%,#b5e8ef05)}
+.home-banner-scroll{background:#092b396b;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-color:#d1f0f233}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.home-banner{background:linear-gradient(135deg,#365e6bd9,#234b59e6)}.home-banner-scroll{background:#153b48dc}}
+@media(max-width:600px){.home-banner{backdrop-filter:blur(12px) saturate(120%);-webkit-backdrop-filter:blur(12px) saturate(120%)}}
