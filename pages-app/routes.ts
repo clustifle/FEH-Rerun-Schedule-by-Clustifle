@@ -1,0 +1,15 @@
+// Stable view URLs; account IDs are immutable Supabase UUIDs, never emails.
+export const viewPaths:Record<string,string>={Homepage:'home',General:'schedule/general',Remix:'schedule/remix','Monthly Revival':'schedule/monthly-revival','Forging Bonds Revival':'schedule/new-heroes-revival','Hall of Forms Revival':'schedule/hall-of-forms-revival',Waitlist:'rerun-waitlist',Profile:'profile'};
+export const uuidPattern=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+export function readRoute(){
+ const base=import.meta.env.BASE_URL;const path=location.pathname.startsWith(base)?location.pathname.slice(base.length).replace(/\/$/,''):'';
+ const params=new URLSearchParams(location.search);const profile=path.startsWith('profile/')?path.slice(8).replace(/^id=/,''):params.get('profile')||'';
+ const settings=path==='account'||path==='settings'||path.startsWith('settings/');
+ const view=profile?'Profile':Object.keys(viewPaths).find(key=>viewPaths[key]===path)||params.get('schedule')||null;
+ return {view,profile,settings,section:path==='account'?'Account':path.split('/')[1]||'',explicit:!!path||params.has('profile')||params.has('schedule')};
+}
+export function viewUrl(view:string,month='',profile=''){return import.meta.env.BASE_URL+(viewPaths[view]||'home')+(view==='Profile'&&profile?'/'+encodeURIComponent(profile):'')+(month?'?month='+encodeURIComponent(month):'');}
+export function goTo(url:string,replace=false){if(location.pathname+location.search===url)return;history[replace?'replaceState':'pushState'](null,'',url+location.hash);window.dispatchEvent(new Event('route-change'));}
+export function settingsUrl(section=''){return import.meta.env.BASE_URL+'settings'+(section?'/'+section.toLowerCase().replace(/ & /g,'-').replace(/ /g,'-'):'');}
+// The generated GitHub Pages 404 redirects only within this project's base path.
+export function restorePagesRoute(){const params=new URLSearchParams(location.search);const route=params.get('__route');if(route&&route.startsWith(import.meta.env.BASE_URL)&&!route.startsWith('//')){history.replaceState(null,'',route);}}
