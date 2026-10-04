@@ -293,3 +293,6 @@ dialog.hero-details{padding:0!important;overflow:hidden}.hero-details[open]{disp
 /* Compact pinned header leaves more room for the schedule. */
 .tracker .masthead{padding:12px 24px;gap:8px;grid-template-rows:auto}.tracker .masthead .feh-wordmark img{width:210px;height:auto}.tracker .masthead .mobile-menu-toggle{width:44px;height:44px;min-height:44px}
 @media(max-width:600px){.tracker .masthead{padding:10px 16px}.tracker .masthead .feh-wordmark img{width:190px;max-width:100%}}
+/* Breathing room between pinned branding, controls and the schedule grid. */
+.tracker .toolbar{padding-top:12px;padding-bottom:18px}.tracker .fb-schedule{padding-top:30px}
+@media(max-width:600px){.tracker .toolbar{padding-top:10px;padding-bottom:16px}.tracker .fb-schedule{padding-top:24px}}
