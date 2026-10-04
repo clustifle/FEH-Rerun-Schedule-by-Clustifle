@@ -297,3 +297,4 @@ dialog.hero-details{padding:0!important;overflow:hidden}.hero-details[open]{disp
 .tracker .toolbar{padding-top:12px;padding-bottom:18px}.tracker .fb-schedule{padding-top:30px}
 @media(max-width:600px){.tracker .toolbar{padding-top:10px;padding-bottom:16px}.tracker .fb-schedule{padding-top:24px}}
 .fb-editor label.fb-ongoing-choice{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #a6d9e440;border-radius:8px}.fb-editor .fb-ongoing-choice input{width:18px;height:18px;margin:0;accent-color:#9ce5ee}.fb-duration{padding:14px;border:1px solid #ffffff25;border-radius:10px}.fb-duration h3{font-size:16px;margin:0}.fb-duration p{font-size:13px;color:#bed7de;line-height:1.5}.fb-event-copy .fb-countdown{display:inline-flex;margin:0 0 8px;font-size:12px;padding:4px 9px;line-height:1.4}
+.fb-event-copy>span{display:block}
