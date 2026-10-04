@@ -16,7 +16,7 @@ import {useAutoRefresh} from './useAutoRefresh';
 import {ChevronDown,Menu,CalendarDays,Plus,Shield,Swords,Sparkles,X,Pencil,Search,Upload,LockKeyhole,ChevronLeft,ChevronRight} from 'lucide-react';
 type Hero={demote:boolean;pool:string|null;schedule:string;blessing:string|null;id:string;name:string;title:string;category:string;color:string;month:string|null;notes:string;portrait:string|null;updated:string};
 const schedules=['Homepage','General','Remix','Monthly Revival','Forging Bonds Revival','Waitlist'];
-const scheduleLabel=(s:string)=>s==='Homepage'?'Home':s==='Waitlist'?'Rerun Waitlist':s+' Schedule';
+const scheduleLabel=(s:string)=>s==='Homepage'?'Home':s==='Waitlist'?'Rerun Waitlist':s==='Forging Bonds Revival'?'New Heroes Revival Schedule':s+' Schedule';
 const kindClass=(h:Hero)=>['Legendary','Mythic','Chosen Hero'].includes(h.category)?h.blessing?.toLowerCase()||'unblessed':h.category.toLowerCase();
 const blessingIcon=(category:string,blessing:string)=>assetUrl((category==='Chosen Hero'?'chosen/':'blessings/')+blessing.toLowerCase()+(category==='Chosen Hero'?'.png':'.webp'));
 function HeroTypeTag({hero}:{hero:Hero}){
