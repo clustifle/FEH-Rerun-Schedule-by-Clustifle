@@ -1,129 +1,153 @@
 # Fire Emblem Heroes Rerun Schedule
 
-![Fire Emblem Heroes Rerun Schedule by Clustifle](public/clustifle-feh-rerun-logo.png)
+<p align="center">
+  <img src="public/clustifle-feh-rerun-logo.png" width="420" alt="Fire Emblem Heroes Rerun Schedule by Clustifle">
+</p>
 
-**Website made by Clustifle** â€” an unofficial, publicly accessible tracker for hero reruns.
+An independent fan project by **Clustifle** for browsing Fire Emblem Heroes rerun schedules, active summoning banners, and revival lineups.
 
-[Open the tracker](https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/) Â· [YouTube](https://www.youtube.com/@Clustifle) Â· [X](https://x.com/Clustifle)
+**[Visit the website](https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/)** · [Report an issue](https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/issues) · [Deployment status](https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/actions)
 
-The website was originally made on ChatGPT Sites and later migrated to GitHub Pages with Supabase. The original Sites deployment has been removed. GitHub Pages is the active website.
+## Overview
 
-## Themes
+The website brings several schedule views into one interface, with hero portraits, searchable lineups, local banner times, and tools for authorized schedule editors. Visitors can browse without an account. Signed-in users can customize a public profile and use personal tracking features.
 
-Open **Settings → Appearance → Theme** to choose **Default**, the original teal appearance, or **Europa Nuova**, with Europa fonts, orange accents, and one graphic background. Theme choices apply throughout the site, are saved on this device, and return to Default when preferences are reset. Weapon colors and hero badges retain their colors.
+The frontend is built with **React, TypeScript, and Vite** and hosted on **GitHub Pages**. **Supabase** provides authentication, schedule data, and image storage.
 
-## Browse the tracker
+## Schedule views
 
-1. Use the header navigation to switch between Home, all schedule views, Profile, Find Users, Settings, and FAQ.
-2. Choose a view from the table below.
-3. Search by hero name or title using **Find a hero**. Use **Hero type** and **Advanced filters** to narrow by type, color, and pool.
-4. On dated schedules, use the month slider and navigation buttons to browse months. On **Rerun Waitlist**, scroll horizontally or swipe on mobile; the rows expand as heroes are added.
-5. Hover over a hero on desktop for a mini preview. Click or tap to open **Hero Details**, including portrait, name, title, tags, editor note, and update information.
-6. Enable **Compact view** for smaller portraits and columns with card tags hidden. Full information remains in previews and Hero Details.
-
-Open pages refresh hero and banner data every 30 seconds while visible, and when returning to the tab or reconnecting. Unsaved forms pause updates. New website versions load automatically when idle, preserving the selected view and month.
-
-**FAQ** opens inside the navigation menu, with searchable schedule explanations and editor instructions for authorized accounts. **Settings â†’ About** contains project information, credits, special thanks, YouTube, X, GitHub, and the install-app control. The footer keeps only the site name, creator credit, and artwork attribution.
-
-### Schedule views
-
-| View | What it tracks |
+| View | Purpose |
 | --- | --- |
-| **Home** | Active banners and dates, using four featured portraits, L/M/E color lanes, or two heroes per color for New Heroes Return / Double Special Heroes. |
-| **General Schedule** | The end-of-month banner schedule for Legendary, Mythic, Emblem, and Chosen Heroes. |
-| **Remix Schedule** | Older heroes returning on Remix banners, kept separate from General Schedule. |
-| **Monthly Revival Schedule** | Older Legendary and Mythic reruns, grouped by month with separate Legendary Revival and Mythic Revival columns. |
-| **New Heroes Revival Schedule** | New Heroes revival lineups in a compact month list with up to four portraits. |
-| **Hall of Forms Revival Schedule** | Hall of Forms revival lineups in their own compact month list. |
-| **Rerun Waitlist** | A manually managed list populated by editors with Add Hero or Choose a Hero. Banner membership does not automatically add or remove entries. |
+| **Home** | Currently active banners, featured heroes, active dates, and time remaining. |
+| **General Schedule** | Recorded end-of-month reruns for Legendary, Mythic, Emblem, and Chosen Heroes. |
+| **Remix Schedule** | Hero reruns associated with Remix banners. |
+| **Monthly Revival Schedule** | Legendary and Mythic revival entries, grouped by month. |
+| **New Heroes Revival Schedule** | Returning New Heroes lineups, including Forging Bonds revivals, in a compact month list. |
+| **Hall of Forms Revival Schedule** | Hall of Forms revival lineups in a separate month list. |
+| **Rerun Waitlist** | A list maintained manually by editors for heroes awaiting a recorded rerun. |
 
-These are the website's organizational views. A Waitlist entry is not an official promise of a future banner.
+Schedule entries reflect information recorded by the site's editors. A listed month or waitlist entry does not guarantee a future banner; consult in-game announcements for confirmed dates, lineups, and availability.
 
-### Rerun timing
+## Browsing and personalization
 
-Dated views show recorded rerun months. Use **Rerun Waitlist** when no month is available. Editor notes provide announcement sources or other context; check in-game notices for final banner dates and availability.
+- **Search and filters:** Find heroes by name or title and narrow results by hero type, weapon color, and pool.
+- **Hero information:** Hover over a portrait on desktop for a quick preview, or select it to open the full Hero Details view.
+- **Month navigation:** Browse dated schedules with the month strip and return to the present using **Current month**.
+- **Compact view:** Reduce portrait and column sizes on supported schedules while keeping full information available in Hero Details.
+- **Automatic updates:** Schedule data refreshes every 30 seconds while the page is visible, subject to update preferences. Open editing forms pause refreshes.
 
-### Hero types, pools, and blessings
+**Settings** contains appearance, navigation, carousel, motion, date and time, and update preferences. Preferences are saved on the current device. **FAQ** provides searchable explanations of the site's schedules and banner types, with additional instructions for authorized editors. Both panels scroll independently of the navigation controls.
 
-Supported specific types are **Legendary, Mythic, Emblem, Chosen, Rearmed, Attuned, Aided, Entwined, Duo, Harmonized, and Vista**.
+### Themes
 
-For heroes without a specific type:
+Choose a theme under **Settings → Appearance → Theme**:
 
-- **General** uses **General Pool**.
-- **Special** defaults to **Limited Pool**.
+| Theme | Appearance |
+| --- | --- |
+| **Default** | The original teal design with Champions typography. |
+| **Europa Nuova** | Europa typography, orange accents, one graphic background, and transparent gradient navigation. |
 
-Legendary, Mythic, and Emblem default to **L/M/E Pool**. Rearmed, Attuned, Aided, Entwined, Vista, Chosen, Duo, and Harmonized default to Limited Pool. Editors can choose the pool independently of hero type. Pool labels are tracker groupings; they do not replace the game's banner-specific appearance rates or eligibility.
+Themes apply throughout the site, including banner cards, hover previews, and editors. Weapon-color rows and hero badges retain their identifying colors. **Reset settings** restores the Default theme and other device preferences.
 
-Legendary and Chosen entries offer Wind, Earth, Fire, and Water tags. Mythic entries offer Anima, Astra, Light, and Dark. Emblem and other types have their own colored tags. General and Special do not require a blessing.
+### Banner layouts and times
 
-## Homepage banners
+Home uses three banner layouts:
 
-Owners and Managers can use **+ Add newâ€¦** on Home to save a banner name, start and end dates, and select existing heroes for its slots. Editors enter UTC dates and times, with FEH defaults of 07:00 for the start and 06:59 for the end. Visitors see these times automatically converted to their local timezone. Ongoing banners appear automatically; upcoming and ended entries remain available to editors. **Edit banner / slots** updates a lineup, and **Create hero in banner** adds a new hero directly. Banner membership does not change the heroâ€™s rerun schedule. Multiple active banners rotate in a looping carousel every 10 seconds, with arrows, slide indicators, swipe support, and a pause control. The active navigation indicator fills over 10 seconds. Rotation pauses with the Pause control, touch interactions, open dialogs, or a hidden tab.
+- **Legendary / Mythic / Emblem:** Hero lineups arranged in weapon-color rows.
+- **New Heroes / Special Heroes:** Four featured portraits with names highlighted in their weapon colors.
+- **New Heroes Return / Double Special Heroes:** Up to two heroes per weapon color.
 
-## Add or edit heroes
+Multiple active banners appear in a looping carousel with manual navigation, a filling progress indicator, and a pause control. Its default interval is 10 seconds and can be changed in Settings.
 
-Editing requires an authorized **Owner** or **Manager** account. Public visitors have read-only access.
+Editors enter dates and times in UTC. The default start time is **07:00 UTC**, and the default end time is **06:59 UTC** on the selected end date. Visitors see banner times in their local timezone unless they choose UTC in Settings.
 
-1. Open **Owner sign in** and enter your own account email and password manually. Use **Forgot password?** if needed.
-2. Choose **Add hero**, or open a hero's details and select its edit action.
-3. Select the schedule, hero type, color, pool, and blessing where applicable. Enter the name and title. Check **Demote Â· 4â€“5â˜… summonable** when applicable; this is shown in Hero Details and hover previews.
-4. Add a rerun month for a dated entry, or select Rerun Waitlist when no month is available. **Skip next rerun month** also saves the hero to Waitlist when an EoM return is uncertain; homepage banner membership stays intact. To move a waitlisted hero into a dated view, select its schedule and month.
-5. Add a portrait and a note explaining the announcement, prediction, or other context.
-6. Select **Save hero**. Changes are stored in Supabase and do not require a frontend rebuild.
+### Hero pools
 
-Monthly Revival accepts Legendary and Mythic entries only. Both the owner and managers can write hero notes. Deleting a hero is also available to authorized editors.
+The tracker distinguishes **General Pool**, **Non-Seasonal Limited**, **Seasonal Limited**, and **L/M/E Pool**. Editors can select a pool independently of hero type. These labels organize the tracker; the actual summoning banner determines eligibility and appearance rates.
 
-### Portrait uploads
+## Accounts and editor access
 
-Use **PNG, JPG, or WebP**, up to **3 MB**. You can choose a file, drag and drop an image, or paste a copied image into the editor.
+Email sign-in and account creation are available from the navigation menu. Creating an account does not grant schedule-editing access.
 
-Direct HTTPS image links from supported FEH Wiki / Fandom / Wikia or Wikimedia hosts can be imported. Paste the image URL, not the wiki article URL, and wait for the preview. If a host blocks import, download the image and upload the file instead.
+| Role | Access |
+| --- | --- |
+| **Visitor** | Browse schedules and personalize the interface. Signed-in visitors can manage their profile and personal tracking. |
+| **Schedule Manager** | Create and edit heroes, banners, waitlist entries, and revival lineups. |
+| **Head Administrator** | All editing capabilities, plus management of Schedule Manager access. |
 
-### Manager access
+Account and profile controls are available in **Settings → Account** after signing in. Public profiles support a username, display name, picture, bio, social links, and optional favorites. Usernames form shareable links such as `/profile/clustifle`; **Find Users** searches public usernames and display names.
 
-Only the owner can manage editor access through **Managers**. A manager must already have a confirmed Supabase Authentication account before the owner adds its email. The panel does not create accounts or send invitations. Managers sign in with their own credentials.
+The Head Administrator grants editor access through **Manage Schedule Managers**. The selected user must already have a confirmed account. See the [backend editor-access guide](supabase/MANAGERS.md) for implementation details; its internal role identifiers retain the older Owner and Manager names.
 
-See [Owner and Managers setup](supabase/MANAGERS.md) for authorization details.
+## Editing schedules
 
-## Install on a phone
+Authorized editors can use **Add Hero**, edit a hero from its details, or select an existing portrait through **Choose a Hero**. Hero records include a name, title, type, weapon color, pool, applicable blessing, portrait, and editor note. The **Demote** option identifies a 4–5-star summonable demote hero.
 
-Use **Install app** in **Settings â†’ About**:
+Use a recorded month for a dated schedule. **Skip next rerun month** supports entries whose next return is uncertain. The **Rerun Waitlist** is managed explicitly: adding a hero to a banner or revival lineup does not automatically add or remove its waitlist entry.
 
-- **Android:** Open in Chrome and use the install prompt when available, or the browser's Install app / Add to Home screen option.
-- **iPhone / iPad:** Open in Safari, choose Share â†’ Add to Home Screen, and enable Open as Web App if offered.
+On Home, **Add new…** creates a banner; **Edit banner / slots** changes its identity, dates, and lineup. Revival editors support up to four heroes and a **Currently ongoing** option for displaying time remaining during the configured active period.
 
-Installation adds a home-screen icon and standalone window. An internet connection is needed for current schedules and editing. Offline mode provides a reconnect screen rather than a cached schedule.
+Changes are saved directly to Supabase and do not require a frontend deployment.
 
-## Hosting and development
+### Hero portraits
 
-The frontend uses **React, TypeScript, and Vite** on **GitHub Pages**. **Supabase** provides the database, sign-in, portrait storage, and image import. The tracker is publicly viewable; only the owner and authorized managers can edit.
+The hero editor accepts **PNG, JPG, and WebP** files up to **3 MB** through upload, drag and drop, or paste. Direct HTTPS image links from supported Fandom/Wikia and Wikimedia hosts can also be imported.
 
-Pushes to `main` automatically check, build, and deploy through [GitHub Actions](https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/actions). Hero edits are saved directly to Supabase without rebuilding the website.
+Small portraits are enlarged with conventional image smoothing to a maximum 1024-pixel longest edge. This preserves composition, aspect ratio, and transparency; it does not generate additional artwork detail.
 
-For local development, use **Node 24** and **pnpm 11**:
+## Local development
+
+Use **Node.js 24** and **pnpm 11**, matching the deployment workflow.
 
 ```sh
+git clone https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle.git
+cd FEH-Rerun-Schedule-by-Clustifle
 pnpm install --frozen-lockfile
 pnpm dev:pages
 ```
 
-To check and build:
+Open the local URL printed by Vite. To check types and create the GitHub Pages build:
 
 ```sh
 pnpm exec tsc -p tsconfig.pages.json
 pnpm build:pages
 ```
 
-The active frontend is in `pages-app/`, styles are in `app/globals.css`, and assets are in `public/`. Backend setup and migrations are in `supabase/`; see [Owner and Managers](supabase/MANAGERS.md) for editor access. Historical migrations should not be rerun on the live database without review. Keep passwords, secret keys, and service-role keys out of the repository.
+The build output is written to `pages-dist/`.
+
+### Project structure
+
+| Path | Contents |
+| --- | --- |
+| [`pages-app/`](pages-app/) | Active GitHub Pages frontend and Supabase integration. |
+| [`app/globals.css`](app/globals.css) | Shared layout and interface styles. |
+| [`app/themes.css`](app/themes.css) | Theme assets, typography, and appearance overrides. |
+| [`public/`](public/) | Logos, fonts, theme backgrounds, and installable-app assets. |
+| [`supabase/`](supabase/) | Backend configuration, migrations, and editor-access documentation. |
+| [`.github/workflows/pages.yml`](.github/workflows/pages.yml) | Type checks, production build, and GitHub Pages deployment. |
+
+The active frontend's Supabase connection is configured in [`pages-app/static-data.ts`](pages-app/static-data.ts). Use a separate backend when developing changes that write stored data. Keep private credentials and service-role keys out of the repository.
+
+The repository also retains files from the project's original ChatGPT Sites implementation. The GitHub Pages application uses the `dev:pages` and `build:pages` commands above.
+
+## Deployment
+
+Pushes to `main` run the GitHub Actions deployment workflow. It checks TypeScript, builds the frontend, and publishes `pages-dist/` to GitHub Pages. Schedule and profile changes made through the website are stored in Supabase and do not require this workflow.
+
+## Feedback and contributions
+
+For a missing entry or schedule correction, include the hero's name and title, the relevant schedule, the month if known, and an announcement source. For interface bugs, include the affected page, browser or device, reproduction steps, and a screenshot where useful.
+
+Use [GitHub Issues](https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/issues) for reports. Code contributions should explain the change and include relevant validation; frontend changes should pass the type check and GitHub Pages build.
 
 ## Credits
 
-- **Website, design, and tracker:** Clustifle Â© 2026.
-- **Fire Emblem Heroes and artwork:** Â© Nintendo / INTELLIGENT SYSTEMS.
-- **Typography:** Champions font from UEFA. Font assets remain subject to their respective rights and licenses.
-- **Information references:** [Official FEH news](https://fire-emblem-heroes.com/en/topics/), [Learn with Sharena](https://new-guide.fire-emblem-heroes.com/en-US/feh-1170.html), and [Fire Emblem Heroes Wiki](https://feheroes.fandom.com/). Specific references are linked in the website's FAQ.
-- **Project history:** Originally created with ChatGPT Sites; migrated to GitHub Pages and Supabase.
+- **Website, design, and development:** Clustifle.
+- **Special thanks:** [u/King41bert0713](https://www.reddit.com/user/King41bert0713/) for helping with additions during development.
+- **Fire Emblem Heroes artwork:** © Nintendo / INTELLIGENT SYSTEMS.
+- **Typography and Europa theme graphics:** UEFA brand assets, retaining their respective ownership and licensing terms.
+- **Information sources:** In-game announcements, official Fire Emblem Heroes notices, and community references linked in the site's FAQ.
 
-This is an unofficial fan website, unaffiliated with Nintendo or INTELLIGENT SYSTEMS. Artwork, branding, fonts, and third-party dependencies retain their respective rights. No blanket license is granted for those assets by this README.
+Project information and social links are available in **Settings → About**, including [YouTube](https://www.youtube.com/@Clustifle) and [X](https://x.com/Clustifle). Where supported, this section also provides **Install app**; current schedules and editing require an internet connection.
 
-For a missing entry or correction, include the hero's name and title, schedule, month if known, and announcement source when contacting Clustifle through the linked social pages or reporting it in this repository.
+This is an unofficial fan project and is not affiliated with Nintendo or INTELLIGENT SYSTEMS. Third-party artwork, branding, fonts, and dependencies remain subject to their respective rights and licenses.

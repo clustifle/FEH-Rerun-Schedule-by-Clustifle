@@ -141,3 +141,49 @@ html[data-theme=europa-nuova] .revival-picker-card.is-selected{border-color:#ff7
 html[data-theme=europa-nuova] .tracker footer.revival-picker-footer{background:#17110e;color:#dfcfc1}
 html[data-theme=europa-nuova] .filter-sheet-body{scrollbar-color:#b67b4d70 transparent}
 html[data-theme=europa-nuova] .navigation-schedules summary:hover,html[data-theme=europa-nuova] .navigation-schedules[open]>summary{border-bottom-color:#ff79005c}
+/* Audit pass: shared controls, helper text, focus states, and secondary editors. */
+html[data-theme=europa-nuova]{--europa-text:#eee5dd;--europa-muted:#c9b7a7;--europa-border:#ffffff26}
+html[data-theme=europa-nuova] body :focus-visible{outline-color:#ffac59}
+html[data-theme=europa-nuova] body :is(input[type=checkbox],input[type=radio]){accent-color:#ff7900}
+html[data-theme=europa-nuova] body :is(form input:not([type=checkbox]):not([type=radio]):not([type=file]),form select,form textarea){background:#130e0bb3;border-color:#ffffff38;color:#fff}
+html[data-theme=europa-nuova] body :is(input,select,textarea):focus{border-color:#ff7900;box-shadow:0 0 0 3px #ff790014}
+html[data-theme=europa-nuova] :is(input,textarea)::placeholder{color:#baa695}
+html[data-theme=europa-nuova] .tracker .mobile-navigation-drawer,html[data-theme=europa-nuova] .settings-inline{color:var(--europa-text)}
+html[data-theme=europa-nuova] .navigation-auth-links{color:#ad9e92}
+html[data-theme=europa-nuova] .homepage-count{color:#ffd4aa;background:#ff790012;border-color:#ff790040}
+html[data-theme=europa-nuova] .settings-row{border-top-color:var(--europa-border)}
+html[data-theme=europa-nuova] :is(.settings-hint,.profile-eyebrow,.profile-editor small,.profile-username,.profile-private>h3 span,.profile-favorite small,.profile-game-list>*,.profile-follow-dates p,.owner-login-intro,.manager-help,.manager-list small,.banner-date-help,.fb-slot-pick small,.hero-detail-bottom>span){color:var(--europa-muted)}
+html[data-theme=europa-nuova] .settings-inline .settings-mobile-section{color:var(--europa-muted)}
+html[data-theme=europa-nuova] :is(.profile-socials a,.profile-saved-list a,.owner-forgot,.profile-favorite button,.profile-saved-list button){color:#ffba80}
+html[data-theme=europa-nuova] .public-profile .profile-socials a{border-bottom-color:#ff790044}
+html[data-theme=europa-nuova] .public-profile .profile-socials a:hover{border-bottom-color:#ffad65;color:#fff}
+html[data-theme=europa-nuova] :is(.profile-save-schedule input,.profile-save-schedule select,.profile-interest-fields select,.profile-editor input,.profile-editor textarea){background:#130e0bb3;color:#fff;border-color:#ffffff30}
+html[data-theme=europa-nuova] .profile-picture{border-color:#ffffff35}
+html[data-theme=europa-nuova] .public-profile .profile-bio{color:var(--europa-text)}
+html[data-theme=europa-nuova] .user-search label:focus-within{border-color:#ff7900;box-shadow:0 0 0 3px #ff790018}
+html[data-theme=europa-nuova] .tracker .user-directory form.user-search .primary:hover{background:#ff790018;border-color:#ff7900}
+html[data-theme=europa-nuova] .faq-inline .faq-entry p,html[data-theme=europa-nuova] .faq-empty{color:var(--europa-text)}
+html[data-theme=europa-nuova] .faq-entry summary:focus-visible{outline-color:#ffac59}
+html[data-theme=europa-nuova] .hero-details .hero-details-close{background:#17110ecc;border-color:#ffffff30}
+html[data-theme=europa-nuova] .hero-details .hero-detail-portrait,html[data-theme=europa-nuova] .hero-editor .portrait.large{border-color:#ffffff40}
+html[data-theme=europa-nuova] .hero-editor .editor-portrait{background:#ffffff04}
+html[data-theme=europa-nuova] .hero-editor :is(label,h3,.eyebrow){color:var(--europa-text)}
+html[data-theme=europa-nuova] .hero-editor :is(.upload p,.portrait-link p){color:var(--europa-muted)}
+html[data-theme=europa-nuova] :is(.upload,.manager-owner,.fb-slot-pick){background:#17110eb3;border-color:var(--europa-border)}
+html[data-theme=europa-nuova] .portrait-dropzone.is-dragging{background:#ff79001a;border-color:#ffab62;box-shadow:inset 0 0 0 2px #ff790055,0 0 24px #ff790018}
+html[data-theme=europa-nuova] .portrait-dropzone:focus-visible{outline-color:#ffac59}
+html[data-theme=europa-nuova] .fb-slot-pick:hover{border-color:#ffab62}
+html[data-theme=europa-nuova] .banner-editor :is(.banner-editor-section h3,.banner-editor-section p,.banner-hero-picker small){color:var(--europa-muted)}
+html[data-theme=europa-nuova] .banner-editor .form-actions .secondary{border-color:#ffffff40;background:#ffffff09;color:#fff}
+html[data-theme=europa-nuova] .home-banner-actions .secondary:hover{background:#ff790018;border-color:#ff790080}
+html[data-theme=europa-nuova] .banner-empty-slot,html[data-theme=europa-nuova] .banner-empty-slot span{color:#c8baad}
+html[data-theme=europa-nuova] .pool-tag{background:#17110e;border-color:#ffffff35;color:#eee5dd}
+html[data-theme=europa-nuova] .portrait{color:#eee5dd}
+html[data-theme=europa-nuova] .filter-pool-any{color:var(--europa-muted)}
+html[data-theme=europa-nuova] .filter-pool-choice[aria-pressed=true] .filter-choice-check{background:#ff7900;border-color:#ff7900;color:#170a00}
+html[data-theme=europa-nuova] .filter-sheet .filter-close:hover,html[data-theme=europa-nuova] .filter-reset:hover:not(:disabled){background:#ff790018}
+html[data-theme=europa-nuova] .filter-sheet-footer p strong{color:#eee5dd}
+html[data-theme=europa-nuova] dialog:not(.mobile-navigation-drawer)::backdrop{background:#080503b3}
+html[data-theme=europa-nuova] .filter-choice-check{border-color:#ffffff35}
+html[data-theme=europa-nuova] .filter-sheet{box-shadow:0 35px 110px #000000ad}
+html[data-theme=europa-nuova] .filter-show{box-shadow:0 3px 12px #00000020}
