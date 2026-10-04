@@ -187,3 +187,9 @@ html[data-theme=europa-nuova] dialog:not(.mobile-navigation-drawer)::backdrop{ba
 html[data-theme=europa-nuova] .filter-choice-check{border-color:#ffffff35}
 html[data-theme=europa-nuova] .filter-sheet{box-shadow:0 35px 110px #000000ad}
 html[data-theme=europa-nuova] .filter-show{box-shadow:0 3px 12px #00000020}
+
+/* Keep the schedule search transparent instead of inheriting editor field surfaces. */
+html[data-theme=europa-nuova] .tracker .toolbar .search{background:transparent;color:var(--europa-muted);border-bottom-color:var(--europa-border);transition:border-color .18s ease}
+html[data-theme=europa-nuova] .tracker .toolbar .search input{background:transparent;border:0;box-shadow:none;color:#fff}
+html[data-theme=europa-nuova] .tracker .toolbar .search input::placeholder{color:var(--europa-muted)}
+html[data-theme=europa-nuova] .tracker .toolbar .search:focus-within{border-bottom-color:var(--europa-orange)}
