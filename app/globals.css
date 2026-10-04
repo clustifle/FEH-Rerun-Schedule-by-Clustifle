@@ -226,3 +226,5 @@ dialog.hero-details{padding:0!important;overflow:hidden}.hero-details[open]{disp
 @keyframes countdown-gradient{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 @keyframes countdown-sheen{0%,62%{transform:translateX(-140%)}85%,100%{transform:translateX(140%)}}
 @media(prefers-reduced-motion:reduce){.home-banner-countdown,.home-banner-countdown::after{animation:none}.home-banner-countdown::after{display:none}}
+
+.feh-wordmark.logo-home-link{appearance:none;padding:0;border:0;background:transparent;text-align:left;border-radius:4px;transition:opacity .18s ease}.feh-wordmark.logo-home-link:hover{opacity:.85}.feh-wordmark.logo-home-link:focus-visible{outline:2px solid #a9e7ef;outline-offset:6px}@media(prefers-reduced-motion:reduce){.feh-wordmark.logo-home-link{transition:none}}
