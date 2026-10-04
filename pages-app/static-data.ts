@@ -1,6 +1,7 @@
 import {createClient} from '@supabase/supabase-js';
 import {jsonResponse,requestTimeout} from './browser-compat';
 import {normalizePool} from './hero-pools';
+import {upscalePortrait} from './portrait-upscale';
 export const supabase=createClient('https://aknsqeqykjgdyhdroqcx.supabase.co','sb_publishable_PiJIst1aSJtrYBiIvwDIVA_KS3c-E3g');
 export const assetUrl=(value:string)=>import.meta.env.BASE_URL+value.replace(/^\//,'');
 export const portraitUrl=(value:string)=>value.startsWith('data/')?assetUrl(value):supabase.storage.from('portraits').getPublicUrl(value).data.publicUrl;
@@ -83,6 +84,7 @@ async function runApiFetch(input:string,init?:RequestInit){
    if(file instanceof File&&file.size){
     if(file.size>3145728||!['image/png','image/jpeg','image/webp'].includes(file.type))throw new Error('Choose PNG, JPG, or WebP under 3 MB.');
     const bytes=new Uint8Array(await file.arrayBuffer());const valid=file.type==='image/png'?bytes[0]===137&&bytes[1]===80&&bytes[2]===78&&bytes[3]===71:file.type==='image/jpeg'?bytes[0]===255&&bytes[1]===216&&bytes[2]===255:String.fromCharCode(...bytes.slice(0,4))==='RIFF'&&String.fromCharCode(...bytes.slice(8,12))==='WEBP';if(!valid)throw new Error('Invalid portrait image.');
+    if(form.get('portraitPrepared')!=='true')file=(await upscalePortrait(file)).file;
     uploaded=crypto.randomUUID()+'.'+(file.type==='image/png'?'png':file.type==='image/jpeg'?'jpg':'webp');
     const {error}=await supabase.storage.from('portraits').upload(uploaded,file,{contentType:file.type});if(error)throw new Error(error.message);portrait=uploaded;
    }
