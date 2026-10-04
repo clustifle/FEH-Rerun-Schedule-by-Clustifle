@@ -6,6 +6,7 @@ import {createPortal,flushSync} from 'react-dom';
 import InstallApp from './InstallApp';
 import FaqHelp from './FaqHelp';
 import Homepage from './Homepage';
+import {listedRerunHeroes,hiddenFromWaitlist,type RerunBanner} from './rerun-waitlist';
 import {useAutoRefresh} from './useAutoRefresh';
 import {ChevronDown,Menu,CalendarDays,Plus,Shield,Swords,Sparkles,X,Pencil,Search,Upload,LockKeyhole,ChevronLeft,ChevronRight} from 'lucide-react';
 type Hero={demote:boolean;pool:string|null;schedule:string;blessing:string|null;id:string;name:string;title:string;category:string;color:string;month:string|null;notes:string;portrait:string|null;updated:string};
@@ -109,6 +110,7 @@ export default function Home(){
  const blessingDialog=useRef<HTMLDialogElement>(null);
  const [canEdit,setCanEdit]=useState(false),[role,setRole]=useState<string|null>(null);
  useEffect(()=>{const refresh=()=>{void apiFetch("/api/session").then(r=>r.json() as Promise<{canEdit?:boolean;role?:string}>).then(d=>{setCanEdit(d?.canEdit===true);setRole(d?.role||null);}).catch(()=>{setCanEdit(false);setRole(null);});};refresh();window.addEventListener("owner-session-change",refresh);return()=>window.removeEventListener("owner-session-change",refresh);},[]);
+ const [rerunBanners,setRerunBanners]=useState<RerunBanner[]>([]);
  const [heroes,setHeroes]=useState<Hero[]>([]),[loading,setLoading]=useState(true),[error,setError]=useState(''),[filter,setFilter]=useState('All heroes'),[search,setSearch]=useState(''),[editing,setEditing]=useState<Hero|null|undefined>(undefined),[saving,setSaving]=useState(false),[preview,setPreview]=useState(''),[notice,setNotice]=useState('');
  const [portraitUrl,setPortraitUrl]=useState(''),[importing,setImporting]=useState(false),[importedPortrait,setImportedPortrait]=useState<File|null>(null),[portraitMessage,setPortraitMessage]=useState(''),[importedUrl,setImportedUrl]=useState('');
  const [viewedHero,setViewedHero]=useState<Hero|null>(null);
@@ -128,8 +130,8 @@ export default function Home(){
  function viewHero(h:Hero){hideHeroPreview();setViewedHero(h);heroDetails.current?.showModal();}
  function closeHeroDetails(){heroDetails.current?.close();}
  const dialog=useRef<HTMLDialogElement>(null),fileRef=useRef<HTMLInputElement>(null);
- async function load(quiet=false){if(!quiet){setLoading(true);setError('');}try{const r=await apiFetch('/api/heroes');const d=await r.json() as Hero[] & {error?:string};if(!r.ok)throw new Error(d.error);const next=d.map(h=>({...h,pool:h.pool==='Special Heroes Pool'?'Limited Pool':h.pool||defaultPool(h.category)}));setHeroes(old=>JSON.stringify(old)===JSON.stringify(next)?old:next);if(editing===undefined)setError(''); }catch(e){if(!quiet)setError((e as Error).message);}finally{if(!quiet)setLoading(false);}}
- useEffect(()=>{load();},[]);
+ async function load(quiet=false){if(!quiet){setLoading(true);setError('');}try{const [r,b]=await Promise.all([apiFetch('/api/heroes'),apiFetch('/api/banners')]);const [d,banners]=await Promise.all([r.json() as Promise<Hero[] & {error?:string}>,b.json() as Promise<RerunBanner[] & {error?:string}>]);if(!r.ok)throw new Error(d.error);if(!b.ok)throw new Error(banners.error||'Could not load banner lineups.');setRerunBanners(old=>JSON.stringify(old)===JSON.stringify(banners)?old:banners);const next=d.map(h=>({...h,pool:h.pool==='Special Heroes Pool'?'Limited Pool':h.pool||defaultPool(h.category)}));setHeroes(old=>JSON.stringify(old)===JSON.stringify(next)?old:next);if(editing===undefined)setError(''); }catch(e){if(!quiet)setError((e as Error).message);}finally{if(!quiet)setLoading(false);}}
+ useEffect(()=>{void load();const refresh=()=>{void load(true);};window.addEventListener('banners-change',refresh);return()=>window.removeEventListener('banners-change',refresh);},[]);
  useAutoRefresh(()=>load(true),true);
  useEffect(()=>{setViewedHero(old=>old?heroes.find(h=>h.id===old.id)||null:old);setHeroPreview(old=>{if(!old)return old;const hero=heroes.find(h=>h.id===old.hero.id);return hero?{...old,hero}:null;});},[heroes]);
  const newHeroBanner=useRef<string|null>(null),savedBannerHero=useRef<string|null>(null);
@@ -155,7 +157,8 @@ export default function Home(){
  }
  async function importLink(link=portraitUrl){setImporting(true);setError('');setPortraitMessage('');try{const r=await apiFetch('/api/portrait-import',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:link.trim()})});if(!r.ok){const d=await r.json() as {error?:string};throw new Error(d.error||'Could not import this portrait.');}const blob=await r.blob();const file=new File([blob],'imported-portrait.'+(blob.type==='image/png'?'png':blob.type==='image/jpeg'?'jpg':'webp'),{type:blob.type});const image=await new Promise<string>((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(new Error('Could not preview this portrait.'));reader.readAsDataURL(file);});setImportedPortrait(file);setImportedUrl(link.trim());if(fileRef.current)fileRef.current.value='';setPreview(image);setPortraitMessage('Portrait ready. Save the hero to keep it.');}catch(e){setError((e as Error).message);}finally{setImporting(false);}}
  useEffect(()=>{const link=portraitUrl.trim();if(saving||!link||!link.toLowerCase().startsWith('https://')||importedUrl===link)return;const timer=setTimeout(()=>{void importLink(link);},600);return()=>clearTimeout(timer);},[portraitUrl,saving]);
- const scheduleHeroes=activeSchedule==='Homepage'?heroes:heroes.filter(h=>(h.schedule||'General')===activeSchedule);
+ const listedReruns=listedRerunHeroes(rerunBanners);
+ const scheduleHeroes=activeSchedule==='Homepage'?heroes:heroes.filter(h=>(h.schedule||'General')===activeSchedule&&(activeSchedule!=='Waitlist'||!hiddenFromWaitlist(h,listedReruns)));
  const visible=activeSchedule==='Homepage'?scheduleHeroes:scheduleHeroes.filter(h=>(filter==='All heroes'||h.category===filter)&&(colorFilter==='All'||h.color===colorFilter)&&(poolFilter==='All'||h.pool===poolFilter)&&(`${h.name} ${h.title}`.toLowerCase().includes(search.toLowerCase())));
  const now=new Date(),currentMonth=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
  const unscheduled=visible.filter(h=>!h.month);
