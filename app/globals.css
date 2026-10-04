@@ -421,3 +421,19 @@ html[data-motion=full] .homepage-tools{animation:home-content-in .6s cubic-bezie
     scroll-behavior: auto;
   }
 }
+
+/* Native scrolling with a shared, theme-aware scrollbar finish. */
+:root{--scroll-thumb:#82bbc8;--scroll-thumb-hover:#b5e3eb;--scroll-track:#102e3866}
+html[data-theme=europa-nuova]{--scroll-thumb:#bd7945;--scroll-thumb-hover:#ff9b4f;--scroll-track:#100b0866}
+html[data-theme] body,html[data-theme] body *:not(.month-strip){scrollbar-width:thin;scrollbar-color:var(--scroll-thumb) var(--scroll-track)}
+html{scrollbar-width:thin;scrollbar-color:var(--scroll-thumb) var(--scroll-track)}
+@supports selector(::-webkit-scrollbar){
+ html,html[data-theme] body,html[data-theme] body *:not(.month-strip){scrollbar-width:auto;scrollbar-color:auto}
+ html::-webkit-scrollbar,html[data-theme] body ::-webkit-scrollbar,html[data-theme] body::-webkit-scrollbar{width:10px;height:10px}
+ html::-webkit-scrollbar-track,html[data-theme] body ::-webkit-scrollbar-track,html[data-theme] body::-webkit-scrollbar-track{background:var(--scroll-track);border-radius:999px}
+ html::-webkit-scrollbar-thumb,html[data-theme] body ::-webkit-scrollbar-thumb,html[data-theme] body::-webkit-scrollbar-thumb{background:var(--scroll-thumb);border:3px solid transparent;background-clip:padding-box;border-radius:999px;min-height:32px;min-width:32px}
+ html::-webkit-scrollbar-thumb:hover,html[data-theme] body ::-webkit-scrollbar-thumb:hover,html[data-theme] body::-webkit-scrollbar-thumb:hover{background-color:var(--scroll-thumb-hover)}
+ html::-webkit-scrollbar-corner,html[data-theme] body ::-webkit-scrollbar-corner{background:transparent}
+ html::-webkit-scrollbar-button,html[data-theme] body ::-webkit-scrollbar-button{display:none;width:0;height:0}
+}
+@media(forced-colors:active){html,html[data-theme] body,html[data-theme] body *:not(.month-strip){scrollbar-color:auto;scrollbar-width:auto}}

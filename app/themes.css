@@ -61,7 +61,7 @@ html[data-theme=europa-nuova] .fb-row.is-selected{background:#ff790010;border-le
 html[data-theme=europa-nuova] .fb-list-head{border-color:#ff790050;color:#cbbfb6}
 html[data-theme=europa-nuova] .fb-row{border-bottom-color:#ffffff20}
 html[data-theme=europa-nuova] .month-scroll{scrollbar-color:#ff8b3f #ffffff12}
-html[data-theme=europa-nuova] .tracker :is(.month-scroll,.fb-list)::-webkit-scrollbar-thumb{background:#ff8b3f}
+
 /* Weapon colors, hero glows, and type badges retain their semantic colors. */
 html[data-theme=europa-nuova] dialog:not(.mobile-navigation-drawer){background:linear-gradient(120deg,#17120ff7,#080807fa);color:#fff;border-color:#ff790045}
 html[data-theme=europa-nuova] :is(.hero-editor,.banner-editor) :is(.dialog-top,.form-actions){background:#17120ff5;border-color:#ffffff26}
