@@ -2,11 +2,15 @@
 
 ![Fire Emblem Heroes Rerun Schedule by Clustifle](public/clustifle-feh-rerun-logo.png)
 
-**Website made by Clustifle** — an unofficial, publicly accessible tracker for hero reruns.
+**Website made by Clustifle** â€” an unofficial, publicly accessible tracker for hero reruns.
 
-[Open the tracker](https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/) · [YouTube](https://www.youtube.com/@Clustifle) · [X](https://x.com/Clustifle)
+[Open the tracker](https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/) Â· [YouTube](https://www.youtube.com/@Clustifle) Â· [X](https://x.com/Clustifle)
 
 The website was originally made on ChatGPT Sites and later migrated to GitHub Pages with Supabase. The original Sites deployment has been removed. GitHub Pages is the active website.
+
+## Themes
+
+Open **Settings → Appearance → Theme** to choose **Default**, the original teal appearance, or **Europa Nuova**, with Europa fonts, orange accents, and one graphic background. Theme choices apply throughout the site, are saved on this device, and return to Default when preferences are reset. Weapon colors and hero badges retain their colors.
 
 ## Browse the tracker
 
@@ -19,7 +23,7 @@ The website was originally made on ChatGPT Sites and later migrated to GitHub Pa
 
 Open pages refresh hero and banner data every 30 seconds while visible, and when returning to the tab or reconnecting. Unsaved forms pause updates. New website versions load automatically when idle, preserving the selected view and month.
 
-**FAQ** opens inside the navigation menu, with searchable schedule explanations and editor instructions for authorized accounts. **Settings → About** contains project information, credits, special thanks, YouTube, X, GitHub, and the install-app control. The footer keeps only the site name, creator credit, and artwork attribution.
+**FAQ** opens inside the navigation menu, with searchable schedule explanations and editor instructions for authorized accounts. **Settings â†’ About** contains project information, credits, special thanks, YouTube, X, GitHub, and the install-app control. The footer keeps only the site name, creator credit, and artwork attribution.
 
 ### Schedule views
 
@@ -54,7 +58,7 @@ Legendary and Chosen entries offer Wind, Earth, Fire, and Water tags. Mythic ent
 
 ## Homepage banners
 
-Owners and Managers can use **+ Add new…** on Home to save a banner name, start and end dates, and select existing heroes for its slots. Editors enter UTC dates and times, with FEH defaults of 07:00 for the start and 06:59 for the end. Visitors see these times automatically converted to their local timezone. Ongoing banners appear automatically; upcoming and ended entries remain available to editors. **Edit banner / slots** updates a lineup, and **Create hero in banner** adds a new hero directly. Banner membership does not change the hero’s rerun schedule. Multiple active banners rotate in a looping carousel every 10 seconds, with arrows, slide indicators, swipe support, and a pause control. The active navigation indicator fills over 10 seconds. Rotation pauses with the Pause control, touch interactions, open dialogs, or a hidden tab.
+Owners and Managers can use **+ Add newâ€¦** on Home to save a banner name, start and end dates, and select existing heroes for its slots. Editors enter UTC dates and times, with FEH defaults of 07:00 for the start and 06:59 for the end. Visitors see these times automatically converted to their local timezone. Ongoing banners appear automatically; upcoming and ended entries remain available to editors. **Edit banner / slots** updates a lineup, and **Create hero in banner** adds a new hero directly. Banner membership does not change the heroâ€™s rerun schedule. Multiple active banners rotate in a looping carousel every 10 seconds, with arrows, slide indicators, swipe support, and a pause control. The active navigation indicator fills over 10 seconds. Rotation pauses with the Pause control, touch interactions, open dialogs, or a hidden tab.
 
 ## Add or edit heroes
 
@@ -62,7 +66,7 @@ Editing requires an authorized **Owner** or **Manager** account. Public visitors
 
 1. Open **Owner sign in** and enter your own account email and password manually. Use **Forgot password?** if needed.
 2. Choose **Add hero**, or open a hero's details and select its edit action.
-3. Select the schedule, hero type, color, pool, and blessing where applicable. Enter the name and title. Check **Demote · 4–5★ summonable** when applicable; this is shown in Hero Details and hover previews.
+3. Select the schedule, hero type, color, pool, and blessing where applicable. Enter the name and title. Check **Demote Â· 4â€“5â˜… summonable** when applicable; this is shown in Hero Details and hover previews.
 4. Add a rerun month for a dated entry, or select Rerun Waitlist when no month is available. **Skip next rerun month** also saves the hero to Waitlist when an EoM return is uncertain; homepage banner membership stays intact. To move a waitlisted hero into a dated view, select its schedule and month.
 5. Add a portrait and a note explaining the announcement, prediction, or other context.
 6. Select **Save hero**. Changes are stored in Supabase and do not require a frontend rebuild.
@@ -83,10 +87,10 @@ See [Owner and Managers setup](supabase/MANAGERS.md) for authorization details.
 
 ## Install on a phone
 
-Use **Install app** in **Settings → About**:
+Use **Install app** in **Settings â†’ About**:
 
 - **Android:** Open in Chrome and use the install prompt when available, or the browser's Install app / Add to Home screen option.
-- **iPhone / iPad:** Open in Safari, choose Share → Add to Home Screen, and enable Open as Web App if offered.
+- **iPhone / iPad:** Open in Safari, choose Share â†’ Add to Home Screen, and enable Open as Web App if offered.
 
 Installation adds a home-screen icon and standalone window. An internet connection is needed for current schedules and editing. Offline mode provides a reconnect screen rather than a cached schedule.
 
@@ -114,8 +118,8 @@ The active frontend is in `pages-app/`, styles are in `app/globals.css`, and ass
 
 ## Credits
 
-- **Website, design, and tracker:** Clustifle © 2026.
-- **Fire Emblem Heroes and artwork:** © Nintendo / INTELLIGENT SYSTEMS.
+- **Website, design, and tracker:** Clustifle Â© 2026.
+- **Fire Emblem Heroes and artwork:** Â© Nintendo / INTELLIGENT SYSTEMS.
 - **Typography:** Champions font from UEFA. Font assets remain subject to their respective rights and licenses.
 - **Information references:** [Official FEH news](https://fire-emblem-heroes.com/en/topics/), [Learn with Sharena](https://new-guide.fire-emblem-heroes.com/en-US/feh-1170.html), and [Fire Emblem Heroes Wiki](https://feheroes.fandom.com/). Specific references are linked in the website's FAQ.
 - **Project history:** Originally created with ChatGPT Sites; migrated to GitHub Pages and Supabase.
