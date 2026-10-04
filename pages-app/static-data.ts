@@ -1,9 +1,10 @@
 import {createClient} from '@supabase/supabase-js';
+import {jsonResponse,requestTimeout} from './browser-compat';
 export const supabase=createClient('https://aknsqeqykjgdyhdroqcx.supabase.co','sb_publishable_PiJIst1aSJtrYBiIvwDIVA_KS3c-E3g');
 export const assetUrl=(value:string)=>import.meta.env.BASE_URL+value.replace(/^\//,'');
 export const portraitUrl=(value:string)=>value.startsWith('data/')?assetUrl(value):supabase.storage.from('portraits').getPublicUrl(value).data.publicUrl;
 export async function ownerSession(){const {data:{session}}=await supabase.auth.getSession();if(!session)return false;const {data,error}=await supabase.rpc('is_tracker_owner');return !error&&data===true;}
-const fail=(error:unknown,status=400)=>Response.json({error:error instanceof Error?error.message:String(error)},{status});
+const fail=(error:unknown,status=400)=>jsonResponse({error:error instanceof Error?error.message:String(error)},{status});
 function portraitCandidates(value:string){
  const url=new URL(value.trim());const host=url.hostname.toLowerCase();
  if(url.protocol!=='https:'||url.username||url.password||(url.port&&url.port!=='443')||!(host==='wikia.nocookie.net'||host.endsWith('.wikia.nocookie.net')||host==='cdn.wikimg.net'||host==='upload.wikimedia.org'))throw new Error('Use a direct HTTPS image link from FEH Wiki, Fandom/Wikia, or Wikimedia.');
@@ -12,7 +13,9 @@ function portraitCandidates(value:string){
  return [...new Set(candidates)];
 }
 async function browserPortrait(url:string){
- const response=await fetch(url,{credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(12000)});
+ const timeout=requestTimeout(12000);
+ try{
+ const response=await fetch(url,{credentials:'omit',referrerPolicy:'no-referrer',signal:timeout.signal});
  if(!response.ok)throw new Error('Image host returned '+response.status);
  if(Number(response.headers.get('content-length')||0)>3145728)throw new Error('Choose a portrait under 3 MB.');
  const reader=response.body?.getReader();if(!reader)throw new Error('Empty portrait');
@@ -24,6 +27,7 @@ async function browserPortrait(url:string){
  const webp=bytes.length>=12&&String.fromCharCode(...bytes.slice(0,4))==='RIFF'&&String.fromCharCode(...bytes.slice(8,12))==='WEBP';
  if(!png&&!jpg&&!webp)throw new Error('The link must contain a PNG, JPG, or WebP image.');
  return new Blob([bytes],{type:png?'image/png':jpg?'image/jpeg':'image/webp'});
+ }finally{timeout.clear();}
 }
 async function importImage(url:string){
  const candidates=portraitCandidates(url);
@@ -38,16 +42,16 @@ async function importImage(url:string){
 }
 export async function apiFetch(input:string,init?:RequestInit){
  try{
-  if(input==='/api/session'){const {data:role}=await supabase.rpc('tracker_role');return Response.json({canEdit:role==='Owner'||role==='Manager',role});}
+  if(input==='/api/session'){const {data:role}=await supabase.rpc('tracker_role');return jsonResponse({canEdit:role==='Owner'||role==='Manager',role});}
   if(input==='/api/heroes'&&(!init?.method||init.method==='GET')){
    const {data,error}=await supabase.from('heroes').select('*').order('month',{nullsFirst:false}).order('name');
    if(error)throw new Error('Schedule unavailable. '+error.message);
-   return Response.json(data);
+   return jsonResponse(data);
   }
-  if(input==='/api/banners'&&(!init?.method||init.method==='GET')){const {data,error}=await supabase.from('tracker_banners').select('*,tracker_banner_heroes(hero_id)').order('starts_on');if(error)throw new Error(error.message);return Response.json(data);}
+  if(input==='/api/banners'&&(!init?.method||init.method==='GET')){const {data,error}=await supabase.from('tracker_banners').select('*,tracker_banner_heroes(hero_id)').order('starts_on');if(error)throw new Error(error.message);return jsonResponse(data);}
   if(!await ownerSession())return fail('Only the owner can edit the schedule.',403);
-  if(input==='/api/banners'&&init?.method==='POST'){const body=JSON.parse(String(init.body));const {data,error}=await supabase.rpc('save_tracker_banner_layout',{banner_id:body.id||null,banner_name:body.name,start_date:body.starts_on,end_date:body.ends_on,start_time:body.starts_time||'07:00',end_time:body.ends_time||'06:59',hero_ids:body.hero_ids||[],layout_type:body.banner_type||'lme'});if(error)throw new Error(error.message);return Response.json({id:data});}
-  if(input==='/api/banner-heroes'&&init?.method==='POST'){const body=JSON.parse(String(init.body));const {data:banner,error:bannerError}=await supabase.from('tracker_banners').select('banner_type,tracker_banner_heroes(hero_id)').eq('id',body.bannerId).single();if(bannerError)throw new Error(bannerError.message);if(banner.banner_type==='featured'&&banner.tracker_banner_heroes.length>=4&&!banner.tracker_banner_heroes.some(h=>h.hero_id===body.heroId))return fail('This featured banner already has four heroes. Edit its lineup to replace a hero.',400);if(banner.banner_type==='revival'&&!banner.tracker_banner_heroes.some(h=>h.hero_id===body.heroId)){const {data:hero,error:heroError}=await supabase.from('heroes').select('color').eq('id',body.heroId).single();if(heroError)throw new Error(heroError.message);const {count,error:countError}=await supabase.from('heroes').select('id',{count:'exact',head:true}).in('id',banner.tracker_banner_heroes.map(h=>h.hero_id)).eq('color',hero.color);if(countError)throw new Error(countError.message);if((count||0)>=2)return fail('This banner already has two '+hero.color+' heroes. Edit its lineup to replace a hero.',400);}const {error}=await supabase.from('tracker_banner_heroes').upsert({banner_id:body.bannerId,hero_id:body.heroId});if(error)throw new Error(error.message);return Response.json({ok:true});}
+  if(input==='/api/banners'&&init?.method==='POST'){const body=JSON.parse(String(init.body));const {data,error}=await supabase.rpc('save_tracker_banner_layout',{banner_id:body.id||null,banner_name:body.name,start_date:body.starts_on,end_date:body.ends_on,start_time:body.starts_time||'07:00',end_time:body.ends_time||'06:59',hero_ids:body.hero_ids||[],layout_type:body.banner_type||'lme'});if(error)throw new Error(error.message);return jsonResponse({id:data});}
+  if(input==='/api/banner-heroes'&&init?.method==='POST'){const body=JSON.parse(String(init.body));const {data:banner,error:bannerError}=await supabase.from('tracker_banners').select('banner_type,tracker_banner_heroes(hero_id)').eq('id',body.bannerId).single();if(bannerError)throw new Error(bannerError.message);if(banner.banner_type==='featured'&&banner.tracker_banner_heroes.length>=4&&!banner.tracker_banner_heroes.some(h=>h.hero_id===body.heroId))return fail('This featured banner already has four heroes. Edit its lineup to replace a hero.',400);if(banner.banner_type==='revival'&&!banner.tracker_banner_heroes.some(h=>h.hero_id===body.heroId)){const {data:hero,error:heroError}=await supabase.from('heroes').select('color').eq('id',body.heroId).single();if(heroError)throw new Error(heroError.message);const {count,error:countError}=await supabase.from('heroes').select('id',{count:'exact',head:true}).in('id',banner.tracker_banner_heroes.map(h=>h.hero_id)).eq('color',hero.color);if(countError)throw new Error(countError.message);if((count||0)>=2)return fail('This banner already has two '+hero.color+' heroes. Edit its lineup to replace a hero.',400);}const {error}=await supabase.from('tracker_banner_heroes').upsert({banner_id:body.bannerId,hero_id:body.heroId});if(error)throw new Error(error.message);return jsonResponse({ok:true});}
 
   if(input==='/api/portrait-import'){
    const body=JSON.parse(String(init?.body));const blob=await importImage(body.url);
@@ -57,7 +61,7 @@ export async function apiFetch(input:string,init?:RequestInit){
    const {id}=JSON.parse(String(init.body));const {data:old,error:readError}=await supabase.from('heroes').select('portrait').eq('id',id).single();if(readError)throw new Error(readError.message);
    const {error}=await supabase.from('heroes').delete().eq('id',id);if(error)throw new Error(error.message);
    if(old.portrait&&!old.portrait.startsWith('data/'))await supabase.storage.from('portraits').remove([old.portrait]);
-   return Response.json({ok:true});
+   return jsonResponse({ok:true});
   }
   if(input==='/api/heroes'&&init?.method==='POST'){
    const form=init.body as FormData;const id=String(form.get('id')||crypto.randomUUID());
@@ -75,7 +79,7 @@ export async function apiFetch(input:string,init?:RequestInit){
    const {error}=await supabase.from('heroes').upsert(row);
    if(error){if(uploaded)await supabase.storage.from('portraits').remove([uploaded]);throw new Error(error.message);}
    if(uploaded&&old?.portrait&&!old.portrait.startsWith('data/'))await supabase.storage.from('portraits').remove([old.portrait]);
-   return Response.json({ok:true,id});
+   return jsonResponse({ok:true,id});
   }
   return fail('Unknown operation',404);
  }catch(error){return fail(error);}
