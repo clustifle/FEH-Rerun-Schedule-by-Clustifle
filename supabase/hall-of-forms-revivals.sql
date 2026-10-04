@@ -1,0 +1,11 @@
+begin;
+create table if not exists public.hall_of_forms_revivals(month date primary key check(extract(day from month)=1),title text not null default 'Title to be announced' check(length(title) between 1 and 150),hero_1 uuid references public.heroes(id) on delete set null,hero_2 uuid references public.heroes(id) on delete set null,hero_3 uuid references public.heroes(id) on delete set null,hero_4 uuid references public.heroes(id) on delete set null);
+alter table public.hall_of_forms_revivals enable row level security;
+create policy "Public Hall of Forms schedule" on public.hall_of_forms_revivals for select to anon,authenticated using(true);
+create policy "Editors manage Hall of Forms" on public.hall_of_forms_revivals for all to authenticated using((select public.is_tracker_owner())) with check((select public.is_tracker_owner()));
+grant select on public.hall_of_forms_revivals to anon;
+grant select,insert,update,delete on public.hall_of_forms_revivals to authenticated;
+insert into public.hall_of_forms_revivals(month) select generate_series('2025-10-01'::date,'2029-10-01'::date,'1 month')::date on conflict do nothing;
+alter table public.hall_of_forms_revivals add column ongoing boolean not null default false, add column starts_on date, add column ends_on date, add column starts_time time not null default '07:00', add column ends_time time not null default '06:59';
+alter table public.hall_of_forms_revivals add constraint hof_revival_ongoing_dates check(not ongoing or (starts_on is not null and ends_on is not null and ends_on+ends_time>starts_on+starts_time));
+commit;
