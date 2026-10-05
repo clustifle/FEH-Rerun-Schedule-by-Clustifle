@@ -18,7 +18,7 @@ export default function AdvancedFilters(p:Props){
   timer.current=setTimeout(()=>{dialog.current?.close();setClosing(false);},reduceMotion()?0:180);
  }
  return <>
-  <button className={'filter-launch'+(active?' has-filters':'')} aria-haspopup="dialog" aria-expanded={open} onClick={()=>{setClosing(false);setOpen(true);dialog.current?.showModal();if(body.current)body.current.scrollTop=0;}}><SlidersHorizontal size={17}/><span>Filters</span>{active>0&&<span className="filter-active-count" aria-label={active+' active filters'}>{active}</span>}</button>
+  <button aria-label="Filters" title="Filters" className={'filter-launch toolbar-icon'+(active?' has-filters':'')} aria-haspopup="dialog" aria-expanded={open} onClick={()=>{setClosing(false);setOpen(true);dialog.current?.showModal();if(body.current)body.current.scrollTop=0;}}><SlidersHorizontal size={17}/>{active>0&&<span className="filter-active-count" aria-label={active+' active filters'}>{active}</span>}</button>
   <dialog ref={dialog} className={'filter-sheet'+(closing?' is-closing':'')} aria-labelledby="advanced-filter-title" onClose={()=>setOpen(false)} onCancel={e=>{e.preventDefault();close();}} onClick={e=>{if(e.target===dialog.current){const rect=dialog.current.getBoundingClientRect();if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom)close();}}}>
    <header className="filter-sheet-header"><div className="filter-sheet-emblem" aria-hidden="true"><SlidersHorizontal size={22}/></div><div><h2 id="advanced-filter-title">Filters</h2><p>Find the heroes you’re looking for.</p></div><button className="filter-close" aria-label="Close filters" onClick={close} autoFocus><X size={21}/></button></header>
    <div className="filter-sheet-body" ref={body}>
