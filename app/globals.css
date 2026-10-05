@@ -505,3 +505,8 @@ html[data-motion=reduced] .mobile-navigation-drawer.has-settings>.settings-inlin
 @keyframes nav-panel-content-in{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
 @media(max-width:760px){.tracker .mobile-navigation-drawer.has-settings[open]:has(>.settings-inline){padding:16px 20px!important}}
 html[data-motion=reduced] .mobile-navigation-drawer.panel-leaving>.main-menu-links,html[data-motion=reduced] .tracker .mobile-navigation-drawer.has-settings[open]>.settings-inline{animation:none}
+
+.tracker .mobile-navigation-drawer.panel-exiting.has-settings[open]>.settings-inline{pointer-events:none;animation:nav-panel-content-out .22s ease both}.mobile-navigation-drawer.panel-exiting>.settings-mobile-back{pointer-events:none;opacity:.5}
+.mobile-navigation-drawer.menu-returning>.main-menu-links{animation:nav-menu-return .32s cubic-bezier(.22,.8,.25,1) both}
+@keyframes nav-panel-content-out{to{opacity:0;transform:translateX(36px)}}@keyframes nav-menu-return{from{opacity:0;transform:translateX(-36px)}to{opacity:1;transform:none}}
+html[data-motion=reduced] .tracker .mobile-navigation-drawer.panel-exiting.has-settings[open]>.settings-inline,html[data-motion=reduced] .mobile-navigation-drawer.menu-returning>.main-menu-links{animation:none}
