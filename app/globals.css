@@ -581,3 +581,11 @@ html[data-scrollbar-active],html[data-theme] body [data-scrollbar-active]:not(.m
 @media(forced-colors:active){html,html[data-theme] body,html[data-theme] body *:not(.month-strip){scrollbar-color:auto}html::-webkit-scrollbar-thumb,html[data-theme] body ::-webkit-scrollbar-thumb{background-color:ButtonText}}
 @media(prefers-reduced-motion:reduce){html::-webkit-scrollbar-thumb,html[data-theme] body ::-webkit-scrollbar-thumb{transition:none}}
 @supports selector(::-webkit-scrollbar){html,html[data-scrollbar-active],html[data-theme] body,html[data-theme] body *:not(.month-strip),html[data-theme] body [data-scrollbar-active]:not(.month-strip){scrollbar-color:auto}}
+
+/* The page rail floats above content and reserves no native scrollbar gutter. */
+html,html[data-scrollbar-active]{scrollbar-width:none;scrollbar-gutter:auto}html::-webkit-scrollbar{display:none;width:0;height:0}
+.page-overlay-scrollbar{position:fixed;right:1px;top:0;bottom:0;width:12px;z-index:2147483000;background:transparent;opacity:0;pointer-events:none;transition:opacity .28s ease}
+html[data-scrollbar-active] .page-overlay-scrollbar,.page-overlay-scrollbar:hover,.page-overlay-scrollbar:focus-within,.page-overlay-scrollbar.is-dragging{opacity:1;pointer-events:auto}
+.page-overlay-thumb{position:absolute;top:0;left:0;width:12px;border:3px solid transparent;border-radius:999px;background:var(--scroll-thumb);background-clip:padding-box;cursor:grab;touch-action:none;min-height:36px}.page-overlay-thumb:hover,.page-overlay-scrollbar.is-dragging .page-overlay-thumb{background-color:var(--scroll-thumb-hover)}.page-overlay-scrollbar.is-dragging .page-overlay-thumb{cursor:grabbing}.page-overlay-thumb:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
+@media(prefers-reduced-motion:reduce){.page-overlay-scrollbar{transition:none}}
+@media(forced-colors:active){.page-overlay-thumb{background-color:ButtonText}}
