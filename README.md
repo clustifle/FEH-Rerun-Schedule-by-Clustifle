@@ -153,3 +153,7 @@ Use [GitHub Issues](https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle
 Project information and social links are available in **Settings → About**, including [YouTube](https://www.youtube.com/@Clustifle) and [X](https://x.com/Clustifle). Where supported, this section also provides **Install app**; current schedules and editing require an internet connection.
 
 This is an unofficial fan project and is not affiliated with Nintendo or INTELLIGENT SYSTEMS. Third-party artwork, branding, fonts, and dependencies remain subject to their respective rights and licenses.
+
+### Frutiger Aero theme
+
+Settings → Personalization includes Frutiger Aero: Segoe UI typography, an original sky and aurora background, reflective blue glass, glossy controls, and matching menus, dialogs, filters, profiles, and notifications. Inspired by the [Frutiger Aero Archive](https://frutigeraeroarchive.org/). The theme respects reduced motion and preserves weapon colors.
