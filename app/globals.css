@@ -493,3 +493,15 @@ html[data-motion=reduced] .mobile-navigation-drawer.has-settings>.settings-inlin
 @media(prefers-reduced-motion:reduce){html:not([data-motion=full]) .mobile-navigation-drawer.has-settings>.settings-inline{animation:none}}
 
 .filter-color-choice .filter-weapon-orb{display:block;width:26px;height:26px;object-fit:contain;flex:none;filter:drop-shadow(0 2px 4px #0004)}.filter-color-choice[aria-pressed=true] .filter-weapon-orb{filter:drop-shadow(0 0 5px #ffffff40)}.hero-weapon-orb{display:inline-block;width:24px;height:24px;object-fit:contain;vertical-align:middle;margin-right:8px}
+
+/* A two-stage navigation-to-panel transition, shared by Settings and FAQ. */
+.mobile-navigation-drawer.panel-leaving>.main-menu-links{pointer-events:none;animation:nav-panel-menu-out .22s ease both}
+@keyframes nav-panel-menu-out{to{opacity:0;transform:translateX(-48px)}}
+.tracker .mobile-navigation-drawer.has-settings[open]:has(>.settings-inline){display:flex!important;flex-direction:column;align-items:stretch;gap:0;padding:24px clamp(20px,5vw,72px)!important;overflow:hidden!important}
+.tracker .mobile-navigation-drawer.has-settings[open]:has(>.settings-inline)>.main-menu-links,.tracker .mobile-navigation-drawer.has-settings[open]>.mobile-navigation-top{display:none}
+.tracker .mobile-navigation-drawer.has-settings[open]>.settings-mobile-back{display:inline-flex;align-items:center;gap:8px;position:relative;align-self:flex-start;flex:0 0 auto;min-height:44px;margin:0 0 12px;padding:8px 0;border:0;background:transparent;color:var(--muted);z-index:2}
+.tracker .mobile-navigation-drawer.has-settings[open]:has(>.settings-inline)>.settings-inline{position:relative;inset:auto;grid-area:auto;flex:1 1 0;align-self:center;width:100%;max-width:1120px;min-height:0;max-height:none;overflow-y:auto;overscroll-behavior:contain;padding:12px 12px 24px 0;background:transparent;animation:nav-panel-content-in .38s cubic-bezier(.22,.8,.25,1) both}
+.tracker .mobile-navigation-drawer.has-settings::backdrop,html[data-theme=europa-nuova] .tracker .mobile-navigation-drawer.has-settings::backdrop{background:#0009;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+@keyframes nav-panel-content-in{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
+@media(max-width:760px){.tracker .mobile-navigation-drawer.has-settings[open]:has(>.settings-inline){padding:16px 20px!important}}
+html[data-motion=reduced] .mobile-navigation-drawer.panel-leaving>.main-menu-links,html[data-motion=reduced] .tracker .mobile-navigation-drawer.has-settings[open]>.settings-inline{animation:none}
