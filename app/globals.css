@@ -480,3 +480,5 @@ html[data-theme=europa-nuova] .tracker .toolbar :is(.compact-toggle.toolbar-icon
 .tracker .toolbar .toolbar-search>.toolbar-icon:hover{color:#fff}
 .tracker .toolbar .toolbar-search.is-open>.toolbar-icon,html[data-theme=europa-nuova] .tracker .toolbar .toolbar-search.is-open>.toolbar-icon{color:var(--cyan)}
 html[data-theme=europa-nuova] .tracker .toolbar .toolbar-search>.toolbar-icon:hover{color:#ffac65}
+
+.tracker .homepage-tools .homepage-add-banner{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;flex:0 0 44px;padding:0;background:transparent;border:0;border-radius:0;box-shadow:none;color:var(--muted)}.tracker .homepage-tools .homepage-add-banner:hover{color:#fff}html[data-theme=europa-nuova] .tracker .homepage-tools .homepage-add-banner:hover{color:#ffac65}
