@@ -652,3 +652,17 @@ html[data-theme] .portrait-marks img.portrait-mark{position:absolute;width:25%;h
 /* Give Standard schedule portraits more room for their corner icons. */
 @media(min-width:601px){.tracker:not(.compact-view) .schedule .hero-tile .portrait,.tracker:not(.compact-view) .waitlist-slot .portrait{max-width:min(112px,calc(var(--fit-portrait) + 8px))}}
 @media(max-width:600px){.tracker:not(.compact-view) .schedule .hero-tile{width:80px}.tracker:not(.compact-view) .schedule .hero-tile .portrait,.tracker:not(.compact-view) .waitlist-slot .portrait{max-width:80px}.tracker:not(.compact-view) .waitlist-board{--waitlist-card:92px}}
+
+/* Center the portrait/name pair within each schedule or banner slot. */
+.tracker .schedule .color-slot:not(.revival-row),.tracker .schedule .revival-group,.tracker .waitlist-slot{align-content:center;justify-items:center;align-items:center}
+.tracker .schedule .hero-tile,.tracker .waitlist-slot .hero-tile{justify-self:center;gap:4px}
+.tracker .schedule .tile-name,.tracker .waitlist-slot .tile-name,.tracker .home-banner-row .tile-name{text-align:center;line-height:1.2;min-height:1.2em}
+.tracker .schedule .hero-tile,.tracker.compact-view .schedule .hero-tile{width:100%}
+.tracker:not(.compact-view) .schedule .hero-tile .portrait,.tracker:not(.compact-view) .waitlist-slot .portrait{max-width:min(120px,calc(var(--fit-portrait) + 18px),calc(var(--fit-row) - 36px))}
+.tracker .schedule .no-heroes,.tracker .waitlist-slot .no-heroes{margin:0;align-self:center}
+.tracker .home-banner-board{width:max(100%,calc(44px + 24px + var(--banner-editor-space) + var(--banner-count)*120px - 12px))}
+.tracker .home-banner-row{min-height:132px}
+.tracker .home-banner-row .color-slot{grid-template-columns:repeat(var(--banner-count),minmax(108px,1fr));justify-items:center;align-items:center;padding-top:12px;padding-bottom:12px}
+.tracker .home-banner-row .hero-tile{width:100%;gap:5px;justify-content:center}
+.tracker .home-banner-row .hero-tile .portrait{max-width:88px}
+@media(max-width:600px){.tracker:not(.compact-view) .schedule .hero-tile .portrait,.tracker:not(.compact-view) .waitlist-slot .portrait{max-width:88px}.tracker:not(.compact-view) .waitlist-board{--waitlist-card:100px}.tracker .home-banner-row .hero-tile .portrait{max-width:80px}.tracker .home-banner-row .color-slot{grid-template-columns:repeat(var(--banner-count),minmax(96px,1fr))}.tracker .home-banner-board{width:max(100%,calc(44px + 24px + var(--banner-editor-space) + var(--banner-count)*108px - 12px))}}
