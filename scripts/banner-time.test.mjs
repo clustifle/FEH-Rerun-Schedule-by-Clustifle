@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {bannerTiming} from '../pages-app/banner-time.ts';
 test('uses FEH UTC defaults for the real remaining time',()=>{
  const value=bannerTiming('2026-09-30','2026-10-12',Date.parse('2026-10-03T07:30:00Z'));
- assert.equal(value.countdown,'8d23h remaining');assert.equal(value.state,'Ongoing');
+ assert.equal(value.countdown,'8d 23h remaining');assert.equal(value.state,'Ongoing');
 });
 test('starts exactly at 07:00 UTC and ends exactly at 06:59 UTC',()=>{
  assert.equal(bannerTiming('2026-10-03','2026-10-12',Date.parse('2026-10-03T06:59:00Z')).state,'Upcoming');
@@ -27,7 +27,7 @@ test('upcoming countdown targets the start rather than the end',()=>{
 });
 test('switches to seconds below 24 hours and handles the final second',()=>{
  const end=Date.parse('2026-10-12T06:59:00Z');
- assert.equal(bannerTiming('2026-10-03','2026-10-12',end-86400000).countdown,'1d0h remaining');
+ assert.equal(bannerTiming('2026-10-03','2026-10-12',end-86400000).countdown,'1d 0h remaining');
  assert.equal(bannerTiming('2026-10-03','2026-10-12',end-86399000).countdown,'23:59:59 remaining');
  assert.equal(bannerTiming('2026-10-03','2026-10-12',end-1000).countdown,'00:00:01 remaining');
  assert.equal(bannerTiming('2026-10-03','2026-10-12',end).countdown,'Ended');
