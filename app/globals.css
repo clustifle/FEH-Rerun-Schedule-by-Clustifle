@@ -467,3 +467,11 @@ html[data-theme=europa-nuova] .toolbar-search>.toolbar-icon{background:#ffffff08
 
 /* Keep mobile icon controls in one row instead of the legacy stacked toolbar. */
 @media(max-width:600px){.tracker .toolbar{display:flex;flex-direction:row;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 16px 12px}.tracker .toolbar>.waitlist-edit-menu{flex:0 0 44px}.tracker .toolbar>.toolbar-search{flex:0 0 auto;margin-left:auto}.tracker .toolbar>.toolbar-search.is-open{flex:1 1 100%;margin-left:0}.tracker .toolbar .toolbar-icon{flex:0 0 44px;width:44px;height:44px}.tracker .toolbar-search-field input{font-size:16px}}
+
+/* Bare action icons retain comfortable hit areas and visible keyboard focus. */
+.tracker .toolbar :is(.schedule-add-hero.toolbar-icon,.compact-toggle.toolbar-icon,.filter-launch.toolbar-icon),.tracker .revival-page-actions .schedule-add-hero.toolbar-icon,
+html[data-theme=europa-nuova] .tracker .toolbar :is(.schedule-add-hero.toolbar-icon,.compact-toggle.toolbar-icon,.filter-launch.toolbar-icon),html[data-theme=europa-nuova] .tracker .revival-page-actions .schedule-add-hero.toolbar-icon{background:transparent;border:0;box-shadow:none;border-radius:0;color:var(--muted)}
+.tracker .toolbar :is(.schedule-add-hero.toolbar-icon:hover,.compact-toggle.toolbar-icon:hover,.filter-launch.toolbar-icon:hover),.tracker .revival-page-actions .schedule-add-hero.toolbar-icon:hover{color:#fff}
+.tracker .toolbar :is(.compact-toggle.toolbar-icon[aria-pressed=true],.filter-launch.toolbar-icon.has-filters),.tracker .toolbar .waitlist-edit-menu[open] .toolbar-icon{color:var(--cyan)}
+html[data-theme=europa-nuova] .tracker .toolbar :is(.schedule-add-hero.toolbar-icon:hover,.compact-toggle.toolbar-icon:hover,.filter-launch.toolbar-icon:hover){color:#ffac65;background:transparent;border:0;box-shadow:none}
+html[data-theme=europa-nuova] .tracker .toolbar :is(.compact-toggle.toolbar-icon[aria-pressed=true],.filter-launch.toolbar-icon.has-filters),html[data-theme=europa-nuova] .tracker .toolbar .waitlist-edit-menu[open] .toolbar-icon{color:var(--cyan)}
