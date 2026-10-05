@@ -45,7 +45,7 @@ Choose a theme under **Settings → Appearance → Theme**:
 | Theme | Appearance |
 | --- | --- |
 | **Default** | The original teal design with Champions typography. |
-| **Europa Nuova** | Europa typography, orange accents, one graphic background, and transparent gradient navigation. |
+| **Energy Wave** | Europa typography, orange accents, one graphic background, and transparent gradient navigation. |
 
 Themes apply throughout the site, including banner cards, hover previews, and editors. Weapon-color rows and hero badges retain their identifying colors. **Reset settings** restores the Default theme and other device preferences.
 
