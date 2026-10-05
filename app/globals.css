@@ -635,3 +635,16 @@ html[data-theme=frutiger-aero][data-theme] .all-heroes-sort select{background:#e
 
 /* Keep shared schedule transitions within the page's content width. */
 .tracker .schedule-page-frame{width:100%;min-width:0;box-sizing:border-box}.tracker .schedule-page-frame .schedule-stage{min-width:0;max-width:100%;overflow:clip}.tracker .schedule-page-frame .schedule{min-width:0;max-width:100%}.tracker .schedule-page-frame .month-scroll{overflow-x:auto;overflow-y:hidden;min-width:0;max-width:100%;isolation:isolate}.tracker .schedule-page-frame .color-slot,.tracker .schedule-page-frame .revival-group{min-width:0}.tracker .schedule-page-frame .waitlist-window{min-width:0;max-width:100%}
+
+/* Shared portrait corner marks: weapon top-left, hero type bottom-left, movement bottom-right. */
+.tracker :is(.portrait,.all-heroes-portrait,.fb-portrait,.home-revival-portrait,.revival-picker-portrait,.profile-favorite-portrait,.waitlist-order-portrait,.hover-portrait,.hero-detail-portrait){position:relative;isolation:isolate}
+.portrait-marks{position:absolute;inset:0;pointer-events:none;display:block;z-index:3;container-type:inline-size;border:0;background:none;padding:0;overflow:visible}
+html[data-theme] .portrait-marks img.portrait-mark{position:absolute;width:25%;height:25%;min-width:14px;min-height:14px;max-width:64px;max-height:64px;object-fit:contain;border:0;border-radius:0;padding:0;margin:0;box-shadow:none;background:none;transform:none;opacity:1;filter:drop-shadow(0 1px 2px #0008)}
+.portrait-marks .weapon-mark{top:1%;left:1%}.portrait-marks .type-mark{bottom:1%;left:1%}.portrait-marks .move-mark{bottom:1%;right:1%}
+.tracker .hero-tile .portrait{overflow:hidden}.tracker .hero-tile>.hero-type-signature,.tracker .hero-tile>.hero-kind{display:none}
+.tracker .all-heroes-card .all-heroes-copy small{display:none}
+.tracker .hero-detail-portrait .portrait-marks img.portrait-mark{max-width:64px;max-height:64px}
+
+.tracker .revival-slot-portrait{position:relative;display:block;width:64px;height:64px;flex:none;overflow:hidden}.tracker .revival-slot-portrait>img{width:100%;height:100%;object-fit:cover}.tracker .revival-slot-portrait .portrait-marks{position:absolute}
+
+.hero-hover-preview .hover-portrait{position:relative;isolation:isolate}
