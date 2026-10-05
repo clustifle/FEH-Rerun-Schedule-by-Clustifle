@@ -536,3 +536,18 @@ html[data-motion=reduced] .tracker .mobile-navigation-drawer.panel-exiting.has-s
 .mobile-navigation-drawer .settings-inline .settings-personalization>.settings-group>h3{font-size:18px;line-height:1.3;margin:0 0 16px}
 .settings-personalization .settings-row{gap:20px}.settings-personalization .settings-row:last-child{border-bottom:0}.settings-personalization .theme-picker{margin-top:18px;margin-bottom:22px}.settings-personalization .theme-picker .theme-options{gap:12px}.settings-personalization .theme-preview{min-height:100px}.settings-personalization .theme-option-copy{padding:14px}
 @media(max-width:760px){.mobile-navigation-drawer .settings-inline .settings-personalization>.settings-group{padding:18px;margin-top:18px;border-radius:12px}.settings-personalization .settings-row{gap:14px}.settings-personalization .theme-picker .theme-options{grid-template-columns:1fr}.settings-personalization .theme-preview{min-height:92px}}
+
+/* Borderless Settings with a mobile category drill-in. */
+.settings-mobile-categories,.settings-category-back{display:none}
+.mobile-navigation-drawer .settings-inline:not(.faq-inline) .settings-personalization>.settings-group{border:0;border-radius:0;background:transparent;padding:20px 0;margin-top:16px}
+.mobile-navigation-drawer .settings-inline:not(.faq-inline) .settings-sections{border:0}
+.mobile-navigation-drawer .settings-inline:not(.faq-inline) .settings-row,.mobile-navigation-drawer .settings-inline:not(.faq-inline) .profile-editor,.mobile-navigation-drawer .settings-inline:not(.faq-inline) .settings-about-thanks{border:0}
+.mobile-navigation-drawer .settings-inline:not(.faq-inline) label.theme-option{border:0;box-shadow:none}.mobile-navigation-drawer .settings-inline:not(.faq-inline) label.theme-option.is-selected{box-shadow:inset 0 -2px var(--cyan)}
+@media(max-width:760px){
+ .mobile-navigation-drawer .settings-inline:not(.faq-inline) .settings-layout>.settings-sections{display:none}
+ .settings-inline:not(.faq-inline):not(.mobile-category-open) .settings-layout>.settings-body{display:none}
+ .settings-inline:not(.faq-inline):not(.mobile-category-open) .settings-mobile-categories{display:flex;flex-direction:column;gap:4px;overflow-y:auto;min-height:0;flex:1}
+ .settings-mobile-categories button{display:flex;justify-content:space-between;align-items:center;min-height:60px;padding:16px 4px;background:transparent;border:0;color:var(--muted);font-size:17px;text-align:left}.settings-mobile-categories button:hover{color:#fff;background:#ffffff05}
+ .settings-inline.mobile-category-open .settings-category-back{display:inline-flex;align-items:center;align-self:flex-start;gap:8px;flex:0 0 auto;min-height:44px;padding:8px 0;margin-bottom:16px;background:transparent;border:0;color:var(--muted);font-size:14px}
+}
+.mobile-navigation-drawer .settings-inline:not(.faq-inline) .settings-layout>.settings-sections{border:0}
