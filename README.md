@@ -69,6 +69,8 @@ The tracker distinguishes **General Pool**, **Non-Seasonal Limited**, **Seasonal
 
 Email sign-in and account creation are available from the navigation menu. Creating an account does not grant schedule-editing access.
 
+After signing in, accounts without a completed identity enter a required fullscreen profile setup. A display name and unique username are required; a picture, bio, social link, and Fire Emblem favorites are optional. Setup drafts resume on the same browser, except unsubmitted picture files. Existing profiles with a valid name and username remain available. The setup follows the selected theme and reduced-motion preference.
+
 | Role | Access |
 | --- | --- |
 | **Visitor** | Browse schedules and personalize the interface. Signed-in visitors can manage their profile and personal tracking. |
