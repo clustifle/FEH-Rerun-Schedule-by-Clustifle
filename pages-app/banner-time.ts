@@ -8,3 +8,5 @@ export function bannerTiming(startsOn:string,endsOn:string,now:number,startTime=
  const countdown=state==='Ended'?'Ended':state==='Upcoming'?`Starting in ${days}d ${hours}h`:remaining<86400000?`${pad(Math.floor(seconds/3600))}:${pad(Math.floor(seconds%3600/60))}:${pad(seconds%60)} remaining`:`${days}d ${hours}h remaining`;
  return {countdown,progress:Math.max(0,Math.min(100,(now-start)/(end-start)*100)),state};
 }
+
+export function bannerStatusTag(timing:ReturnType<typeof bannerTiming>,comingSoon=false){return timing.state==='Ended'?null:comingSoon&&timing.state==='Upcoming'?'Coming soon':timing.countdown;}

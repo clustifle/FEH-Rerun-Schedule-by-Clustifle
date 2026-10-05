@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {bannerTiming} from '../pages-app/banner-time.ts';
+import {bannerTiming,bannerStatusTag} from '../pages-app/banner-time.ts';
 test('uses FEH UTC defaults for the real remaining time',()=>{
  const value=bannerTiming('2026-09-30','2026-10-12',Date.parse('2026-10-03T07:30:00Z'));
  assert.equal(value.countdown,'8d 23h remaining');assert.equal(value.state,'Ongoing');
@@ -31,4 +31,14 @@ test('switches to seconds below 24 hours and handles the final second',()=>{
  assert.equal(bannerTiming('2026-10-03','2026-10-12',end-86399000).countdown,'23:59:59 remaining');
  assert.equal(bannerTiming('2026-10-03','2026-10-12',end-1000).countdown,'00:00:01 remaining');
  assert.equal(bannerTiming('2026-10-03','2026-10-12',end).countdown,'Ended');
+});
+
+test('coming soon replaces the upcoming countdown only until the start',()=>{
+ const upcoming=bannerTiming('2026-10-03','2026-10-12',Date.parse('2026-10-01T04:00:00Z'));
+ assert.equal(bannerStatusTag(upcoming,true),'Coming soon');
+ assert.equal(bannerStatusTag(upcoming,false),'Starting in 2d 3h');
+ const active=bannerTiming('2026-10-03','2026-10-12',Date.parse('2026-10-03T07:00:00Z'));
+ assert.equal(bannerStatusTag(active,true),active.countdown);
+ const ended=bannerTiming('2026-10-03','2026-10-12',Date.parse('2026-10-12T06:59:00Z'));
+ assert.equal(bannerStatusTag(ended,true),null);
 });
