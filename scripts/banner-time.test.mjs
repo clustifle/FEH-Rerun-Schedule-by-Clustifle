@@ -23,7 +23,7 @@ test('the same UTC instant converts to each visitors timezone across date bounda
 });
 
 test('upcoming countdown targets the start rather than the end',()=>{
- assert.equal(bannerTiming('2026-10-03','2026-10-12',Date.parse('2026-10-01T04:00:00Z')).countdown,'Starting in 2d3h');
+ assert.equal(bannerTiming('2026-10-03','2026-10-12',Date.parse('2026-10-01T04:00:00Z')).countdown,'Starting in 2d 3h');
 });
 test('switches to seconds below 24 hours and handles the final second',()=>{
  const end=Date.parse('2026-10-12T06:59:00Z');
