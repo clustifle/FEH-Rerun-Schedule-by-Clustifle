@@ -648,3 +648,7 @@ html[data-theme] .portrait-marks img.portrait-mark{position:absolute;width:25%;h
 .tracker .revival-slot-portrait{position:relative;display:block;width:64px;height:64px;flex:none;overflow:hidden}.tracker .revival-slot-portrait>img{width:100%;height:100%;object-fit:cover}.tracker .revival-slot-portrait .portrait-marks{position:absolute}
 
 .hero-hover-preview .hover-portrait{position:relative;isolation:isolate}
+
+/* Give Standard schedule portraits more room for their corner icons. */
+@media(min-width:601px){.tracker:not(.compact-view) .schedule .hero-tile .portrait,.tracker:not(.compact-view) .waitlist-slot .portrait{max-width:min(112px,calc(var(--fit-portrait) + 8px))}}
+@media(max-width:600px){.tracker:not(.compact-view) .schedule .hero-tile{width:80px}.tracker:not(.compact-view) .schedule .hero-tile .portrait,.tracker:not(.compact-view) .waitlist-slot .portrait{max-width:80px}.tracker:not(.compact-view) .waitlist-board{--waitlist-card:92px}}
