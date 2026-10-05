@@ -666,3 +666,15 @@ html[data-theme] .portrait-marks img.portrait-mark{position:absolute;width:25%;h
 .tracker .home-banner-row .hero-tile{width:100%;gap:5px;justify-content:center}
 .tracker .home-banner-row .hero-tile .portrait{max-width:88px}
 @media(max-width:600px){.tracker:not(.compact-view) .schedule .hero-tile .portrait,.tracker:not(.compact-view) .waitlist-slot .portrait{max-width:88px}.tracker:not(.compact-view) .waitlist-board{--waitlist-card:100px}.tracker .home-banner-row .hero-tile .portrait{max-width:80px}.tracker .home-banner-row .color-slot{grid-template-columns:repeat(var(--banner-count),minmax(96px,1fr))}.tracker .home-banner-board{width:max(100%,calc(44px + 24px + var(--banner-editor-space) + var(--banner-count)*108px - 12px))}}
+
+/* New/Special banners put the featured heroes above the centered details. */
+.tracker .home-banner.featured-banner-layout{grid-template-columns:minmax(0,1fr);grid-template-areas:"heroes" "details";gap:18px;padding:32px;align-content:center}
+.featured-banner-layout .featured-banner-heroes{grid-area:heroes;width:min(100%,760px);margin:0 auto;padding:0;gap:24px;align-items:start}
+.featured-banner-layout .home-banner-copy{grid-area:details;text-align:center;width:min(100%,880px);margin:0 auto;padding:0}
+.featured-banner-layout .home-banner-countdown{margin-left:auto;margin-right:auto}
+.featured-banner-layout .home-banner-dates,.featured-banner-layout .home-banner-actions{justify-content:center}
+.featured-banner-layout .home-banner-copy h2{margin-left:auto;margin-right:auto}
+.tracker .featured-banner-layout .hero-tile{padding:0;gap:10px}
+.tracker .featured-banner-layout .tile-name{text-align:center;font-size:18px;line-height:1.25;min-height:1.25em}
+.featured-banner-layout .featured-banner-empty{min-height:140px}
+@media(max-width:600px){.tracker .home-banner.featured-banner-layout{padding:24px 18px;gap:24px}.featured-banner-layout .featured-banner-heroes{max-width:340px;gap:18px 20px}.tracker .featured-banner-layout .tile-name{font-size:16px}.featured-banner-layout .featured-banner-empty{min-height:108px}.featured-banner-layout .home-banner-dates{font-size:14px}}
