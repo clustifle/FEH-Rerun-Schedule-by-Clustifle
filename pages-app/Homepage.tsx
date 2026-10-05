@@ -1,3 +1,4 @@
+import useBannerClock from './useBannerClock';
 import {useEffect,useRef,useState,type ReactNode} from 'react';
 import {Plus,Pencil,X,ChevronLeft,ChevronRight,Pause,Play} from 'lucide-react';
 import {apiFetch} from './static-data';
@@ -18,12 +19,12 @@ export default function Homepage({heroes,visible,canEdit,card,addHero}:{heroes:B
  const preferences=usePreferences();const duration=preferences.carouselSeconds*1000;const hover=useRef(false);
  const [banners,setBanners]=useState<Banner[]>([]),[loading,setLoading]=useState(true),[error,setError]=useState('');
  const [bannerType,setBannerType]=useState<'lme'|'featured'|'revival'>('lme');
- const [clockNow,setClockNow]=useState(()=>Date.now());
+ const clockNow=useBannerClock(banners.map(b=>({start:Date.parse(b.starts_on+'T'+(b.starts_time||'07:00')+'Z'),end:Date.parse(b.ends_on+'T'+(b.ends_time||'06:59')+'Z')})));
  const today=new Date(clockNow).toISOString().slice(0,10);
  const dialog=useRef<HTMLDialogElement>(null);
  const [editing,setEditing]=useState<Banner|null>(null),[name,setName]=useState(''),[start,setStart]=useState(today),[end,setEnd]=useState(new Date(Date.now()+86400000).toISOString().slice(0,10)),[startTime,setStartTime]=useState('07:00'),[endTime,setEndTime]=useState('06:59'),[members,setMembers]=useState<string[]>([]),[search,setSearch]=useState(''),[saving,setSaving]=useState(false),[formError,setFormError]=useState('');
  async function load(quiet=false){try{const response=await apiFetch('/api/banners');const data=await response.json();if(!response.ok)throw new Error(data.error||'Could not load banners.');setBanners(old=>JSON.stringify(old)===JSON.stringify(data)?old:data);setError('');recordUpdate();}catch(e){if(!quiet)setError((e as Error).message);}finally{if(!quiet)setLoading(false);}}
- useEffect(()=>{void load();const refresh=()=>{void load();};window.addEventListener('banners-change',refresh);const tick=()=>{if(document.visibilityState==='visible')setClockNow(Date.now());};const timer=setInterval(tick,60000);window.addEventListener('focus',tick);document.addEventListener('visibilitychange',tick);return()=>{clearInterval(timer);window.removeEventListener('banners-change',refresh);window.removeEventListener('focus',tick);document.removeEventListener('visibilitychange',tick);};},[]);
+ useEffect(()=>{void load();const refresh=()=>{void load();};window.addEventListener('banners-change',refresh);return()=>{window.removeEventListener('banners-change',refresh);};},[]);
  useAutoRefresh(()=>load(true));
  useEffect(()=>{if(!canEdit)dialog.current?.close();},[canEdit]);
  function open(banner:Banner|null){setEditing(banner);setBannerType(banner?layoutOf(banner):'lme');setName(banner?.name||'');setStart(banner?.starts_on||today);setEnd(banner?.ends_on||new Date(Date.now()+86400000).toISOString().slice(0,10));setStartTime(banner?.starts_time?.slice(0,5)||'07:00');setEndTime(banner?.ends_time?.slice(0,5)||'06:59');setMembers(banner?.tracker_banner_heroes.map(h=>h.hero_id)||[]);setSearch('');setFormError('');dialog.current?.showModal();}
