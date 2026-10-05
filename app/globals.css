@@ -568,3 +568,16 @@ html[data-motion=reduced] .tracker .mobile-navigation-drawer.panel-exiting.has-s
 .mobile-navigation-drawer .settings-inline>.settings-header{width:100%;max-width:none}
 .mobile-navigation-drawer .settings-inline .settings-account{max-width:none}
 @media(max-width:760px){.tracker .mobile-navigation-drawer.has-settings[open]:has(>.settings-inline){padding-inline:20px!important}}
+
+/* Idle scrollbars disappear without changing the scroll container's geometry. */
+html,html[data-theme] body,html[data-theme] body *:not(.month-strip){scrollbar-color:transparent transparent}
+html[data-scrollbar-active],html[data-theme] body [data-scrollbar-active]:not(.month-strip){scrollbar-color:var(--scroll-thumb) transparent}
+@supports selector(::-webkit-scrollbar){
+ html::-webkit-scrollbar-track,html[data-theme] body ::-webkit-scrollbar-track,html[data-theme] body::-webkit-scrollbar-track{background:transparent}
+ html::-webkit-scrollbar-thumb,html[data-theme] body ::-webkit-scrollbar-thumb,html[data-theme] body::-webkit-scrollbar-thumb{background-color:transparent;transition:background-color .3s ease}
+ html[data-scrollbar-active]::-webkit-scrollbar-thumb,html[data-theme] body [data-scrollbar-active]::-webkit-scrollbar-thumb{background-color:var(--scroll-thumb)}
+ html::-webkit-scrollbar-thumb:hover,html[data-theme] body ::-webkit-scrollbar-thumb:hover{background-color:var(--scroll-thumb-hover)}
+}
+@media(forced-colors:active){html,html[data-theme] body,html[data-theme] body *:not(.month-strip){scrollbar-color:auto}html::-webkit-scrollbar-thumb,html[data-theme] body ::-webkit-scrollbar-thumb{background-color:ButtonText}}
+@media(prefers-reduced-motion:reduce){html::-webkit-scrollbar-thumb,html[data-theme] body ::-webkit-scrollbar-thumb{transition:none}}
+@supports selector(::-webkit-scrollbar){html,html[data-scrollbar-active],html[data-theme] body,html[data-theme] body *:not(.month-strip),html[data-theme] body [data-scrollbar-active]:not(.month-strip){scrollbar-color:auto}}
