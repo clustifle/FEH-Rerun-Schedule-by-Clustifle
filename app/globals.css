@@ -632,3 +632,6 @@ html[data-theme=europa-nuova] .all-heroes-sort select{background:#23140d;border-
 html[data-theme=frutiger-aero][data-theme] .all-heroes-card{background:linear-gradient(135deg,#e5f9ff38,#77cae52b);border-color:#d1f4ff88;box-shadow:inset 0 1px #ffffff66}.all-heroes .toolbar-icon{flex:none}
 html[data-theme=frutiger-aero][data-theme] .all-heroes-sort select{background:#effbffdf;color:#194c67;border-color:#94d3ed}
 @media(max-width:600px){.all-heroes-tools{gap:12px}.all-heroes-search{flex-basis:100%}.all-heroes-results.grid-view{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.all-heroes-card{padding:16px 10px}.all-heroes-portrait{width:84px;height:84px}.all-heroes-copy strong{font-size:16px}.all-heroes-sort{flex:1}}
+
+/* Keep shared schedule transitions within the page's content width. */
+.tracker .schedule-page-frame{width:100%;min-width:0;box-sizing:border-box}.tracker .schedule-page-frame .schedule-stage{min-width:0;max-width:100%;overflow:clip}.tracker .schedule-page-frame .schedule{min-width:0;max-width:100%}.tracker .schedule-page-frame .month-scroll{overflow-x:auto;overflow-y:hidden;min-width:0;max-width:100%;isolation:isolate}.tracker .schedule-page-frame .color-slot,.tracker .schedule-page-frame .revival-group{min-width:0}.tracker .schedule-page-frame .waitlist-window{min-width:0;max-width:100%}

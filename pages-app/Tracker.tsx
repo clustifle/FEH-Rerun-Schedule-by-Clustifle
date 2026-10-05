@@ -82,8 +82,7 @@ export default function Home(){
   hideHeroPreview();stopMonthMotion();
   if(reduceMotion()){setCompact(v=>!v);return;}
   if(document.startViewTransition){
-   const animatedTiles=Array.from(document.querySelectorAll<HTMLElement>('.schedule-stage .hero-tile')).filter(tile=>{const rect=tile.getBoundingClientRect();return rect.right>0&&rect.left<window.innerWidth&&rect.bottom>0&&rect.top<window.innerHeight;});
-   animatedTiles.forEach(tile=>{tile.style.setProperty('view-transition-name','density-hero-'+tile.dataset.heroId);tile.style.setProperty('view-transition-class','density-hero');});
+   // Capture the board as one surface so scrolled-out heroes retain its clipping boundary.
    flushSync(()=>setDensityPhase('preparing'));
    try{
     const transition=document.startViewTransition(()=>{
@@ -102,7 +101,7 @@ export default function Home(){
     void transition.ready.catch(()=>{});void transition.updateCallbackDone.catch(()=>{});
     await transition.finished;
    }catch{/* Keep the selected density if a browser cancels the visual transition. */}
-   finally{animatedTiles.forEach(tile=>{tile.style.removeProperty('view-transition-name');tile.style.removeProperty('view-transition-class');});setDensityPhase('idle');}
+   finally{setDensityPhase('idle');}
   }else{
    setDensityPhase('leaving');
    densityTimer.current=setTimeout(()=>{setCompact(v=>!v);setDensityPhase('entering');densityTimer.current=setTimeout(()=>setDensityPhase('idle'),420);},140);
