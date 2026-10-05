@@ -1,5 +1,5 @@
 // Stable view URLs; account IDs are immutable Supabase UUIDs, never emails.
-export const viewPaths:Record<string,string>={Homepage:'home',General:'schedule/general',Remix:'schedule/remix','Monthly Revival':'schedule/monthly-revival','Forging Bonds Revival':'schedule/new-heroes-revival','Hall of Forms Revival':'schedule/hall-of-forms-revival',Waitlist:'rerun-waitlist',Profile:'profile',Users:'users'};
+export const viewPaths:Record<string,string>={Homepage:'home',General:'schedule/general',Remix:'schedule/remix','Monthly Revival':'schedule/monthly-revival','Forging Bonds Revival':'schedule/new-heroes-revival','Hall of Forms Revival':'schedule/hall-of-forms-revival',Waitlist:'rerun-waitlist',Profile:'profile',Users:'users','All Heroes':'all-heroes'};
 export const uuidPattern=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export function readRoute(){
  const base=import.meta.env.BASE_URL;const path=location.pathname.startsWith(base)?location.pathname.slice(base.length).replace(/\/$/,''):'';

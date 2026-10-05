@@ -261,3 +261,6 @@ html[data-theme=frutiger-aero][data-theme] .tracker dialog:not(.mobile-navigatio
 html[data-theme=frutiger-aero][data-theme] .tracker dialog:not(.mobile-navigation-drawer) :is(.dialog-top,.hero-profile-header,.revival-picker-header) .icon-button:hover,html[data-theme=frutiger-aero][data-theme] .tracker dialog:not(.mobile-navigation-drawer) .filter-close:hover{background:#d4f3ff;color:#123f59;border-color:#399bc1}
 html[data-theme=frutiger-aero][data-theme] .tracker dialog:not(.mobile-navigation-drawer) :is(.dialog-top,.hero-profile-header,.revival-picker-header) .icon-button svg{width:22px;height:22px;flex:none}
 @media(max-width:700px){html[data-theme=frutiger-aero][data-theme] .tracker dialog:not(.mobile-navigation-drawer) .editor-section{padding:20px 16px}}
+
+html[data-theme=frutiger-aero][data-theme] .tracker .all-heroes-search input[type=search][type],html[data-theme=frutiger-aero][data-theme] .tracker .all-heroes-search input[type=search][type]:is(:focus,:hover,:active){background:transparent;border:0;box-shadow:none;outline:none;color:#f5fcff}
+html[data-theme=frutiger-aero][data-theme] .tracker .all-heroes-sort select{background:#effbffdf;color:#194c67;border-color:#94d3ed;box-shadow:inset 0 1px #fff}
