@@ -559,3 +559,12 @@ html[data-motion=reduced] .tracker .mobile-navigation-drawer.panel-exiting.has-s
 .account-profile-section{padding:24px 0;display:flex;flex-direction:column;gap:16px}.account-profile-section h4{font-size:17px;margin:0}.account-profile-section label{font-size:14px;font-weight:500}.account-profile-section input,.account-profile-section textarea{min-height:46px;font-size:15px;border-radius:8px}.account-profile-section textarea{resize:vertical}.account-profile-section>.secondary{align-self:flex-start}.account-profile-save{display:flex;align-items:center;flex-wrap:wrap;gap:18px;padding:20px 0 8px}.account-profile-save button{min-height:46px;border-radius:8px}.account-profile-save a{font-size:14px;text-underline-offset:4px}
 .mobile-navigation-drawer .settings-inline .settings-account .settings-actions button{width:auto;border-radius:8px;min-height:44px}.settings-account .profile-link-row{gap:10px}.settings-account .profile-link-row button{min-height:44px}
 @media(max-width:760px){.settings-account .settings-email{font-size:17px}.settings-account>.settings-actions{display:flex;flex-direction:column;align-items:stretch}.mobile-navigation-drawer .settings-inline .settings-account>.settings-actions button{width:100%}.account-photo-section{grid-template-columns:80px minmax(0,1fr);column-gap:16px}.account-photo-section .profile-picture{width:76px;height:76px}.account-photo-section .profile-actions{flex-direction:column;align-items:flex-start}.account-profile-section{padding:22px 0}.settings-account .profile-link-row{display:flex;flex-wrap:wrap}.settings-account .profile-link-row input{flex:1 1 100%;width:100%}.account-profile-save{gap:14px}}
+
+/* Let both immersive panels use the available screen width. */
+.tracker .mobile-navigation-drawer.has-settings[open]:has(>.settings-inline){padding-inline:clamp(20px,4vw,64px)!important}
+.tracker .mobile-navigation-drawer.has-settings[open]:has(>.settings-inline)>.settings-inline{max-width:none;width:100%;padding-right:0}
+.mobile-navigation-drawer .settings-inline>.settings-layout{width:100%;max-width:none;margin:0}
+.mobile-navigation-drawer .settings-inline .settings-layout>.settings-body{width:100%;max-width:none;margin:0}
+.mobile-navigation-drawer .settings-inline>.settings-header{width:100%;max-width:none}
+.mobile-navigation-drawer .settings-inline .settings-account{max-width:none}
+@media(max-width:760px){.tracker .mobile-navigation-drawer.has-settings[open]:has(>.settings-inline){padding-inline:20px!important}}
