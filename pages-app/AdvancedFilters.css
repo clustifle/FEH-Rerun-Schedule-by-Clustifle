@@ -23,3 +23,11 @@
 @media(max-width:600px){.tracker dialog.filter-sheet{inset:0 0 0 auto;width:min(420px,100vw);margin:0;height:100dvh;max-height:100dvh;border-radius:0}.filter-sheet-header{padding-top:max(20px,env(safe-area-inset-top))}}
 @media(prefers-reduced-motion:reduce){.tracker dialog.filter-sheet[open],.tracker dialog.filter-sheet.is-closing{animation:none}}
 html[data-motion=reduced] .tracker dialog.filter-sheet[open],html[data-motion=reduced] .tracker dialog.filter-sheet.is-closing{animation:none}
+
+/* A quieter sidebar hierarchy with room for labels and orb artwork. */
+.tracker .filter-sheet-header{padding:28px 26px 22px;gap:16px;border-bottom:1px solid var(--line)}.filter-sheet-header h2{font-size:26px;letter-spacing:0}.filter-sheet .filter-close{width:40px;height:40px;border:0;background:transparent;border-radius:8px}
+.tracker .filter-sheet-body{padding:24px 26px 28px}.filter-section{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}.filter-section h3{font-size:14px;letter-spacing:0;margin-bottom:14px}.filter-search{border-radius:9px}.filter-search input{min-height:48px}.filter-section select{min-height:48px;border-radius:9px}
+.filter-color-options{gap:6px}.filter-color-choice{min-height:84px;padding:12px 3px;gap:10px;border-radius:9px;background:transparent}.filter-color-choice .filter-weapon-orb{width:28px;height:28px}.filter-color-choice[aria-pressed=true]{box-shadow:none}
+.filter-pool-options{grid-template-columns:1fr;gap:8px}.filter-pool-choice,.filter-pool-choice.any-pool{min-height:70px;padding:14px;border-radius:9px;background:transparent}.filter-pool-choice strong{font-size:14px}.filter-pool-choice small{font-size:12px;line-height:1.45}.filter-pool-choice>img{width:30px;height:30px}.filter-pool-choice .filter-choice-check{margin-left:auto}
+.tracker .filter-sheet-footer{padding:18px 26px max(20px,env(safe-area-inset-bottom));gap:10px}.filter-sheet-footer p{white-space:normal;line-height:1.4}.filter-show{min-height:44px}.filter-reset{min-height:44px}
+@media(max-width:600px){.tracker .filter-sheet-header{padding:22px 20px 18px}.tracker .filter-sheet-body{padding:20px}.tracker .filter-sheet-footer{padding-inline:20px}.filter-sheet-header h2{font-size:24px}.filter-section{margin-top:24px;padding-top:20px}}
