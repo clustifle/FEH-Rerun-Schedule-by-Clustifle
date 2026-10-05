@@ -15,3 +15,11 @@
 .tracker .filter-sheet-footer{margin:0;padding:16px 25px 20px;gap:14px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;text-align:left}
 @media(max-width:600px){.tracker dialog.filter-sheet{width:100%;max-width:100%;max-height:92dvh;margin:auto 0 0}.tracker .filter-sheet-footer{padding:16px 20px max(18px,env(safe-area-inset-bottom))}.filter-pool-options{grid-template-columns:1fr}.filter-pool-choice{min-height:64px}.filter-pool-choice strong{font-size:14px}.filter-pool-choice small{font-size:12px}.filter-pool-choice>img{width:28px;height:28px}}
 @media(max-width:600px){.tracker dialog.filter-sheet{width:100vw;max-width:100vw;inset-inline:0}.filter-sheet-footer p{font-size:11px}.filter-sheet-footer>div{gap:4px}.filter-reset,.filter-show{padding-inline:9px}}
+
+/* Right-side filters retain the current surfaces with a pinned header and footer. */
+.tracker dialog.filter-sheet{position:fixed;inset:0 0 0 auto;margin:0;width:min(460px,100vw);height:100dvh;max-height:100dvh;max-width:100vw;border-radius:18px 0 0 18px;border-block:0;border-right:0;overflow:hidden}
+.tracker dialog.filter-sheet[open]{animation:filter-sidebar-enter .26s cubic-bezier(.22,.75,.25,1) both}.tracker dialog.filter-sheet.is-closing{animation:filter-sidebar-exit .18s ease both}.filter-sheet-body{flex:1}.tracker .filter-sheet-footer{border-radius:0;padding-bottom:max(20px,env(safe-area-inset-bottom))}
+@keyframes filter-sidebar-enter{from{transform:translateX(100%)}to{transform:translateX(0)}}@keyframes filter-sidebar-exit{to{transform:translateX(100%)}}
+@media(max-width:600px){.tracker dialog.filter-sheet{inset:0 0 0 auto;width:min(420px,100vw);margin:0;height:100dvh;max-height:100dvh;border-radius:0}.filter-sheet-header{padding-top:max(20px,env(safe-area-inset-top))}}
+@media(prefers-reduced-motion:reduce){.tracker dialog.filter-sheet[open],.tracker dialog.filter-sheet.is-closing{animation:none}}
+html[data-motion=reduced] .tracker dialog.filter-sheet[open],html[data-motion=reduced] .tracker dialog.filter-sheet.is-closing{animation:none}
