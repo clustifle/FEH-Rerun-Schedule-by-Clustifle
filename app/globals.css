@@ -475,3 +475,8 @@ html[data-theme=europa-nuova] .tracker .toolbar :is(.schedule-add-hero.toolbar-i
 .tracker .toolbar :is(.compact-toggle.toolbar-icon[aria-pressed=true],.filter-launch.toolbar-icon.has-filters),.tracker .toolbar .waitlist-edit-menu[open] .toolbar-icon{color:var(--cyan)}
 html[data-theme=europa-nuova] .tracker .toolbar :is(.schedule-add-hero.toolbar-icon:hover,.compact-toggle.toolbar-icon:hover,.filter-launch.toolbar-icon:hover){color:#ffac65;background:transparent;border:0;box-shadow:none}
 html[data-theme=europa-nuova] .tracker .toolbar :is(.compact-toggle.toolbar-icon[aria-pressed=true],.filter-launch.toolbar-icon.has-filters),html[data-theme=europa-nuova] .tracker .toolbar .waitlist-edit-menu[open] .toolbar-icon{color:var(--cyan)}
+
+.tracker .toolbar .toolbar-search>.toolbar-icon,html[data-theme=europa-nuova] .tracker .toolbar .toolbar-search>.toolbar-icon{background:transparent;border:0;box-shadow:none;border-radius:0;color:var(--muted)}
+.tracker .toolbar .toolbar-search>.toolbar-icon:hover{color:#fff}
+.tracker .toolbar .toolbar-search.is-open>.toolbar-icon,html[data-theme=europa-nuova] .tracker .toolbar .toolbar-search.is-open>.toolbar-icon{color:var(--cyan)}
+html[data-theme=europa-nuova] .tracker .toolbar .toolbar-search>.toolbar-icon:hover{color:#ffac65}
