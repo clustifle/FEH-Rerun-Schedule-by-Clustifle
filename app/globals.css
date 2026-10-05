@@ -624,3 +624,5 @@ html[data-theme=europa-nuova] .tracker :is(.homepage-tools h2,.home-revivals>h2,
 
 /* Section subtitles use the active theme font with natural character spacing. */
 html[data-theme] .tracker :is(.hero-editor h3,.banner-editor-section h3,.hero-owner-note h3,.eyebrow,.detail-eyebrow,.chooser-eyebrow,.about-eyebrow,.homepage-eyebrow,.profile-eyebrow,.mobile-navigation-top h2){font-family:inherit;font-size:15px;font-weight:600;line-height:1.4;letter-spacing:normal;text-transform:none}
+
+.weapon-type-field{display:grid;gap:12px;margin:18px 0}.weapon-type-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.weapon-type-choice{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:78px!important;padding:10px!important;font-size:13px}.weapon-type-choice img{width:36px;height:36px;object-fit:contain}.weapon-type-options [aria-pressed=true]{outline:2px solid var(--cyan);outline-offset:-2px}.filter-sheet .weapon-type-options{grid-template-columns:repeat(3,minmax(0,1fr))}

@@ -1,3 +1,4 @@
+import {weaponTypes} from './weapon-types';
 import {createClient} from '@supabase/supabase-js';
 import {jsonResponse,requestTimeout} from './browser-compat';
 import {normalizePool} from './hero-pools';
@@ -88,7 +89,8 @@ async function runApiFetch(input:string,init?:RequestInit){
     uploaded=crypto.randomUUID()+'.'+(file.type==='image/png'?'png':file.type==='image/jpeg'?'jpg':'webp');
     const {error}=await supabase.storage.from('portraits').upload(uploaded,file,{contentType:file.type});if(error)throw new Error(error.message);portrait=uploaded;
    }
-   const row={id,demote:form.get('demote')==='on',name:String(form.get('name')||'').trim(),title:String(form.get('title')||'').trim(),category:String(form.get('category')),schedule:String(form.get('schedule')),color:String(form.get('color')),pool:normalizePool(String(form.get('pool')||'')||null,String(form.get('category'))),month:form.get('schedule')==='Waitlist'?null:String(form.get('month')||'')||null,blessing:!['Legendary','Mythic','Chosen Hero'].includes(String(form.get('category')))?null:String(form.get('blessing')||'')||null,notes:String(form.get('notes')||'').trim(),portrait,updated:new Date().toISOString()};
+   const weaponType=String(form.get('weapon_type')||'')||null;if(weaponType&&!weaponTypes[String(form.get('color'))]?.includes(weaponType))return jsonResponse({error:'Choose a valid weapon type for this color.'},{status:400});
+   const row={id,weapon_type:weaponType,demote:form.get('demote')==='on',name:String(form.get('name')||'').trim(),title:String(form.get('title')||'').trim(),category:String(form.get('category')),schedule:String(form.get('schedule')),color:String(form.get('color')),pool:normalizePool(String(form.get('pool')||'')||null,String(form.get('category'))),month:form.get('schedule')==='Waitlist'?null:String(form.get('month')||'')||null,blessing:!['Legendary','Mythic','Chosen Hero'].includes(String(form.get('category')))?null:String(form.get('blessing')||'')||null,notes:String(form.get('notes')||'').trim(),portrait,updated:new Date().toISOString()};
    const {error}=await supabase.from('heroes').upsert(row);
    if(error){if(uploaded)await supabase.storage.from('portraits').remove([uploaded]);throw new Error(error.message);}
    if(uploaded&&old?.portrait&&!old.portrait.startsWith('data/'))await supabase.storage.from('portraits').remove([old.portrait]);
