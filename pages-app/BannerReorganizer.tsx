@@ -1,7 +1,7 @@
 import HeroPortraitMarks from './HeroPortraitMarks';
-import {ArrowDown,ArrowUp,ChevronsDown,ChevronsUp,Layers,X} from 'lucide-react';
+import {ArrowDown,ArrowUp,ChevronsDown,ChevronsUp,Layers,Trash2,X} from 'lucide-react';
 import {useEffect,useRef,useState} from 'react';
-import {supabase} from './static-data';
+import {apiFetch,supabase} from './static-data';
 import type {Banner} from './Homepage';
 
 export default function BannerReorganizer({banners,onClose,onSaved}:{banners:Banner[];onClose:()=>void;onSaved:()=>Promise<void>}){
@@ -13,7 +13,8 @@ export default function BannerReorganizer({banners,onClose,onSaved}:{banners:Ban
 
  useEffect(()=>{
   const next=[...banners].sort((a,b)=>(a.sort_order??2147483647)-(b.sort_order??2147483647));
-  setRows(next); setSelectedId(current=>current&&next.some(b=>b.id===current)?current:next[0]?.id||'');
+  setRows(current=>{const available=new Map(next.map(b=>[b.id,b]));const retained=current.flatMap(b=>{const updated=available.get(b.id);if(!updated)return[];available.delete(b.id);return[updated];});return [...retained,...next.filter(b=>available.has(b.id))];});
+  setSelectedId(current=>current&&next.some(b=>b.id===current)?current:next[0]?.id||'');
  },[banners]);
 
  useEffect(()=>{dialog.current?.showModal();const overflow=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{dialog.current?.close();document.body.style.overflow=overflow;};},[]);
@@ -23,6 +24,23 @@ export default function BannerReorganizer({banners,onClose,onSaved}:{banners:Ban
   if(index<0||to<0||to>=rows.length||index===to)return;
   setRows(old=>{const next=[...old];next.splice(to,0,next.splice(index,1)[0]);return next;});
   setDirty(true); setMessage('');
+ }
+
+ async function remove(banner:Banner){
+  if(!confirm('Remove "'+banner.name+'" from banners? Its lineup will be removed, but the heroes themselves will remain.'))return;
+  setSaving(true);setError('');setMessage('');
+  try{
+   const response=await apiFetch('/api/banners',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:banner.id})});
+   const result=await response.json();
+   if(!response.ok)throw new Error(result.error||'Could not remove banner.');
+   const next=rows.filter(row=>row.id!==banner.id);
+   setRows(next);
+   if(selectedId===banner.id)setSelectedId(next[Math.min(rows.findIndex(row=>row.id===banner.id),next.length-1)]?.id||'');
+   setMessage('"'+banner.name+'" removed.');
+   window.dispatchEvent(new Event('banners-change'));
+  }catch(error){
+   setError('Could not remove banner: '+(error instanceof Error?error.message:String(error)));
+  }finally{setSaving(false);}
  }
 
  async function save(){
@@ -60,14 +78,17 @@ export default function BannerReorganizer({banners,onClose,onSaved}:{banners:Ban
   <ol className="banner-order-list" aria-label="Banner order list">
    {rows.map((banner,i)=>
     <li key={banner.id}>
-     <button type="button" aria-pressed={selectedId===banner.id} disabled={saving} onClick={()=>setSelectedId(banner.id)} onKeyDown={e=>{if(e.altKey&&(e.key==='ArrowUp'||e.key==='ArrowDown')){e.preventDefault();if(selectedId===banner.id)move(index+(e.key==='ArrowUp'?-1:1));}}}>
-      <span className="banner-order-number">{i+1}</span>
-      <span className={'banner-order-card '+(banner.banner_type==='remix'?'remix':banner.banner_type||'lme')}>
-       <strong>{banner.name}</strong>
-       <small>{banner.starts_on} · {banner.starts_time || '07:00'} to {banner.ends_on} · {banner.ends_time || '06:59'}</small>
-      </span>
-      <span className="banner-order-meta">{banner.banner_type ? banner.banner_type.toUpperCase() : 'LME'}</span>
-     </button>
+     <div className="banner-order-row">
+      <button type="button" aria-pressed={selectedId===banner.id} disabled={saving} onClick={()=>setSelectedId(banner.id)} onKeyDown={e=>{if(e.altKey&&(e.key==='ArrowUp'||e.key==='ArrowDown')){e.preventDefault();if(selectedId===banner.id)move(index+(e.key==='ArrowUp'?-1:1));}}}>
+       <span className="banner-order-number">{i+1}</span>
+       <span className={'banner-order-card '+(banner.banner_type==='remix'?'remix':banner.banner_type||'lme')}>
+        <strong>{banner.name}</strong>
+        <small>{banner.starts_on} · {banner.starts_time || '07:00'} to {banner.ends_on} · {banner.ends_time || '06:59'}</small>
+       </span>
+       <span className="banner-order-meta">{banner.banner_type ? banner.banner_type.toUpperCase() : 'LME'}</span>
+      </button>
+      <button type="button" className="banner-order-remove" aria-label={'Remove '+banner.name} title="Remove banner" disabled={saving} onClick={()=>void remove(banner)}><Trash2 size={18}/></button>
+     </div>
     </li>
    )}
   </ol>
