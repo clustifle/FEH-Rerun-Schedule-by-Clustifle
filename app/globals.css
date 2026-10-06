@@ -640,6 +640,17 @@ html[data-theme=frutiger-aero][data-theme] .all-heroes-card{background:linear-gr
 html[data-theme=frutiger-aero][data-theme] .all-heroes-sort select{background:#effbffdf;color:#194c67;border-color:#94d3ed}
 @media(max-width:600px){.all-heroes-tools{gap:12px}.all-heroes-search{flex-basis:100%}.all-heroes-results.grid-view{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.all-heroes-card{padding:16px 10px}.all-heroes-portrait{width:84px;height:84px}.all-heroes-copy strong{font-size:16px}.all-heroes-sort{flex:1}}
 
+/* Keep All Heroes controls fixed while only the directory results scroll. */
+.tracker:has(.all-heroes){display:flex;flex-direction:column;height:100dvh;overflow:hidden}
+.tracker:has(.all-heroes)>.masthead{flex:none}
+.tracker .schedule-page-frame:has(.all-heroes){display:flex;flex:1;flex-direction:column;width:100%;min-height:0;height:auto;max-height:none;overflow:hidden}
+.tracker .schedule-page-frame:has(.all-heroes)>.schedule-page-heading{flex:none}
+.tracker .schedule-page-frame:has(.all-heroes)>.all-heroes{overflow:hidden}
+.all-heroes{display:flex;flex:1;flex-direction:column;min-height:0}
+.all-heroes-tools,.all-heroes-count{flex:none}
+.all-heroes-results{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;align-content:start;padding:2px 4px 20px;scrollbar-width:thin}
+@media(max-width:600px){.all-heroes-tools{margin-top:4px;margin-bottom:12px}.all-heroes-count{margin-bottom:12px}}
+
 /* Keep shared schedule transitions within the page's content width. */
 .tracker .schedule-page-frame{width:100%;min-width:0;box-sizing:border-box}.tracker .schedule-page-frame .schedule-stage{min-width:0;max-width:100%;overflow:clip}.tracker .schedule-page-frame .schedule{min-width:0;max-width:100%}.tracker .schedule-page-frame .month-scroll{overflow-x:auto;overflow-y:hidden;min-width:0;max-width:100%;isolation:isolate}.tracker .schedule-page-frame .color-slot,.tracker .schedule-page-frame .revival-group{min-width:0}.tracker .schedule-page-frame .waitlist-window{min-width:0;max-width:100%}
 
