@@ -332,15 +332,3 @@ html[data-theme=midnight-frutiger] .theme-option-midnight-frutiger .theme-previe
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
  }
-
- html[data-theme=midnight-frutiger] .tracker,
- html[data-theme=midnight-frutiger] .tracker :where(*),
- html[data-theme=midnight-frutiger] .tracker :where(*)::before,
- html[data-theme=midnight-frutiger] .tracker :where(*)::after,
- html[data-theme=midnight-frutiger] .tracker::before,
- html[data-theme=midnight-frutiger] .tracker::after{
-  background:transparent!important;
-  box-shadow:none!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
- }
