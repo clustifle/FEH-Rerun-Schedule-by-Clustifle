@@ -62,7 +62,7 @@ async function runApiFetch(input:string,init?:RequestInit){
    if(error)throw new Error('Schedule unavailable. '+error.message);
    return jsonResponse(data);
   }
-  if(input==='/api/banners'&&(!init?.method||init.method==='GET')){const {data,error}=await supabase.from('tracker_banners').select('*,tracker_banner_heroes(hero_id,slot_index)').order('sort_order',{nullsFirst:true,ascending:true}).order('starts_on');if(error)throw new Error(error.message);return jsonResponse(data);}
+  if(input==='/api/banners'&&(!init?.method||init.method==='GET')){const {data,error}=await supabase.from('tracker_banners').select('*,tracker_banner_heroes(hero_id,slot_index)').order('starts_on');if(error)throw new Error(error.message);return jsonResponse(data);}
   if(!await ownerSession())return fail('Only the owner can edit the schedule.',403);
   if(input==='/api/banners'&&init?.method==='POST'){const body=JSON.parse(String(init.body));const {data,error}=await supabase.rpc('save_tracker_banner_slots',{banner_id:body.id||null,banner_name:body.name,start_date:body.starts_on,end_date:body.ends_on,start_time:body.starts_time||'07:00',end_time:body.ends_time||'06:59',hero_ids:body.hero_ids||[],layout_type:body.banner_type||'lme',is_coming_soon:body.coming_soon===true,slot_ids:body.hero_slots||body.hero_ids||[]});if(error)throw new Error(error.message);return jsonResponse({id:data});}
   if(input==='/api/banner-heroes'&&init?.method==='POST'){

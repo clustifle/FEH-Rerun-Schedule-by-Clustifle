@@ -89,7 +89,7 @@ Use a recorded month for a dated schedule. **Skip next rerun month** supports en
 
 On Home, **Add new…** creates a banner; **Edit banner / slots** changes its identity, dates, and lineup. Revival editors support up to four heroes and a **Currently ongoing** option for displaying time remaining during the configured active period.
 
-Changes are saved directly to Supabase and do not require a frontend deployment.
+Changes are saved directly to Supabase and do not require a frontend deployment. To enable persistent Home banner ordering, apply [`supabase/banner-order.sql`](supabase/banner-order.sql) once in the Supabase SQL Editor. Until then, banners continue to load in their date order, but saving a custom order is unavailable.
 
 ### Hero portraits
 
