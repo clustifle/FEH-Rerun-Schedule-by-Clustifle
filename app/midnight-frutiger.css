@@ -36,28 +36,30 @@ html[data-theme=midnight-frutiger] :focus-visible{outline-color:#a5f7ec}
 html[data-theme=midnight-frutiger] ::selection{background:#61e8d980;color:#fff}
 html[data-theme=midnight-frutiger] .tracker{background:transparent}
 html[data-theme=midnight-frutiger] .tracker .masthead{
- background:linear-gradient(90deg,#0a1220f5,#162235f2,#0a1220f5);
+ background:linear-gradient(90deg,#0a1220bd,#162235ab,#0a1220bd);
  border-bottom:1px solid #a4d9eb35;
  box-shadow:inset 0 -1px #ffffff0b,0 8px 28px #02061166;
+ -webkit-backdrop-filter:blur(18px) saturate(145%);
+ backdrop-filter:blur(18px) saturate(145%);
 }
 html[data-theme=midnight-frutiger] .tracker :is(.home-banner,.home-revival-card,.month-column,.waitlist-board,.all-heroes,.public-profile,.user-directory,.user-search-result,.settings-inline){
- background:linear-gradient(145deg,#172438dc,#0c1422e8);
+ background:linear-gradient(145deg,#b9edff12,#94d9f008 48%,#0b14231c);
  border-color:#a4d9eb3b;
  box-shadow:0 16px 42px #02061152,inset 0 1px #ffffff12;
 }
 html[data-theme=midnight-frutiger] .tracker .home-banner-scroll{
- background:linear-gradient(120deg,#080f1bcf,#111c2bd9);
+ background:linear-gradient(120deg,#080f1b72,#111c2b6b);
  border-color:#a4d9eb35;
 }
 html[data-theme=midnight-frutiger] .tracker .month-scroll{
  scrollbar-color:#8cf4e280 #ffffff12;
 }
-html[data-theme=midnight-frutiger] .tracker .color-slot.red{background:linear-gradient(145deg,#411a31,#241725)}
-html[data-theme=midnight-frutiger] .tracker .color-slot.blue{background:linear-gradient(145deg,#152b50,#131b36)}
-html[data-theme=midnight-frutiger] .tracker .color-slot.green{background:linear-gradient(145deg,#12413c,#102a30)}
-html[data-theme=midnight-frutiger] .tracker .color-slot.colorless{background:linear-gradient(145deg,#282c43,#1a2032)}
+html[data-theme=midnight-frutiger] .tracker .color-slot.red{background:linear-gradient(145deg,#a33d6268,#43182c48)}
+html[data-theme=midnight-frutiger] .tracker .color-slot.blue{background:linear-gradient(145deg,#4275bd66,#172b5145)}
+html[data-theme=midnight-frutiger] .tracker .color-slot.green{background:linear-gradient(145deg,#3da88864,#14473e45)}
+html[data-theme=midnight-frutiger] .tracker .color-slot.colorless{background:linear-gradient(145deg,#91a9bd58,#28374d42)}
 html[data-theme=midnight-frutiger] .tracker :is(.schedule-page-heading,.fb-heading,.month-column h2,.revival-subheads,.toolbar,.month-control,.banner-carousel-controls){
- background:linear-gradient(115deg,#132238eb,#101a2be8);
+ background:linear-gradient(115deg,#132238a8,#101a2b91);
  color:#f5f8ff;
  border-color:#a4d9eb38;
  box-shadow:inset 0 1px #ffffff0c,0 8px 24px #02061138;
@@ -69,7 +71,7 @@ html[data-theme=midnight-frutiger] .tracker :is(.home-banner-copy h2,.fb-heading
 }
 html[data-theme=midnight-frutiger] .tracker :is(.home-banner-dates,.fb-heading p,.month-strip-heading,.month-strip-readout,.settings-hint,.settings-row small,.tracker footer,.month-choice){color:#b6c9dc}
 html[data-theme=midnight-frutiger] .tracker :is(.home-banner-countdown,.settings-inline .settings-role,.settings-inline .settings-notice){
- background:linear-gradient(110deg,#167e84,#258f9a 55%,#496aa5);
+ background:linear-gradient(110deg,#167e84d9,#258f9ad4 55%,#496aa5d9);
  color:#f6ffff;
  border-color:#8cf4e266;
  box-shadow:0 4px 18px #31d6c51c;
@@ -91,7 +93,7 @@ html[data-theme=midnight-frutiger] .tracker :is(.primary,.secondary,.mobile-menu
  border-color:#8cf4e2b3;
 }
 html[data-theme=midnight-frutiger] .tracker :is(.toolbar select,.toolbar input,.advanced-filters summary,.all-heroes-sort select,.settings-row select){
- background:#101b2be8;
+ background:linear-gradient(145deg,#1724389c,#0c1422a8);
  color:#f4f7ff;
  border-color:#a4d9eb52;
 }
@@ -106,15 +108,17 @@ html[data-theme=midnight-frutiger] .tracker :is(.home-banner,.home-revival-card,
  background:linear-gradient(120deg,#d8fff40a,transparent 48%,#c39cff0a);
 }
 html[data-theme=midnight-frutiger] .tracker .hero-hover-preview{
- background:linear-gradient(145deg,#1a2a41f7,#0a1322fc);
+ background:linear-gradient(145deg,#1a2a41d9,#0a1322e8);
  border-color:#8cf4e266;
  box-shadow:0 18px 48px #020611a3,inset 0 1px #ffffff17;
 }
 html[data-theme=midnight-frutiger] .tracker dialog:not(.mobile-navigation-drawer){
- background:linear-gradient(135deg,#142238f7,#0a1220fc);
+ background:linear-gradient(135deg,#142238e8,#0a1220ed);
  color:#f2f6ff;
  border-color:#8cf4e25c;
  box-shadow:0 24px 80px #020611a8,inset 0 1px #ffffff12;
+ -webkit-backdrop-filter:blur(18px) saturate(140%);
+ backdrop-filter:blur(18px) saturate(140%);
 }
 html[data-theme=midnight-frutiger] .tracker dialog:not(.mobile-navigation-drawer) :is(input:not([type=checkbox]):not([type=radio]),select,textarea){
  background:#091322d9;
@@ -122,8 +126,8 @@ html[data-theme=midnight-frutiger] .tracker dialog:not(.mobile-navigation-drawer
  border-color:#a4d9eb4f;
 }
 html[data-theme=midnight-frutiger] .tracker dialog:not(.mobile-navigation-drawer) option{background:#101b2b;color:#f2f6ff}
-html[data-theme=midnight-frutiger] .tracker .mobile-navigation-drawer{background:#09111fe8}
-html[data-theme=midnight-frutiger] .mobile-navigation-drawer::backdrop{background:#030713c9}
+html[data-theme=midnight-frutiger] .tracker .mobile-navigation-drawer{background:#09111fbf}
+html[data-theme=midnight-frutiger] .mobile-navigation-drawer::backdrop{background:#03071399;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 html[data-theme=midnight-frutiger] .tracker .mobile-navigation-drawer nav :is(button,summary){color:#d5e9f2}
 html[data-theme=midnight-frutiger] .tracker .mobile-navigation-drawer nav :is(button:hover,summary:hover){background:#8cf4e218;color:#f5fffd}
 html[data-theme=midnight-frutiger] .tracker .mobile-navigation-drawer nav button[aria-current]{color:#8cf4e2}
@@ -147,3 +151,138 @@ html[data-theme=midnight-frutiger] .tracker footer{border-color:#a4d9eb30}
    linear-gradient(155deg,#080d19,#11172a 56%,#080e19);
  }
 }
+
+/* Frosted panes use backdrop blur; repeated cards and scroll regions stay light. */
+html[data-theme=midnight-frutiger] .tracker :is(.home-banner,.home-revival-card,.settings-inline,.user-directory,.filter-fields,.nav-popover,.hero-hover-preview){
+ background:linear-gradient(145deg,#d9fff21a 0%,#99dff00b 42%,#101a2b56 100%);
+ border-color:#b9edff55;
+ box-shadow:0 18px 48px #02061170,inset 0 1px 0 #e0fffa32,inset 0 -1px 0 #88d9f21c;
+ -webkit-backdrop-filter:blur(16px) saturate(145%);
+ backdrop-filter:blur(16px) saturate(145%);
+}
+html[data-theme=midnight-frutiger] .tracker .all-heroes{
+ background:linear-gradient(145deg,#d9fff20c,#99dff006 45%,#101a2b20);
+ border-color:#b9edff55;
+ box-shadow:0 16px 42px #02061152,inset 0 1px 0 #e0fffa24,inset 0 -1px 0 #88d9f216;
+}
+html[data-theme=midnight-frutiger] .tracker .waitlist-board{
+ background:linear-gradient(145deg,#d9fff20c,#99dff006 45%,#101a2b20);
+ border-color:#b9edff4a;
+ box-shadow:inset 0 1px 0 #e0fffa24,inset 0 -1px 0 #88d9f216;
+}
+html[data-theme=midnight-frutiger] .tracker .month-column{
+ background:linear-gradient(145deg,#d9fff20e,#99dff007 45%,#101a2b28);
+ border-color:#b9edff55;
+ box-shadow:inset 0 1px 0 #e0fffa20,inset 0 -1px 0 #88d9f216;
+}
+html[data-theme=midnight-frutiger] .tracker .all-heroes-card{
+ background:linear-gradient(145deg,#e5fff40c 0%,#9be2f006 48%,#101a2b12 100%);
+ border-color:#b9edff4a;
+ box-shadow:inset 0 1px 0 #e0fffa24,inset 0 -1px 0 #88d9f210;
+}
+html[data-theme=midnight-frutiger] .tracker .all-heroes-card:hover{
+ background:linear-gradient(145deg,#e5fff421 0%,#9be2f011 48%,#101a2b26 100%);
+ border-color:#c9fff1a0;
+ box-shadow:inset 0 1px 0 #f4fffb42,0 8px 22px #02061140;
+}
+html[data-theme=midnight-frutiger] .tracker .all-heroes-card :is(.all-heroes-portrait,.all-heroes-copy){
+ background-color:transparent;
+}
+html[data-theme=midnight-frutiger] .tracker .all-heroes-portrait{
+ background:linear-gradient(145deg,#e5fff408,#9be2f002 55%,#101a2b10);
+ border:1px solid #b9edff28;
+}
+html[data-theme=midnight-frutiger] .tracker :is(.home-banner,.home-revival-card,.month-column,.all-heroes,.public-profile,.user-directory,.user-search-result,.hero-hover-preview,.mobile-navigation-drawer)::before{
+ background:
+  radial-gradient(ellipse at 12% 0%,#f3fffc20,transparent 48%),
+  linear-gradient(112deg,#ddfff312 0%,transparent 34%,#b9a6ff0b 68%,transparent 100%);
+}
+html[data-theme=midnight-frutiger] .tracker :is(.toolbar,.month-control,.banner-carousel-controls,.schedule-page-heading){
+ background:linear-gradient(145deg,#d9fff215,#99dff008 48%,#101a2b32);
+ border-color:#b9edff55;
+ box-shadow:inset 0 1px 0 #e0fffa20,0 10px 28px #02061145;
+ -webkit-backdrop-filter:blur(12px) saturate(140%);
+ backdrop-filter:blur(12px) saturate(140%);
+}
+html[data-theme=midnight-frutiger] .tracker :is(.all-heroes-tools,.all-heroes-search,.all-heroes-sort,.all-heroes-views){
+ background-color:transparent;
+}
+html[data-theme=midnight-frutiger] .tracker .all-heroes-sort select{
+ background:linear-gradient(145deg,#d9fff21a,#8ed6ef0b 48%,#101a2b42);
+ border-color:#b9edff69;
+}
+html[data-theme=midnight-frutiger] .tracker :is(.primary,.secondary,.mobile-menu-toggle,.icon-button,.compact-toggle,.month-current,.month-arrow,.carousel-arrow,.carousel-play){
+ background:linear-gradient(160deg,#effffb1b 0%,#8ed6ef0c 42%,#17243a9c 100%);
+ border-color:#c1f2ff69;
+ box-shadow:inset 0 1px 0 #f3fffd32,inset 0 -1px 0 #92ddf11c,0 5px 16px #02061140;
+}
+html[data-theme=midnight-frutiger] .tracker :is(.primary,.secondary,.mobile-menu-toggle,.icon-button,.compact-toggle,.month-current,.month-arrow,.carousel-arrow,.carousel-play):hover:not(:disabled){
+ background:linear-gradient(155deg,#effffb30 0%,#8cf4e21b 48%,#253454bd 100%);
+ border-color:#c9fff1ad;
+ box-shadow:inset 0 1px 0 #f3fffd45,0 0 18px #8cf4e226,0 8px 22px #02061155;
+}
+html[data-theme=midnight-frutiger] .tracker .primary{
+ background:linear-gradient(150deg,#cafff4 0%,#72e1d0 43%,#5b9ed0 100%);
+ box-shadow:inset 0 1px 0 #ffffffc2,inset 0 -1px 0 #286f8290,0 7px 20px #31d6c538;
+}
+html[data-theme=midnight-frutiger] .tracker .primary:hover:not(:disabled){
+ background:linear-gradient(150deg,#e2fff8 0%,#8cf4e2 43%,#78b8e7 100%);
+ box-shadow:inset 0 1px 0 #ffffffd9,0 0 22px #8cf4e248,0 9px 24px #02061155;
+}
+html[data-theme=midnight-frutiger] .tracker .all-heroes :is(.toolbar,.all-heroes-sort),
+html[data-theme=midnight-frutiger] .tracker .waitlist-board .color-label{
+ background:linear-gradient(155deg,#effffb18,#8ed6ef08 46%,#111d3040);
+ border-color:#b9edff46;
+ box-shadow:inset 0 1px 0 #e0fffa22;
+}
+html[data-theme=midnight-frutiger] .theme-option-midnight-frutiger .theme-preview{
+ border-bottom:1px solid #d6fff0a6;
+ box-shadow:inset 0 1px 0 #ffffff75,inset 0 0 32px #76e7d51c;
+}
+html[data-theme=midnight-frutiger] .theme-option-midnight-frutiger .theme-preview::after{
+ content:"";
+ position:absolute;
+ inset:0;
+ pointer-events:none;
+ background:linear-gradient(120deg,#ffffff1b,transparent 38%,#c3aaff10 68%,transparent);
+}
+@media(max-width:760px){
+ html[data-theme=midnight-frutiger] .tracker :is(.home-banner,.home-revival-card,.settings-inline,.user-directory,.filter-fields,.nav-popover,.hero-hover-preview){
+  -webkit-backdrop-filter:blur(8px) saturate(125%);
+  backdrop-filter:blur(8px) saturate(125%);
+ }
+}
+@media(prefers-reduced-transparency:reduce){
+  html[data-theme=midnight-frutiger] .tracker :is(.home-banner,.home-revival-card,.settings-inline,.user-directory,.filter-fields,.nav-popover,.hero-hover-preview){
+    background:#101a2bf5;
+   -webkit-backdrop-filter:none;
+   backdrop-filter:none;
+  }
+  html[data-theme=midnight-frutiger] .tracker :is(.masthead,dialog:not(.mobile-navigation-drawer)){
+   -webkit-backdrop-filter:none;
+   backdrop-filter:none;
+  }
+  html[data-theme=midnight-frutiger] .tracker dialog:not(.mobile-navigation-drawer){
+   background:#101a2bf5;
+  }
+  html[data-theme=midnight-frutiger] .tracker :is(.masthead,.all-heroes,.all-heroes-card,.month-column,.waitlist-board,.toolbar,.month-control,.banner-carousel-controls,.schedule-page-heading,.month-column h2,.fb-heading,.revival-subheads,.all-heroes-sort select,.settings-row select){
+   background:#101a2bf5;
+   -webkit-backdrop-filter:none;
+   backdrop-filter:none;
+  }
+  html[data-theme=midnight-frutiger] .tracker .all-heroes-card:hover{
+   background:#192b40;
+  }
+  html[data-theme=midnight-frutiger] .tracker .mobile-navigation-drawer{
+   background:#09111f;
+  }
+  html[data-theme=midnight-frutiger] .mobile-navigation-drawer::backdrop{
+   background:#030713e8;
+   -webkit-backdrop-filter:none;
+   backdrop-filter:none;
+  }
+  html[data-theme=midnight-frutiger] .tracker .color-slot.red{background:#411a31}
+  html[data-theme=midnight-frutiger] .tracker .color-slot.blue{background:#152b50}
+  html[data-theme=midnight-frutiger] .tracker .color-slot.green{background:#12413c}
+  html[data-theme=midnight-frutiger] .tracker .color-slot.colorless{background:#282c43}
+ }
