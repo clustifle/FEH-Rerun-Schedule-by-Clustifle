@@ -1,0 +1,25 @@
+import {Plus} from 'lucide-react';
+import {portraitUrl} from './static-data';
+import HeroPortraitMarks from './HeroPortraitMarks';
+import type {ReactNode} from 'react';
+import type {BannerHero} from './Homepage';
+export type BannerLayout='lme'|'featured'|'revival'|'remix';
+export type BannerMember={hero_id:string;slot_index?:number|null};
+export const bannerColors=['Red','Blue','Green','Colorless'];
+export function slotColor(layout:BannerLayout,index:number,size:number){return layout==='featured'?undefined:bannerColors[Math.floor((layout==='remix'?index%8:index)/(layout==='remix'?2:size/4))];}
+export function arrangeSlots(layout:BannerLayout,members:BannerMember[],heroes:BannerHero[],savedSize?:number|null){
+ const width=layout==='featured'?4:layout==='remix'?16:layout==='revival'?8:Math.max(savedSize||0,4*Math.max(3,...bannerColors.map(c=>members.filter(m=>heroes.find(h=>h.id===m.hero_id)?.color===c).length)));
+ const result:(string|null)[]=Array(width).fill(null);
+ for(const m of members){const hero=heroes.find(h=>h.id===m.hero_id);if(!hero)continue;const explicit=m.slot_index;
+ const index=explicit!=null&&explicit>=0&&explicit<width&&slotColor(layout,explicit,width)=== (layout==='featured'?undefined:hero.color)&&!result[explicit]?explicit:result.findIndex((id,i)=>!id&&(!slotColor(layout,i,width)||slotColor(layout,i,width)===hero.color));if(index>=0)result[index]=m.hero_id;
+ }return result;
+}
+export default function BannerLineup({layout,slots,heroes,editor=false,onSlot,card}:{layout:BannerLayout;slots:(string|null)[];heroes:BannerHero[];editor?:boolean;onSlot?:(index:number)=>void;card?:(h:BannerHero)=>ReactNode}){
+ const renderSlot=(index:number)=>{const hero=heroes.find(h=>h.id===slots[index]);return editor?<button type="button" key={index} className="banner-editor-slot" aria-label={(layout==='remix'?`Remix ${index<8?1:2} · `:'')+(slotColor(layout,index,slots.length)||'Featured')+` slot ${layout==='featured'?index+1:layout==='remix'?index%2+1:index%(slots.length/4)+1}`+(hero?` · ${hero.name}`:' · Select a hero')} onClick={()=>onSlot?.(index)}><span className="banner-editor-slot-portrait">{hero?.portrait?<img src={portraitUrl(hero.portrait)} alt=""/>:<Plus size={24}/>} {hero&&<HeroPortraitMarks hero={hero}/>}</span><strong>{hero?.name||'Select a hero'}</strong></button>:<div key={index} className="banner-lineup-slot">{hero?card?.(hero):<span className="banner-empty-slot" aria-hidden="true">◇</span>}</div>;};
+ if(layout==='featured')return <div className="banner-editor-featured-slots">{slots.map((_,i)=>renderSlot(i))}</div>;
+ const perColor=layout==='remix'?2:slots.length/4;
+ return <div className={'banner-lineup-grid'+(layout==='remix'?' remix-lineup':'')} style={editor?undefined:{minWidth:44+perColor*(layout==='remix'?2:1)*108}}>
+ {layout==='remix'&&<div className="remix-lineup-head"><span/><h3>Remix 1</h3><h3>Remix 2</h3></div>}
+ {bannerColors.map((color,c)=><div className="banner-lineup-row" key={color}><div className={'color-label '+color.toLowerCase()}><span>{color}</span></div>{Array.from({length:layout==='remix'?2:1},(_,group)=><div className={'color-slot banner-lineup-group '+color.toLowerCase()} key={group} style={{gridTemplateColumns:`repeat(${perColor},minmax(0,1fr))`}}>{Array.from({length:perColor},(_,i)=>renderSlot(group*8+c*perColor+i))}</div>)}</div>)}
+ </div>;
+}
