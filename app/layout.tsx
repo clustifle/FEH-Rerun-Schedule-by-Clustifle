@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "codex-preview": "development",
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: [{ url: "/feh-tab-symbol.png", type: "image/png", sizes: "192x192" }],
+    shortcut: "/feh-tab-symbol.png",
   },
 };
 
@@ -24,5 +24,4 @@ export default function RootLayout({
     </html>
   );
 }
-
 

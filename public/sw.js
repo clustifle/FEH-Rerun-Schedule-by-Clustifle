@@ -1,5 +1,5 @@
-const CACHE='feh-rerun-static-v1';
-self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(['./offline.html','./icons/app-192.png','./icons/app-512.png'])));self.skipWaiting();});
+const CACHE='feh-rerun-static-v2';
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(['./offline.html','./icons/app-192.png','./icons/app-512.png','./icons/app-512-maskable.png'])));self.skipWaiting();});
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('feh-rerun-static-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{
  const url=new URL(event.request.url),scope=new URL(self.registration.scope);
