@@ -35,8 +35,15 @@ test('switches to seconds below 24 hours and handles the final second',()=>{
 
 test('coming soon replaces the upcoming countdown only until the start',()=>{
  const upcoming=bannerTiming('2026-10-03','2026-10-12',Date.parse('2026-10-01T04:00:00Z'));
- assert.equal(bannerStatusTag(upcoming,true),'Coming soon');
+ assert.equal(bannerStatusTag(upcoming,true),'Coming soon in 2d 3h');
  assert.equal(bannerStatusTag(upcoming,false),'Starting in 2d 3h');
+ const underOneHour=bannerTiming('2026-10-03','2026-10-12',Date.parse('2026-10-03T06:30:45Z'));
+ assert.equal(underOneHour.countdown,'Starting in 0d 0h');
+ assert.equal(bannerStatusTag(underOneHour,true),'Coming soon in 00:29:15');
+ assert.equal(bannerStatusTag(underOneHour,false),'Starting in 0d 0h');
+ const underOneDay=bannerTiming('2026-10-03','2026-10-12',Date.parse('2026-10-02T12:34:56Z'));
+ assert.equal(underOneDay.countdown,'Starting in 0d 18h');
+ assert.equal(bannerStatusTag(underOneDay,true),'Coming soon in 18:25:04');
  const active=bannerTiming('2026-10-03','2026-10-12',Date.parse('2026-10-03T07:00:00Z'));
  assert.equal(bannerStatusTag(active,true),active.countdown);
  const ended=bannerTiming('2026-10-03','2026-10-12',Date.parse('2026-10-12T06:59:00Z'));

@@ -6,7 +6,20 @@ export function bannerTiming(startsOn:string,endsOn:string,now:number,startTime=
  const seconds=Math.ceil(remaining/1000),days=Math.floor(seconds/86400),hours=Math.floor(seconds%86400/3600);
  const pad=(value:number)=>String(value).padStart(2,'0');
  const countdown=state==='Ended'?'Ended':state==='Upcoming'?`Starting in ${days}d ${hours}h`:remaining<86400000?`${pad(Math.floor(seconds/3600))}:${pad(Math.floor(seconds%3600/60))}:${pad(seconds%60)} remaining`:`${days}d ${hours}h remaining`;
- return {countdown,progress:Math.max(0,Math.min(100,(now-start)/(end-start)*100)),state};
+ return {countdown,remainingSeconds:seconds,progress:Math.max(0,Math.min(100,(now-start)/(end-start)*100)),state};
 }
 
-export function bannerStatusTag(timing:ReturnType<typeof bannerTiming>,comingSoon=false){return timing.state==='Ended'?null:comingSoon&&timing.state==='Upcoming'?`Coming soon in ${timing.countdown.replace(/^Starting in /,'')}`:timing.countdown;}
+export function bannerStatusTag(timing:ReturnType<typeof bannerTiming>,comingSoon=false){
+ if(timing.state==='Ended')return null;
+ if(comingSoon&&timing.state==='Upcoming'){
+  if(timing.countdown.startsWith('Starting in 0d ')){
+   const pad=(value:number)=>String(value).padStart(2,'0');
+   const hours=Math.floor(timing.remainingSeconds/3600);
+   const minutes=Math.floor(timing.remainingSeconds%3600/60);
+   const seconds=timing.remainingSeconds%60;
+   return `Coming soon in ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+  }
+  return `Coming soon in ${timing.countdown.replace(/^Starting in /,'')}`;
+ }
+ return timing.countdown;
+}
