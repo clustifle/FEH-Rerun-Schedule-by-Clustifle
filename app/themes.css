@@ -17,7 +17,7 @@
 .theme-option input[type=radio]{position:absolute;right:14px;top:14px;width:18px;height:18px;margin:0;z-index:1;accent-color:#9fe6ef}
 .theme-option:focus-within{outline:3px solid white;outline-offset:4px}
 .theme-preview{position:relative;display:flex;flex-direction:column;justify-content:center;min-height:116px;padding:20px 22px;background:linear-gradient(110deg,#2f4e59,#416c7b);color:#fff;overflow:hidden}
-.theme-preview-heading{font-family:Champions,Arial,sans-serif;font-size:32px;font-weight:700;line-height:1.2}
+.theme-preview-heading{font-family:Champions,'Segoe UI',Arial,sans-serif;font-size:32px;font-weight:700;line-height:1.2}
 .theme-preview-lines{display:flex;flex-direction:column;gap:7px;width:55%;margin-top:10px}
 .theme-preview-lines i{height:3px;background:#ffffff75;border-radius:2px}.theme-preview-lines i:last-child{width:65%;opacity:.55}
 .theme-preview-accent{position:absolute;bottom:0;left:0;right:0;height:3px;background:#8de0ee}
