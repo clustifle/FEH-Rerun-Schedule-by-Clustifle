@@ -36,7 +36,7 @@ export default function Homepage({heroes,visible,canEdit,card,addHero}:{heroes:B
  function slotsFor(banner:Banner|null,ids:string[]=[]){
   const next:(string|null)[]=Array(16).fill(null);if(!banner)return next;
   const placed=new Set<string>();
-  banner.tracker_banner_heroes.forEach(link=>{const slot=link.slot_index;if(Number.isInteger(slot)&&slot!==null&&slot>=0&&slot<16&&!next[slot]){next[slot]=link.hero_id;placed.add(link.hero_id);}});
+  banner.tracker_banner_heroes.forEach(link=>{const slot=link.slot_index;if(typeof slot==='number'&&Number.isInteger(slot)&&slot>=0&&slot<16&&!next[slot]){next[slot]=link.hero_id;placed.add(link.hero_id);}});
   const leftovers=(ids.length?ids:banner.tracker_banner_heroes.map(link=>link.hero_id)).filter(id=>!placed.has(id));
   leftovers.forEach(id=>{const hero=heroes.find(candidate=>candidate.id===id);if(!hero)return;const slot=remixColorSlots(hero.color).find(index=>!next[index]);if(slot!==undefined)next[slot]=id;});
   return next;
