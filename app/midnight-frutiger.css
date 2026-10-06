@@ -207,25 +207,6 @@ html[data-theme=midnight-frutiger] .tracker :is(.toolbar,.month-control,.banner-
 html[data-theme=midnight-frutiger] .tracker :is(.all-heroes-tools,.all-heroes-search,.all-heroes-sort,.all-heroes-views){
  background-color:transparent;
 }
-html[data-theme=midnight-frutiger] .tracker .all-heroes :is(.all-heroes-views .toolbar-icon,.all-heroes-tools>.toolbar-icon){
- background:linear-gradient(155deg,#e8fff51c,#9bdff00c 48%,#101a2b38);
- color:#e6f6ff;
- border:1px solid #b9edff68;
- border-radius:10px;
- box-shadow:inset 0 1px 0 #f3fffd30,0 5px 16px #02061135;
-}
-html[data-theme=midnight-frutiger] .tracker .all-heroes :is(.all-heroes-views .toolbar-icon[aria-pressed=true],.all-heroes-tools>.toolbar-icon:active){
- background:linear-gradient(150deg,#8cf4e238,#9cbbff1a 55%,#101a2b4d);
- color:#a9fff0;
- border-color:#c9fff1a0;
- box-shadow:inset 0 1px 0 #f3fffd32,inset 0 -2px #8cf4e2;
-}
-html[data-theme=midnight-frutiger] .tracker .all-heroes :is(.all-heroes-views .toolbar-icon:hover,.all-heroes-tools>.toolbar-icon:hover){
- background:linear-gradient(150deg,#effffb2b,#8cf4e21b 48%,#25345470);
- color:#f5fffd;
- border-color:#d5fff2b8;
- box-shadow:inset 0 1px 0 #f3fffd45,0 0 16px #8cf4e21e,0 7px 20px #02061145;
-}
 html[data-theme=midnight-frutiger] .tracker .all-heroes-sort select{
  background:linear-gradient(145deg,#d9fff21a,#8ed6ef0b 48%,#101a2b42);
  border-color:#b9edff69;
