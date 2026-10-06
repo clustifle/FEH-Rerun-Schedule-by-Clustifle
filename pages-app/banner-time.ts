@@ -9,4 +9,4 @@ export function bannerTiming(startsOn:string,endsOn:string,now:number,startTime=
  return {countdown,progress:Math.max(0,Math.min(100,(now-start)/(end-start)*100)),state};
 }
 
-export function bannerStatusTag(timing:ReturnType<typeof bannerTiming>,comingSoon=false){return timing.state==='Ended'?null:comingSoon&&timing.state==='Upcoming'?'Coming soon':timing.countdown;}
+export function bannerStatusTag(timing:ReturnType<typeof bannerTiming>,comingSoon=false){return timing.state==='Ended'?null:comingSoon&&timing.state==='Upcoming'?`Coming soon in ${timing.countdown.replace(/^Starting in /,'')}`:timing.countdown;}
