@@ -309,26 +309,3 @@ html[data-theme=midnight-frutiger] .theme-option-midnight-frutiger .theme-previe
   html[data-theme=midnight-frutiger] .tracker .color-slot.green{background:#12413c}
   html[data-theme=midnight-frutiger] .tracker .color-slot.colorless{background:#282c43}
  }
-
- html[data-theme=midnight-frutiger] .tracker .schedule-page-frame:has(>.all-heroes)>.schedule-page-heading{
-  background:transparent;
-  box-shadow:none;
-  -webkit-backdrop-filter:none;
-  backdrop-filter:none;
- }
- html[data-theme=midnight-frutiger] .tracker .all-heroes,
- html[data-theme=midnight-frutiger] .tracker .all-heroes :where(*,*::before,*::after){
-  background:transparent!important;
-  box-shadow:none!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
- }
- html[data-theme=midnight-frutiger] .tracker .all-heroes::before,
- html[data-theme=midnight-frutiger] .tracker .all-heroes::after,
- html[data-theme=midnight-frutiger] .tracker .all-heroes *::before,
- html[data-theme=midnight-frutiger] .tracker .all-heroes *::after{
-  background:transparent!important;
-  box-shadow:none!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
- }
