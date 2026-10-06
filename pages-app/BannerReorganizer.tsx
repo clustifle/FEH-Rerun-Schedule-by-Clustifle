@@ -33,8 +33,11 @@ export default function BannerReorganizer({banners,onClose,onSaved}:{banners:Ban
    if(error)throw error;
    setDirty(false); setMessage('Banner order saved.');
    await onSaved();
-  }catch{
-   setError('Could not save banner order. Ensure the banner sorting database update is installed, then try again.');
+  }catch(error){
+   const message=error&&typeof error==='object'&&'message'in error?String(error.message):String(error);
+   setError(message.includes('reorder_tracker_banners')||message.includes('schema cache')
+    ?'Banner ordering is not set up in Supabase yet. Run supabase/banner-order.sql in the SQL Editor, then try again.'
+    :'Could not save banner order: '+message);
   }finally{setSaving(false);} 
  }
 
