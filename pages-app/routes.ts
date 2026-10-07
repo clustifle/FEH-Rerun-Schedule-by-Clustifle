@@ -6,7 +6,7 @@ export function readRoute(){
  const params=new URLSearchParams(location.search);const profile=path.startsWith('profile/')?path.slice(8).replace(/^id=/,''):params.get('profile')||'';
  const faq=path==='faq';
  const settings=faq||path==='account'||path==='settings'||path.startsWith('settings/');
- const view=profile?'Profile':Object.keys(viewPaths).find(key=>viewPaths[key]===path)||params.get('schedule')||null;
+ const view=profile?'Profile':Object.keys(viewPaths).find(key=>viewPaths[key]===path)||(params.get('schedule')&&viewPaths[params.get('schedule')!] ? params.get('schedule') : null);
  return {view,profile,settings,faq,section:path==='account'?'Account':path.split('/')[1]||'',explicit:!!path||params.has('profile')||params.has('schedule')};
 }
 export function viewUrl(view:string,month='',profile=''){return import.meta.env.BASE_URL+(viewPaths[view]||'home')+(view==='Profile'&&profile?'/'+encodeURIComponent(profile):'')+(month?'?month='+encodeURIComponent(month):'');}
