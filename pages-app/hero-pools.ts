@@ -1,4 +1,4 @@
-export const pools=['General Pool','Non-Seasonal Limited','Seasonal Limited','L/M/E Pool'];
+export const pools=['General Pool','Non-Seasonal Limited','Seasonal Limited','L/M/E Pool','Grail Pool'];
 export function defaultPool(category:string){
  if(['Legendary','Mythic','Emblem'].includes(category))return 'L/M/E Pool';
  if(['Special','Duo','Harmonized'].includes(category))return 'Seasonal Limited';
