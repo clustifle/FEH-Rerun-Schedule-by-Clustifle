@@ -9,3 +9,5 @@ The stylesheet uses positions within the original sprite sheets; no game illustr
 `feh.woff2` is a web subset of the supplied font, covering Latin, accented Latin, Greek, Cyrillic and common punctuation. Malformed OpenType layout tables in the original were omitted from the subset; the supplied original remains unchanged.
 
 The SRPG Status sheet supplies an empty blue status strip for rerun-window month headers. Sprite regions are displayed with CSS; no game statistic text is used.
+
+Browser and PWA icons use the project-owner-supplied `feh site icon symbol.png`, resized with padding onto a dark teal background. The maskable variant keeps the symbol inside its safe area.

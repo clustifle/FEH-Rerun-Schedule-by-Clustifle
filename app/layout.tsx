@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "codex-preview": "development",
   },
   icons: {
-    icon: [{ url: "/feh-tab-symbol.png", type: "image/png", sizes: "192x192" }],
-    shortcut: "/feh-tab-symbol.png",
+    icon: [{ url: "/feh-tab-symbol.png?v=2", type: "image/png", sizes: "192x192" }],
+    shortcut: "/feh-tab-symbol.png?v=2",
   },
 };
 

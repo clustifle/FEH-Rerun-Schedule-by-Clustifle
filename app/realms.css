@@ -113,11 +113,15 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-the
 html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .owner-login-popup label{display:flex;flex-direction:column;gap:8px}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .owner-login-popup .owner-forgot{color:var(--realm-accent,#edcf84);background:none;border:0;min-height:40px;padding:8px}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .owner-login-popup .owner-login-intro{color:#e0ded5;line-height:1.5;margin:0}
-html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .install-platforms{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:14px;margin:22px 0}
-html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .install-platforms>section{background:var(--realm-field,#06242d);border:1px solid var(--realm-line,#91b3ad);border-radius:7px;padding:16px;margin:0}
-html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .install-platforms h3{color:var(--realm-accent,#edcf84);margin:0 0 12px}
-html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .install-platforms p{font-size:15px;line-height:1.6;margin:0}
 
 :root[data-theme="fire-emblem-heroes"] .tracker .about-minimal{background:none!important;border:0!important;box-shadow:none!important;text-align:center;padding:24px 12px!important;display:flex;flex-direction:column;align-items:center;gap:12px}
 :root[data-theme="fire-emblem-heroes"] .tracker .about-minimal h3,:root[data-theme="fire-emblem-heroes"] .tracker .about-minimal p{margin:0;max-width:650px}
 :root[data-theme="fire-emblem-heroes"] .tracker .about-minimal h3{font-size:24px;line-height:1.3}
+
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] dialog.install-minimal{width:min(440px,calc(100vw - 24px));text-align:center;padding:32px 24px;position:fixed}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .install-minimal .install-close{position:absolute;top:8px;right:8px}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .install-minimal .install-app-icon{display:block;width:80px;height:80px;margin:0 auto 18px;border-radius:16px}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .install-minimal h2{font-size:25px;margin:0 0 12px}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .install-minimal p{font-size:16px;line-height:1.5;margin:0 0 20px}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .install-minimal .primary{width:100%;min-height:48px}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .install-minimal .install-status{margin:18px 0 0;font-size:14px}
