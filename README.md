@@ -6,6 +6,8 @@
 
 An unofficial fan website by **Clustifle** for browsing Fire Emblem Heroes summoning banners, hero reruns, and revival schedules.
 
+**Version 1.0 · First release**
+
 **[Visit the website](https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/)**
 
 ## About the game
@@ -19,9 +21,10 @@ The home page displays current and upcoming banners, featured heroes, active dat
 - **Legendary / Mythic / Emblem:** Featured lineups arranged by weapon color.
 - **New / Special Heroes:** Four featured heroes from new or seasonal summoning events.
 - **New Heroes Return / Double Special Heroes:** Returning lineups with two heroes per weapon color.
-- **Remix:** Two groups of eight heroes, displayed in one window with a fading transition and manual selection.
+- **Remix:** Two groups of eight heroes sharing one window, with a fading transition and manual selection.
+- **Revivals:** New Heroes and Hall of Forms revival cards.
 
-Banner times follow the timezone selected in Settings. In-game announcements provide the confirmed dates, lineups, and summoning details.
+Banner times follow the timezone selected in Settings. Check in-game announcements for confirmed dates, lineups, and summoning details.
 
 ## Rerun schedules
 
@@ -29,20 +32,29 @@ Banner times follow the timezone selected in Settings. In-game announcements pro
 | --- | --- |
 | General | Recorded rerun months for Legendary, Mythic, Emblem, and Chosen Heroes. |
 | Remix | Hero reruns associated with Remix banners. |
-| Monthly Legendary/Mythic Revival | Monthly revival entries for older Legendary and Mythic Heroes. |
-| New Heroes Revival | Returning New Heroes lineups and Forging Bonds revivals. |
-| Hall of Forms Revival | Returning Hall of Forms lineups. |
-| Rerun Waitlist | Heroes awaiting a recorded rerun, maintained by the site's editors. |
+| L/M Revival | Monthly revival entries for older Legendary and Mythic Heroes. |
+| NH Revival | Returning New Heroes lineups and Forging Bonds revivals. |
+| HoF Revival | Returning Hall of Forms lineups. |
+| L/M/E Waitlist | Legendary, Mythic, and Emblem Heroes awaiting a recorded rerun. |
+| Double Special Heroes Waitlist | Heroes awaiting a Double Special Heroes rerun. |
+| New Heroes Return Waitlist | Heroes awaiting a New Heroes Return rerun. |
 
-Schedules are maintained by the Head Administrator and Schedule Managers. Recorded months are planning windows; check hero notes and official notices for confirmation.
+The Head Administrator and Schedule Managers maintain schedules and manually add waitlist entries. A hero's schedule category does not automatically add them to a waitlist.
+
+Recorded months are planning windows; check hero notes and official notices for confirmation. Heroes can also remain unscheduled, with notes only.
+
+## Browsing and appearance
+
+Use filters, search, and Standard or Compact views to browse heroes and schedules. Hero profiles show weapon and movement types, hero types, pools, and notes. Heroic Grails units have their own icon and visibility toggle, including in Hall of Forms revivals.
+
+Fire Emblem Heroes is the default theme, with ten realm variants available in Settings: Midgard, Nifl, Múspell, Hel, Ljósálfheimr, Dökkálfheimr, Niðavellir, Jötunheimr, Vanaheimr, and Ásgarðr.
 
 ## Credits
 
-- **Website, design, and development:** [Clustifle](https://www.youtube.com/@Clustifle).
-- **Special thanks:** [u/King41bert0713](https://www.reddit.com/user/King41bert0713/) for helping with additions during development.
-- **Game and artwork:** © Nintendo / INTELLIGENT SYSTEMS.
-- **Typography and Europa theme graphics:** UEFA brand assets.
-- **Frutiger Aero inspiration:** [Frutiger Aero Archive](https://frutigeraeroarchive.org/).
+- **Made by:** [Clustifle](https://www.youtube.com/@Clustifle).
+- **Special thanks:** [u/King41bert0713](https://www.reddit.com/user/King41bert0713/) for feature ideas and feedback.
+- **Game UI and backgrounds:** [Fire Emblem Heroes Wiki game assets](https://feheroes.fandom.com/wiki/Game_assets_collection#UI_Sprite_sheets) and [combat backgrounds](https://feheroes.fandom.com/wiki/Combat_backgrounds).
+- **Artwork:** © Nintendo / INTELLIGENT SYSTEMS.
 - **Schedule references:** In-game announcements, official Fire Emblem Heroes notices, and community sources linked in the site's FAQ.
 
-This fan project is not affiliated with Nintendo or INTELLIGENT SYSTEMS. Third-party assets remain the property of their respective owners.
+This is an unofficial fan project, unaffiliated with Nintendo or INTELLIGENT SYSTEMS. Third-party assets remain the property of their respective owners.
