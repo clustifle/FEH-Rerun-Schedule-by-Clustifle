@@ -789,3 +789,32 @@ html[data-theme][data-theme] .tracker .banner-order-row>button[aria-pressed=true
 html[data-theme][data-theme] .tracker .banner-reorganizer footer{padding:16px 24px;margin:0;background:var(--edit-panel);border-top:1px solid var(--edit-line);flex:none;display:flex;justify-content:space-between;align-items:center;gap:20px;color:var(--edit-muted)}
 .banner-reorganizer footer>div{display:flex;gap:8px;flex-wrap:wrap}.banner-reorganizer footer p{font-size:13px;line-height:1.5}.banner-order-discard{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:16px 24px;border-top:1px solid var(--edit-line);background:var(--edit-panel)}
 @media(max-width:760px){html[data-theme][data-theme] .tracker .hero-editor .editor-body{grid-template-columns:1fr;padding:20px 16px;gap:20px}html[data-theme][data-theme] .tracker .hero-editor .editor-portrait{position:static}html[data-theme][data-theme] .tracker .banner-editor fieldset{grid-template-columns:1fr;padding:20px 16px}html[data-theme][data-theme] .tracker :is(.hero-editor,.banner-editor) .dialog-top{padding:18px 16px}html[data-theme][data-theme] .tracker :is(.hero-editor,.banner-editor,.fb-editor) .form-actions{padding:14px 16px;flex-wrap:wrap}html[data-theme][data-theme] .tracker .banner-reorganizer{width:calc(100vw - 20px);max-height:calc(100dvh - 20px)}html[data-theme][data-theme] .tracker .banner-reorganizer :is(header,footer){padding:18px}html[data-theme][data-theme] .tracker .banner-reorganizer footer{flex-direction:column;align-items:stretch}.banner-order-row-actions{flex-direction:column}.banner-order-meta{display:none}html[data-theme][data-theme] .tracker .banner-order-tools,html[data-theme][data-theme] .tracker .banner-order-list{padding-left:16px;padding-right:16px}.banner-order-search{flex-basis:100%}}
+
+/* Banner cards fit their own available width, including carousel slides. */
+html[data-theme] .tracker .home-banner{container-type:inline-size;grid-template-columns:minmax(0,1fr);gap:24px;padding:clamp(12px,3vw,32px);min-width:0}
+html[data-theme] .tracker .home-banner-copy{width:100%;max-width:880px;margin-inline:auto;text-align:center;min-width:0}
+html[data-theme] .tracker .home-banner-copy h2{font-size:clamp(22px,3vw,36px);overflow-wrap:anywhere}
+html[data-theme] .tracker .home-banner-countdown{max-width:100%;width:fit-content;margin-inline:auto;white-space:normal;overflow-wrap:anywhere}
+html[data-theme] .tracker .home-banner-dates,html[data-theme] .tracker .home-banner-actions{justify-content:center;flex-wrap:wrap;overflow-wrap:anywhere}
+html[data-theme] .tracker .home-banner-scroll,html[data-theme] .tracker .home-banner .banner-lineup-scroll{width:100%;min-width:0;overflow:visible}
+html[data-theme] .tracker .home-banner .banner-lineup-grid{width:100%;min-width:0!important}
+html[data-theme] .tracker .home-banner .banner-lineup-row{grid-template-columns:36px minmax(0,1fr)}
+html[data-theme] .tracker .home-banner .banner-lineup-group{display:grid;gap:12px;padding:14px 10px;min-height:120px;min-width:0}
+html[data-theme] .tracker .home-banner .banner-lineup-slot{min-width:0;align-self:start}
+html[data-theme] .tracker .home-banner .hero-tile{width:100%;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px}
+html[data-theme] .tracker .home-banner .hero-tile .portrait{width:100%;max-width:104px;aspect-ratio:1;height:auto;flex:none;margin-inline:auto}
+html[data-theme] .tracker .home-banner .tile-name{width:100%;max-width:none;text-align:center;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;font-size:14px;line-height:1.25}
+html[data-theme] .tracker .home-banner .banner-empty-slot{width:min(100%,104px);height:auto;aspect-ratio:1}
+.responsive-remix-lineup{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;min-width:0}
+.responsive-remix-panel{min-width:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.responsive-remix-panel h3{margin:0;padding:14px 8px;text-align:center;font-size:18px;background:#00000018;border-bottom:1px solid var(--line)}
+html[data-theme] .tracker .home-banner .responsive-remix-panel .banner-lineup-group{grid-template-columns:repeat(2,minmax(0,1fr))}
+html[data-theme] .tracker .home-banner .featured-banner-heroes{width:100%;max-width:760px;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2vw,24px);padding:0}
+html[data-theme] .tracker .home-banner .featured-banner-heroes .portrait{max-width:140px}
+html[data-theme] .tracker .home-banner .featured-banner-hero{min-width:0}
+html[data-theme] .tracker .home-revival-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:20px}
+html[data-theme] .tracker .home-revival-card{min-width:0;width:auto}
+html[data-theme] .tracker .home-revival-heroes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(6px,2vw,16px);width:100%;max-width:440px;margin-inline:auto}
+html[data-theme] .tracker .home-revival-portrait{width:100%;height:auto;max-width:96px;aspect-ratio:1;justify-self:center;min-width:0}
+@container (max-width:580px){.responsive-remix-lineup{grid-template-columns:minmax(0,1fr)}html[data-theme] .tracker .home-banner .featured-banner-heroes{grid-template-columns:repeat(2,minmax(0,1fr));max-width:360px}}
+@media(max-width:600px){.responsive-remix-lineup{grid-template-columns:minmax(0,1fr)}html[data-theme] .tracker .home-banner .featured-banner-heroes{grid-template-columns:repeat(2,minmax(0,1fr));max-width:360px}html[data-theme] .tracker .home-banner-actions .secondary{max-width:100%;white-space:normal}}
