@@ -56,3 +56,18 @@ html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-them
 /* Sprite back controls stay icon-only in the base theme and every realm. */
 html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme] .tracker :is(.mobile-navigation-top>.icon-button,.settings-mobile-back,.settings-category-back){background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;outline:0!important}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme] .tracker :is(.mobile-navigation-top>.icon-button,.settings-mobile-back,.settings-category-back):focus-visible{filter:drop-shadow(0 0 4px #ffe8a8)}
+
+/* Desktop Settings shares the FAQ window and category/content layout. */
+@media(min-width:761px){
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .mobile-navigation-drawer.has-settings:has(>.settings-inline:not(.faq-inline)){width:min(1000px,calc(100vw - 24px))!important;height:min(900px,calc(100dvh - 24px))!important;padding:24px!important}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline)>.settings-layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:24px;overflow:hidden;min-height:0;flex:1;width:100%;max-width:none}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-sections{display:flex!important;flex-direction:column;gap:12px;position:static;margin:0;padding:4px 0;border:0;overflow:auto;align-self:stretch}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-mobile-categories{display:none!important}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-body{display:block;padding:4px 8px 24px;overflow-y:auto;min-height:0;min-width:0}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-sections button{position:relative;isolation:isolate;min-height:48px;flex:none;padding:10px 18px;text-align:center;background:none;border:0;border-radius:6px;color:#fff1d3;font:18px/1.3 FEHeroes,Georgia,serif;text-shadow:0 2px 2px #00141d;box-shadow:none;white-space:normal}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-sections button::before{content:"";position:absolute;inset:0;z-index:-1;background:url('../public/themes/fire-emblem-heroes/Common_Button.webp') 0 10.9%/219.5% 1197.5%;clip-path:polygon(5% 0,95% 0,100% 50%,95% 100%,5% 100%,0 50%);filter:var(--realm-sprite-filter,none);pointer-events:none}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-sections button[aria-current]{filter:brightness(1.2);color:var(--realm-accent,#ffe5a0)}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline)>.settings-header h2{font-size:26px}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-row{flex-wrap:nowrap}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-row select{width:200px;max-width:50%}
+}
