@@ -53,7 +53,7 @@ export default function Home(){
  const [fehScheduleMenu,setFehScheduleMenu]=useState(false),[fehWaitlistMenu,setFehWaitlistMenu]=useState(false);
  const [settingsSection,setSettingsSection]=useState(()=>readRoute().section);
  useEffect(()=>{const sync=()=>setSettingsSection(readRoute().section);window.addEventListener('route-change',sync);window.addEventListener('popstate',sync);return()=>{window.removeEventListener('route-change',sync);window.removeEventListener('popstate',sync);};},[]);
- const fehTheme=preferences.theme==='fire-emblem-heroes';
+ const fehTheme=true;
  const [showGrails,setShowGrails]=useState(true);
  const [moveFilter,setMoveFilter]=useState('All'),[moveType,setMoveType]=useState('');
  const [weaponFilter,setWeaponFilter]=useState('All');

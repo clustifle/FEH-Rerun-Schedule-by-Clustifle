@@ -1,0 +1,54 @@
+/* Shared thumbnail picker retained independently of retired themes. */
+.settings-inline .theme-picker{border:0;padding:0;margin:24px 0 32px;min-width:0}
+.theme-picker legend{font-size:17px;font-weight:700;padding:0;margin-bottom:8px}
+.theme-picker .theme-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
+.settings-inline label.theme-option{position:relative;display:flex;flex-direction:column;gap:0;padding:0;min-width:0;border:1px solid #ffffff30;border-radius:12px;overflow:hidden;background:#ffffff04;cursor:pointer;transition:border-color .2s,background .2s}
+.settings-inline label.theme-option:hover{border-color:#ffffff80;background:#ffffff09}
+.settings-inline label.theme-option.is-selected{border-color:#9fe6ef;box-shadow:0 0 0 1px #9fe6ef}
+.theme-option input[type=radio]{position:absolute;right:14px;top:14px;width:18px;height:18px;margin:0;z-index:1;accent-color:#9fe6ef}
+.theme-option:focus-within{outline:3px solid white;outline-offset:4px}
+.theme-preview{position:relative;display:flex;flex-direction:column;justify-content:center;min-height:116px;padding:20px 22px;background:linear-gradient(110deg,#2f4e59,#416c7b);color:#fff;overflow:hidden}
+.theme-preview-heading{font-family:Champions,'Segoe UI',Arial,sans-serif;font-size:32px;font-weight:700;line-height:1.2}
+.theme-preview-lines{display:flex;flex-direction:column;gap:7px;width:55%;margin-top:10px}
+.theme-preview-lines i{height:3px;background:#ffffff75;border-radius:2px}.theme-preview-lines i:last-child{width:65%;opacity:.55}
+.theme-preview-accent{position:absolute;bottom:0;left:0;right:0;height:3px;background:#8de0ee}
+.theme-option-copy{display:flex;flex-direction:column;gap:6px;padding:16px 18px}.theme-option-copy strong{font-size:16px}.theme-option-copy small{font-size:13px;line-height:1.5;color:#d2d9dd}
+
+
+/* Realm variants inherit the complete FEH interface; only artwork and surface colors vary. */
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme]{--teal:var(--realm-panel);--cyan:var(--realm-accent);--pink:var(--realm-accent);--line:var(--realm-line);--edit-bg:var(--realm-deep);--edit-panel:var(--realm-panel);--edit-field:var(--realm-field);--edit-text:#fff6df;--edit-muted:#e0ded5;--edit-line:var(--realm-line);--edit-accent:var(--realm-accent);--edit-button:var(--realm-header);--edit-button-text:#fff6df}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] body{background-color:var(--realm-deep);background-image:linear-gradient(0deg,color-mix(in srgb,var(--realm-deep) 88%,transparent),color-mix(in srgb,var(--realm-deep) 35%,transparent)),var(--realm-background);background-position:center;background-size:cover;background-attachment:fixed;background-repeat:no-repeat}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker .masthead{background:linear-gradient(var(--realm-header),var(--realm-deep));border-color:var(--realm-accent);box-shadow:0 2px 0 var(--realm-line),0 5px 16px #0005}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.home-banner,.home-revival-card,.all-heroes-card,.banner-management,.homepage-empty,.fb-row,.profile-header,.profile-card){background:linear-gradient(135deg,var(--realm-panel),var(--realm-deep));border-color:var(--realm-line);box-shadow:inset 0 0 0 3px var(--realm-deep),inset 0 0 0 4px var(--realm-line),0 8px 24px #0004}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.home-banner-scroll,.responsive-remix-panel,.month-column,.waitlist-window,.fb-list){border-color:var(--realm-line);background-color:var(--realm-deep)}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.month-column h2,.waitlist-window h2,.fb-row>h3){background-color:var(--realm-header);border-color:var(--realm-accent);color:#fff4db}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker .home-banner-countdown{background:linear-gradient(var(--realm-header),var(--realm-deep));border-color:var(--realm-accent);box-shadow:inset 0 0 0 1px var(--realm-line),0 2px 4px #0005}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker dialog{background:linear-gradient(135deg,var(--realm-panel),var(--realm-deep));border-color:var(--realm-line);color:#fff6df;box-shadow:inset 0 0 0 3px var(--realm-deep),inset 0 0 0 4px var(--realm-line),0 12px 45px #0006}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.dialog-top,.form-actions,.filter-header,.filter-footer,.waitlist-order-header,.waitlist-order-footer,.banner-order-header,.banner-order-footer,.settings-mobile-back){background:linear-gradient(var(--realm-header),var(--realm-deep));border-color:var(--realm-accent)}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.editor-section,.banner-editor-section,.filter-section,.settings-group,.faq-section,.hero-detail-identity,.hero-detail-facts,.hero-owner-note){background:var(--realm-panel);border-color:var(--realm-line);box-shadow:inset 0 0 0 1px var(--realm-line)}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(input:not([type=checkbox]):not([type=radio]):not([type=hidden]),select,textarea){background:var(--realm-field);border-color:var(--realm-line);color:#fff6df}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.secondary,.filter-reset,.icon-button,.filter-close,.mobile-menu-toggle,.grail-visibility-toggle){background:linear-gradient(var(--realm-header),var(--realm-deep));border-color:var(--realm-line);color:#fff6df;box-shadow:inset 0 0 0 1px var(--realm-line)}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.primary,.filter-show)::before{filter:var(--realm-sprite-filter)}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.main-menu-links>button,.main-menu-links>a,.feh-schedule-options button,.settings-category-list button)::before{filter:var(--realm-sprite-filter)}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.month-column h2,.waitlist-window h2)::before{filter:var(--realm-sprite-filter)}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .hero-hover-preview{background:linear-gradient(135deg,var(--realm-panel),var(--realm-deep));border-color:var(--realm-line);color:#fff6df}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.settings-body,.faq-body,.settings-layout){background:transparent}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker .homepage-reorganize-banner{background:transparent;border:0;box-shadow:none}
+html[data-theme=fire-emblem-heroes] .theme-options .theme-option{min-width:0}
+html[data-theme=fire-emblem-heroes] .theme-options .theme-preview{color:#fff;text-shadow:0 1px 3px #000}
+html[data-theme=fire-emblem-heroes] .theme-options .theme-option-copy strong{overflow-wrap:anywhere;line-height:1.25}
+html[data-theme=fire-emblem-heroes] .settings-personalization .theme-picker .theme-options{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media(max-width:400px){html[data-theme=fire-emblem-heroes] .settings-personalization .theme-picker .theme-options{grid-template-columns:repeat(2,minmax(0,1fr))}}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker .mobile-navigation-drawer.has-settings[open]{background:var(--realm-deep)!important;background-image:linear-gradient(135deg,var(--realm-panel),var(--realm-deep))!important}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker .mobile-navigation-drawer::before{background:linear-gradient(var(--realm-panel),var(--realm-deep));box-shadow:inset 2px 0 var(--realm-line)}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.settings-mobile-back,.settings-category-back){background:none;border:0;box-shadow:none;padding:0}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker .settings-group{border-radius:7px;padding:14px}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.faq-categories button,.faq-inline .settings-sections button,.settings-menu-buttons button)::before{filter:var(--realm-sprite-filter)}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.faq-article,.faq-intro,.faq-section,details.faq-item){background:var(--realm-panel);border-color:var(--realm-line)}
+
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker .mobile-navigation-drawer:not(.has-settings){background:linear-gradient(135deg,var(--realm-panel),var(--realm-deep))!important;border-color:var(--realm-line);box-shadow:inset 0 0 0 3px var(--realm-header),0 12px 45px #0008}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.settings-mobile-categories button,.faq-inline .settings-sections button)::before{filter:var(--realm-sprite-filter)}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker :is(.faq-entry,.faq-search){background:var(--realm-field);border-color:var(--realm-line)}
+html[data-theme=fire-emblem-heroes][data-realm]:not([data-realm=base])[data-theme][data-theme][data-theme] .tracker .faq-entry[open] summary{background:var(--realm-header);border-color:var(--realm-line)}
+
+.theme-preview-heading{font-family:FEHeroes,Georgia,serif}
