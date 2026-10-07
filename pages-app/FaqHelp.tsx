@@ -40,6 +40,11 @@ const entries:Entry[]=[
  },
  {
   "section": "Schedules",
+  "question": "Which heroes can appear in the L/M/E Waitlist?",
+  "answer": "The L/M/E Waitlist can also include General, Special, Rearmed, Attuned, Aided, Entwined, and Vista heroes after their release in a New Heroes or Special Heroes summoning event. These entries track heroes whose next rerun is uncertain. Being on this waitlist does not confirm that a hero will rerun on a Legendary/Mythic/Emblem banner or when that rerun will happen. Only the Head Administrator and authorized Schedule Managers manually add or edit entries; debuting in a summoning event does not add a hero automatically."
+ },
+ {
+  "section": "Schedules",
   "question": "Are heroes added to a waitlist automatically?",
   "answer": "No. Only the Head Administrator and authorized Schedule Managers manually add entries. Changing a hero’s schedule category does not add it to a waitlist. Removing a waitlist entry keeps the hero in the roster and does not remove it from banners or other waitlists."
  },
