@@ -972,3 +972,4 @@ html[data-theme][data-theme] .tracker .home-banner.featured-banner-layout .home-
 html[data-theme] .settings-personalization .theme-picker .theme-options{grid-template-columns:repeat(auto-fit,minmax(106px,140px))}
 /* A dim-only backdrop applies consistently to every workspace panel. */
 dialog::backdrop{backdrop-filter:blur(0px)!important;animation:none!important}
+.tracker .homepage-reorganize-banner{display:grid;place-items:center;width:44px;height:44px;flex:none;padding:10px;border:0;border-radius:0;background:transparent;color:var(--edit-text,#fff);cursor:pointer}.tracker .homepage-reorganize-banner:hover{background:transparent;opacity:.8}
