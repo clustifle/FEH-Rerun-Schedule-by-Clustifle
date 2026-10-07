@@ -139,3 +139,6 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .fb-empty{b
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.month-navigator,.month-navigator-top,.month-strip){color:#e6e9d5;border-color:#8da795}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .month-navigator button{color:#ffedc1;background:#103b45;border-color:#8ba894}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .month-navigator button[aria-pressed=true]{background:#2b594b;border-color:#e4ce92;color:#fff1c5}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-board{background:#082b35;border:1px solid #b3baa0;border-radius:6px;box-shadow:inset 0 0 0 2px #123e46,inset 0 0 0 3px #71988d66}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-row{border-color:#98ac8e66}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-slot{box-shadow:inset 0 1px #a6bc9620,inset 0 -1px #a6bc9620}
