@@ -952,3 +952,11 @@ html[data-theme][data-theme] .tracker .home-banner .banner-lineup-group{height:7
 html[data-theme][data-theme] .tracker .home-banner .banner-lineup-group .banner-lineup-slot{width:70px;height:70px;display:flex;align-items:center;justify-content:center}
 html[data-theme][data-theme] .tracker .home-banner .hero-tile{justify-content:center}
 html[data-theme][data-theme] .tracker .home-banner .remix-viewer{width:170px;max-width:100%}
+
+/* Banner timing and identity share a consistent left edge. */
+html[data-theme][data-theme] .tracker .home-banner-copy{text-align:left;margin-inline:0}
+html[data-theme][data-theme] .tracker .home-banner-copy h2{text-align:left;text-wrap:wrap}
+html[data-theme][data-theme] .tracker .home-banner-copy .home-banner-countdown{margin-left:0;margin-right:auto;text-align:left}
+html[data-theme][data-theme] .tracker .home-banner-copy .home-banner-dates{text-align:left;justify-content:flex-start}
+html[data-theme][data-theme] .tracker .home-banner-copy .home-banner-actions{justify-content:flex-start}
+html[data-theme][data-theme] .tracker .home-revival-link>.home-banner-countdown{margin-left:0;margin-right:auto;text-align:left}
