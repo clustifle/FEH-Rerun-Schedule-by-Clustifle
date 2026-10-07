@@ -970,3 +970,5 @@ html[data-theme][data-theme] .tracker .home-banner.featured-banner-layout .home-
 html[data-theme][data-theme] .tracker .home-banner.featured-banner-layout .home-banner-actions{justify-content:center}
 
 html[data-theme] .settings-personalization .theme-picker .theme-options{grid-template-columns:repeat(auto-fit,minmax(106px,140px))}
+/* A dim-only backdrop applies consistently to every workspace panel. */
+dialog::backdrop{backdrop-filter:blur(0px)!important;animation:none!important}
