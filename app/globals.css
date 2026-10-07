@@ -960,3 +960,10 @@ html[data-theme][data-theme] .tracker .home-banner-copy .home-banner-countdown{m
 html[data-theme][data-theme] .tracker .home-banner-copy .home-banner-dates{text-align:left;justify-content:flex-start}
 html[data-theme][data-theme] .tracker .home-banner-copy .home-banner-actions{justify-content:flex-start}
 html[data-theme][data-theme] .tracker .home-revival-link>.home-banner-countdown{margin-left:0;margin-right:auto;text-align:left}
+
+/* Featured summoning events retain their centered presentation. */
+html[data-theme][data-theme] .tracker .home-banner.featured-banner-layout .home-banner-copy{text-align:center;margin-inline:auto}
+html[data-theme][data-theme] .tracker .home-banner.featured-banner-layout .home-banner-copy h2{text-align:center;text-wrap:balance}
+html[data-theme][data-theme] .tracker .home-banner.featured-banner-layout .home-banner-countdown{margin-left:auto;margin-right:auto;text-align:center}
+html[data-theme][data-theme] .tracker .home-banner.featured-banner-layout .home-banner-dates{text-align:center;justify-content:center}
+html[data-theme][data-theme] .tracker .home-banner.featured-banner-layout .home-banner-actions{justify-content:center}
