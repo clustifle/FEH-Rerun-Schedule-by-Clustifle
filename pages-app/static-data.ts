@@ -1,3 +1,4 @@
+import portraitManifest from './portrait-manifest.json';
 import {isWaitlist} from './waitlist-types';
 import {moveTypes} from './move-types';
 import {weaponTypes} from './weapon-types';
@@ -7,7 +8,8 @@ import {normalizePool} from './hero-pools';
 import {upscalePortrait} from './portrait-upscale';
 export const supabase=createClient('https://aknsqeqykjgdyhdroqcx.supabase.co','sb_publishable_PiJIst1aSJtrYBiIvwDIVA_KS3c-E3g');
 export const assetUrl=(value:string)=>import.meta.env.BASE_URL+value.replace(/^\//,'');
-export const portraitUrl=(value:string)=>value.startsWith('data/')?assetUrl(value):supabase.storage.from('portraits').getPublicUrl(value).data.publicUrl;
+const deliveryPortraits=portraitManifest as Record<string,{thumb:string;detail:string}>;
+export const portraitUrl=(value:string,size:'thumb'|'detail'='thumb')=>value.startsWith('data/')?assetUrl(value):deliveryPortraits[value]?assetUrl(deliveryPortraits[value][size]):supabase.storage.from('portraits').getPublicUrl(value).data.publicUrl;
 export async function ownerSession(){const {data:{session}}=await supabase.auth.getSession();if(!session)return false;const {data,error}=await supabase.rpc('is_tracker_owner');return !error&&data===true;}
 const fail=(error:unknown,status=400)=>jsonResponse({error:error instanceof Error?error.message:String(error)},{status});
 function portraitCandidates(value:string){
@@ -101,7 +103,7 @@ async function runApiFetch(input:string,init?:RequestInit){
     const bytes=new Uint8Array(await file.arrayBuffer());const valid=file.type==='image/png'?bytes[0]===137&&bytes[1]===80&&bytes[2]===78&&bytes[3]===71:file.type==='image/jpeg'?bytes[0]===255&&bytes[1]===216&&bytes[2]===255:String.fromCharCode(...bytes.slice(0,4))==='RIFF'&&String.fromCharCode(...bytes.slice(8,12))==='WEBP';if(!valid)throw new Error('Invalid portrait image.');
     if(form.get('portraitPrepared')!=='true')file=(await upscalePortrait(file)).file;
     uploaded=crypto.randomUUID()+'.'+(file.type==='image/png'?'png':file.type==='image/jpeg'?'jpg':'webp');
-    const {error}=await supabase.storage.from('portraits').upload(uploaded,file,{contentType:file.type});if(error)throw new Error(error.message);portrait=uploaded;
+    const {error}=await supabase.storage.from('portraits').upload(uploaded,file,{contentType:file.type,cacheControl:'31536000'});if(error)throw new Error(error.message);portrait=uploaded;
    }
    const weaponType=String(form.get('weapon_type')||'')||null;if(weaponType&&!weaponTypes[String(form.get('color'))]?.includes(weaponType))return jsonResponse({error:'Choose a valid weapon type for this color.'},{status:400});
    const moveType=String(form.get('move_type')||'')||null;if(moveType&&!moveTypes.includes(moveType))return jsonResponse({error:'Choose a valid movement type.'},{status:400});
