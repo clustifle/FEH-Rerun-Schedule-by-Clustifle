@@ -182,3 +182,5 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .month-stri
 /* Compensate for the FEH font baseline so lettering sits at the ribbon visual center. */
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.homepage-tools h2,.home-revivals>h2,.schedule-page-heading h2,.fb-heading h2){padding-top:9px;padding-bottom:21px}
 @media(max-width:700px){html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.homepage-tools h2,.home-revivals>h2,.schedule-page-heading h2,.fb-heading h2){padding-top:8px;padding-bottom:20px}}
+/* Keep parchment headings legible against the game ribbon. */
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.homepage-tools h2,.home-revivals>h2,.schedule-page-heading h2,.fb-heading h2){-webkit-text-stroke:.65px #000;paint-order:stroke fill;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000,0 2px 3px #000c}
