@@ -58,3 +58,9 @@ Fire Emblem Heroes is the default theme, with ten realm variants available in Se
 - **Schedule references:** In-game announcements, official Fire Emblem Heroes notices, and community sources linked in the site's FAQ.
 
 This is an unofficial fan project, unaffiliated with Nintendo or INTELLIGENT SYSTEMS. Third-party assets remain the property of their respective owners.
+
+## Community and permissions
+
+Please read the [Contributing Guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) before participating.
+
+Original project code and documentation are **all rights reserved**. Reuse requires prior written permission; see [LICENSE](LICENSE). Nintendo artwork and other third-party materials are excluded and retain their respective rights and terms.
