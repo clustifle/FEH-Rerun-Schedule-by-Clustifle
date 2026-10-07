@@ -942,3 +942,13 @@ html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot .portrait
 html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot .tile-name{font-size:11px}
 html[data-theme][data-theme] .tracker .home-banner .banner-empty-slot{max-width:44px}
 html[data-theme][data-theme] .tracker .home-revival-link>.home-banner-countdown{display:table;width:fit-content;max-width:100%;margin:0 auto 16px;text-align:center}
+
+/* Square row spaces come from window proportions, without painted slot boxes. */
+html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot::before,html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot::after{content:none}
+html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot{width:100%;max-width:none;height:auto;min-height:0;padding:0;align-self:center}
+html[data-theme][data-theme] .tracker .home-banner-scroll{width:fit-content;max-width:100%;justify-self:center}
+html[data-theme][data-theme] .tracker .home-banner .banner-lineup-grid{width:fit-content;max-width:100%}
+html[data-theme][data-theme] .tracker .home-banner .banner-lineup-group{height:70px;padding:0;gap:0}
+html[data-theme][data-theme] .tracker .home-banner .banner-lineup-group .banner-lineup-slot{width:70px;height:70px;display:flex;align-items:center;justify-content:center}
+html[data-theme][data-theme] .tracker .home-banner .hero-tile{justify-content:center}
+html[data-theme][data-theme] .tracker .home-banner .remix-viewer{width:170px;max-width:100%}
