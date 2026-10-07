@@ -103,3 +103,10 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .mobile-nav
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-category-back{display:none!important}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-row{flex-wrap:wrap;gap:12px}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-row select{width:100%;max-width:100%}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-edit-menu>summary.toolbar-icon{display:grid;place-items:center;width:44px;height:44px;min-height:44px;padding:8px;background:transparent;border:0;border-radius:0;box-shadow:none;color:#fff0c7;isolation:auto}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-edit-menu>summary.toolbar-icon::before{display:none;content:none}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-edit-menu>summary.toolbar-icon svg{display:block;visibility:visible;opacity:1;width:18px;height:18px}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-edit-options{background:#0b303a;border-color:#8caa9c;color:#fff1d4}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-edit-options button{color:#fff1d4;font-family:FEHeroes,Georgia,serif}
+/* Hover previews are portalled to body, so tag typography must not depend on .tracker. */
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] :is(.hero-type-signature,.hero-type-copy,.hero-type-copy strong,.hero-type-copy>span,.hero-kind,.pool-signature,.pool-signature strong){font-family:FEHeroes,Georgia,serif!important;font-weight:400}
