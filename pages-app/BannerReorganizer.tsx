@@ -1,5 +1,5 @@
 import {moveBanner} from './banner-order';
-import {ArrowDown,ArrowUp,ChevronsDown,ChevronsUp,Layers,Search,GripVertical,X} from 'lucide-react';
+import {ArrowDown,ArrowUp,ChevronsDown,ChevronsUp,Search,GripVertical,X} from 'lucide-react';
 import {useEffect,useRef,useState} from 'react';
 import {supabase} from './static-data';
 import type {Banner} from './Homepage';
@@ -49,7 +49,7 @@ export default function BannerReorganizer({banners,onClose,onSaved}:{banners:Ban
  return <dialog ref={dialog} className="banner-reorganizer" aria-labelledby="banner-order-title" onCancel={e=>{e.preventDefault();close();}}>
   <header>
    <div>
-    <h2 id="banner-order-title"><Layers size={22}/>Reorganize banners</h2>
+    <h2 id="banner-order-title">Reorganize banners</h2>
     <p>Drag banners or use the move controls to arrange their order on Home.</p>
    </div>
    <button className="icon-button" aria-label="Close banner reorganizer" disabled={saving} onClick={close}><X/></button>
