@@ -148,3 +148,7 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-the
 /* Plain Settings headings across all realms. */
 html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-group>h3::before{display:none!important}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-group>h3{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;min-height:0!important}
+
+/* Sprite controls must not inherit the base teal form-button surface. */
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .month-browser button{background:transparent!important;border:0!important;box-shadow:none}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .month-browser button[aria-current=date]{color:var(--realm-accent);box-shadow:inset 0 0 0 2px var(--realm-accent)}
