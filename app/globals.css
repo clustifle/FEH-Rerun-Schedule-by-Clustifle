@@ -719,3 +719,29 @@ html[data-theme] .settings-personalization .theme-option input[type=radio]{top:8
 @media(max-width:760px){.tracker .home-banner.remix-banner-layout{grid-template-columns:1fr}.banner-editor-featured-slots{grid-template-columns:repeat(2,minmax(0,1fr))}.banner-editor-section .remix-lineup .banner-lineup-row,.banner-editor-section .remix-lineup-head{grid-template-columns:32px minmax(0,1fr) minmax(0,1fr)}.banner-editor-section .remix-lineup .banner-lineup-group{padding:8px 4px;gap:4px}.banner-editor-section .remix-lineup .banner-editor-slot{padding:6px 2px}.banner-editor-section .remix-lineup .banner-editor-slot strong{font-size:11px}.remix-lineup-head h3{font-size:14px}}
 .banner-editor .form-actions .danger{margin-right:auto;min-height:44px;padding:10px 14px;display:inline-flex;align-items:center;gap:8px;border:1px solid #ff9eaa66;border-radius:3px;background:#721d2c40;color:#ffd0d5}.banner-editor .form-actions .danger:hover{background:#9b2d3d75}
 .banner-order-row{display:flex;align-items:stretch;gap:6px}.banner-order-row>button:first-child{flex:1;min-width:0}.banner-order-list .banner-order-remove{width:48px;flex:0 0 48px;justify-content:center;padding:8px;color:#ffd0d5;border-color:#ff9eaa35}.banner-order-list .banner-order-remove:hover{background:#9b2d3d40;border-color:#ff9eaa90}
+
+/* A full-width Remix window and spacious, slot-based lineup editor. */
+html[data-theme] .tracker .home-banner.remix-banner-layout{grid-template-columns:minmax(0,1fr);gap:24px}
+.remix-banner-layout .home-banner-copy{text-align:center;max-width:880px;margin:0 auto}
+.remix-banner-layout .home-banner-countdown{margin-left:auto;margin-right:auto}
+.remix-banner-layout .home-banner-dates,.remix-banner-layout .home-banner-actions{justify-content:center}
+.banner-lineup-scroll{overflow-x:auto;min-width:0;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--cyan) transparent;border-radius:12px}
+.banner-lineup-scroll:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+html[data-theme] .remix-lineup{min-width:620px!important}
+html[data-theme] .remix-lineup-head{grid-template-columns:44px minmax(0,1fr) minmax(0,1fr);background:#00000018}
+.remix-lineup-head h3{display:flex;justify-content:center;align-items:center;gap:12px;font-weight:600}
+.remix-lineup-head h3 small{font-size:12px;font-weight:400;color:var(--muted)}
+html[data-theme] .remix-lineup .banner-lineup-row{grid-template-columns:44px minmax(0,1fr) minmax(0,1fr)}
+html[data-theme] .remix-lineup .banner-lineup-group{padding:16px;gap:20px;min-height:136px}
+.banner-editor-section .banner-lineup-scroll{border:1px solid var(--line);margin-top:18px;background:#ffffff04}
+html[data-theme] .banner-editor-section .banner-lineup-grid{min-width:420px}
+html[data-theme] .banner-editor-section .remix-lineup{min-width:620px}
+html[data-theme] .banner-editor-section .banner-lineup-group{padding:14px 12px;gap:12px;min-height:142px}
+html[data-theme] .banner-editor-slot{min-height:116px;padding:10px 8px;gap:5px;border-radius:12px;box-shadow:none;transition:background .2s,border-color .2s}
+.banner-editor-slot.is-empty{border-style:dashed;background:#ffffff03}
+.banner-editor-slot small{font-size:11px;color:var(--muted);line-height:1.25}
+html[data-theme] .banner-editor-slot strong{font-size:14px;line-height:1.25}
+html[data-theme] .banner-editor-slot-portrait{width:72px;border-radius:8px}
+.banner-editor-slot.is-empty .banner-editor-slot-portrait{width:48px;color:var(--cyan);background:#ffffff08}
+html[data-theme] .banner-editor-featured-slots{gap:14px}
+@media(max-width:600px){.remix-banner-layout .home-banner-copy h2{font-size:25px}.remix-lineup-head h3{flex-direction:column;gap:3px}.banner-editor-section .banner-lineup-scroll{margin-top:12px}.banner-editor-slot small{font-size:11px}}
