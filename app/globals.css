@@ -931,11 +931,11 @@ html[data-theme][data-theme] .tracker .home-banner .remix-viewer .banner-lineup-
 @media(max-width:760px){html[data-theme][data-theme] .tracker .home-banner{height:510px;min-height:510px;max-height:510px;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:14px;padding:16px}html[data-theme][data-theme] .tracker .home-banner-copy h2{font-size:22px;margin-bottom:8px}html[data-theme][data-theme] .tracker .home-banner-scroll{width:100%;max-width:440px;justify-self:center}html[data-theme][data-theme] .tracker .home-banner .banner-lineup-group{height:76px}html[data-theme][data-theme] .tracker .home-banner.featured-banner-layout{grid-template-rows:minmax(0,1fr) auto}html[data-theme][data-theme] .tracker .home-banner .featured-banner-heroes .portrait{max-width:96px}}
 @media(prefers-reduced-motion:reduce){.remix-viewer-panels>.responsive-remix-panel{transition:none}}html[data-motion=reduced] .remix-viewer-panels>.responsive-remix-panel{transition:none}
 
-/* Compact triangular slot surfaces keep the portraits and their marks intact. */
+/* Compact square slots keep the portraits and their marks intact. */
 html[data-theme][data-theme] .tracker .home-banner-scroll{max-width:390px;justify-self:center;width:100%}
 html[data-theme][data-theme] .tracker .home-banner .banner-lineup-group{height:70px;padding:4px 6px;gap:8px}
-html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot{position:relative;isolation:isolate;max-width:94px;min-height:62px;padding:4px 4px 2px;align-self:center}
-html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot::before,html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot::after{content:"";position:absolute;z-index:-1;inset:0;clip-path:polygon(50% 0,100% 100%,0 100%);pointer-events:none}
+html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot{position:relative;isolation:isolate;width:62px;max-width:100%;height:62px;min-height:62px;padding:4px;align-self:center}
+html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot::before,html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot::after{content:"";position:absolute;z-index:-1;inset:0;clip-path:none;pointer-events:none}
 html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot::before{background:color-mix(in srgb,currentColor 32%,transparent)}
 html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot::after{inset:2px;background:color-mix(in srgb,var(--teal) 55%,transparent)}
 html[data-theme][data-theme] .tracker .home-banner .banner-lineup-slot .portrait{max-width:44px}
