@@ -823,3 +823,63 @@ html[data-theme] .tracker .home-revival-portrait{width:100%;height:auto;max-widt
 html:not([data-theme=frutiger-aero]) .tracker .all-heroes-tools .toolbar-icon{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:10px;background:transparent;border:0;border-radius:0;box-shadow:none;color:var(--muted);transition:color .18s ease}
 html:not([data-theme=frutiger-aero]) .tracker .all-heroes-tools .toolbar-icon:hover{background:transparent;color:var(--cyan)}
 html:not([data-theme=frutiger-aero]) .tracker .all-heroes-tools .toolbar-icon[aria-pressed=true]{color:var(--cyan);box-shadow:inset 0 -2px currentColor}
+/* Shared right-side workspace for editing, ordering and filtering. */
+html[data-theme][data-theme] .tracker dialog:is(.hero-editor,.banner-editor,.fb-editor,.waitlist-reorganizer,.banner-reorganizer,.filter-sheet,.revival-hero-picker){position:fixed;inset:0 0 0 auto;margin:0;width:min(680px,100vw);max-width:100vw;height:100dvh;max-height:100dvh;padding:0;border:0;border-left:1px solid var(--edit-line);border-radius:0;background:var(--edit-bg);color:var(--edit-text);box-shadow:-12px 0 40px #0003;overflow:hidden;backdrop-filter:none;-webkit-backdrop-filter:none;transform:none}
+html[data-theme][data-theme] .tracker dialog:is(.filter-sheet,.revival-hero-picker){width:min(520px,100vw)}
+html[data-theme][data-theme] .tracker dialog:is(.hero-editor,.banner-editor,.fb-editor,.waitlist-reorganizer,.banner-reorganizer,.filter-sheet,.revival-hero-picker)::backdrop{background:rgb(0 0 0 / .28);backdrop-filter:none;-webkit-backdrop-filter:none;animation:none}
+html[data-theme][data-theme] .tracker dialog:is(.hero-editor,.banner-editor,.fb-editor,.waitlist-reorganizer,.banner-reorganizer,.filter-sheet,.revival-hero-picker)[open]{display:flex;flex-direction:column;animation:workspace-drawer-in .22s ease both}
+html[data-theme][data-theme] .tracker :is(.hero-editor,.banner-editor,.fb-editor)>form{display:flex;flex-direction:column;width:100%;height:100%;max-height:100%;margin:0;padding:0;min-height:0;overflow:auto;overscroll-behavior:contain}
+html[data-theme][data-theme] .tracker :is(.hero-editor,.banner-editor,.fb-editor) .dialog-top{position:sticky;top:0;z-index:5;flex:none;padding:20px 24px;margin:0;background:var(--edit-bg);border-bottom:1px solid var(--edit-line);backdrop-filter:none;align-items:center}
+html[data-theme][data-theme] .tracker :is(.hero-editor,.banner-editor,.fb-editor) .dialog-top h2{font-size:24px;margin:0}
+html[data-theme][data-theme] .tracker :is(.hero-editor,.banner-editor,.fb-editor) .form-actions{position:sticky;bottom:0;z-index:5;flex:none;margin-top:auto;padding:16px 24px;background:var(--edit-bg);border-top:1px solid var(--edit-line);backdrop-filter:none;display:flex;justify-content:flex-end;flex-wrap:wrap}
+html[data-theme][data-theme] .tracker .hero-editor .editor-body{display:flex;flex-direction:column;gap:24px;padding:24px;overflow:visible;flex:none}
+html[data-theme][data-theme] .tracker .hero-editor .editor-portrait{position:static;width:100%;max-width:none}
+html[data-theme][data-theme] .tracker .hero-editor .upload{margin-bottom:16px;gap:14px}
+html[data-theme][data-theme] .tracker .hero-editor .upload>div:last-child{max-width:360px}
+html[data-theme][data-theme] .tracker .hero-editor .portrait.large{width:144px;max-width:144px}
+html[data-theme][data-theme] .tracker :is(.hero-editor .editor-section,.banner-editor-section){padding:20px;border-radius:12px;background:var(--edit-panel);box-shadow:none}
+html[data-theme][data-theme] .tracker .banner-editor fieldset{display:block;padding:24px;margin:0;border:0;overflow:visible;flex:none;min-width:0}
+html[data-theme][data-theme] .tracker :is(.banner-editor,.hero-editor) .form-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+html[data-theme][data-theme] .tracker :is(.waitlist-reorganizer,.banner-reorganizer,.filter-sheet,.revival-hero-picker)>:is(header,footer){flex:none;background:var(--edit-bg);color:var(--edit-text);padding:20px 24px;margin:0;border-color:var(--edit-line);backdrop-filter:none}
+html[data-theme][data-theme] .tracker :is(.waitlist-reorganizer,.banner-reorganizer,.filter-sheet,.revival-hero-picker) h2{font-family:inherit;font-weight:600;font-size:24px;line-height:1.25;color:var(--edit-text);letter-spacing:normal;text-transform:none}
+html[data-theme][data-theme] .tracker :is(.waitlist-reorganizer,.banner-reorganizer,.filter-sheet,.revival-hero-picker) :is(.icon-button,.filter-close){display:grid;place-items:center;width:44px;height:44px;min-width:44px;border:1px solid var(--edit-line);border-radius:10px;padding:8px;background:transparent;color:var(--edit-text);box-shadow:none}
+html[data-theme][data-theme] .tracker :is(.waitlist-order-list,.banner-order-list,.filter-sheet-body,.revival-picker-grid){flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:20px 24px;scrollbar-width:thin}
+html[data-theme][data-theme] .tracker :is(.waitlist-order-tools,.waitlist-order-colors,.banner-order-tools,.revival-picker-tools){flex:none;padding:12px 24px;background:var(--edit-bg);color:var(--edit-text);border-color:var(--edit-line);flex-wrap:wrap;gap:8px}
+html[data-theme][data-theme] .tracker :is(.waitlist-reorganizer,.filter-sheet,.revival-hero-picker) :is(input,select){background:var(--edit-field);color:var(--edit-text);border:1px solid var(--edit-line);border-radius:8px;min-height:44px;max-width:100%;color-scheme:dark}
+html[data-theme=frutiger-aero][data-theme] .tracker :is(.waitlist-reorganizer,.filter-sheet,.revival-hero-picker) :is(input,select){color-scheme:light}
+html[data-theme][data-theme] .tracker .filter-search{background:var(--edit-field);border-color:var(--edit-line);color:var(--edit-muted)}
+html[data-theme][data-theme] .tracker .filter-search input{background:transparent;border:0;box-shadow:none}
+html[data-theme][data-theme] .tracker .filter-section{margin-top:24px;padding-top:20px;border-top:1px solid var(--edit-line)}
+html[data-theme][data-theme] .tracker .filter-section h3{color:var(--edit-text);font-size:15px;margin-bottom:14px}
+html[data-theme][data-theme] .tracker :is(.filter-color-choice,.filter-pool-choice,.waitlist-order-colors .secondary){background:var(--edit-panel);color:var(--edit-text);border:1px solid var(--edit-line);box-shadow:none;border-radius:10px}
+html[data-theme][data-theme] .tracker :is(.filter-color-choice,.filter-pool-choice,.waitlist-order-colors .secondary)[aria-pressed=true]{border-color:var(--edit-accent);box-shadow:inset 0 0 0 1px var(--edit-accent);background:var(--edit-field);color:var(--edit-text)}
+html[data-theme][data-theme] .tracker :is(.filter-pool-choice small,.filter-sheet-footer p,.waitlist-reorganizer header p,.waitlist-reorganizer footer p){color:var(--edit-muted)}
+html[data-theme][data-theme] .tracker .filter-show{background:var(--edit-button);color:var(--edit-button-text);border:0;min-height:44px}
+html[data-theme][data-theme] .tracker .filter-reset{background:transparent;color:var(--edit-text);border:1px solid var(--edit-line);min-height:44px}
+html[data-theme][data-theme] .tracker .filter-sheet.is-closing{animation:workspace-drawer-out .18s ease both}
+html[data-theme][data-theme] .tracker .revival-picker-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+.waitlist-order-search{display:flex;align-items:center;flex:1;min-width:140px;gap:8px}.waitlist-order-search input{width:100%;min-width:0;padding:8px 10px}
+html[data-theme][data-theme] .tracker .waitlist-order-list li{display:flex;gap:6px;align-items:center;margin-bottom:8px}
+html[data-theme][data-theme] .tracker .waitlist-order-list li>button{flex:1;min-width:0;background:var(--edit-panel);border:1px solid var(--edit-line);border-radius:10px;color:var(--edit-text)}
+html[data-theme][data-theme] .tracker .waitlist-order-list li>button[aria-pressed=true]{border-color:var(--edit-accent)}
+.waitlist-order-row-actions{display:flex;flex-direction:column;gap:4px}.waitlist-unsaved{padding:12px 24px;background:var(--edit-panel);color:var(--edit-text);border-bottom:1px solid var(--edit-line)}.waitlist-unsaved>div{display:flex;gap:8px;margin-top:10px}
+@keyframes workspace-drawer-in{from{transform:translateX(32px);opacity:0}to{transform:translateX(0);opacity:1}}@keyframes workspace-drawer-out{to{transform:translateX(32px);opacity:0}}
+@media(max-width:480px){html[data-theme][data-theme] .tracker :is(.hero-editor,.banner-editor,.fb-editor,.waitlist-reorganizer,.banner-reorganizer,.filter-sheet,.revival-hero-picker) :is(.dialog-top,header,footer,.editor-body,fieldset,.filter-sheet-body,.waitlist-order-list,.banner-order-list,.revival-picker-grid){padding:16px}html[data-theme][data-theme] .tracker :is(.hero-editor,.banner-editor) .form-row{grid-template-columns:1fr}.waitlist-order-colors .secondary{flex:1;padding:10px 6px;font-size:13px}}
+@media(prefers-reduced-motion:reduce){html[data-theme][data-theme] .tracker dialog:is(.hero-editor,.banner-editor,.fb-editor,.waitlist-reorganizer,.banner-reorganizer,.filter-sheet,.revival-hero-picker)[open]{animation:none}}
+html[data-motion=reduced][data-theme] .tracker dialog:is(.hero-editor,.banner-editor,.fb-editor,.waitlist-reorganizer,.banner-reorganizer,.filter-sheet,.revival-hero-picker)[open]{animation:none}
+html[data-theme][data-theme] .tracker :is(.hero-editor,.banner-editor,.fb-editor)>form>*{flex-shrink:0}
+html[data-theme][data-theme] .tracker .fb-editor>form>:is(label,section,.fb-editor-slots,p){margin:16px 24px}
+html[data-theme][data-theme] .tracker .fb-editor-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+html[data-theme][data-theme] .tracker .waitlist-reorganizer :is(.primary,.secondary){min-height:44px;padding:10px 14px;font-size:14px;border-radius:9px;border:1px solid var(--edit-line);background:transparent;color:var(--edit-text)}
+html[data-theme][data-theme] .tracker .waitlist-reorganizer .primary{background:var(--edit-button);border-color:var(--edit-button);color:var(--edit-button-text)}
+html[data-theme][data-theme] .tracker .waitlist-reorganizer footer>div{flex-wrap:wrap;gap:8px}
+html[data-theme][data-theme] .tracker .waitlist-order-list small{color:var(--edit-muted);overflow-wrap:anywhere}
+html[data-theme][data-theme] .tracker .filter-sheet ::placeholder{color:var(--edit-muted);opacity:1}
+html[data-theme][data-theme] .tracker .revival-picker-card{background:var(--edit-panel);color:var(--edit-text);border-color:var(--edit-line)}
+html[data-theme][data-theme] .tracker .revival-picker-card:is(.is-selected,:focus-visible){border-color:var(--edit-accent)}
+html[data-theme][data-theme] .tracker .revival-picker-card :is(small,.revival-picker-subtitle){color:var(--edit-muted)}
+@media(max-width:360px){html[data-theme][data-theme] .tracker .filter-color-options{grid-template-columns:repeat(3,minmax(0,1fr))}html[data-theme][data-theme] .tracker .fb-editor-slots{grid-template-columns:1fr}}
+html[data-theme][data-theme] .tracker .banner-editor .responsive-remix-lineup{grid-template-columns:1fr;gap:20px}
+html[data-theme][data-theme] .tracker .banner-editor .responsive-remix-panel .banner-lineup-group{grid-template-columns:repeat(2,minmax(0,1fr))}
+html[data-theme][data-theme] .tracker .banner-editor .banner-lineup-grid{min-width:0!important}
+.responsive-remix-panel h3 small{display:block;font-size:12px;font-weight:400;margin-top:4px;color:var(--edit-muted)}
