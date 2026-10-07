@@ -1,8 +1,8 @@
 @import "./fire-emblem-heroes-interface.css";
-@font-face{font-family:FEHeroes;src:url('../public/themes/fire-emblem-heroes/feh.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:FEHeroes,Georgia,serif;src:url('../public/themes/fire-emblem-heroes/feh.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 html[data-theme=fire-emblem-heroes][data-theme]{color-scheme:dark;--teal:#174d5a;--cyan:#8de6e8;--pink:#e7b6db;--line:#92b5b866;--muted:#d2dedb;--edit-bg:#092b37;--edit-panel:#123e49;--edit-field:#06242d;--edit-text:#fff6df;--edit-muted:#ccded8;--edit-line:#91b3ad88;--edit-accent:#edcf84;--edit-button:#24717a;--edit-button-text:#fff7df}
-html[data-theme=fire-emblem-heroes][data-theme][data-theme] body{background:#051820 url('../public/themes/fire-emblem-heroes/wallpaper.webp') center top/cover fixed no-repeat;color:#fff6df;font-family:FEHeroes,Georgia,'Segoe UI',serif}
-html[data-theme=fire-emblem-heroes][data-theme][data-theme] :is(button,input,select,textarea){font-family:inherit}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] body{background:#051820 url('../public/themes/fire-emblem-heroes/wallpaper.webp') center top/cover fixed no-repeat;color:#fff6df;font-family:FEHeroes,Georgia,serif}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] :is(button,input,select,textarea){font-family:FEHeroes,Georgia,serif}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] :is(h1,h2,h3,h4,.tile-name,.nav-label){font-family:FEHeroes,Georgia,serif;letter-spacing:normal;text-transform:none;font-weight:400}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .masthead{background:linear-gradient(#113f4cee,#062630ee);border-bottom:2px solid #c9c09a;box-shadow:0 2px 0 #1d4e55,0 5px 16px #0005;backdrop-filter:none}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.home-banner,.home-revival-card,.all-heroes-card,.banner-management,.homepage-empty,.fb-row,.profile-header,.profile-card){background:linear-gradient(135deg,#154855ee,#062b36ee);border:1px solid #b3c5b7;border-radius:10px;box-shadow:inset 0 0 0 3px #082b35,inset 0 0 0 4px #688f8c88,0 8px 24px #0004;backdrop-filter:none;-webkit-backdrop-filter:none}
@@ -47,7 +47,7 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .settings-h
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .settings-sections button[aria-current]{background:#24535c;color:#ffe5aa;box-shadow:inset 3px 0 #e7cf92}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .settings-row{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid #b7c6b426}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .settings-row>span{display:grid;gap:6px;min-width:0}
-html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .settings-row small{color:#c4d9d3;font-family:'Segoe UI',sans-serif;font-size:13px;line-height:1.5}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .settings-row small{color:#c4d9d3;font-family:FEHeroes,Georgia,serif;font-size:13px;line-height:1.5}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .settings-row input[type=checkbox]{width:20px;height:20px;flex:none;accent-color:#dfc785}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .theme-option-copy{min-height:48px;display:grid;place-items:center;padding:8px}
 /* Month labels are text within their existing layout, not separate window strips. */
@@ -85,7 +85,7 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .faq-entry 
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .faq-entry a{color:#f4d891}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .faq-count{color:#c9ddcf;font-size:14px}
 /* Hero profile and signatures use FEH typography and opaque teal windows. */
-html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.hero-type-signature,.hero-type-copy,.hero-type-copy strong,.hero-type-copy>span,.hero-kind,.pool-signature,.pool-signature strong){font-family:FEHeroes,Georgia,serif!important;font-weight:400}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.hero-type-signature,.hero-type-copy,.hero-type-copy strong,.hero-type-copy>span,.hero-kind,.pool-signature,.pool-signature strong){font-family:FEHeroes,Georgia,serif;font-weight:400}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker dialog.hero-details{background:linear-gradient(135deg,#123f49,#062731);color:#fff1d5;font-family:FEHeroes,Georgia,serif}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .hero-profile-header{background:linear-gradient(#174c57,#0a2b36);border-bottom:1px solid #c9c49a;padding:20px 28px}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .hero-profile-header h2{font-size:26px;color:#fff0c5}
@@ -109,7 +109,7 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-e
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-edit-options{background:#0b303a;border-color:#8caa9c;color:#fff1d4}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-edit-options button{color:#fff1d4;font-family:FEHeroes,Georgia,serif}
 /* Hover previews are portalled to body, so tag typography must not depend on .tracker. */
-html[data-theme=fire-emblem-heroes][data-theme][data-theme] :is(.hero-type-signature,.hero-type-copy,.hero-type-copy strong,.hero-type-copy>span,.hero-kind,.pool-signature,.pool-signature strong){font-family:FEHeroes,Georgia,serif!important;font-weight:400}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] :is(.hero-type-signature,.hero-type-copy,.hero-type-copy strong,.hero-type-copy>span,.hero-kind,.pool-signature,.pool-signature strong){font-family:FEHeroes,Georgia,serif;font-weight:400}
 /* Shared rerun windows: game panel bars and inset frames, without changing slot sizing. */
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.month-column,.waitlist-window,.home-banner-scroll,.responsive-remix-panel,.fb-list){background:#082b35;border:1px solid #b3baa0;border-radius:6px;box-shadow:inset 0 0 0 2px #123e46,inset 0 0 0 3px #71988d66;backdrop-filter:none}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.month-column h2,.waitlist-window h2,.responsive-remix-panel>h3){position:relative;isolation:isolate;background:#0b3441;color:#fff0c5;border:0;border-bottom:1px solid #c1bc92;box-shadow:inset 0 -1px #4a8889;text-align:center;text-shadow:0 1px 2px #001924}

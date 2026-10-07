@@ -18,7 +18,7 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.filter
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.banner-editor-slot,.revival-picker-card){background:linear-gradient(#17444d,#0a2c36);border:1px solid #8fae9c;border-radius:6px;color:#fff0cc;box-shadow:inset 0 0 0 2px #163c43;padding:10px;min-width:0}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.banner-editor-slot,.revival-picker-card):hover{border-color:#f5daa1;filter:brightness(1.1)}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .banner-editor-slot.is-empty .banner-editor-slot-portrait{background:#092d36;border:1px dashed #b5c3a0;color:#e9d398}
-html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .banner-editor-slot small{color:#c9ded1;font-family:'Segoe UI',sans-serif;font-size:12px}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .banner-editor-slot small{color:#c9ded1;font-family:FEHeroes,Georgia,serif;font-size:12px}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.banner-order-row>button,.waitlist-order-list li>button){background:linear-gradient(110deg,#1b4b54,#0b3039);border:1px solid #80a79c;color:#fff0cf;border-radius:6px;box-shadow:inset 0 0 0 2px #123740}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.banner-order-row>button,.waitlist-order-list li>button)[aria-pressed=true]{border-color:#ecd390;background:#24554f;box-shadow:inset 3px 0 #ecd390}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.banner-order-number,.waitlist-order-number){background:#092b35;border:1px solid #b3b58c;border-radius:50%;color:#ffe7ac}

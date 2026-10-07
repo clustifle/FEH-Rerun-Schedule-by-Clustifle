@@ -8,7 +8,7 @@
 .theme-option input[type=radio]{position:absolute;right:14px;top:14px;width:18px;height:18px;margin:0;z-index:1;accent-color:#9fe6ef}
 .theme-option:focus-within{outline:3px solid white;outline-offset:4px}
 .theme-preview{position:relative;display:flex;flex-direction:column;justify-content:center;min-height:116px;padding:20px 22px;background:linear-gradient(110deg,#2f4e59,#416c7b);color:#fff;overflow:hidden}
-.theme-preview-heading{font-family:Champions,'Segoe UI',Arial,sans-serif;font-size:32px;font-weight:700;line-height:1.2}
+.theme-preview-heading{font-family:FEHeroes,Georgia,serif;font-size:32px;font-weight:700;line-height:1.2}
 .theme-preview-lines{display:flex;flex-direction:column;gap:7px;width:55%;margin-top:10px}
 .theme-preview-lines i{height:3px;background:#ffffff75;border-radius:2px}.theme-preview-lines i:last-child{width:65%;opacity:.55}
 .theme-preview-accent{position:absolute;bottom:0;left:0;right:0;height:3px;background:#8de0ee}
@@ -152,3 +152,18 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-the
 /* Sprite controls must not inherit the base teal form-button surface. */
 html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .month-browser button{background:transparent!important;border:0!important;box-shadow:none}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .month-browser button[aria-current=date]{color:var(--realm-accent);box-shadow:inset 0 0 0 2px var(--realm-accent)}
+
+/* Responsive artwork choices and a device-sized preview before applying. */
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .settings-personalization .theme-picker .theme-options{grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .settings-personalization .theme-preview{height:auto;min-height:0;aspect-ratio:1;padding:0;background-size:cover;background-position:center}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .theme-option-copy{padding:9px 6px;text-align:center;min-height:48px;justify-content:center}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .theme-option-copy strong{font-size:14px;line-height:1.2}
+.theme-live-preview{margin-top:20px;width:100%;aspect-ratio:16/10;min-height:250px;background-size:cover;background-position:center;border:1px solid;border-radius:12px;overflow:hidden;color:#fff6df;font-family:FEHeroes,Georgia,serif;text-shadow:0 2px 3px #000}
+.theme-demo-header{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:2px solid;font-size:clamp(15px,2vw,21px)}
+.theme-demo-content{padding:clamp(16px,4vw,32px);display:grid;gap:18px}
+.theme-demo-content h4{margin:0;text-align:center;font-size:clamp(20px,3vw,28px)}
+.theme-demo-card{border:1px solid;border-radius:10px;padding:18px;display:grid;gap:12px;text-align:left}
+.theme-demo-card strong{font-size:20px}.theme-demo-colors{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.theme-demo-colors i{height:32px;border:1px solid #ffffff40;border-radius:5px;background:#ad475c99}.theme-demo-colors i:nth-child(2){background:#3d78a799}.theme-demo-colors i:nth-child(3){background:#3f876399}.theme-demo-colors i:nth-child(4){background:#888c8899}
+.theme-demo-button{justify-self:center;padding:8px 22px;border:1px solid;border-radius:6px}
+.theme-preview-actions{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:12px}.theme-preview-actions strong{overflow-wrap:anywhere}
+@media(max-width:600px){.theme-live-preview{aspect-ratio:3/4}.theme-demo-content{gap:22px;padding:24px 16px}.theme-demo-card{padding:20px 14px}.theme-demo-colors i{height:52px}}
