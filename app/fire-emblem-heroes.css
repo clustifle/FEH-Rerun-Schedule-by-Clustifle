@@ -110,3 +110,32 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-e
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-edit-options button{color:#fff1d4;font-family:FEHeroes,Georgia,serif}
 /* Hover previews are portalled to body, so tag typography must not depend on .tracker. */
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] :is(.hero-type-signature,.hero-type-copy,.hero-type-copy strong,.hero-type-copy>span,.hero-kind,.pool-signature,.pool-signature strong){font-family:FEHeroes,Georgia,serif!important;font-weight:400}
+/* Shared rerun windows: game panel bars and inset frames, without changing slot sizing. */
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.month-column,.waitlist-window,.home-banner-scroll,.responsive-remix-panel,.fb-list){background:#082b35;border:1px solid #b3baa0;border-radius:6px;box-shadow:inset 0 0 0 2px #123e46,inset 0 0 0 3px #71988d66;backdrop-filter:none}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.month-column h2,.waitlist-window h2,.responsive-remix-panel>h3){position:relative;isolation:isolate;background:#0b3441;color:#fff0c5;border:0;border-bottom:1px solid #c1bc92;box-shadow:inset 0 -1px #4a8889;text-align:center;text-shadow:0 1px 2px #001924}
+/* Empty cyan-framed bar at x=426,y=153,w=416,h=62 in SRPGStatus (2016 x 710). */
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.month-column h2,.waitlist-window h2,.responsive-remix-panel>h3)::before{content:"";position:absolute;inset:0;z-index:-1;background:url('../public/themes/fire-emblem-heroes/SRPGStatus.webp') 26.63% 23.61%/484.62% 1145.16%;opacity:.8;pointer-events:none}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.color-label,.revival-subheads h3){border-color:#b9b48e;color:#fff4dc;text-shadow:0 1px 2px #00131c;box-shadow:inset 0 0 0 1px #b0c5a936}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .color-label.red{background:linear-gradient(90deg,#6d233c,#a14759)}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .color-label.blue{background:linear-gradient(90deg,#163857,#356990)}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .color-label.green{background:linear-gradient(90deg,#164436,#397653)}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .color-label.colorless{background:linear-gradient(90deg,#314343,#667c73)}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .color-slot.red{background:linear-gradient(120deg,#492735,#261e2b)}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .color-slot.blue{background:linear-gradient(120deg,#1b3b54,#102937)}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .color-slot.green{background:linear-gradient(120deg,#244a38,#112e2c)}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .color-slot.colorless{background:linear-gradient(120deg,#3b4a42,#203239)}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.color-slot,.banner-lineup-row,.revival-group){border-color:#98ac8e66;box-shadow:inset 0 1px #a6bc9620}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .revival-subheads{background:#0b303a;border-color:#aab79a;box-shadow:inset 0 -1px #6c9690}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .revival-subheads h3{font-family:FEHeroes,Georgia,serif;color:#ffebbb;background:#143f47;font-weight:400}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.home-banner .banner-lineup-grid,.banner-lineup-scroll,.waitlist-window .schedule){background:#082b35;border-radius:5px}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .banner-empty-slot{background:none;border:0;box-shadow:none;color:#91b1a3}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .fb-list{padding:8px;gap:10px}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .fb-row{background:linear-gradient(110deg,#153e47,#092b35);border:1px solid #8da797;border-radius:6px;box-shadow:inset 0 0 0 2px #153d43;margin-bottom:8px}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .fb-row.is-selected{border-color:#ebd497;box-shadow:inset 3px 0 #d5c18a,inset 0 0 0 2px #153d43}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .fb-row>h3{color:#ffebbb;font-size:20px;background:none}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.fb-list-head,.fb-event-copy>span){color:#bfdbcc}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .fb-event-copy h4{font-family:FEHeroes,Georgia,serif;color:#ffefd1;font-weight:400}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .fb-empty{background:#092d36;border:1px dashed #90a894;color:#b8cdbb}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.month-navigator,.month-navigator-top,.month-strip){color:#e6e9d5;border-color:#8da795}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .month-navigator button{color:#ffedc1;background:#103b45;border-color:#8ba894}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .month-navigator button[aria-pressed=true]{background:#2b594b;border-color:#e4ce92;color:#fff1c5}
