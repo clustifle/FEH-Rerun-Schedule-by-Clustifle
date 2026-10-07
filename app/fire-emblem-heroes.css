@@ -152,3 +152,4 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .homepage-a
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .fb-heading{text-align:center}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .homepage-count{background:#604f3420;border:1px solid #5c4b3a66;color:#30291f;text-shadow:none}
 @media(max-width:700px){html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.homepage-tools h2,.home-revivals>h2,.schedule-page-heading h2,.fb-heading h2){font-size:19px;padding:14px 42px;min-height:58px}}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.homepage-tools h2,.home-revivals>h2,.schedule-page-heading h2,.fb-heading h2){color:#fff;text-shadow:0 1px 2px #302519,0 0 3px #30251980}
