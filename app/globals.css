@@ -818,3 +818,8 @@ html[data-theme] .tracker .home-revival-heroes{display:grid;grid-template-column
 html[data-theme] .tracker .home-revival-portrait{width:100%;height:auto;max-width:96px;aspect-ratio:1;justify-self:center;min-width:0}
 @container (max-width:580px){.responsive-remix-lineup{grid-template-columns:minmax(0,1fr)}html[data-theme] .tracker .home-banner .featured-banner-heroes{grid-template-columns:repeat(2,minmax(0,1fr));max-width:360px}}
 @media(max-width:600px){.responsive-remix-lineup{grid-template-columns:minmax(0,1fr)}html[data-theme] .tracker .home-banner .featured-banner-heroes{grid-template-columns:repeat(2,minmax(0,1fr));max-width:360px}html[data-theme] .tracker .home-banner-actions .secondary{max-width:100%;white-space:normal}}
+
+/* Directory toolbar uses icons without browser-default button boxes. */
+html:not([data-theme=frutiger-aero]) .tracker .all-heroes-tools .toolbar-icon{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:10px;background:transparent;border:0;border-radius:0;box-shadow:none;color:var(--muted);transition:color .18s ease}
+html:not([data-theme=frutiger-aero]) .tracker .all-heroes-tools .toolbar-icon:hover{background:transparent;color:var(--cyan)}
+html:not([data-theme=frutiger-aero]) .tracker .all-heroes-tools .toolbar-icon[aria-pressed=true]{color:var(--cyan);box-shadow:inset 0 -2px currentColor}
