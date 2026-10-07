@@ -883,3 +883,7 @@ html[data-theme][data-theme] .tracker .banner-editor .responsive-remix-lineup{gr
 html[data-theme][data-theme] .tracker .banner-editor .responsive-remix-panel .banner-lineup-group{grid-template-columns:repeat(2,minmax(0,1fr))}
 html[data-theme][data-theme] .tracker .banner-editor .banner-lineup-grid{min-width:0!important}
 .responsive-remix-panel h3 small{display:block;font-size:12px;font-weight:400;margin-top:4px;color:var(--edit-muted)}
+
+/* Add/edit panels stay inset rather than becoming full-screen dialogs. */
+html[data-theme][data-theme] .tracker dialog:is(.hero-editor,.banner-editor){inset:16px 16px 16px auto;width:min(600px,calc(100vw - 32px));max-width:calc(100vw - 32px);height:calc(100dvh - 32px);max-height:calc(100dvh - 32px);border:1px solid var(--edit-line);border-radius:16px}
+@media(max-width:600px){html[data-theme][data-theme] .tracker dialog:is(.hero-editor,.banner-editor){inset:12px 12px 12px auto;width:calc(100vw - 24px);max-width:calc(100vw - 24px);height:calc(100dvh - 24px);max-height:calc(100dvh - 24px);border-radius:14px}}
