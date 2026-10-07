@@ -55,6 +55,11 @@ const entries:Entry[]=[
  },
  {
   "section": "Browsing",
+  "question": "What is up with the random heroes selection?",
+  "answer": "The roster is maintained manually and is not limited to Legendary, Mythic, Emblem, Chosen, or recent Duo and seasonal heroes. It also supports banner lineups, rerun waitlists, and New Heroes and Hall of Forms revivals, so older heroes such as Summer Freyja and Wind Tribe Catria can appear. A hero being listed does not by itself confirm an upcoming rerun; check their schedule, month, and notes. Weapon and movement types are entered manually, so some records may still have missing details."
+ },
+ {
+  "section": "Browsing",
   "question": "What do the portrait icons mean?",
   "answer": "Weapon type appears at the upper left, hero type at the lower left, and movement type at the lower right. General and Special heroes leave the hero-type corner blank. Heroic Grails-marked units display the grail icon. Hover previews and Hero Details provide the recorded labels and notes."
  },
