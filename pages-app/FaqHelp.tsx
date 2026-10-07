@@ -3,51 +3,193 @@ import {Search} from 'lucide-react';
 type Section='Schedules'|'Browsing'|'Editing'|'About';
 type Entry={section:Section;question:string;answer:string;sources?:[string,string][]};
 const entries:Entry[]=[
- {section:'Schedules',question:'What is New Heroes Revival Schedule?',answer:'This view tracks returning New Heroes lineups, including revivals associated with Forging Bonds. Its compact month list runs from Oct 2025 to Oct 2029. Each entry shows the event title and up to four portraits with weapon-color backgrounds. Use the month strip or Current month to jump through the list. An ongoing entry shows a remaining-time tag when editors have supplied its active dates. “Title to be announced” or an empty slot means the tracker entry has not been filled yet.',sources:[['Nintendo: FEH revival notices','https://fire-emblem-heroes.com/en-gb/include/topics_detail.html']]},
- {section:'Schedules',question:'What is Hall of Forms Revival Schedule?',answer:'Hall of Forms revivals return a previous Hall of Forms lineup. HoF is a separate event view, rather than a summoning banner arranged by weapon-color rows. This tracker shows each revival as a month entry with up to four featured portraits. Click a portrait for details and use Current month to return to the current period. Check the in-game notice for event details and Forma availability.',sources:[['Nintendo: All About Hall of Forms','https://new-guide.fire-emblem-heroes.com/en-US/feh-3240.html']]},
- {section:'Schedules',question:'What is Double Special Heroes?',answer:'Double Special Heroes summoning events feature returning Special Heroes, with two featured 5-star heroes for each weapon color. On Home, the tracker uses a dedicated layout with two slots each for Red, Blue, Green, and Colorless. This differs from a new Special Heroes banner’s four featured portraits. Check the actual banner for its focus lineup and rates.',sources:[['Nintendo: Special Heroes and Double Special Heroes','https://new-guide.fire-emblem-heroes.com/en-US/feh-3500.html']]},
- {section:'Schedules',question:'What is New Heroes Return?',answer:'New Heroes Return is a returning-hero summoning banner, separate from this website’s New Heroes Revival event list. On Home, editors use the New Heroes Return / Double Special Heroes layout, with up to two heroes per weapon-color row. Its actual lineup and dates come from the banner announcement. A return banner’s slots are separate from the hero’s recorded next rerun month.'},
- {section:'Browsing',question:'How do profiles and Find Users work?',answer:'Open Profile while signed in to visit your own public profile. Your username forms its shareable link, such as /profile/clustifle. Set your username, display name, picture, bio, and visibility choices in Settings → Account. Changing a username changes the public link; older account-ID links still open the profile. Find Users searches public usernames and display names. Emails, followed heroes, and saved schedules are not shown in user search.'},
- {section:'Browsing',question:'Where are About this page and the social links?',answer:'Open Settings → About for information about the project, creator credits, special thanks, YouTube, X, and the GitHub repository. FAQ lives directly in the navigation menu. You can read both without signing in.'},
-
- {section:'Browsing',question:'How do I personalize the schedule?',answer:'Open Settings to choose Standard or Compact view, larger text, portrait tags, your start page and remembered schedule/month. Home carousel settings control auto-play, duration and pause on hover. You can reduce motion, choose a 12- or 24-hour clock and local or UTC banner times, and pause automatic updates. Refresh now checks the latest data. Changes save on this device and apply immediately; navigation defaults apply on the next visit. Settings → Personalization → Reset restores preferences without changing account access or saved heroes.'},
- {section:'Schedules',question:'Where can I find Hall of Forms revivals?',answer:'Choose Hall of Forms Revival Schedule from the navigation menu. Its separate month list runs from Oct 2025 to Oct 2029 and shows four featured portraits with weapon-color backgrounds. Use the month strip or Current month button to browse, and select a portrait for hero details.'},
- {section:'Editing',question:'How do I edit Hall of Forms revivals?',answer:'Open Edit revival in Hall of Forms Revival Schedule to set its title and choose up to four heroes from the portrait picker. Add hero also offers this schedule, or use an empty portrait slot to create a hero directly. Enable Currently ongoing and enter dates and UTC times to display the remaining-time tag. Save revival publishes the lineup separately from New Heroes Revival.'},
- {section:'Schedules',question:'What is a Legendary / Mythic / Emblem banner?',answer:'L/M/E is shorthand for Legendary, Mythic, and Emblem Heroes. These special summoning events feature a selected lineup of returning heroes alongside the headline hero or heroes. In this tracker, their reruns are recorded in General Schedule and their active banners use weapon-color rows on Home. A listed month is a rerun planning window; check the actual in-game banner for its available heroes and rates.',sources:[['Nintendo: Legendary and Mythic summoning','https://new-guide.fire-emblem-heroes.com/en-GB/feh-3120.html']]},
- {section:'Schedules',question:'How is a Remix banner different?',answer:'Legendary & Mythic Hero Remix events bring selected older Legendary and Mythic Heroes back into focus. Some heroes receive new skills through remixes, but appearing on a banner does not mean every returning hero receives an upgrade. The tracker keeps these returns in Remix Schedule. Use the event notice to confirm the lineup and any announced skill changes.',sources:[['Nintendo: FEH event notices','https://fire-emblem-heroes.com/en/include/topics_detail.html']]},
- {section:'Schedules',question:'What are New Heroes and Special Heroes banners?',answer:'New Heroes events introduce a featured lineup, while Special Heroes events feature heroes in themed outfits. On Home, these banners use the four-hero feature layout rather than the L/M/E color-row window. The glow behind each name indicates its weapon color. Banner participation and a hero’s recorded future rerun month are separate.',sources:[['Nintendo: New Heroes summoning','https://new-guide.fire-emblem-heroes.com/en-GB/feh-3490.html'],['Nintendo: Special Heroes summoning','https://new-guide.fire-emblem-heroes.com/en-US/feh-3500.html']]},
- {section:'Editing',question:'How do I mark a revival as currently ongoing?',answer:'In Edit Revival, enable Currently ongoing and enter the active start/end dates and UTC times. Defaults are 07:00 at the start and 06:59 at the end. Save revival to show the homepage-style remaining-time tag during that period. The tag disappears automatically at the end; uncheck the option to hide it manually.'},
- {section:'Editing',question:'How are hero portraits optimized?',answer:'Uploaded, pasted and imported portraits use compact WebP files when this reduces their size. Images larger than 1024 pixels are reduced while preserving aspect ratio and transparency; smaller portraits keep their original resolution. The preview shows the saved dimensions. Existing originals remain in Supabase, while optimized thumbnail and detail copies are served from GitHub Pages. New uploads appear immediately through Storage and are copied on the next website deployment.'},
- {section:'Editing',question:'How do I add heroes to New Heroes Revival?',answer:'Open Add a Hero, choose New Heroes Revival Schedule and select a month from Oct 2025 to Oct 2029. Saving fills an available slot in its four-hero lineup. You can also use an empty slot directly or Edit revival to choose existing heroes from the full-screen portrait picker and update the event title. Search by name or title, filter by weapon color, or leave a slot empty. New Heroes Revival membership does not automatically change the manually managed Rerun Waitlist.'},
- {section:'Editing',question:'How do I sign in and manage editor access?',answer:'Open the navigation menu and use Sign in or Sign up. After signing in, Settings → Account provides profile editing, password help, and Sign out. Confirm your email before signing in. New accounts have visitor access. Authorized accounts can edit the tracker. The Head Administrator can open Settings → Account → Manage Schedule Managers to add or remove access for an existing confirmed account. Schedule Managers can edit heroes and banners but cannot manage account access. Use Settings → Account → Sign out when finished.'},
- {section:'Editing',question:'How do I choose between banner layouts?',answer:'Choose L/M/E · Color rerun window for a lineup grouped by Red, Blue, Green, and Colorless. Choose New / Special Heroes · Four featured heroes for a lineup of up to four heroes. Choose New Heroes Return / Double Special Heroes · Two per color for four color rows with up to two heroes each. Each selected hero supplies its portrait, name, and type tag; the name glow follows its recorded weapon color. The picker disables additional unchecked heroes once four are selected. Uncheck a hero before selecting a replacement.'},
- {section:'Editing',question:'How can I avoid losing unsaved changes?',answer:'Finish with Save hero or Save banner and wait for a successful close. Cancel and the close button discard unsaved edits. Automatic data refresh pauses while a form is open, so it does not replace your draft. If saving fails, the form stays open with an error; correct it and try again.'},
- {section:'Browsing',question:'Does the tracker update automatically?',answer:'Open pages check for a newly published website version while visible and when you return or reconnect. Hero and banner data no longer reload every 30 seconds. After a successful deployment becomes available, the website updates once all open panels are closed and you are no longer typing; your selected view and month are retained. Temporary connection failures keep the last loaded data.'},
- {section:'Schedules',question:'What is Home?',answer:'Home shows active banners and their local start/end times. L/M/E banners use four weapon-color rows. New Heroes Return and Double Special Heroes use the same rows with two slots per color. New and Special Heroes banners feature up to four portraits, with names glowing in their weapon color. Multiple banners rotate in a looping carousel, using the duration selected in Settings → Home carousel (10 seconds by default). Use the arrows, slide indicators, swipe, or Pause; the active numbered navigation tile highlights the current banner. Pause, touch interactions, open dialogs, and a hidden tab pause rotation. Times automatically convert to your local timezone. Open the hamburger menu to switch to rerun schedules.'},
- {section:'Editing',question:'How do I manage homepage banners?',answer:'On Home, choose Add new… to open the full-screen banner editor. Select L/M/E for color rows, New / Special Heroes for up to four featured heroes, or New Heroes Return / Double Special Heroes for two slots per color. Enter a name and UTC start/end dates and times (defaults: 07:00 start, 06:59 end). Select existing heroes, then Save banner. Edit banner / slots uses the same editor to change a saved banner. Create hero in banner opens Add Hero and attaches the saved hero to that banner. Banner membership is separate from a hero’s rerun month. Upcoming and ended banners are available in the editor section.'},
- {section:'Schedules',question:'Which schedule should I choose?',answer:'General is for the end-of-month rotation. Remix has its own older-hero reruns. Monthly Revival separates Legendary and Mythic revivals within each month. New Heroes Revival and Hall of Forms Revival show event lineups in compact month lists. Rerun Waitlist contains L/M/E, Double Special Heroes (DSH), and New Heroes Return (NHR) lists, maintained manually by Head Admins and Schedule Managers. Open Schedule in the navigation menu to switch schedule views.'},
- {section:'Schedules',question:'What is General Schedule?',answer:'This is the tracker’s end-of-month banner view for Legendary, Mythic, Emblem, and Chosen Heroes. Each column is a recorded month and each row is a hero color. Check the actual event announcement for its lineup and exact dates.',sources:[['FEH Wiki: banner archive','https://feheroes.fandom.com/wiki/Category:Legendary/Mythic/Emblem_Hero_summoning_events']]},
- {section:'Schedules',question:'What is Remix Schedule?',answer:'Remix keeps older heroes returning on Remix banners in a separate month-by-month view. A listed return does not itself announce a new skill upgrade. Read the hero’s note and the event announcement for context.',sources:[['FEH Wiki: Remix archive','https://feheroes.fandom.com/wiki/Summoning_event_archive/Legendary_%26_Mythic_Hero_Remix']]},
- {section:'Schedules',question:'What is Monthly Legendary/Mythic Revival Schedule?',answer:'Monthly Revival groups older Legendary and Mythic reruns by month, with separate Legendary Revival and Mythic Revival columns. These entries are separate from General and Remix, and from the game’s Weekly Revival series.',sources:[['FEH Wiki: Monthly Revival archive','https://feheroes.fandom.com/wiki/Summoning_event_archive/Monthly_Revival']]},
- {section:'Schedules',question:'What is Rerun Waitlist?',answer:'Open Rerun Waitlist in navigation and choose L/M/E Waitlist, DSH Waitlist, or NHR Waitlist. Each list has separate membership and ordering. Only Head Admins and Schedule Managers can add heroes: use Add Hero from the selected waitlist to create and add one, or Choose a Hero to select an existing hero. Saving or changing a hero schedule category elsewhere does not add it to any waitlist. Banner slots and other waitlist memberships remain intact. Remove from Waitlist removes only that entry; the hero stays in the roster. Reorganize each list independently by weapon color.'},
- {section:'Schedules',question:'How reliable is a recorded month?',answer:'Entries are maintained manually by the Head Administrator and Schedule Managers. A month is a planning window, not an exact start day. Read the hero’s note for an announcement source, expectation, or uncertainty, then check the in-game notice for final information.',sources:[['Nintendo: FEH news','https://fire-emblem-heroes.com/en/topics/']]},
- {section:'Browsing',question:'What do the pool labels mean?',answer:'General Pool groups ordinary general-pool entries. Seasonal Limited identifies seasonal Special Heroes, including seasonal Duo and Harmonized heroes. Non-Seasonal Limited identifies limited heroes without a seasonal theme, such as Rearmed, Attuned, Aided, Entwined, Vista, and Chosen entries. Seasonal and non-seasonal heroes can have different rerun arrangements. Editors can override the suggested pool independently of hero type for exceptions. L/M/E Pool groups Legendary, Mythic, and Emblem entries. Pool selection is independent of hero type; these tracker labels do not replace a banner’s actual summoning availability.'},
- {section:'Browsing',question:'What do the icons and hero type labels mean?',answer:'The icon and text identify the recorded hero type. Legendary and Chosen display Wind, Earth, Fire, or Water; Mythic displays Anima, Astra, Light, or Dark. Emblem, Duo, Harmonized, Rearmed, Attuned, Aided, Entwined, Vista, General, and Special have their own icons. Pool icons identify the separate pool grouping.',sources:[['Nintendo: Legendary and Mythic blessings','https://new-guide.fire-emblem-heroes.com/en-US/feh-1170.html']]},
- {section:'Browsing',question:'How do I search and filter?',answer:'Choose a schedule, then search a hero’s name or title. Hero type narrows the list; Advanced filters combine type, color, and pool. Reset filters and clear the search if a hero appears missing. Filtering applies to the selected schedule.'},
- {section:'Browsing',question:'How do I navigate months and see details?',answer:'Use the slider or month navigation buttons on dated views. Month headings use a short format such as Oct 26; columns expand with the number of heroes in each color row. Hover over a hero on desktop for a preview, or click / tap for full Hero Details, including its title, tags, pool, editor note, and update information. Waitlist has no month slider.'},
- {section:'Browsing',question:'How does the layout adapt to my screen?',answer:'Rows and portraits adjust to available browser space, with minimum sizes to keep information readable. Dated columns and Waitlist lanes scroll horizontally when needed. Compact view makes cards smaller and hides their tags; details remain available by hovering or tapping.'},
- {section:'Editing',question:'Who can edit the tracker?',answer:'The Head Administrator and authorized Schedule Managers can add, edit, delete, upload portraits, and write hero notes after signing in with their own account. Only the Head Administrator manages editor access. The Schedule Manager panel requires an existing confirmed account and does not send invitations.'},
- {section:'Editing',question:'How do I add a hero or change its rerun month?',answer:'Choose a schedule and open Add hero, or choose Edit hero from the full-screen Hero profile. The editor fills the screen; its fields scroll while Save and Cancel stay visible. Enter the name, title, type, blessing if applicable, color, and pool. Check Demote only for a 4–5★ summonable demote hero; this appears in Hero Details and hover previews. Select General, Remix, or Monthly Revival and supply a month. Choose a waitlist schedule category when no month is available, or enable Skip next rerun month to save an uncertain EoM return with the L/M/E Waitlist category. This does not add a waitlist entry; use Choose a Hero in the desired waitlist to add it manually. Homepage banner membership stays intact. Save to publish the change; moving into Waitlist clears the month.'},
- {section:'Editing',question:'What should I put in a hero note?',answer:'Include the announcement source, banner context, expected timing, or information that is still uncertain. Notes are visible in Hero Details and previews, so write them for visitors. The Head Administrator and Schedule Managers can update notes.'},
- {section:'Editing',question:'How do portrait uploads and image links work?',answer:'Use a PNG, JPG, or WebP image up to 3 MB. Choose a file, drag and drop it, or paste a copied image. A supported direct FEH Wiki / Fandom image URL can also be imported. Wait for the preview before saving. If the host blocks import, download the image and upload the file.'},
- {section:'About',question:'Can I install the tracker on my phone?',answer:'Use Install app in Settings → About. On Android, open in Chrome and use the install option when available. On iPhone or iPad, use Safari → Share → Add to Home Screen, with Open as Web App enabled if offered. Current schedules and editing need internet access.',sources:[['Apple: add a web app','https://support.apple.com/en-hk/guide/iphone/iphea86e5236/ios']]},
- {section:'About',question:'Who made this website?',answer:'Clustifle made this unofficial fan tracker, originally on ChatGPT Sites and later migrated to GitHub Pages with Supabase. Artwork belongs to Nintendo / INTELLIGENT SYSTEMS; Champions typography is from UEFA. Settings → About contains the project credits, special thanks, and Clustifle’s social links.'}
+ {
+  "section": "Schedules",
+  "question": "Which schedule should I use?",
+  "answer": "General tracks recorded reruns for Legendary, Mythic, Emblem, and Chosen Heroes. Remix tracks Remix returns. L/M Revival tracks monthly Legendary/Mythic revival entries. NH Revival and HoF Revival show their own event lineups. Open Schedule in navigation to choose a view."
+ },
+ {
+  "section": "Schedules",
+  "question": "Are listed rerun months confirmed dates?",
+  "answer": "A recorded month is a planning window, not an exact start date. Read the hero note for its source and any uncertainty. Confirmed event dates and lineups should be checked against the in-game announcement. Editors maintain entries manually."
+ },
+ {
+  "section": "Schedules",
+  "question": "What do the banner cards show?",
+  "answer": "Home shows current and upcoming events, their featured heroes, active dates, and a remaining-time or coming-soon label. L/M/E, New Heroes Return, and Double Special Heroes use color-row lineups. New and Special Heroes use four featured portraits. Revival cards show returning event lineups."
+ },
+ {
+  "section": "Schedules",
+  "question": "How does the Remix window work?",
+  "answer": "A Remix card contains two groups of eight heroes. Each group has two slots per weapon color. The window fades between Remix 1 and Remix 2; use its group controls to switch manually. Its lineup is separate from the hero’s recorded next rerun month."
+ },
+ {
+  "section": "Schedules",
+  "question": "How are New Heroes Return and NH Revival different?",
+  "answer": "New Heroes Return is a returning-hero banner shown in the color-row banner layout. NH Revival is the separate New Heroes Revival schedule, including returning lineups associated with Forging Bonds. They have separate entries and are not interchangeable."
+ },
+ {
+  "section": "Schedules",
+  "question": "Where can I find Hall of Forms revivals?",
+  "answer": "Open Schedule → HoF Revival Schedule. Browse its month entries and select a portrait for Hero Details. Hall of Forms is an event lineup, not a summoning banner; a featured grail unit is not made summonable by appearing there."
+ },
+ {
+  "section": "Schedules",
+  "question": "Why are there three rerun waitlists?",
+  "answer": "Open Rerun Waitlist and choose L/M/E Waitlist, DSH Waitlist, or NHR Waitlist. They track separate rerun arrangements for Legendary/Mythic/Emblem, Double Special Heroes, and New Heroes Return. Each list has its own membership and order, without a month browser."
+ },
+ {
+  "section": "Schedules",
+  "question": "Are heroes added to a waitlist automatically?",
+  "answer": "No. Only the Head Administrator and authorized Schedule Managers manually add entries. Changing a hero’s schedule category does not add it to a waitlist. Removing a waitlist entry keeps the hero in the roster and does not remove it from banners or other waitlists."
+ },
+ {
+  "section": "Browsing",
+  "question": "How do I search and filter heroes?",
+  "answer": "Open a schedule or All Heroes, then search by name or title. Filters can narrow results by hero type, weapon color, and pool. The Filters panel opens on the right. If a hero seems missing, clear the search and reset filters. Results remain limited to the view you selected."
+ },
+ {
+  "section": "Browsing",
+  "question": "What is the difference between Standard and Compact view?",
+  "answer": "Standard uses larger portraits and more space for browsing. Compact keeps portraits small and makes dense lists easier to scan. Both adapt to browser size; wide schedules can scroll horizontally. Select a hero to see full details in either view."
+ },
+ {
+  "section": "Browsing",
+  "question": "What do the portrait icons mean?",
+  "answer": "Weapon type appears at the upper left, hero type at the lower left, and movement type at the lower right. General and Special heroes leave the hero-type corner blank. Heroic Grails-marked units display the grail icon. Hover previews and Hero Details provide the recorded labels and notes."
+ },
+ {
+  "section": "Browsing",
+  "question": "How do Heroic Grails and Grail Pool work?",
+  "answer": "Editors can mark Heroic Grails with a checkbox and assign Grail Pool separately. The grail icon and tag appear in portraits and details. Use the grail visibility toggle, including in HoF revivals, to show or hide marked units. Hiding a unit does not delete it or change an event lineup."
+ },
+ {
+  "section": "Browsing",
+  "question": "What do hero pool labels mean?",
+  "answer": "Pool labels group heroes as General Pool, Seasonal Limited, Non-Seasonal Limited, L/M/E Pool, or Grail Pool. Pool and hero type are separate fields and can be set independently by editors. These labels describe the tracker’s records; check the actual event for summoning availability."
+ },
+ {
+  "section": "Browsing",
+  "question": "Why does a hero have no rerun schedule or month?",
+  "answer": "Editors can choose None to leave both schedule and month blank while retaining notes. None is an editor option, not a separate schedule page. Unscheduled heroes remain available in All Heroes and Hero Details."
+ },
+ {
+  "section": "Browsing",
+  "question": "How do I browse months and open Hero Details?",
+  "answer": "Use the month browser and navigation controls in dated views. Current month returns to the current period. Hover over a portrait on desktop for a preview, or click or tap it for Hero Details. Waitlists have no month browser."
+ },
+ {
+  "section": "Browsing",
+  "question": "How do themes and Settings work?",
+  "answer": "Settings → Personalization offers the default Fire Emblem Heroes theme and ten realm variants, including separate light and dark dream realms. You can adjust view size, text, tags, remembered navigation, carousel behavior, and motion. Date & time controls the clock and timezone. Preferences are saved on this device."
+ },
+ {
+  "section": "Browsing",
+  "question": "How does the home carousel work?",
+  "answer": "Use the arrows or numbered tiles to select a banner. Play or pause controls automatic rotation. Settings → Personalization → Home carousel sets auto-play, time per banner, and pause on hover. The controls use the selected realm’s colors; there is no animated countdown progress bar."
+ },
+ {
+  "section": "Browsing",
+  "question": "Does the website update automatically?",
+  "answer": "Visible pages check for a newly published deployment and when you return or reconnect. Schedule data no longer reloads every 30 seconds. When a successful deployment is available, the site updates when panels are closed and you are no longer typing. Settings → Updates lets you control automatic updates or use Refresh now."
+ },
+ {
+  "section": "Browsing",
+  "question": "How do I reset my preferences?",
+  "answer": "Open Settings → Personalization → Reset, choose Reset settings, then confirm Restore defaults. This resets device preferences without deleting heroes, schedule data, or your account. Cancel keeps your preferences."
+ },
+ {
+  "section": "Browsing",
+  "question": "Do I need an account to browse?",
+  "answer": "No. You can browse schedules, heroes, waitlists, Settings, and FAQ without signing in. Sign in or Sign up from navigation to use account features. New accounts have visitor access; registering does not grant schedule-editing permissions."
+ },
+ {
+  "section": "Browsing",
+  "question": "How do profiles and Find Users work?",
+  "answer": "Profile opens your public profile when signed in. Settings → Account lets you update your username, display name, picture, bio, and visibility choices. Find Users searches public usernames and display names. Sign-in emails are private and do not appear in public search. Changing your username changes its public profile link."
+ },
+ {
+  "section": "Editing",
+  "question": "Who can edit live schedules and manage access?",
+  "answer": "The Head Administrator and authorized Schedule Managers can maintain heroes, banners, revivals, and waitlists. Only the Head Administrator manages editor access. Public contributions are welcome from everyone, but live editing permissions remain restricted to authorized accounts."
+ },
+ {
+  "section": "Editing",
+  "question": "How do I add or edit a hero?",
+  "answer": "Use Add hero in the relevant view or Edit hero in Hero Details. The editor opens in a panel rather than filling the desktop screen. Set the name, title, type, weapon and movement details, color, pool, schedule, month when required, and notes. Demote and Heroic Grails have separate checkboxes. Save publishes the change."
+ },
+ {
+  "section": "Editing",
+  "question": "How do I add or edit a banner lineup?",
+  "answer": "Open Add banner or edit an existing banner. Choose its type, name, active dates and times, and featured heroes. Clicking a hero slot opens the Select a hero picker. Remix has two groups of eight with two slots per color; other layouts follow their selected banner type. Banner membership is separate from a hero’s rerun schedule."
+ },
+ {
+  "section": "Editing",
+  "question": "How do I update revival entries?",
+  "answer": "Open Edit revival in NH Revival or HoF Revival to update the title and featured heroes. If an event is currently ongoing, supply its active dates and UTC times to show its remaining-time label. Review the lineup and save. The two revival schedules are maintained separately."
+ },
+ {
+  "section": "Editing",
+  "question": "How do I reorganize banners and waitlists?",
+  "answer": "Open Reorganize in the relevant view, adjust the order, and save. Waitlists are reorganized independently; changing one does not reorder the others. Review the selected list or banner section before saving."
+ },
+ {
+  "section": "Editing",
+  "question": "How do portrait uploads work?",
+  "answer": "Choose, drop, or paste a PNG, JPG, or WebP image up to 3 MB. Supported direct FEH Wiki/Fandom image links can be imported. Wait for the preview before saving. Portraits are optimized when this reduces their size; optimized copies are served from GitHub Pages, with live Storage fallback for new uploads."
+ },
+ {
+  "section": "About",
+  "question": "How do I install the website as an app?",
+  "answer": "Open navigation → Install App, then select Install. When your browser provides a PWA install prompt, the button opens it for confirmation. Otherwise, it shows short browser instructions. On iPhone or iPad, use Safari → Share → Add to Home Screen. Current schedules and editing need an internet connection.",
+  "sources": [
+   [
+    "PWA installation support",
+    "https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt"
+   ]
+  ]
+ },
+ {
+  "section": "About",
+  "question": "Can anyone contribute to the website?",
+  "answer": "Yes. Everyone can suggest rerun information, hero corrections, features, design improvements, or bug reports through GitHub issues. Testing, documentation, and code contributions are also welcome. Include a source for schedule corrections and distinguish confirmed information from predictions. Maintainers review submissions before applying live changes.",
+  "sources": [
+   [
+    "Contributing Guidelines",
+    "https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/blob/main/CONTRIBUTING.md"
+   ],
+   [
+    "Submit an issue",
+    "https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/issues"
+   ]
+  ]
+ },
+ {
+  "section": "About",
+  "question": "Is the website open source?",
+  "answer": "Original website code and documentation use the MIT License. Nintendo artwork, game UI, backgrounds, supplied fonts, and other third-party materials retain their own rights and terms. The code license does not grant permission to reuse those assets.",
+  "sources": [
+   [
+    "MIT License",
+    "https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/blob/main/LICENSE"
+   ],
+   [
+    "Third-party notices",
+    "https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/blob/main/THIRD_PARTY_NOTICES.md"
+   ]
+  ]
+ },
+ {
+  "section": "About",
+  "question": "Where can I find the version and credits?",
+  "answer": "Open Settings → About for the website logo, release version, credits, copyright, and special thanks. Installation is in the navigation menu, not in About."
+ }
 ];
 export default function FaqHelp({canEdit=false}:{canEdit?:boolean}){
  const [query,setQuery]=useState(''),[section,setSection]=useState<Section|'All'>('All');
  useEffect(()=>{if(!canEdit&&section==='Editing')setSection('All');},[canEdit,section]);
  const topics=(['All','Schedules','Browsing','Editing','About'] as const).filter(topic=>canEdit||topic!=='Editing');
  const filtered=entries.filter(e=>(canEdit||e.section!=='Editing')&&(section==='All'||section===e.section)&&(e.question+' '+e.answer).toLowerCase().includes(query.trim().toLowerCase()));
- const topicLabel=(topic:string)=>topic==='Editing'?'Editor instructions':topic;
+ const topicLabel=(topic:string)=>topic==='Editing'?'Editor instructions':topic==='About'?'App & community':topic;
  return <section className="settings-inline faq-inline" aria-labelledby="faq-title"><header className="settings-header"><div><h2 id="faq-title">FAQ</h2><p>{canEdit?'Schedule guide and editor instructions.':'Your guide to schedules, banners, and heroes.'}</p></div></header><div className="settings-layout"><label className="settings-mobile-section">FAQ topic<select value={section} onChange={e=>setSection(e.target.value as Section|'All')}>{topics.map(topic=><option key={topic} value={topic}>{topicLabel(topic)}</option>)}</select></label><nav className="settings-sections" aria-label="FAQ topics">{topics.map(topic=><button key={topic} aria-current={section===topic?'location':undefined} onClick={()=>setSection(topic)}>{topicLabel(topic)}</button>)}</nav><div className="settings-body"><label className="faq-search"><Search size={18} aria-hidden="true"/><input type="search" aria-label="Search FAQ" placeholder="Search schedules, banners, or heroes…" value={query} onChange={e=>setQuery(e.target.value)}/></label><div className="faq-content"><p className="faq-count" role="status">{filtered.length} {filtered.length===1?'answer':'answers'}</p>{filtered.map(e=><details key={e.question} className="faq-entry" open={query.trim()?true:undefined}><summary>{e.question}</summary><div><p>{e.answer}</p>{e.sources&&<nav aria-label={'Sources for '+e.question}>{e.sources.map(([name,url])=><a key={url} href={url} target="_blank" rel="noopener noreferrer">{name} ↗</a>)}</nav>}</div></details>)}{!filtered.length&&<p className="faq-empty">No matching answers. Try another topic or search.</p>}</div></div></div></section>;
 }
