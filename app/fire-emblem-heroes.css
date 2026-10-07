@@ -142,3 +142,13 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .month-navi
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-board{background:#082b35;border:1px solid #b3baa0;border-radius:6px;box-shadow:inset 0 0 0 2px #123e46,inset 0 0 0 3px #71988d66}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-row{border-color:#98ac8e66}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-slot{box-shadow:inset 0 1px #a6bc9620,inset 0 -1px #a6bc9620}
+/* Parchment ribbon from Common.webp replaces the ornamental title frame. */
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.homepage-tools h2,.home-revivals>h2,.schedule-page-heading h2,.fb-heading h2){position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;gap:8px;width:fit-content;min-width:min(320px,100%);max-width:100%;min-height:60px;padding:15px 54px;margin-left:auto;margin-right:auto;background:none;border:0;box-shadow:none;color:#30291f;font-size:21px;line-height:1.25;text-align:center;text-shadow:0 1px #f5e4c180;text-wrap:balance}
+/* Ribbon region x=0,y=171,w=980,h=126 in the original 2033 x 1542 atlas. */
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.homepage-tools h2,.home-revivals>h2,.schedule-page-heading h2,.fb-heading h2)::before{content:"";position:absolute;inset:0;z-index:-1;background:url('../public/themes/fire-emblem-heroes/Common.webp') 0 12.08%/207.45% 1223.81%;pointer-events:none}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .homepage-tools{display:grid;grid-template-columns:1fr;justify-items:center;gap:10px}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .homepage-tools>div:first-child{width:100%;text-align:center}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .homepage-actions{justify-self:end}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .fb-heading{text-align:center}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .homepage-count{background:#604f3420;border:1px solid #5c4b3a66;color:#30291f;text-shadow:none}
+@media(max-width:700px){html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.homepage-tools h2,.home-revivals>h2,.schedule-page-heading h2,.fb-heading h2){font-size:19px;padding:14px 42px;min-height:58px}}
