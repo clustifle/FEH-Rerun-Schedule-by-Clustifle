@@ -192,3 +192,4 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .carousel-d
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .carousel-banner-number{position:relative;font:18px/1 FEHeroes,Georgia,serif;text-shadow:0 1px 2px #000;pointer-events:none}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .carousel-dots button.is-current .carousel-banner-number{color:#fff0ae;text-shadow:0 1px 2px #000,0 0 3px #dec278}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .carousel-dots button:hover:not(:disabled){filter:brightness(1.2)}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .waitlist-slot>.no-heroes{width:100%;grid-column:1/-1;font-size:16px;color:#d0dcd2;text-align:center;white-space:nowrap}
