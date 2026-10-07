@@ -158,7 +158,7 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme] .settings-perso
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .settings-personalization .theme-preview{height:auto;min-height:0;aspect-ratio:1;padding:0;background-size:cover;background-position:center}
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .theme-option-copy{padding:9px 6px;text-align:center;min-height:48px;justify-content:center}
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .theme-option-copy strong{font-size:14px;line-height:1.2}
-.theme-live-preview{margin-top:20px;width:100%;aspect-ratio:16/10;min-height:250px;background-size:cover;background-position:center;border:1px solid;border-radius:12px;overflow:hidden;color:#fff6df;font-family:FEHeroes,Georgia,serif;text-shadow:0 2px 3px #000}
+.theme-live-preview{margin-top:20px;width:100%;aspect-ratio:16/10;min-height:330px;background-size:cover;background-position:center;border:1px solid;border-radius:12px;overflow:hidden;color:#fff6df;font-family:FEHeroes,Georgia,serif;text-shadow:0 2px 3px #000}
 .theme-demo-header{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:2px solid;font-size:clamp(15px,2vw,21px)}
 .theme-demo-content{padding:clamp(16px,4vw,32px);display:grid;gap:18px}
 .theme-demo-content h4{margin:0;text-align:center;font-size:clamp(20px,3vw,28px)}
@@ -166,4 +166,4 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme] .theme-option-c
 .theme-demo-card strong{font-size:20px}.theme-demo-colors{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.theme-demo-colors i{height:32px;border:1px solid #ffffff40;border-radius:5px;background:#ad475c99}.theme-demo-colors i:nth-child(2){background:#3d78a799}.theme-demo-colors i:nth-child(3){background:#3f876399}.theme-demo-colors i:nth-child(4){background:#888c8899}
 .theme-demo-button{justify-self:center;padding:8px 22px;border:1px solid;border-radius:6px}
 .theme-preview-actions{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:12px}.theme-preview-actions strong{overflow-wrap:anywhere}
-@media(max-width:600px){.theme-live-preview{aspect-ratio:3/4}.theme-demo-content{gap:22px;padding:24px 16px}.theme-demo-card{padding:20px 14px}.theme-demo-colors i{height:52px}}
+@media(max-width:600px){.theme-live-preview{aspect-ratio:auto;min-height:420px}.theme-demo-content{gap:22px;padding:24px 16px}.theme-demo-card{padding:20px 14px}.theme-demo-colors i{height:52px}}

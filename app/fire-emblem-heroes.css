@@ -1,5 +1,5 @@
 @import "./fire-emblem-heroes-interface.css";
-@font-face{font-family:FEHeroes,Georgia,serif;src:url('../public/themes/fire-emblem-heroes/feh.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:FEHeroes;src:url('../public/themes/fire-emblem-heroes/feh.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 html[data-theme=fire-emblem-heroes][data-theme]{color-scheme:dark;--teal:#174d5a;--cyan:#8de6e8;--pink:#e7b6db;--line:#92b5b866;--muted:#d2dedb;--edit-bg:#092b37;--edit-panel:#123e49;--edit-field:#06242d;--edit-text:#fff6df;--edit-muted:#ccded8;--edit-line:#91b3ad88;--edit-accent:#edcf84;--edit-button:#24717a;--edit-button-text:#fff7df}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] body{background:#051820 url('../public/themes/fire-emblem-heroes/wallpaper.webp') center top/cover fixed no-repeat;color:#fff6df;font-family:FEHeroes,Georgia,serif}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] :is(button,input,select,textarea){font-family:FEHeroes,Georgia,serif}
