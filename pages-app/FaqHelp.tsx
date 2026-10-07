@@ -76,7 +76,7 @@ const entries:Entry[]=[
  {
   "section": "Browsing",
   "question": "How do I browse months and open Hero Details?",
-  "answer": "Use the month browser and navigation controls in dated views. Current month returns to the current period. Hover over a portrait on desktop for a preview, or click or tap it for Hero Details. Waitlists have no month browser."
+  "answer": "Use Browse Month to choose a year and month, or step through available months with the arrows. Unavailable months are disabled. Current month returns to the current period. Hover over a portrait on desktop for a preview, or click or tap it for Hero Details. Waitlists have no month browser."
  },
  {
   "section": "Browsing",

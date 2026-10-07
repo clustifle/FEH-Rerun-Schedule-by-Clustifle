@@ -125,3 +125,26 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-the
 html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .install-minimal p{font-size:16px;line-height:1.5;margin:0 0 20px}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .install-minimal .primary{width:100%;min-height:48px}
 html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .install-minimal .install-status{margin:18px 0 0;font-size:14px}
+
+/* Shared FEH calendar browser. */
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .month-browser{max-width:760px;margin:18px auto 0;padding:16px!important;border:1px solid var(--realm-line);border-radius:10px;font-family:FEHeroes,Georgia,serif;overflow:hidden}
+.month-browser-heading,.month-browser-selection,.month-browser-year{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.month-browser-heading{font-size:19px;margin-bottom:12px;color:var(--realm-accent)}
+.month-browser-selection{padding:4px 0 12px;border-bottom:1px solid var(--realm-line)}
+.month-browser-selection p{margin:0;text-align:center;font-size:24px;line-height:1.3;color:#fff;text-shadow:0 2px 2px #000;min-width:0}
+.month-browser-year{justify-content:center;margin:12px 0}
+.month-browser-year label{display:flex;align-items:center;gap:10px;color:var(--realm-accent)}
+.month-browser-year select{font:inherit;color:#fff;background:var(--realm-field);border:1px solid var(--realm-line);border-radius:5px;padding:8px 12px;min-height:44px}
+.month-browser-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.month-browser button{font:inherit;position:relative;isolation:isolate;min-height:44px;background:transparent;color:#fff;border:0;border-radius:6px;padding:8px 10px;cursor:pointer;text-shadow:0 1px 2px #000}
+.month-browser button::before{content:"";position:absolute;inset:0;z-index:-1;background:url('../public/themes/fire-emblem-heroes/Common_Button.webp') 0 10.9%/219.5% 1197.5%;filter:var(--realm-sprite-filter);pointer-events:none;clip-path:polygon(5% 0,95% 0,100% 50%,95% 100%,5% 100%,0 50%)}
+.month-browser button:hover:not(:disabled){filter:brightness(1.15)}
+.month-browser button:disabled{opacity:.35;cursor:default}
+.month-browser button[aria-current=date]{color:var(--realm-accent);box-shadow:inset 0 0 0 2px var(--realm-accent)}
+.month-browser button:focus-visible,.month-browser select:focus-visible{outline:2px solid var(--realm-accent);outline-offset:2px}
+.month-browser-step,.month-browser-year>button{display:grid;place-items:center;flex:none;width:44px}
+.month-browser-current{font-size:15px!important;max-width:55%;line-height:1.3}
+@media(max-width:600px){.month-browser-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.month-browser-selection p{font-size:21px}.month-browser-heading{font-size:17px}.month-browser-current{font-size:14px!important}}
+/* Plain Settings headings across all realms. */
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-group>h3::before{display:none!important}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline:not(.faq-inline) .settings-group>h3{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;min-height:0!important}
