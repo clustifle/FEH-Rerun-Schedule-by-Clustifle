@@ -1,29 +1,21 @@
-Copyright (c) 2026 Clustifle. All rights reserved.
+MIT License
 
-This notice applies to original code and documentation authored for Fire Emblem
-Heroes Rerun Schedule by Clustifle, except material carrying a separate license
-or copyright notice.
+Copyright (c) 2026 Clustifle
 
-No permission is granted to copy, modify, distribute, sublicense, sell, or reuse
-covered material without prior written permission from the applicable copyright
-holder, except as permitted by applicable law. Public availability of this
-repository does not grant an open-source license.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-For permission requests, contact Clustifle using a contact method published by
-the project maintainer. Do not assume that submitting a request grants permission.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Third-party materials are excluded from this notice. Fire Emblem Heroes artwork,
-characters, game UI sprites, and game backgrounds remain the property of Nintendo
-and INTELLIGENT SYSTEMS. Supplied fonts, other third-party assets, dependencies,
-and vendored code retain their respective owners' rights and license terms.
-See the asset source records and existing third-party license notices. Clustifle
-does not grant permission to reuse materials owned by others.
-
-This project is an unofficial fan project, unaffiliated with Nintendo or
-INTELLIGENT SYSTEMS.
-
-TO THE EXTENT PERMITTED BY APPLICABLE LAW, THE COVERED MATERIAL IS PROVIDED
-"AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NONINFRINGEMENT.
-THE COPYRIGHT HOLDER IS NOT LIABLE FOR CLAIMS, DAMAGES, OR OTHER LIABILITY
-ARISING FROM USE OF THE COVERED MATERIAL.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

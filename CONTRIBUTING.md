@@ -1,18 +1,34 @@
 # Contributing
 
-Thank you for helping improve Fire Emblem Heroes Rerun Schedule. Please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+Everyone is welcome to help improve **Fire Emblem Heroes Rerun Schedule**. You do not need coding experience: rerun information, corrections, ideas, testing, documentation, and design feedback are all useful contributions.
 
-## Bugs, ideas, and schedule corrections
+Please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
-Open a GitHub issue with a clear description. For bugs, include the affected page, theme, device or browser, reproduction steps, expected behavior, and screenshots when useful. Remove personal information from screenshots.
+## Ways to help
 
-For schedule corrections, include the hero or banner name, dates, timezone, and a source such as an in-game announcement or official notice. Clearly distinguish confirmed information from predictions.
+- Submit confirmed rerun dates, banner lineups, or revival information.
+- Correct hero details, notes, missing information, or outdated entries.
+- Suggest features, filters, accessibility improvements, or theme refinements.
+- Report bugs and test the website on different browsers and devices.
+- Improve documentation, design, or code through a pull request.
 
-Discuss substantial redesigns or new features in an issue before starting a large pull request.
+## Schedule and hero contributions
 
-## Local development
+[Open an issue](https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/issues) with the hero or banner name, schedule category, proposed correction, dates and timezone where relevant, and a source such as an in-game announcement or official notice. Screenshots are welcome; remove personal information.
 
-Use Node.js 24 and pnpm 11, matching the deployment workflow.
+Clearly distinguish confirmed information from predictions. For waitlist suggestions, identify L/M/E, Double Special Heroes, or New Heroes Return.
+
+Anyone can suggest changes. The Head Administrator and authorized Schedule Managers review and apply changes to the live website. Open-source contributions do not require manager access, and manager permissions are not automatically granted to contributors.
+
+## Bugs and ideas
+
+Include the affected page, theme, device or browser, steps to reproduce, and expected behavior. For ideas, explain what would improve and who it would help. Discuss substantial redesigns before starting a large pull request.
+
+## Code contributions
+
+Fork the repository, create a branch, make a focused change, and open a pull request. Describe the problem, resulting behavior, and your checks. Include desktop and mobile screenshots for visible changes.
+
+Use Node.js 24 and pnpm 11, matching the deployment workflow:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
@@ -21,13 +37,7 @@ pnpm dev:pages
 
 The GitHub Pages application is in `pages-app/`; shared styling is in `app/`. Public images and theme assets are in `public/`. Database SQL files are in `supabase/`.
 
-## Pull requests
-
-1. Create a branch with a focused change.
-2. Explain the problem, resulting behavior, and how you checked it.
-3. Include desktop and mobile screenshots for visible changes.
-4. Check all affected realm themes, keyboard navigation, and reduced-motion behavior.
-5. Run the relevant checks before submitting:
+Check affected realm themes, keyboard navigation, and reduced-motion behavior. Run the relevant checks:
 
 ```sh
 pnpm exec tsc -p tsconfig.pages.json
@@ -35,24 +45,16 @@ node --test scripts/banner-time.test.mjs
 pnpm build:pages
 ```
 
-For portrait-delivery changes, install Pillow and also run:
+For portrait-delivery changes, install Pillow and run `python scripts/test-portrait-sync.py`.
 
-```sh
-python scripts/test-portrait-sync.py
-```
+Keep changes focused. Do not commit credentials, service-role keys, personal data, or local environment files. Test database changes in a separate development environment rather than the production database, and preserve existing access controls.
 
-Avoid unrelated formatting or dependency changes. Keep secrets, service-role keys, personal data, and local environment files out of commits.
+Heroes marked as unscheduled use notes without a schedule month. Do not create a None Schedule page or automatically populate waitlists from a hero's category.
 
-## Schedule data and access
+## Review and licensing
 
-Only the Head Administrator and authorized Schedule Managers manually add or edit live schedule data and waitlist entries. A contribution does not grant editing access. Do not modify the production database while testing; use a separate development environment and preserve existing access controls.
+Maintainers review contributions for accuracy, usability, and compatibility with the website. They may request revisions before merging or updating live data.
 
-Heroes marked as unscheduled use notes without a schedule month. Do not add a public None Schedule page or automatically populate waitlists from a hero's category.
+Original project code and documentation are open source under the [MIT License](LICENSE). By submitting original code or documentation, you agree to contribute it under MIT. You retain copyright in your contribution; no copyright assignment is required.
 
-## Assets and attribution
-
-Preserve existing copyright notices and asset source records. Include the source and permission or license for any new third-party asset. Nintendo artwork, game sprites, backgrounds, supplied fonts, and other third-party materials are not covered by the project's code license.
-
-Submit only work you have the right to contribute. By submitting original work, you grant Clustifle permission to incorporate, modify, and distribute it as part of this project under the repository's all-rights-reserved terms. You retain ownership of your contribution unless separately agreed. Third-party material keeps its own terms.
-
-The repository is publicly available but is not open source. Reuse outside contributions to this project requires the applicable copyright holder's written permission; see [LICENSE](LICENSE).
+Submit only material you have the right to contribute. Include the source and applicable rights or license for new third-party assets, and preserve existing notices. Nintendo artwork, game sprites, backgrounds, supplied fonts, and other third-party materials retain their own terms; see [Third-party notices](THIRD_PARTY_NOTICES.md).
