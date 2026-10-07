@@ -9,7 +9,7 @@ import {apiFetch} from './static-data';
 import {bannerTiming,bannerStatusTag} from './banner-time';
 import {usePreferences,getPreferences,setPreferences,recordUpdate} from './preferences';
 import {useAutoRefresh} from './useAutoRefresh';
-export type BannerHero={id:string;name:string;title:string;color:string;category?:string;blessing?:string|null;weapon_type?:string|null;move_type?:string|null;portrait?:string|null};
+export type BannerHero={id:string;name:string;title:string;color:string;heroic_grail?:boolean;category?:string;blessing?:string|null;weapon_type?:string|null;move_type?:string|null;portrait?:string|null};
 export type Banner={slot_count?:number|null;coming_soon?:boolean;banner_type?:BannerLayout;id:string;name:string;starts_on:string;ends_on:string;starts_time:string;ends_time:string;sort_order?:number|null;tracker_banner_heroes:BannerMember[]};
 const layoutOf=(b:Banner)=>b.banner_type||(/new heroes|special heroes/i.test(b.name)?'featured':'lme');
 const colors=['Red','Blue','Green','Colorless'];

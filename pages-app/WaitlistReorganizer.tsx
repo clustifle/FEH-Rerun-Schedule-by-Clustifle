@@ -4,7 +4,7 @@ import HeroPortraitMarks from './HeroPortraitMarks';
 import {useEffect,useRef,useState} from 'react';
 import {ArrowUp,ArrowDown,ChevronsUp,ChevronsDown,X,Search} from 'lucide-react';
 import {portraitUrl,supabase} from './static-data';
-type Hero={id:string;name:string;title:string;color:string;category?:string;blessing?:string|null;weapon_type?:string|null;move_type?:string|null;portrait:string|null};
+type Hero={id:string;name:string;title:string;color:string;heroic_grail?:boolean;category?:string;blessing?:string|null;weapon_type?:string|null;move_type?:string|null;portrait:string|null};
 export default function WaitlistReorganizer({heroes,kind,title,onClose,onSaved}:{heroes:Hero[];kind:WaitlistKind;title:string;onClose:()=>void;onSaved:()=>Promise<void>}){
  const dialog=useRef<HTMLDialogElement>(null),[color,setColor]=useState('Red'),[rows,setRows]=useState(()=>heroes.filter(h=>h.color==='Red')),[selected,setSelected]=useState(''),[dirty,setDirty]=useState(false),[saving,setSaving]=useState(false),[error,setError]=useState(''),[message,setMessage]=useState(''),[search,setSearch]=useState(''),[confirmClose,setConfirmClose]=useState(false);
  useEffect(()=>{dialog.current?.showModal();const overflow=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{dialog.current?.close();document.body.style.overflow=overflow;};},[]);

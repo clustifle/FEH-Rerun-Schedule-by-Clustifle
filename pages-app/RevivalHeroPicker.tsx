@@ -2,7 +2,7 @@ import HeroPortraitMarks from './HeroPortraitMarks';
 import {useEffect,useRef,useState} from 'react';
 import {Check,Search,X} from 'lucide-react';
 import {portraitUrl} from './static-data';
-type Hero={id:string;name:string;title:string;color:string;category?:string;blessing?:string|null;weapon_type?:string|null;move_type?:string|null;portrait?:string|null};
+type Hero={id:string;name:string;title:string;color:string;heroic_grail?:boolean;category?:string;blessing?:string|null;weapon_type?:string|null;move_type?:string|null;portrait?:string|null};
 export default function RevivalHeroPicker({open,slot,heroes,selected,used,onPick,onClose,title="Choose a hero",context,footer,requiredColor}:{title?:string;context?:string;footer?:string;requiredColor?:string;open:boolean;slot:number;heroes:Hero[];selected:string|null;used:string[];onPick:(id:string|null)=>void;onClose:()=>void}){
  const dialog=useRef<HTMLDialogElement>(null),searchInput=useRef<HTMLInputElement>(null),grid=useRef<HTMLDivElement>(null);
  const [search,setSearch]=useState(''),[color,setColor]=useState('All');

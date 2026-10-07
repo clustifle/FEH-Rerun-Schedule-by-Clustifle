@@ -2,7 +2,7 @@ import HeroPortraitMarks from './HeroPortraitMarks';
 import {useMemo,useState} from 'react';
 import {Grid2X2,List,Plus,Search,Shield} from 'lucide-react';
 import {portraitUrl,assetUrl} from './static-data';
-type Hero={id:string;name:string;title:string;category:string;blessing?:string|null;color:string;portrait:string|null;weapon_type?:string|null;move_type?:string|null;searchText?:string};
+type Hero={id:string;name:string;title:string;category:string;heroic_grail?:boolean;blessing?:string|null;color:string;portrait:string|null;weapon_type?:string|null;move_type?:string|null;searchText?:string};
 const heroNameCollator=new Intl.Collator('en',{sensitivity:'base',numeric:true});
 const heroTitleCollator=new Intl.Collator('en',{sensitivity:'base'});
 export default function AllHeroes<T extends Hero>({heroes,onView,canEdit,onAdd}:{heroes:T[];onView:(hero:T)=>void;canEdit:boolean;onAdd:()=>void}){

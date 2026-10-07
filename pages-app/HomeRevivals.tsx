@@ -6,7 +6,7 @@ import {goTo,viewUrl} from './routes';
 import {bannerTiming,bannerStatusTag} from './banner-time';
 import useBannerClock from './useBannerClock';
 import {useAutoRefresh} from './useAutoRefresh';
-type Hero={id:string;name:string;color:string;category?:string;blessing?:string|null;weapon_type?:string|null;move_type?:string|null;portrait?:string|null};
+type Hero={id:string;name:string;color:string;heroic_grail?:boolean;category?:string;blessing?:string|null;weapon_type?:string|null;move_type?:string|null;portrait?:string|null};
 type Revival={month:string;title:string;ongoing:boolean;coming_soon:boolean;home_featured?:boolean;starts_on:string|null;ends_on:string|null;starts_time:string;ends_time:string;hero_1:string|null;hero_2:string|null;hero_3:string|null;hero_4:string|null};
 const kinds=[{table:'forging_bonds_revivals',label:'New Heroes Revival',view:'Forging Bonds Revival'},{table:'hall_of_forms_revivals',label:'Hall of Forms Revival',view:'Hall of Forms Revival'}];
 const monthLabel=(month:string)=>new Date(month+'T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'});
