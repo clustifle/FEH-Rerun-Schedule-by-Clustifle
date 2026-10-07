@@ -184,3 +184,11 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.homepa
 @media(max-width:700px){html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.homepage-tools h2,.home-revivals>h2,.schedule-page-heading h2,.fb-heading h2){padding-top:8px;padding-bottom:20px}}
 /* Keep parchment headings legible against the game ribbon. */
 html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker :is(.homepage-tools h2,.home-revivals>h2,.schedule-page-heading h2,.fb-heading h2){-webkit-text-stroke:.65px #000;paint-order:stroke fill;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000,0 2px 3px #000c}
+/* Static numbered game tiles replace FEH countdown progress bars. */
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .carousel-dots{gap:4px}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .carousel-dots button,html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .carousel-dots button.is-current{position:relative;isolation:isolate;display:grid;place-items:center;width:36px;min-width:36px;height:40px;padding:0;color:#d9e6df;transition:filter .15s}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .carousel-dots button::before{content:"";position:absolute;inset:3px 1px;width:auto;height:auto;border:0;border-radius:0;background:url('../public/themes/fire-emblem-heroes/Common.webp') 0 32.53%/770.08% 720.56%;box-shadow:none;opacity:.65}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .carousel-dots button.is-current::before{background:url('../public/themes/fire-emblem-heroes/Common.webp') 0 32.53%/770.08% 720.56%;border:0;opacity:1;box-shadow:none;filter:drop-shadow(0 0 3px #ffe8a8)}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .carousel-banner-number{position:relative;font:18px/1 FEHeroes,Georgia,serif;text-shadow:0 1px 2px #000;pointer-events:none}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .carousel-dots button.is-current .carousel-banner-number{color:#fff0ae;text-shadow:0 1px 2px #000,0 0 3px #dec278}
+html[data-theme=fire-emblem-heroes][data-theme][data-theme] .tracker .carousel-dots button:hover:not(:disabled){filter:brightness(1.2)}
