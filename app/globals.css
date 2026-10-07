@@ -1,3 +1,4 @@
+@import "./fire-emblem-heroes.css";
 @import url("./frutiger-aero.css");
 @import "./themes.css";
 @font-face{font-family:Champions;src:url('/fonts/Champions-Light.ttf') format('truetype');font-weight:300;font-display:swap}@font-face{font-family:Champions;src:url('/fonts/Champions-Regular.ttf') format('truetype');font-weight:400;font-display:swap}@font-face{font-family:Champions;src:url('/fonts/Champions-Bold.ttf') format('truetype');font-weight:700;font-display:swap}@font-face{font-family:Champions;src:url('/fonts/Champions-ExtraBold.ttf') format('truetype');font-weight:800;font-display:swap}
@@ -967,3 +968,5 @@ html[data-theme][data-theme] .tracker .home-banner.featured-banner-layout .home-
 html[data-theme][data-theme] .tracker .home-banner.featured-banner-layout .home-banner-countdown{margin-left:auto;margin-right:auto;text-align:center}
 html[data-theme][data-theme] .tracker .home-banner.featured-banner-layout .home-banner-dates{text-align:center;justify-content:center}
 html[data-theme][data-theme] .tracker .home-banner.featured-banner-layout .home-banner-actions{justify-content:center}
+
+html[data-theme] .settings-personalization .theme-picker .theme-options{grid-template-columns:repeat(auto-fit,minmax(106px,140px))}
