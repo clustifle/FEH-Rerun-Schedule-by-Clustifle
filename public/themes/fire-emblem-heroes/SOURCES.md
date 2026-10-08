@@ -11,3 +11,5 @@ The stylesheet uses positions within the original sprite sheets; no game illustr
 The SRPG Status sheet supplies an empty blue status strip for rerun-window month headers. Sprite regions are displayed with CSS; no game statistic text is used.
 
 Browser and PWA icons use the project-owner-supplied `feh site icon symbol.png`, resized with padding onto a dark teal background. The maskable variant keeps the symbol inside its safe area.
+
+`portrait-frame.webp`: project-owner-supplied `Frame_4.webp` from Fire Emblem Heroes. The original transparent image is preserved; CSS applies Red, Blue, Green, and Colorless weapon-color treatments. Game asset rights remain with Nintendo / INTELLIGENT SYSTEMS.
