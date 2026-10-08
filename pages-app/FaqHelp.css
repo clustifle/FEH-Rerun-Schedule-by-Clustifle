@@ -1,0 +1,10 @@
+html[data-theme][data-theme] .tracker .faq-inline .faq-answer{max-width:72ch;line-height:1.65;overflow-wrap:anywhere}
+html[data-theme][data-theme] .tracker .faq-inline .faq-answer p{margin:0 0 16px;line-height:1.65}
+html[data-theme][data-theme] .tracker .faq-inline .faq-answer :is(ul,ol){display:block;margin:0 0 18px;padding-left:24px;list-style-position:outside;line-height:1.65}
+html[data-theme][data-theme] .tracker .faq-inline .faq-answer ul{list-style-type:disc}
+html[data-theme][data-theme] .tracker .faq-inline .faq-answer ol{list-style-type:decimal}
+html[data-theme][data-theme] .tracker .faq-inline .faq-answer li{display:list-item;margin:8px 0;padding-left:4px;line-height:1.65}
+html[data-theme][data-theme] .tracker .faq-inline .faq-answer strong{color:var(--realm-accent,var(--edit-accent,#edcf84));font-weight:700}
+html[data-theme][data-theme] .tracker .faq-inline .faq-answer>:last-child{margin-bottom:0}
+html[data-theme][data-theme] .tracker .faq-inline .faq-entry nav{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 16px}
+@media(max-width:600px){html[data-theme][data-theme] .tracker .faq-inline .faq-answer :is(ul,ol){padding-left:21px}}
