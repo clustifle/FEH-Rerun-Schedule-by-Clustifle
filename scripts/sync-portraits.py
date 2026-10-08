@@ -11,7 +11,8 @@ from PIL import Image, ImageOps
 
 ROOT=Path(__file__).resolve().parent.parent
 CONFIG=(ROOT/"pages-app/static-data.ts").read_text(encoding="utf-8")
-URL,KEY=re.search(r"createClient\('([^']+)','([^']+)'\)",CONFIG).groups()
+URL=re.search(r"export const supabaseUrl='([^']+)'",CONFIG).group(1)
+KEY=re.search(r"export const supabasePublishableKey='([^']+)'",CONFIG).group(1)
 MANIFEST=ROOT/"pages-app/portrait-manifest.json"
 OUTPUT=ROOT/"public/hero-portraits"
 OUTPUT.mkdir(parents=True,exist_ok=True)
