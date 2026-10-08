@@ -14,8 +14,6 @@ An unofficial Fire Emblem Heroes rerun website by **Clustifle**.
 
 This fan website records summoning banners, hero rerun windows, and New Heroes and Hall of Forms revivals. Check in-game announcements for confirmed event dates, featured heroes, and summoning availability.
 
-**L/M/E Waitlist:** Alongside Legendary, Mythic, and Emblem Heroes, the list may include General, Special, **Rearmed, Attuned, Aided, Entwined, and Vista Heroes** after their New Heroes or Special Heroes debut. These heroes may receive an L/M/E rerun, but inclusion does not confirm the banner or date. The Head Administrator and Schedule Managers add entries manually.
-
 ## Credits
 
 - **Made by:** [Clustifle](https://www.youtube.com/@Clustifle).
