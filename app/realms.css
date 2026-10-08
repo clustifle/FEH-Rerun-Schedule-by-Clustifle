@@ -173,3 +173,21 @@ html[data-theme] :is(.portrait,.hover-portrait,.hero-detail-portrait,.all-heroes
 /* Keep artwork inside the game frame's inner opening, including its corners. */
 html[data-theme] :is(.portrait,.hover-portrait,.hero-detail-portrait,.all-heroes-portrait,.home-revival-portrait,.fb-portrait,.profile-favorite-portrait,.profile-picker-portrait,.revival-picker-portrait,.banner-editor-slot-portrait,.waitlist-order-portrait,.revival-slot-portrait):has(>.portrait-marks)>img{clip-path:inset(6% round 9%);border:0!important;border-radius:0!important;box-shadow:none!important}
 .hero-portrait-frame{width:100%;height:100%;background-size:100% 100%}
+
+/* Rerun windows fill their locked card; featured summoning cards retain their layout. */
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .home-banner.rerun-banner-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch;padding:12px;gap:14px;--rerun-portrait:64px}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .home-banner-copy{padding:8px;align-self:center}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .home-banner-scroll{width:100%;height:100%;max-width:none;max-height:none;align-self:stretch;justify-self:stretch;overflow:hidden}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout :is(.banner-lineup-scroll,.banner-lineup-grid){width:100%;height:100%;max-width:none;min-height:0}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .banner-lineup-grid{display:grid;grid-template-rows:repeat(4,minmax(0,1fr))}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .banner-lineup-row{min-height:0;grid-template-columns:30px minmax(0,1fr)}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .banner-lineup-group{height:100%;min-height:0;padding:2px;gap:2px;grid-template-columns:repeat(var(--rerun-columns,3),minmax(0,1fr))!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .banner-lineup-group .banner-lineup-slot{width:100%;height:100%;min-height:0;padding:0}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .hero-tile{width:100%;max-width:100%;height:100%;min-height:0;gap:2px;padding:0;justify-content:center}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .hero-tile .portrait{width:min(var(--rerun-portrait),100%);max-width:var(--rerun-portrait);flex:none}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .tile-name{font-size:12px;line-height:14px;-webkit-line-clamp:1;min-height:14px}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .remix-viewer{display:flex;flex-direction:column;width:100%;height:100%;min-height:0}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .remix-viewer-panels{flex:1;min-height:0}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .responsive-remix-panel{display:grid;grid-template-rows:repeat(4,minmax(0,1fr));min-height:0}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout.remix-banner-layout{--rerun-portrait:56px}
+@media(max-width:760px){html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .home-banner.rerun-banner-layout{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:8px;--rerun-portrait:56px}html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .home-banner-copy{padding:0}html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout .banner-lineup-row{grid-template-columns:26px minmax(0,1fr)}}
