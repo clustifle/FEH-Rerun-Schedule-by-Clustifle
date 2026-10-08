@@ -65,6 +65,10 @@ Everyone is welcome to contribute rerun information, corrections, ideas, testing
 
 Original project code and documentation are open source under the **[MIT License](LICENSE)**. Nintendo artwork and other third-party materials retain their respective rights and terms; see [Third-party notices](THIRD_PARTY_NOTICES.md).
 
+## Public profiles
+
+Public profiles include a banner, profile picture, bio, social links, favorite heroes, and favorite Fire Emblem titles. Use **Edit Profile** on your own profile to open the FEH editor. Choose realm artwork or upload a custom banner; uploads are cropped to 3:1 and optimized to WebP. Public profile editing is separate from Settings → Account, which contains sign-in and account controls. Optional details retain their visibility settings.
+
 ## GitHub authentication
 
 Users can continue with GitHub on the sign-in and sign-up screens. Existing users can optionally link GitHub in **Settings → Account** to keep their existing profile, favorites, and permissions. Linking is never required; email sign-in remains available. GitHub authorization requests only the email scope, with no repository access. Supabase may automatically associate verified matching email addresses under its identity-linking rules.

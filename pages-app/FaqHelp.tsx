@@ -116,7 +116,7 @@ const entries:Entry[]=[
  {
   "section": "Browsing",
   "question": "How do profiles and Find Users work?",
-  "answer": "Profile opens your public profile when signed in. Settings → Account lets you update your username, display name, picture, bio, and visibility choices. Find Users searches public usernames and display names. Sign-in emails are private and do not appear in public search. Changing your username changes its public profile link."
+  "answer": "Profile opens your public profile when signed in. Edit Profile opens a dedicated editor for your username, display name, picture, banner, bio, favorites, and visibility choices. Find Users searches public usernames and display names. Sign-in emails are private and do not appear in public search. Changing your username changes its public profile link."
  },
  {
   "section": "Editing",
