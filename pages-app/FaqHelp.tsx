@@ -56,7 +56,7 @@ const entries:Entry[]=[
  {
   "section": "Browsing",
   "question": "What is the difference between Standard and Compact view?",
-  "answer": "Standard uses larger portraits and more space for browsing. Compact keeps portraits small and makes dense lists easier to scan. Both adapt to browser size; wide schedules can scroll horizontally. Select a hero to see full details in either view."
+  "answer": "Standard uses larger portraits and more space for browsing. Compact keeps portraits small and makes dense lists easier to scan. Both adapt to browser size; wide schedules can scroll horizontally. Select a hero to open their full Hero Profile page in either view. Copy its address to share it; hero links use the hero name and type."
  },
  {
   "section": "Browsing",
@@ -126,7 +126,7 @@ const entries:Entry[]=[
  {
   "section": "Editing",
   "question": "How do I add or edit a hero?",
-  "answer": "Use Add hero in the relevant view or Edit hero in Hero Details. The editor opens in a panel rather than filling the desktop screen. Set the name, title, type, weapon and movement details, color, pool, schedule, month when required, and notes. Demote and Heroic Grails have separate checkboxes. Save publishes the change."
+  "answer": "Use Add hero in the relevant view or Edit hero on the Hero Profile page. The editor opens in a panel rather than filling the desktop screen. Set the name, title, type, weapon and movement details, color, pool, schedule, month when required, and notes. Demote and Heroic Grails have separate checkboxes. Save publishes the change."
  },
  {
   "section": "Editing",
