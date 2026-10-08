@@ -257,7 +257,7 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .banne
 /* Full-page hero dossier. Common sprite back control, FEH portrait and realm palette. */
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-profile-page{max-width:1100px;margin:0 auto;padding:24px 28px 48px;min-height:calc(100dvh - 110px)}
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading{display:flex;align-items:center;gap:16px;margin-bottom:24px;color:var(--realm-accent);font-size:22px;border-bottom:1px solid var(--realm-line);padding-bottom:16px}
-html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-back{width:52px;height:52px;flex:none;padding:0;border:0;box-shadow:none;background:url('../public/themes/fire-emblem-heroes/Common.webp') 34.45% 31.46%/968.1% 881.1%;cursor:pointer}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-back{width:54px;height:46px;flex:none;padding:0;border:0;box-shadow:none;background:url('../public/themes/fire-emblem-heroes/Common.webp') 34.45% 31.46%/968.1% 881.1%;cursor:pointer}
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-profile-page .hero-detail-layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px 32px;padding:0;background:none;border:0}
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-profile-page .hero-detail-top{grid-column:1;grid-row:1 / span 4;display:flex;flex-direction:column;gap:22px;align-items:center;padding:24px 16px;border:1px solid var(--realm-line);border-radius:12px;background:linear-gradient(160deg,var(--realm-header),var(--realm-deep));align-self:start}
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-profile-page .hero-detail-portrait{width:240px;height:240px;position:relative;flex:none;margin:0;overflow:visible}
@@ -290,6 +290,8 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-profile-page h1:focus{outline:none}
 
 /* Match the shared parchment page-title ribbon. */
-html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;gap:8px}
-html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading>span{justify-self:center;display:grid;place-items:center;width:min(320px,100%);min-width:0;height:58px;padding:0;font-size:clamp(18px,5vw,23px)}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading{display:grid;grid-template-columns:54px minmax(0,1fr) 54px;gap:8px}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading>span{justify-self:center;display:grid;place-items:center;width:min(320px,100%);min-width:0;min-height:60px;padding:9px 54px 21px;font-size:21px;line-height:1.25;-webkit-text-stroke:.65px #000;paint-order:stroke fill;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000,0 2px 3px #000c}
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading>span::before{background:url('../public/themes/fire-emblem-heroes/Common.webp') 0 12.08%/207.45% 1223.81%;filter:none}
+
+@media(max-width:700px){html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading{grid-template-columns:minmax(0,1fr)}html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-back{justify-self:start}html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading>span{min-height:58px;padding:8px 42px 20px;font-size:19px}}
