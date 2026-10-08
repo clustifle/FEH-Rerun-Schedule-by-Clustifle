@@ -288,3 +288,8 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-
 
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-profile-page .hero-detail-identity{background:none;border:0;box-shadow:none;padding:0}
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-profile-page h1:focus{outline:none}
+
+/* Match the shared parchment page-title ribbon. */
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;gap:8px}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading>span{justify-self:center;display:grid;place-items:center;width:min(320px,100%);min-width:0;height:58px;padding:0;font-size:clamp(18px,5vw,23px)}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading>span::before{background:url('../public/themes/fire-emblem-heroes/Common.webp') 0 12.08%/207.45% 1223.81%;filter:none}
