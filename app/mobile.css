@@ -1,0 +1,71 @@
+/* Phone layouts retain the shared FEH artwork and realm colors. */
+@media(max-width:600px){
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .all-heroes-tools{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;margin-bottom:8px}
+ .all-heroes .all-heroes-tools .all-heroes-search{min-width:0;grid-column:1;flex-basis:auto;padding:10px}
+ .all-heroes .all-heroes-tools .directory-filter-control{grid-column:2;justify-self:end}
+ .all-heroes .all-heroes-tools:has(.directory-add){grid-template-columns:minmax(0,1fr) 44px 44px}
+ .all-heroes .all-heroes-tools .directory-add{grid-column:3;padding:8px}
+ .all-heroes .directory-display-tools{gap:8px;padding:8px 0}
+ .all-heroes .all-heroes-sort{min-width:0;font-size:14px;gap:7px}
+ .all-heroes .all-heroes-sort select{min-width:0;max-width:185px;padding:9px;font-size:16px}
+ .all-heroes .all-heroes-count{font-size:12px}
+ .all-heroes .all-heroes-views{order:3;margin-left:auto}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .settings-personalization .theme-picker .theme-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .settings-personalization .theme-preview{aspect-ratio:auto;height:64px;min-height:64px}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .settings-personalization .theme-option-copy{min-height:42px;padding:7px 5px}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .settings-personalization .theme-option-copy strong{font-size:13px}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .mobile-navigation-drawer.has-settings[open]{padding:16px!important}
+ .tracker .settings-body .settings-group{padding:14px;min-width:0}
+ .tracker .settings-body .settings-row{gap:12px;flex-wrap:wrap}
+ .tracker .settings-body .settings-row>span{min-width:0}
+ .tracker .settings-body :is(input:not([type=checkbox]):not([type=radio]),select,textarea),.tracker .filter-sheet :is(input,select),.owner-login-popup :is(input,select,textarea){font-size:16px}
+ .tracker .hero-detail-identity{padding:18px}
+ .tracker .hero-detail-identity .hero-detail-portrait{width:150px;height:150px;max-width:100%;margin-inline:auto}
+ .tracker .hero-detail-identity h2{font-size:28px;margin-top:14px}
+ .tracker .hero-detail-identity .hero-detail-title{font-size:18px}
+ .tracker .hero-detail-tags{flex-wrap:wrap;gap:10px}
+ .tracker .hero-profile-rerun{padding:18px}
+ .tracker .filter-sheet-footer{padding-bottom:max(16px,env(safe-area-inset-bottom))}
+ .owner-login-popup{max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain}
+ .tracker .all-heroes-results.table-view{scrollbar-width:thin}
+ .directory-table td:first-child{min-width:220px}
+}
+@media(max-width:360px){
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .featured-banner-heroes{gap:12px 18px;padding:12px 0}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .featured-banner-heroes .portrait{width:72px;height:72px}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .home-banner{padding:18px 12px;min-height:0}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .home-banner-copy h2{font-size:22px;line-height:1.2}
+ .all-heroes .all-heroes-sort select{max-width:155px}
+ .all-heroes .all-heroes-count{margin-left:0}
+ .tracker .filter-sheet-body{padding:16px}
+ .tracker .filter-sheet-footer{padding-inline:16px;flex-wrap:wrap}
+ .tracker .filter-sheet-footer>div{margin-left:auto}
+}
+@media(max-height:500px) and (max-width:950px){
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .mobile-navigation-drawer.has-settings[open]{width:calc(100vw - 20px)!important;max-width:calc(100vw - 20px)!important;height:calc(100dvh - 20px)!important;max-height:calc(100dvh - 20px)!important;padding:14px!important}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .mobile-navigation-drawer.has-settings>.mobile-navigation-top{min-height:44px;padding:0;margin-bottom:0}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline>.settings-header{padding:0 0 10px!important;margin-bottom:10px!important}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .settings-inline>.settings-header h2{font-size:24px;margin:0}
+ .tracker .faq-inline>.settings-header p{display:none}
+ .tracker .settings-inline .settings-layout>.settings-body{min-height:120px;padding-bottom:16px}
+ .tracker .settings-inline .settings-mobile-section{margin:0 0 10px}
+ .tracker .settings-inline .faq-search{padding:8px;margin-bottom:10px}
+ .tracker .settings-inline .faq-entry{margin-bottom:8px}
+ .owner-login-popup{max-height:calc(100dvh - 20px);overflow-y:auto}
+}
+
+@media(max-width:600px){
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-profile-page .hero-detail-portrait{width:150px;height:150px;margin-inline:auto}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .home-banner{height:auto;min-height:0;max-height:none;grid-template-rows:max-content max-content;align-content:start;align-items:start;gap:18px}
+ .all-heroes .all-heroes-sort{flex:0 1 auto}
+ .all-heroes .all-heroes-count{margin-left:auto}
+}
+@media(max-height:500px) and (max-width:950px){
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .faq-inline>.settings-layout{display:block;overflow-y:auto;flex:1;min-height:0;overscroll-behavior:contain}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .faq-inline .settings-layout>.settings-body{height:auto;min-height:0;overflow:visible;padding:0}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .faq-inline .settings-sections{display:none}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .faq-inline .settings-mobile-section{display:grid;margin-bottom:8px}
+ .tracker .faq-inline .faq-search input{min-height:36px}
+}
+
+@media(max-width:600px){html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .banner-carousel-track{align-items:flex-start;height:var(--phone-banner-height,auto)}html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .home-banner{align-self:flex-start}}
