@@ -141,7 +141,7 @@ const entries:Entry[]=[
  {
   "section": "Editing",
   "question": "How do I reorganize banners and waitlists?",
-  "answer": "Open Reorganize in the relevant view, adjust the order, and save. Waitlists are reorganized independently; changing one does not reorder the others. Review the selected list or banner section before saving."
+  "answer": "Open Reorganize in the relevant view, then drag a handle with a mouse or touch, use the arrow controls, or press Alt + Up/Down on a focused entry. Save to apply the order. Each waitlist and weapon color is reorganized independently; changing one does not reorder the others. Reset order discards unsaved changes."
  },
  {
   "section": "Editing",
