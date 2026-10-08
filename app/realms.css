@@ -168,4 +168,4 @@ html[data-theme=fire-emblem-heroes][data-theme][data-theme][data-theme][data-the
 .hero-portrait-frame.frame-green{filter:hue-rotate(285deg) saturate(1.2)}
 .hero-portrait-frame.frame-colorless{filter:grayscale(1)}
 html[data-theme] .portrait-marks img.portrait-mark{z-index:1}
-html[data-theme] :is(.portrait,.hover-portrait,.hero-detail-portrait,.all-heroes-portrait,.home-revival-portrait,.fb-portrait,.profile-favorite-portrait,.profile-picker-portrait,.revival-picker-portrait,.banner-editor-slot-portrait,.waitlist-order-portrait,.revival-slot-portrait):has(>.portrait-marks){border-radius:0!important}
+html[data-theme] :is(.portrait,.hover-portrait,.hero-detail-portrait,.all-heroes-portrait,.home-revival-portrait,.fb-portrait,.profile-favorite-portrait,.profile-picker-portrait,.revival-picker-portrait,.banner-editor-slot-portrait,.waitlist-order-portrait,.revival-slot-portrait):has(>.portrait-marks){border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important}
