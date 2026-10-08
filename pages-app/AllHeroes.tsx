@@ -1,3 +1,4 @@
+import {useDefinitions,definitionNames} from './catalog';
 import HeroPortraitMarks from './HeroPortraitMarks';
 import AdvancedFilters from './AdvancedFilters';
 import {useMemo,useState,useRef,useEffect} from 'react';
@@ -14,7 +15,8 @@ export default function AllHeroes<T extends Hero>({heroes,onView,canEdit,onAdd}:
  const [sort,setSort]=useState('name-asc'),[view,setView]=useState('cards'),[search,setSearch]=useState('');
  const [type,setType]=useState('All heroes'),[color,setColor]=useState('All'),[weapon,setWeapon]=useState('All'),[move,setMove]=useState('All'),[pool,setPool]=useState('All'),[showGrails,setShowGrails]=useState(true),[schedule,setSchedule]=useState('All'),[blessing,setBlessing]=useState('All'),[demote,setDemote]=useState('All');
  const results=useRef<HTMLDivElement>(null);
- const categories=useMemo(()=>Array.from(new Set(heroes.map(h=>h.category))).sort(collator.compare),[heroes]);
+ const definitions=useDefinitions();
+ const categories=definitionNames(definitions,'hero_type',heroes.map(h=>h.category));
  const schedules=useMemo(()=>Array.from(new Set(heroes.map(h=>h.schedule||'None'))).sort((a,b)=>collator.compare(scheduleName(a),scheduleName(b))),[heroes]);
  const blessings=useMemo(()=>Array.from(new Set(heroes.map(h=>h.blessing).filter((s):s is string=>Boolean(s)))).sort(collator.compare),[heroes]);
  const query=search.trim().toLocaleLowerCase();

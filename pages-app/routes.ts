@@ -1,5 +1,5 @@
 // Stable view URLs; account IDs are immutable Supabase UUIDs, never emails.
-export const viewPaths:Record<string,string>={Homepage:'home',General:'schedule/general',Remix:'schedule/remix','Monthly Revival':'schedule/monthly-revival','Forging Bonds Revival':'schedule/new-heroes-revival','Hall of Forms Revival':'schedule/hall-of-forms-revival',Waitlist:'rerun-waitlist/lme','DSH Waitlist':'rerun-waitlist/dsh','NHR Waitlist':'rerun-waitlist/nhr',Profile:'profile',Users:'users','All Heroes':'all-heroes'};
+export const viewPaths:Record<string,string>={'Mods Tool':'mods-tool',Homepage:'home',General:'schedule/general',Remix:'schedule/remix','Monthly Revival':'schedule/monthly-revival','Forging Bonds Revival':'schedule/new-heroes-revival','Hall of Forms Revival':'schedule/hall-of-forms-revival',Waitlist:'rerun-waitlist/lme','DSH Waitlist':'rerun-waitlist/dsh','NHR Waitlist':'rerun-waitlist/nhr',Profile:'profile',Users:'users','All Heroes':'all-heroes'};
 export const uuidPattern=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export function readRoute(){
  const base=import.meta.env.BASE_URL;const path=location.pathname.startsWith(base)?location.pathname.slice(base.length).replace(/\/$/,''):'';
@@ -7,7 +7,7 @@ export function readRoute(){
  const faq=path==='faq';
  const settings=faq||path==='account'||path==='settings'||path.startsWith('settings/');
  let hero='';if(path.startsWith('hero_profile/')){try{hero=decodeURIComponent(path.slice(13));}catch{hero=path.slice(13);}}
- const view=path==='rerun-waitlist'?'Waitlist':profile?'Profile':Object.keys(viewPaths).find(key=>viewPaths[key]===path)||(params.get('schedule')&&viewPaths[params.get('schedule')!] ? params.get('schedule') : null);
+ const view=path.startsWith('mods-tool/')?'Mods Tool':path==='rerun-waitlist'?'Waitlist':profile?'Profile':Object.keys(viewPaths).find(key=>viewPaths[key]===path)||(params.get('schedule')&&viewPaths[params.get('schedule')!] ? params.get('schedule') : null);
  return {view,profile,hero,settings,faq,section:path==='account'?'Account':path.split('/')[1]||'',explicit:!!path||params.has('profile')||params.has('schedule')};
 }
 export function viewUrl(view:string,month='',profile=''){return import.meta.env.BASE_URL+(viewPaths[view]||'home')+(view==='Profile'&&profile?'/'+encodeURIComponent(profile):'')+(month?'?month='+encodeURIComponent(month):'');}

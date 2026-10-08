@@ -1,3 +1,4 @@
+import {useSiteContent} from './site-content';
 import {useEffect,useState} from 'react';
 import {Search} from 'lucide-react';
 import './FaqHelp.css';
@@ -192,12 +193,13 @@ const entries:Entry[]=[
  }
 ];
 function answerText(text:string){return text.split(/(\*\*[^*]+\*\*)/g).map((part,index)=>part.startsWith('**')&&part.endsWith('**')?<strong key={index}>{part.slice(2,-2)}</strong>:part);}
-function FaqAnswer({answer}:{answer:string}){return <div className="faq-answer">{answer.split('\n\n').map((block,index)=>{const lines=block.split('\n');if(lines.every(line=>line.startsWith('- ')))return <ul key={index}>{lines.map((line,i)=><li key={i}>{answerText(line.slice(2))}</li>)}</ul>;if(lines.every(line=>/^\d+\. /.test(line)))return <ol key={index}>{lines.map((line,i)=><li key={i}>{answerText(line.replace(/^\d+\. /,''))}</li>)}</ol>;return <p key={index}>{answerText(block)}</p>;})}</div>;}
+export function FaqAnswer({answer}:{answer:string}){return <div className="faq-answer">{answer.split('\n\n').map((block,index)=>{const lines=block.split('\n');if(lines.every(line=>line.startsWith('- ')))return <ul key={index}>{lines.map((line,i)=><li key={i}>{answerText(line.slice(2))}</li>)}</ul>;if(lines.every(line=>/^\d+\. /.test(line)))return <ol key={index}>{lines.map((line,i)=><li key={i}>{answerText(line.replace(/^\d+\. /,''))}</li>)}</ol>;return <p key={index}>{answerText(block)}</p>;})}</div>;}
 export default function FaqHelp({canEdit=false}:{canEdit?:boolean}){
+ const content=useSiteContent();const currentEntries:Entry[]=content?content.filter(r=>r.kind==='faq').map(r=>({section:r.section,question:r.title,answer:r.body,sources:r.sources})):entries;
  const [query,setQuery]=useState(''),[section,setSection]=useState<Section|'All'>('All');
  useEffect(()=>{if(!canEdit&&section==='Editing')setSection('All');},[canEdit,section]);
  const topics=(['All','Schedules','Browsing','Editing','About'] as const).filter(topic=>canEdit||topic!=='Editing');
- const filtered=entries.filter(e=>(canEdit||e.section!=='Editing')&&(section==='All'||section===e.section)&&(e.question+' '+e.answer.replace(/\*\*/g,'').replace(/\n/g,' ')).toLowerCase().includes(query.trim().toLowerCase()));
+ const filtered=currentEntries.filter(e=>(canEdit||e.section!=='Editing')&&(section==='All'||section===e.section)&&(e.question+' '+e.answer.replace(/\*\*/g,'').replace(/\n/g,' ')).toLowerCase().includes(query.trim().toLowerCase()));
  const topicLabel=(topic:string)=>topic==='Editing'?'Editor instructions':topic==='About'?'App & community':topic;
  return <section className="settings-inline faq-inline" aria-labelledby="faq-title"><header className="settings-header"><div><h2 id="faq-title">FAQ</h2><p>{canEdit?'Schedule guide and editor instructions.':'Your guide to schedules, banners, and heroes.'}</p></div></header><div className="settings-layout"><label className="settings-mobile-section">FAQ topic<select value={section} onChange={e=>setSection(e.target.value as Section|'All')}>{topics.map(topic=><option key={topic} value={topic}>{topicLabel(topic)}</option>)}</select></label><nav className="settings-sections" aria-label="FAQ topics">{topics.map(topic=><button key={topic} aria-current={section===topic?'location':undefined} onClick={()=>setSection(topic)}>{topicLabel(topic)}</button>)}</nav><div className="settings-body"><label className="faq-search"><Search size={18} aria-hidden="true"/><input type="search" aria-label="Search FAQ" placeholder="Search schedules, banners, or heroes…" value={query} onChange={e=>setQuery(e.target.value)}/></label><div className="faq-content"><p className="faq-count" role="status">{filtered.length} {filtered.length===1?'answer':'answers'}</p>{filtered.map(e=><details key={e.question} className="faq-entry" open={query.trim()?true:undefined}><summary>{e.question}</summary><div><FaqAnswer answer={e.answer}/>{e.sources&&<nav aria-label={'Sources for '+e.question}>{e.sources.map(([name,url])=><a key={url} href={url} target="_blank" rel="noopener noreferrer">{name} ↗</a>)}</nav>}</div></details>)}{!filtered.length&&<p className="faq-empty">No matching answers. Try another topic or search.</p>}</div></div></div></section>;
 }
