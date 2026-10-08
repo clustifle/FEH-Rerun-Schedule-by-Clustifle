@@ -2,7 +2,7 @@
   <img src="public/clustifle-feh-rerun-logo.png" width="420" alt="Fire Emblem Heroes Rerun Schedule by Clustifle">
 </p>
 
-An unofficial Fire Emblem Heroes rerun website by **Clustifle** (<= ò course, it's me)
+An unofficial Fire Emblem Heroes rerun website by **Clustifle** (<= of course, it's me)
 
 **[Visit the website](https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/)**
 
