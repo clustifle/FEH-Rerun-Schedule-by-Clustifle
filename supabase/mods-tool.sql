@@ -158,4 +158,3 @@ AS $function$
  order by (p.username=lower(trim(search_term))) desc,p.username,p.id
  limit 21 offset greatest(0,least(coalesce(result_offset,0),500));
 $function$;
-
