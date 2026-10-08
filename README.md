@@ -45,7 +45,7 @@ Recorded months are planning windows; check hero notes and official notices for 
 
 ## Browsing and appearance
 
-Use filters, search, and Standard or Compact views to browse heroes and schedules. Hero profiles are full pages showing rerun information, weapon and movement types, hero types, pools, and notes. Share a profile with its `/hero_profile/[hero_name]_[hero_type]` URL; words use underscores, and versions sharing both a name and type also include their title. The L/M/E Waitlist is at `/rerun-waitlist/lme`; older waitlist links forward there. Heroic Grails units have their own icon and visibility toggle, including in Hall of Forms revivals.
+Use filters, search, and Standard or Compact views to browse heroes and schedules. Hero profiles are full pages showing rerun information, weapon and movement types, hero types, pools, and notes. Share a profile with its `/hero_profile/[hero_name]_[hero_title_name]_[hero_type]` URL; words use underscores. The L/M/E Waitlist is at `/rerun-waitlist/lme`; older waitlist links forward there. Heroic Grails units have their own icon and visibility toggle, including in Hall of Forms revivals.
 
 Fire Emblem Heroes is the default theme, with ten realm variants available in Settings: Midgard, Nifl, Múspell, Hel, Ljósálfheimr, Dökkálfheimr, Niðavellir, Jötunheimr, Vanaheimr, and Ásgarðr.
 

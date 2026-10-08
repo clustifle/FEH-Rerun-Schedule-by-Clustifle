@@ -18,9 +18,9 @@ export function restorePagesRoute(){const params=new URLSearchParams(location.se
 
 export function heroSlug(hero:{id:string;name:string;category:string;title:string},heroes:{id:string;name:string;category:string;title:string}[]){
  const word=(s:string)=>s.trim().replace(/\s+/g,'_');
- const same=heroes.filter(h=>h.name.toLowerCase()===hero.name.toLowerCase());
- let slug=word(hero.name)+'_'+word(hero.category==='Chosen Hero'?'Chosen':hero.category);
- if(same.filter(h=>h.category===hero.category).length>1){slug+='_'+word(hero.title);if(same.filter(h=>h.category===hero.category&&h.title===hero.title).length>1)slug+='_'+hero.id;}
+ const type=hero.category==='Chosen Hero'?'Chosen':hero.category;
+ let slug=[hero.name,hero.title||'Untitled',type].map(word).join('_');
+ if(heroes.filter(h=>[h.name,h.title||'Untitled',h.category==='Chosen Hero'?'Chosen':h.category].map(word).join('_')===slug).length>1)slug+='_'+hero.id;
  return slug;
 }
 export function heroUrl(hero:Parameters<typeof heroSlug>[0],heroes:Parameters<typeof heroSlug>[1]){return import.meta.env.BASE_URL+'hero_profile/'+encodeURIComponent(heroSlug(hero,heroes));}

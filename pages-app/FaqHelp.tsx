@@ -56,7 +56,7 @@ const entries:Entry[]=[
  {
   "section": "Browsing",
   "question": "What is the difference between Standard and Compact view?",
-  "answer": "Standard uses larger portraits and more space for browsing. Compact keeps portraits small and makes dense lists easier to scan. Both adapt to browser size; wide schedules can scroll horizontally. Select a hero to open their full Hero Profile page in either view. Copy its address to share it; hero links use the hero name and type."
+  "answer": "Standard uses larger portraits and more space for browsing. Compact keeps portraits small and makes dense lists easier to scan. Both adapt to browser size; wide schedules can scroll horizontally. Select a hero to open their full Hero Profile page in either view. Copy its address to share it; hero links use the hero name, title, and type."
  },
  {
   "section": "Browsing",
