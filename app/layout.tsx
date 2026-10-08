@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Clustifle’s FEH Rerun Tracker",
-  description: "Track Legendary, Mythic, Emblem, and Chosen Hero reruns with confirmed schedules, estimates, and hero portraits.",
+  title: "FEH Rerun Schedule by Clustifle",
+  description: "The unofficial Fire Emblem Heroes rerun schedule tracker",
   other: {
     "codex-preview": "development",
   },
   icons: {
-    icon: [{ url: "/feh-tab-symbol.png?v=2", type: "image/png", sizes: "192x192" }],
-    shortcut: "/feh-tab-symbol.png?v=2",
+    icon: [{ url: "/favicon.png", type: "image/png", sizes: "192x192" }],
+    shortcut: "/favicon.png",
   },
 };
 

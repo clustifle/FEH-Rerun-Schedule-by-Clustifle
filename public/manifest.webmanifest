@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "Fire Emblem Heroes: Rerun Schedule",
-  "short_name": "FEH Rerun",
-  "description": "Rerun schedules and waitlist by Clustifle.",
+  "name": "FEH Rerun Schedule by Clustifle",
+  "short_name": "FEH Rerun Schedule",
+  "description": "The unofficial Fire Emblem Heroes rerun schedule tracker",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
