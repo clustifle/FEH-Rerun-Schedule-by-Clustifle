@@ -64,3 +64,18 @@ This is an unofficial fan project, unaffiliated with Nintendo or INTELLIGENT SYS
 Everyone is welcome to contribute rerun information, corrections, ideas, testing, design, documentation, and code. Please read the [Contributing Guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md).
 
 Original project code and documentation are open source under the **[MIT License](LICENSE)**. Nintendo artwork and other third-party materials retain their respective rights and terms; see [Third-party notices](THIRD_PARTY_NOTICES.md).
+
+## GitHub authentication
+
+Users can continue with GitHub on the sign-in and sign-up screens. Existing users can optionally link GitHub in **Settings → Account** to keep their existing profile, favorites, and permissions. Linking is never required; email sign-in remains available. GitHub authorization requests only the email scope, with no repository access. Supabase may automatically associate verified matching email addresses under its identity-linking rules.
+
+To activate GitHub authentication in Supabase:
+
+1. Register a GitHub OAuth application with the website homepage and callback `https://aknsqeqykjgdyhdroqcx.supabase.co/auth/v1/callback`.
+2. Enter its Client ID and Client Secret in Supabase Authentication → Sign In / Providers → GitHub, and enable the provider. Keep secrets exclusively in provider settings.
+3. Enable manual identity linking in Supabase Authentication to support the optional account-link button.
+4. Keep these authentication redirect URLs in the Supabase allowlist:
+   - `https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/?auth=github`
+   - `http://127.0.0.1:5184/FEH-Rerun-Schedule-by-Clustifle/?auth=github` for local testing.
+
+This integration does not grant management privileges. Roles continue to come from the existing server-side role checks. No GitHub credentials or avatars are copied into the website repository or Supabase Storage.

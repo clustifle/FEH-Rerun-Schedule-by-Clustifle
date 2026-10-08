@@ -295,3 +295,16 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading>span::before{background:url('../public/themes/fire-emblem-heroes/Common.webp') 0 12.08%/207.45% 1223.81%;filter:none}
 
 @media(max-width:700px){html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading{grid-template-columns:minmax(0,1fr)}html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-back{justify-self:start}html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-page-heading>span{min-height:58px;padding:8px 42px 20px;font-size:19px}}
+
+html[data-theme][data-theme][data-theme][data-theme][data-theme] :is(.owner-login-popup,.settings-account) .github-auth-button{display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;min-height:46px}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .owner-login-popup .github-auth-button{width:100%;margin:20px 0 14px;background:var(--realm-field);border:1px solid var(--realm-line);color:#fff6df;border-radius:8px}
+.auth-method-divider{display:flex;align-items:center;gap:12px;margin:16px 0;color:#d7dedb;font-size:14px}
+.auth-method-divider::before,.auth-method-divider::after{content:'';height:1px;background:var(--realm-line);flex:1}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .github-account-link{margin:24px 0;padding:20px 0;border-top:1px solid var(--realm-line);border-bottom:1px solid var(--realm-line)}
+.github-account-link h4{display:flex;align-items:center;gap:10px;font-size:20px;margin:0 0 10px;color:var(--realm-accent)}
+.github-account-link p{margin:0 0 16px;line-height:1.5}
+.github-linked-status{color:var(--realm-accent);font-size:16px}
+.github-auth-notice{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:12px;width:max-content;max-width:calc(100vw - 32px);padding:16px 20px;border:1px solid var(--realm-line);border-radius:10px;background:var(--realm-deep);color:#fff6df;box-shadow:0 8px 24px #0006;font-size:16px}
+.github-auth-notice p{min-width:0;line-height:1.5}
+.github-auth-notice .icon-button{flex:none;background:transparent;border:0;color:inherit;min-width:40px;min-height:40px;display:grid;place-items:center}
+@media(max-width:600px){.github-auth-notice{flex-wrap:wrap;bottom:16px}.github-auth-notice p{flex:1}}
