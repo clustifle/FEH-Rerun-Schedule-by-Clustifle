@@ -1,0 +1,26 @@
+/* Public profile directory, using the shared FEH ribbon and realm tokens. */
+.tracker .user-directory{max-width:1000px;margin:28px auto 48px;padding:0 24px;color:var(--edit-text,#fff6df)}
+.tracker .user-directory header{text-align:center;margin-bottom:28px}
+.tracker .user-directory header>p{line-height:1.5;opacity:.85;margin:12px 0}
+.tracker .user-directory form.user-search{gap:12px;margin-top:0}
+.tracker .user-directory form.user-search label{background:var(--realm-field,var(--edit-field,#102b36));border-color:var(--realm-line,var(--line,#809da3));border-radius:8px;min-width:0}
+.tracker .user-directory form.user-search input{background:transparent!important;box-shadow:none;color:inherit;font-size:16px}
+.tracker .user-directory form.user-search .primary{position:relative;isolation:isolate;min-width:108px;border:0;background:transparent;border-radius:0}
+.tracker .user-directory .user-search-hint{font-size:14px;opacity:.8;line-height:1.5;margin:12px 0 24px}
+.tracker .user-directory .user-search-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tracker .user-directory .user-search-result{min-width:0;padding:16px;border:1px solid var(--realm-line,var(--line,#809da3));border-radius:8px;background:linear-gradient(135deg,var(--realm-panel,var(--edit-panel,#183d49)),var(--realm-deep,var(--edit-bg,#092832)));box-shadow:inset 0 0 0 3px #ffffff06;transition:border-color .15s,transform .15s}
+.tracker .user-directory .user-search-result:hover{transform:translateY(-2px);border-color:var(--realm-accent,var(--cyan,#bdeaf2))}
+.tracker .user-directory .user-search-result:focus-visible{outline:2px solid var(--realm-accent,var(--cyan,#bdeaf2));outline-offset:3px}
+.tracker .user-directory .user-search-avatar{flex:none;width:56px;height:56px;border-radius:12px;border:1px solid var(--realm-line,var(--line,#809da3))}
+.tracker .user-directory .user-search-identity{min-width:0;line-height:1.4;overflow-wrap:anywhere}
+.tracker .user-directory .user-search-identity strong{font-size:20px;font-weight:400}
+.tracker .user-directory .user-search-result>svg{flex:none}
+.tracker .user-directory .user-search-status>p{display:flex;align-items:center;gap:10px;line-height:1.5}
+.tracker .user-directory .user-directory-empty{text-align:center;padding:36px 16px;opacity:.85}
+.tracker .user-directory .user-directory-empty>svg{color:var(--realm-accent,var(--cyan,#bdeaf2))}
+.tracker .user-directory .user-directory-empty h3{font-size:22px;font-weight:400;margin:16px 0 8px}
+.tracker .user-directory .user-directory-empty p{line-height:1.5;margin:0}
+.user-search-spinner{animation:user-search-turn 1s linear infinite}
+@keyframes user-search-turn{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.user-search-spinner{animation:none}.tracker .user-directory .user-search-result{transition:none}}
+@media(max-width:600px){.tracker .user-directory{padding:0 16px;margin:20px auto 32px}.tracker .user-directory .user-search-results{grid-template-columns:1fr}.tracker .user-directory form.user-search{flex-wrap:nowrap;gap:8px}.tracker .user-directory form.user-search label{padding:0 12px;min-width:0}.tracker .user-directory form.user-search .primary{min-width:80px;padding:0 12px}.tracker .user-directory .user-search-result{padding:12px;gap:12px}.tracker .user-directory .user-search-pages{justify-content:center}}
