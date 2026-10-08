@@ -201,3 +201,20 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .banner-card-menu-options button{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:10px;text-align:left;font:14px/1.3 FEHeroes,Georgia,serif;background:transparent;border:0;border-radius:4px;color:#fff6df;box-shadow:none}
 html[data-theme][data-theme][data-theme][data-theme][data-theme] .banner-card-menu-options button:hover{background:var(--realm-header);color:var(--realm-accent)}
 @media(max-width:760px){html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .rerun-banner-layout:has(.banner-card-menu) .home-banner-copy{padding-top:40px}}
+
+/* Readable FEH typography without synthesized weights or heavy small-text effects. */
+html[data-theme=fire-emblem-heroes]{font-synthesis:none;text-rendering:optimizeLegibility;font-kerning:normal}
+html[data-theme=fire-emblem-heroes] body{line-height:1.5}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] :is(.settings-body,.faq-content,.hero-details,.hero-hover-preview,.profile-card,.filter-sheet-body,.hero-editor,.banner-editor,.fb-editor){letter-spacing:normal}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] :is(.settings-body,.faq-content,.hero-details,.hero-hover-preview,.profile-card,.filter-sheet-body,.hero-editor,.banner-editor,.fb-editor) :is(p,small,label,input,textarea,select){text-shadow:none;line-height:1.5}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] :is(.hero-editor,.banner-editor,.fb-editor,.settings-body,.owner-login-popup,.account-setup) :is(input:not([type=checkbox]):not([type=radio]),textarea,select){font-size:16px}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker :is(.settings-row small,.settings-hint,.settings-access-note,.settings-email-note,.account-email-note,.faq-entry nav a,.home-revival-kind,.home-revival-month){font-size:14px;line-height:1.5;text-shadow:none;color:#e0e8e6}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .home-banner-copy .home-banner-dates{font-size:14px;line-height:1.5;color:#e5eae7;text-shadow:none}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .hero-hover-preview :is(.hover-hero-rerun,.hover-hero-note){font-size:14px;line-height:1.5;color:#e0e8e6}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .hero-hover-preview .hover-hero-hint{font-size:13px;line-height:1.5;color:#d3dfdf}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .hero-hover-preview .hover-hero-title{font-weight:400;line-height:1.4}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .tile-name{letter-spacing:normal;text-shadow:0 1px 1px #0008;line-height:1.35;font-weight:400}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .home-banner-countdown{font-size:14px;padding:4px 8px;line-height:1.25;text-shadow:0 1px 1px #0006}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .fb-event-copy .fb-countdown{font-size:13px;padding:3px 7px;line-height:1.25}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-text-size=larger] .tracker :is(.home-banner-copy .home-banner-dates,.settings-row small,.settings-hint){font-size:16px}
+@media(max-width:600px){html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .home-banner-countdown{font-size:13px;padding:3px 7px}html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .fb-event-copy .fb-countdown{font-size:12px;padding:3px 6px}}
