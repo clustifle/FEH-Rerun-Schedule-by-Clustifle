@@ -1,0 +1,15 @@
+import {chromium} from 'file:///C:/Users/Admin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';import assert from 'node:assert/strict';
+const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+try{const page=await browser.newPage({viewport:{width:1280,height:800}});let saved=[],fail=true;
+await page.route('**/_beta/api/versions',r=>r.fulfill({json:[{version:'9.0',release_date:null,sort_order:900},{version:'10.0',release_date:null,sort_order:1000}]}));
+await page.route('**/_beta/api/bulk',r=>{saved.push(r.request().postDataJSON());return r.fulfill({status:fail?400:200,json:fail?{error:'A hero changed since preview. Refresh and review again.'}:{count:2}});});
+await page.goto('http://127.0.0.1:5192/beta-service/ui-test.html');await page.getByRole('button',{name:'Select matching',exact:true}).click();
+await page.getByRole('checkbox',{name:'Hero type',exact:true}).check();await page.getByRole('combobox',{name:'Update Hero type',exact:true}).selectOption('Mythic');
+await page.getByRole('button',{name:'Review changes',exact:true}).click();await page.getByRole('alert').filter({hasText:'blessing is required'}).waitFor();assert.equal(saved.length,0);
+const blessing=page.getByRole('combobox',{name:'Update Blessing',exact:true});assert.equal(await blessing.locator('option[value=Earth]').count(),0);await blessing.selectOption('Astra');
+await page.getByRole('button',{name:'Review changes',exact:true}).click();await page.getByRole('region',{name:'Bulk edit preview'}).waitFor();assert.ok((await page.locator('.bulk-preview').innerText()).includes('Earth'));assert.ok((await page.locator('.bulk-preview').innerText()).includes('Astra'));
+await page.getByRole('button',{name:'Save beta changes',exact:true}).click();await page.getByRole('alert').filter({hasText:'changed since preview'}).waitFor();assert.equal(saved[0].changes.blessing,'Astra');assert.equal(saved[0].changes.category,'Mythic');assert.equal(Object.keys(saved[0].changes).length,2);assert.equal(saved[0].revisions[saved[0].ids[0]],1);
+fail=false;await page.getByRole('button',{name:'Save beta changes',exact:true}).click();await page.getByText('2 beta heroes updated.',{exact:true}).waitFor();
+for(const width of [390,1280]){await page.setViewportSize({width,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
+await page.getByRole('button',{name:'Select matching',exact:true}).click();await page.getByRole('checkbox',{name:'Schedule category',exact:true}).check();await page.getByRole('combobox',{name:'Update Schedule category',exact:true}).selectOption('None');await page.getByRole('button',{name:'Review changes',exact:true}).click();await page.getByRole('region',{name:'Bulk edit preview'}).waitFor();assert.ok((await page.locator('.bulk-preview').innerText()).includes('Rerun month'));
+console.log('Bulk grouping, required blessing, type-specific options, per-hero preview, stale-save recovery, explicit fields, automatic month clearing and desktop/mobile width passed.');}finally{await browser.close();}

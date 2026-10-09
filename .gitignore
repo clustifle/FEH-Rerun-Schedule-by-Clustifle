@@ -46,7 +46,11 @@ next-env.d.ts
 /work/
 
 /pages-dist/
+/beta-dist/
+/beta-service/seed.sql
 
 # Python delivery-copy tooling
 __pycache__/
 *.pyc
+
+admin-dist/

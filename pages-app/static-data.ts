@@ -1,4 +1,5 @@
 import portraitManifest from './portrait-manifest.json';
+import {isBeta,betaRequest} from './beta';
 import {isWaitlist} from './waitlist-types';
 import {moveTypes} from './move-types';
 import {weaponTypes} from './weapon-types';
@@ -9,7 +10,7 @@ import {upscalePortrait} from './portrait-upscale';
 export const supabaseUrl='https://aknsqeqykjgdyhdroqcx.supabase.co';
 export const supabasePublishableKey='sb_publishable_PiJIst1aSJtrYBiIvwDIVA_KS3c-E3g';
 export const supabase=createClient(supabaseUrl,supabasePublishableKey);
-export const assetUrl=(value:string)=>import.meta.env.BASE_URL+value.replace(/^\//,'');
+export const assetUrl=(value:string)=>import.meta.env.BASE_URL+(isBeta&&value==='clustifle-feh-rerun-logo.png'?'clustifle-feh-rerun-beta-logo.png':value).replace(/^\//,'');
 const deliveryPortraits=portraitManifest as Record<string,{thumb:string;detail:string}>;
 export const portraitUrl=(value:string,size:'thumb'|'detail'='thumb')=>value.startsWith('data/')?assetUrl(value):deliveryPortraits[value]?assetUrl(deliveryPortraits[value][size]):supabase.storage.from('portraits').getPublicUrl(value).data.publicUrl;
 export async function ownerSession(){const {data:{session}}=await supabase.auth.getSession();if(!session)return false;const {data,error}=await supabase.rpc('is_tracker_owner');return !error&&data===true;}
@@ -50,11 +51,25 @@ async function importImage(url:string){
  throw new Error(d.error||'Could not import portrait. Check the direct image link.');
 }
 const pendingReads=new Map<string,Promise<Response>>();
+async function sharedRead(input:string,request:()=>Promise<Response>){
+ let pending=pendingReads.get(input);
+ if(!pending){pending=request();pendingReads.set(input,pending);const active=pending;void pending.finally(()=>{if(pendingReads.get(input)===active)pendingReads.delete(input);}).catch(()=>{});}
+ return (await pending).clone();
+}
 export async function apiFetch(input:string,init?:RequestInit){
+ if(isBeta&&input==='/api/heroes'){
+  if(!init?.method||init.method==='GET')return sharedRead(input,()=>betaRequest('heroes').then(rows=>jsonResponse(rows)));
+  pendingReads.clear();
+  if(init.method==='DELETE')return fetch('/_beta/api/hero',{method:'DELETE',headers:{'Content-Type':'application/json'},body:init.body});
+  if(init.method==='POST'){
+   const form=init.body as FormData;
+   if((form.get('portrait') instanceof File&&(form.get('portrait') as File).size)||form.get('portraitUrl'))return jsonResponse({error:'Portrait uploads are disabled in this beta build; existing portraits are preserved.'},{status:400});
+   const data=Object.fromEntries([...form.entries()].filter(([key,value])=>typeof value==='string'&&!['portrait','portraitPrepared'].includes(key)));
+   return fetch('/_beta/api/hero',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,revision:Number(form.get('revision')),heroic_grail:form.get('heroic_grail')==='on',demote:form.get('demote')==='on'})});
+  }
+ }
  if((!init?.method||init.method==='GET')&&['/api/heroes','/api/banners'].includes(input)){
-  let pending=pendingReads.get(input);
-  if(!pending){pending=runApiFetch(input,init);pendingReads.set(input,pending);const request=pending;void pending.finally(()=>{if(pendingReads.get(input)===request)pendingReads.delete(input);}).catch(()=>{});}
-  return (await pending).clone();
+  return sharedRead(input,()=>runApiFetch(input,init));
  }
  if(init?.method&&init.method!=='GET')pendingReads.clear();
  return runApiFetch(input,init);
@@ -109,7 +124,7 @@ async function runApiFetch(input:string,init?:RequestInit){
    }
    const weaponType=String(form.get('weapon_type')||'')||null;if(weaponType&&!weaponTypes[String(form.get('color'))]?.includes(weaponType))return jsonResponse({error:'Choose a valid weapon type for this color.'},{status:400});
    const moveType=String(form.get('move_type')||'')||null;if(moveType&&!moveTypes.includes(moveType))return jsonResponse({error:'Choose a valid movement type.'},{status:400});
-   const row={id,heroic_grail:form.get('heroic_grail')==='on',move_type:moveType,weapon_type:weaponType,demote:form.get('demote')==='on',name:String(form.get('name')||'').trim(),title:String(form.get('title')||'').trim(),category:String(form.get('category')),schedule:String(form.get('schedule')),color:String(form.get('color')),pool:normalizePool(String(form.get('pool')||'')||null,String(form.get('category'))),month:(String(form.get('schedule'))==='None'||isWaitlist(String(form.get('schedule'))))?null:String(form.get('month')||'')||null,blessing:!['Legendary','Mythic','Chosen Hero'].includes(String(form.get('category')))?null:String(form.get('blessing')||'')||null,notes:String(form.get('notes')||'').trim(),portrait,updated:new Date().toISOString()};
+   const row={id,debut_version:String(form.get('debut_version')||'')||null,release_date:String(form.get('release_date')||'')||null,release_event:String(form.get('release_event')||'')||null,heroic_grail:form.get('heroic_grail')==='on',move_type:moveType,weapon_type:weaponType,demote:form.get('demote')==='on',name:String(form.get('name')||'').trim(),title:String(form.get('title')||'').trim(),category:String(form.get('category')),schedule:String(form.get('schedule')),color:String(form.get('color')),pool:normalizePool(String(form.get('pool')||'')||null,String(form.get('category'))),month:(String(form.get('schedule'))==='None'||isWaitlist(String(form.get('schedule'))))?null:String(form.get('month')||'')||null,blessing:!['Legendary','Mythic','Chosen Hero'].includes(String(form.get('category')))?null:String(form.get('blessing')||'')||null,notes:String(form.get('notes')||'').trim(),portrait,updated:new Date().toISOString()};
    const {error}=await supabase.from('heroes').upsert(row);
    if(error){if(uploaded)await supabase.storage.from('portraits').remove([uploaded]);throw new Error(error.message);}
    if(uploaded&&old?.portrait&&!old.portrait.startsWith('data/'))await supabase.storage.from('portraits').remove([old.portrait]);

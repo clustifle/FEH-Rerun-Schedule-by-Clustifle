@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>FEHRS Administrative Manager</title><style>body{margin:0;background:#fff;color:#182c34}#root>p{font-family:serif;padding:30px;text-align:center}</style></head><body><div id="root"><p role="status">Loading Administrative Manager…</p></div><script type="module">
+const root=document.getElementById('root');
+try{
+ const response=await fetch('/FEH-Rerun-Schedule-by-Clustifle/FEHRS_AdmManager/index.html',{cache:'no-store'});
+ if(!response.ok)throw Error('Could not load Administrative Manager.');
+ const app=new DOMParser().parseFromString(await response.text(),'text/html');
+ for(const style of app.querySelectorAll('link[rel="stylesheet"]'))document.head.append(style.cloneNode());
+ root.innerHTML=app.getElementById('root').innerHTML;
+ const entry=app.querySelector('script[type="module"][src]');if(!entry)throw Error('Administrative Manager is unavailable.');
+ const script=document.createElement('script');script.type='module';script.src=entry.getAttribute('src');script.onerror=()=>{root.innerHTML='<p>Could not connect. Please refresh to try again.</p>';};document.body.append(script);
+}catch(error){root.textContent=error.message+' Refresh to try again.';}
+</script></body></html>

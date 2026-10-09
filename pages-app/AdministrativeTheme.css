@@ -1,0 +1,68 @@
+@font-face{font-family:FEHeroes;src:url('../public/themes/fire-emblem-heroes/feh.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+:root{font-family:FEHeroes,serif;--realm-accent:#236678;--cyan:#236678}
+body,body :is(button,input,select,textarea,a,label,p,span,small,strong,h1,h2,h3,h4,th,td,dialog),.adm-shell .adm-tool-pane :is(button,input,select,textarea){font-family:FEHeroes,serif}
+body{font-size:16px;line-height:1.45;background:#f5f6f4}
+.adm-command{border-bottom:2px solid #b5a77a;box-shadow:0 2px 6px #183e4810}
+.adm-navigation{background:#f1f5f4;border-right-color:#c7ceca}
+.adm-navigation button{font-size:15px;line-height:1.3}
+.adm-navigation button[aria-current=page]{background:linear-gradient(110deg,#174450,#286878);box-shadow:inset 3px 0 #c6b37c;color:#fff6db}
+.adm-navigation small,.adm-role,.adm-command>a{font-size:14px}
+.adm-page-heading h2{padding:9px 30px;min-width:220px;max-width:100%;font-size:23px;color:#fff1cf;text-shadow:0 1px 2px #08242e;background:url('../public/themes/fire-emblem-heroes/Common_Window.webp') 0 20.75%/170.5% 1084.8%;text-align:center}
+.adm-page-heading{flex-wrap:wrap}
+.adm-tile,.adm-overview-panel,.adm-shell :is(.version-list-panel,.version-editor-panel,.bulk-panel,.version-bulk-panel),dialog{border-color:#b6b59f;box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 4px #ddd9c9;border-radius:4px}
+.adm-tile header{border-bottom-color:#b5a77a}
+.adm-tile header svg,.adm-overview-actions svg{color:#236678}
+.adm-quick-label{background:linear-gradient(#286878,#174450);color:#fff1cf;border-right:2px solid #b5a77a}
+.adm-tabs button[aria-selected=true]{color:#174450;border-bottom-color:#a99354}
+.primary,.adm-shell .primary{position:relative;isolation:isolate;background:transparent;border-color:transparent;color:#fff6df;min-height:40px;padding-inline:20px;text-shadow:0 1px 2px #183642}
+.primary::before{content:'';position:absolute;inset:0;z-index:-1;background:url('../public/themes/fire-emblem-heroes/Common_Button.webp') 0 10.9%/219.5% 1197.5%;clip-path:polygon(5% 0,95% 0,100% 50%,95% 100%,5% 100%,0 50%);pointer-events:none}
+.primary:hover:not(:disabled),.adm-shell .primary:hover:not(:disabled){background:transparent;filter:brightness(1.08)}
+.adm-loading{background:#fff}
+@media(max-width:600px){.adm-page-heading h2{min-width:180px;font-size:21px}.adm-navigation button{font-size:15px}}
+
+/* Standalone manager: shared portrait marks must not depend on tracker styles. */
+.portrait-marks{position:absolute;inset:0;display:block;pointer-events:none;z-index:3}
+.portrait-marks img.portrait-mark{position:absolute;width:25%;height:25%;max-width:25%;max-height:25%;object-fit:contain;margin:0;padding:0;border:0;background:none;filter:drop-shadow(0 1px 1px #0007)}
+.portrait-marks .weapon-mark{top:1%;left:1%}
+.portrait-marks .type-mark{bottom:1%;left:1%}
+.portrait-marks .move-mark{bottom:1%;right:1%}
+.hero-portrait-frame{position:absolute;inset:0;display:block;background:url('../public/themes/fire-emblem-heroes/portrait-frame.webp') center/100% 100% no-repeat}
+.hero-portrait-frame.frame-red{filter:hue-rotate(175deg) saturate(1.35)}
+.hero-portrait-frame.frame-blue{filter:hue-rotate(20deg)}
+.hero-portrait-frame.frame-green{filter:hue-rotate(285deg) saturate(1.2)}
+.hero-portrait-frame.frame-colorless{filter:grayscale(1)}
+:is(.revival-picker-portrait,.waitlist-order-portrait){position:relative;isolation:isolate;flex-shrink:0}
+:is(.revival-picker-portrait,.waitlist-order-portrait)>img{clip-path:inset(6% round 9%)}
+dialog:is(.revival-hero-picker,.waitlist-reorganizer)[open]{display:flex;flex-direction:column;overflow:hidden;max-height:calc(100dvh - 48px);gap:0}
+dialog:is(.revival-hero-picker,.waitlist-reorganizer)>:is(header,footer,.revival-picker-tools,.waitlist-order-tools,.waitlist-order-colors){flex-shrink:0}
+dialog :is(label.revival-picker-search,label.waitlist-order-search){display:flex;flex-direction:row;align-items:center;gap:10px;min-width:0}
+dialog :is(.revival-picker-search,.waitlist-order-search)>svg{flex-shrink:0;width:20px;height:20px}
+dialog :is(.revival-picker-search,.waitlist-order-search)>input{flex:1;width:0;min-width:0}
+dialog :is(.revival-picker-grid,.waitlist-order-list){min-height:0;overflow:auto;overscroll-behavior:contain;flex:1;max-height:none}
+dialog .revival-picker-card{min-width:0;overflow-wrap:anywhere}
+dialog .reorder-select{min-width:0}
+dialog .waitlist-order-tools>div{flex-shrink:0}
+dialog .revival-picker-portrait{width:64px;height:64px}
+dialog .waitlist-order-portrait{width:48px;height:48px}
+@media(max-width:600px){dialog:is(.revival-hero-picker,.waitlist-reorganizer){padding:16px;width:calc(100% - 20px);max-height:calc(100dvh - 20px)}dialog .waitlist-order-portrait{width:36px;height:36px}dialog .revival-picker-tools{margin:12px 0}dialog .revival-picker-grid{grid-template-columns:repeat(auto-fill,minmax(105px,1fr))}}
+@media(max-width:600px),(pointer:coarse){.adm-navigation button{min-height:44px}.adm-command button,dialog .icon-button,dialog .reorder-drag-handle,dialog .waitlist-order-row-actions button{width:44px;height:44px;min-height:44px}dialog button,.adm-content :is(button,input,select){min-height:44px}.adm-content input[type=checkbox]{min-height:0}.adm-command{gap:8px}.waitlist-order-tools{gap:8px}}
+@media(max-width:600px){
+ dialog:is(.waitlist-reorganizer,.revival-hero-picker)[open]{max-height:calc(100dvh - 20px)}
+ dialog:is(.waitlist-reorganizer,.revival-hero-picker)>header h2{font-size:20px;line-height:1.2;margin:0;min-width:0;overflow-wrap:anywhere}
+ dialog.waitlist-reorganizer>header>div{flex:1;min-width:0}
+ dialog.waitlist-reorganizer>header p{display:none}
+ dialog.waitlist-reorganizer .waitlist-order-colors{gap:6px;margin:12px 0}
+ dialog.waitlist-reorganizer .waitlist-order-colors button{flex:1;min-width:0;font-size:14px;padding:8px 4px}
+ dialog.waitlist-reorganizer footer>p{display:none}
+ dialog.waitlist-reorganizer footer>div{flex-wrap:nowrap;gap:6px}
+ dialog.waitlist-reorganizer footer button{flex:1;min-width:0;font-size:14px;padding:8px 4px}
+ dialog.revival-hero-picker .revival-picker-footer>span{display:none}
+ dialog.revival-hero-picker .revival-picker-tools{margin:12px 0}
+ dialog.revival-hero-picker .revival-picker-colors{gap:6px}
+ dialog.revival-hero-picker .revival-picker-colors button{font-size:14px;padding:8px 6px}
+ dialog.revival-hero-picker .picker-multi-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+ dialog.revival-hero-picker .picker-multi-actions button{min-width:0;font-size:14px;padding:8px 4px}
+ dialog.revival-hero-picker .picker-multi-actions>span{grid-column:1/-1;font-size:13px}
+ dialog.revival-hero-picker .revival-picker-footer{flex-wrap:nowrap;gap:6px}
+ dialog.revival-hero-picker .revival-picker-footer button{flex:1;min-width:0;font-size:14px;padding:8px 4px;margin:0}
+}

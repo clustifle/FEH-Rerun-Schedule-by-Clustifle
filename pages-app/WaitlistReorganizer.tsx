@@ -1,3 +1,4 @@
+import {isBeta,betaRequest} from './beta';
 import useReorderDrag from './useReorderDrag';
 import type {WaitlistKind} from './waitlist-types';
 import {moveBanner} from './banner-order';
@@ -20,7 +21,7 @@ export default function WaitlistReorganizer({heroes,kind,title,onClose,onSaved}:
   setSaving(true);setError('');
   try{
    const request=kind==='lme'?supabase.rpc('reorder_tracker_waitlist',{weapon_color:color,ordered_ids:rows.map(h=>h.id)}):supabase.rpc('reorder_extended_waitlist',{waitlist_kind:kind,weapon_color:color,ordered_ids:rows.map(h=>h.id)});
-   const result=await request.abortSignal(AbortSignal.timeout(20000));
+   const result=isBeta?await betaRequest('waitlist-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({kind,color,ids:rows.map(h=>h.id)})}).then(()=>({error:null})):await request.abortSignal(AbortSignal.timeout(20000));
    if(result.error)throw result.error;
    setDirty(false);setConfirmClose(false);setMessage(color+' order saved.');
    // Refreshing the surrounding page must not keep this dialog locked after the write succeeds.

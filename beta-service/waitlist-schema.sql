@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS beta_waitlist(list_kind TEXT NOT NULL CHECK(list_kind IN ('lme','dsh','nhr','remix','consideration')),hero_id TEXT NOT NULL REFERENCES beta_heroes(id) ON DELETE CASCADE,sort_order INTEGER NOT NULL DEFAULT 2147483647,PRIMARY KEY(list_kind,hero_id));
