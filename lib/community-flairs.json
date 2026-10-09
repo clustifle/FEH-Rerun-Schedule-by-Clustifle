@@ -2,66 +2,85 @@
   {
     "id": "quick-question",
     "name": "Quick Question",
-    "color": "#9ad1f5"
+    "color": "#9ad1f5",
+    "staffOnly": false
   },
   {
     "id": "serious-discussion",
     "name": "Serious Discussion",
-    "color": "#c2b2ee"
+    "color": "#c2b2ee",
+    "staffOnly": false
   },
   {
     "id": "news",
     "name": "News",
-    "color": "#f2a4ac"
+    "color": "#f2a4ac",
+    "staffOnly": false
   },
   {
     "id": "analysis",
     "name": "Analysis",
-    "color": "#e8cf84"
+    "color": "#e8cf84",
+    "staffOnly": false
   },
   {
     "id": "chat",
     "name": "Chat",
-    "color": "#a8d9cf"
+    "color": "#a8d9cf",
+    "staffOnly": false
   },
   {
     "id": "unit-showcase",
     "name": "Unit Showcase",
-    "color": "#c4df9a"
+    "color": "#c4df9a",
+    "staffOnly": false
   },
   {
     "id": "memes",
     "name": "Memes",
-    "color": "#efb4d3"
+    "color": "#efb4d3",
+    "staffOnly": false
   },
   {
     "id": "resource",
     "name": "Resource",
-    "color": "#a4cbe5"
+    "color": "#a4cbe5",
+    "staffOnly": false
   },
   {
     "id": "gameplay",
     "name": "Gameplay",
-    "color": "#e4b995"
+    "color": "#e4b995",
+    "staffOnly": false
   },
   {
     "id": "aether-showcase",
     "name": "Aether Showcase",
-    "color": "#b5c7ed"
+    "color": "#b5c7ed",
+    "staffOnly": false
   },
   {
     "id": "new-hero-idea",
     "name": "New Hero Idea",
-    "color": "#d3c098"
+    "color": "#d3c098",
+    "staffOnly": false
   },
   {
     "id": "banner-megathread",
-    "name": "Banner Megathread",
-    "color": "#f0c15d"
+    "name": "[MOD] Banner Megathread",
+    "color": "#f0c15d",
+    "staffOnly": true
   },
   {
     "id": "binding-world-megathread",
-    "name": "Binding World Megathread",
-    "color": "#92d8b4"
+    "name": "[MOD] Binding World Megathread",
+    "color": "#92d8b4",
+    "staffOnly": true
+  },
+  {
+    "id": "hall-of-forms-megathread",
+    "name": "[MOD] Hall of Forms Megathread",
+    "color": "#c5adf0",
+    "staffOnly": true
   }
 ]

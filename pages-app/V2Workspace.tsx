@@ -15,13 +15,13 @@ const VersionsManagement=lazy(()=>import('./VersionsManagement'));
 const Community=lazy(()=>import('./Community'));
 export type BetaHero={id:string;name:string;title:string;category:string;color:string;portrait:string|null;pool:string|null;schedule:string;month:string|null;notes:string;revision?:number;weapon_type?:string|null;move_type?:string|null;blessing?:string|null;demote?:boolean;heroic_grail?:boolean;debut_version?:string|null;release_date?:string|null;release_event?:string|null};
 type Props<T extends BetaHero>={section:string;heroes:T[];onView:(hero:T)=>void;onRefresh:()=>Promise<void>};
-const sections=[['My Watchlist','watchlist'],['Community','community'],['Administrative Manager','FEHRS_AdmManager/']] as const;
+const sections=[['My Watchlist','watchlist'],['Forum','community'],['Administrative Manager','FEHRS_AdmManager/']] as const;
 export function BetaNavigation(){return <aside className="beta-navigation"><p><strong>2.0 Beta · Head Admin testing</strong><span>Hero changes stay in the beta database. Other live editing is disabled.</span></p><nav aria-label="Version 2.0 beta tools">{sections.map(([label,path])=><a key={path} href={'/'+path}>{label}</a>)}</nav></aside>;}
 const errorMessage=(e:unknown)=>e instanceof Error?e.message:'Could not complete the request.';
 const title=(hero:BetaHero)=>hero.name+' — '+hero.title;
 function HeroRows<T extends BetaHero>({heroes,onView}:{heroes:T[];onView:(h:T)=>void}){const [limit,setLimit]=useState(60);return <><ul className="v2-hero-list">{heroes.slice(0,limit).map(h=><li key={h.id}><button onClick={()=>onView(h)}>{h.portrait&&<img src={portraitUrl(h.portrait)} alt="" loading="lazy"/>}<span><strong>{h.name}</strong><small>{h.title}</small><small>{h.debut_version?'FEH '+h.debut_version:'Version not recorded'}</small></span></button></li>)}</ul>{heroes.length>limit&&<button className="secondary" onClick={()=>setLimit(v=>v+60)}>Show more</button>}{!heroes.length&&<p>No heroes match this selection.</p>}</>;}
 export default function V2Workspace<T extends BetaHero>(p:Props<T>){
- const titleMap:Record<string,string>={'watchlist':'My Watchlist','community':'Community','bulk':'Bulk Edit Heroes','manage-versions':'Manage FEH Versions','beta-history':'Beta Change History'};
+ const titleMap:Record<string,string>={'watchlist':'My Watchlist','community':'Forum','bulk':'Bulk Edit Heroes','manage-versions':'Manage FEH Versions','beta-history':'Beta Change History'};
  return <section className="v2-workspace"><header className="fb-heading"><h2>{titleMap[p.section]||'Version 2.0'}</h2></header><ToolBoundary key={p.section}>{p.section==='watchlist'?<Watchlist {...p}/>:p.section==='bulk'?<BulkEditor {...p}/>:p.section==='manage-versions'?<VersionsManagement onRefresh={p.onRefresh}/>:p.section==='beta-history'?<BetaHistory/>:<Community/>}</ToolBoundary></section>;
 }
 type Follow={hero_id:string;list_name:string};

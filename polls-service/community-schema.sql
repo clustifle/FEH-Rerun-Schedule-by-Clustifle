@@ -9,3 +9,5 @@ CREATE TABLE IF NOT EXISTS community_images (
  bytes BLOB NOT NULL, size INTEGER NOT NULL, created_at TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS community_images_owner ON community_images(github_id,created_at);
+
+CREATE TABLE IF NOT EXISTS forum_moderators (github_id TEXT PRIMARY KEY,website_id TEXT NOT NULL,assigned_by TEXT NOT NULL,created_at TEXT NOT NULL);

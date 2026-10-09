@@ -2,7 +2,7 @@
 
 The website Community page uses the repository's GitHub Discussions. Posts and replies created on either website appear in the same discussion. Posts publish under the connected GitHub user's identity.
 
-- Categories, thirteen text-only post flairs with distinct colors and flair filters, search, newest/recent activity/popularity sorting, and pagination. Flairs are stored as a visible flair line and an identifying Markdown comment in the GitHub post, so author edits preserve the association. They do not require granting ordinary members GitHub label-management permissions.
+- Categories, fourteen text-only post flairs with distinct colors and flair filters, search, newest/recent activity/popularity sorting, and pagination. Flairs are stored as a visible flair line and an identifying Markdown comment in the GitHub post, so author edits preserve the association. They do not require granting ordinary members GitHub label-management permissions.
 - Visual rich text editor: headings, bold, italic, strikethrough, lists, quotes, code blocks, tables, links, images, emoji, and undo/redo. Post and reply content use Segoe UI. GitHub-compatible Markdown is generated internally.
 - Picture uploads, pasted images, and drag/drop. Pictures are optimized to WebP, at most 1600 pixels and 512 KB, and served by Cloudflare. HTTPS picture URLs also work.
 - Drafts and bookmarked posts saved on the current device. Drafts are scoped to the website account.
@@ -26,3 +26,9 @@ Apply the additive schema through `wrangler d1 execute` with `--command` and the
 Validation: `node --test polls-service/worker.test.mjs polls-service/community.test.mjs`, TypeScript, production builds, and `scripts/community-ui-check.mjs`. Live posting should be tested by an authorized user with a real community post, rather than publishing automated test content.
 
 Local validation passed: fourteen Community/polls security and lifecycle tests; actual GitHub query-schema validation without publishing; sanitized Markdown and image upload/publish/reply flows using simulated GitHub data; four responsive widths (320, 390, 768, 1280); Administrative Manager mobile layout; TypeScript; website/admin production builds; existing Head Admin/Schedule Manager hero/version/watchlist workflows. OAuth connection and real-user posting remain live setup checks.
+
+## Forum moderation
+
+The website labels Community as Forum while preserving existing community URLs. MOD Banner, Binding World, and Hall of Forms megathreads are selectable and writable only by Head Admin, Schedule Managers, or Forum Moderators. The server checks both new and existing flairs during creation and editing. Head Admin manages forum-only moderator membership in Administrative Manager > Forum. Membership is stored in Cloudflare D1 and does not grant schedule or poll permissions.
+
+Browse by flair uses a compact selector and three megathread shortcuts. Post actions are borderless and left-aligned, with a visible upvote count.

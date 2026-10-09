@@ -1,7 +1,7 @@
 import {supabase} from './static-data';
 import {pollApiUrl} from './poll-api';
 export const discussionUrl='https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/discussions';
-export type CommunityUser={github_id:string;website_id:string;login:string;role:'owner'|'manager'|'voter';can_vote:boolean};
+export type CommunityUser={github_id:string;website_id:string;login:string;role:'owner'|'manager'|'moderator'|'voter';can_vote:boolean};
 export type CommunitySession={user:CommunityUser|null;connected:boolean;publicReady:boolean};
 export type Category={id:string;name:string;slug?:string;isAnswerable:boolean};
 export type PageInfo={endCursor?:string;hasNextPage:boolean};
