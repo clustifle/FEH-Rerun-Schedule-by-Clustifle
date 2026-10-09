@@ -19,3 +19,29 @@ body{font-size:16px;line-height:1.45;background:#f5f6f4}
 .primary:hover:not(:disabled),.adm-shell .primary:hover:not(:disabled){background:#2b7183;filter:brightness(1.08)}
 .adm-loading{background:#fff}
 @media(max-width:600px){.adm-page-heading h2{min-width:180px;font-size:21px}.adm-navigation button{font-size:15px}}
+
+/* Standalone manager: shared portrait marks must not depend on tracker styles. */
+.portrait-marks{position:absolute;inset:0;display:block;pointer-events:none;z-index:3}
+.portrait-marks img.portrait-mark{position:absolute;width:25%;height:25%;max-width:25%;max-height:25%;object-fit:contain;margin:0;padding:0;border:0;background:none;filter:drop-shadow(0 1px 1px #0007)}
+.portrait-marks .weapon-mark{top:1%;left:1%}
+.portrait-marks .type-mark{bottom:1%;left:1%}
+.portrait-marks .move-mark{bottom:1%;right:1%}
+.hero-portrait-frame{position:absolute;inset:0;display:block;background:url('../public/themes/fire-emblem-heroes/portrait-frame.webp') center/100% 100% no-repeat}
+.hero-portrait-frame.frame-red{filter:hue-rotate(175deg) saturate(1.35)}
+.hero-portrait-frame.frame-blue{filter:hue-rotate(20deg)}
+.hero-portrait-frame.frame-green{filter:hue-rotate(285deg) saturate(1.2)}
+.hero-portrait-frame.frame-colorless{filter:grayscale(1)}
+:is(.revival-picker-portrait,.waitlist-order-portrait){position:relative;isolation:isolate;flex-shrink:0}
+:is(.revival-picker-portrait,.waitlist-order-portrait)>img{clip-path:inset(6% round 9%)}
+dialog:is(.revival-hero-picker,.waitlist-reorganizer)[open]{display:flex;flex-direction:column;overflow:hidden;max-height:calc(100dvh - 48px);gap:0}
+dialog:is(.revival-hero-picker,.waitlist-reorganizer)>:is(header,footer,.revival-picker-tools,.waitlist-order-tools,.waitlist-order-colors){flex-shrink:0}
+dialog :is(label.revival-picker-search,label.waitlist-order-search){display:flex;flex-direction:row;align-items:center;gap:10px;min-width:0}
+dialog :is(.revival-picker-search,.waitlist-order-search)>svg{flex-shrink:0;width:20px;height:20px}
+dialog :is(.revival-picker-search,.waitlist-order-search)>input{flex:1;width:0;min-width:0}
+dialog :is(.revival-picker-grid,.waitlist-order-list){min-height:0;overflow:auto;overscroll-behavior:contain;flex:1;max-height:none}
+dialog .revival-picker-card{min-width:0;overflow-wrap:anywhere}
+dialog .reorder-select{min-width:0}
+dialog .waitlist-order-tools>div{flex-shrink:0}
+dialog .revival-picker-portrait{width:64px;height:64px}
+dialog .waitlist-order-portrait{width:48px;height:48px}
+@media(max-width:600px){dialog:is(.revival-hero-picker,.waitlist-reorganizer){padding:16px;width:calc(100% - 20px);max-height:calc(100dvh - 20px)}dialog .waitlist-order-portrait{width:36px;height:36px}dialog .revival-picker-tools{margin:12px 0}dialog .revival-picker-grid{grid-template-columns:repeat(auto-fill,minmax(105px,1fr))}}
