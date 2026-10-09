@@ -20,6 +20,7 @@ Checked 9 October 2026. Changes remain on the private beta branch.
 - Hero profile pinning and scrolling; watchlist grid/list/icons; bulk edits and required blessings; version rename/reassignment/deletion; multi-selection; manager navigation, dialogs, saving, and closing.
 - Manager dialogs additionally checked at 320×568, including a visual check of the hero picker.
 - Client request tests verify shared reads, server errors, and timeout recovery.
+- Production-build checks confirm transparent FEH sprite buttons in all 11 website themes, including hover, at 320px and 1280px. The built standalone manager passes its editing and short-screen dialog checks as well.
 
 Initial manager JavaScript measured 523.09 KB before deferred tools and approximately 494 KB afterward (uncompressed). Deferred tool code is still downloaded when used.
 
