@@ -1,13 +1,67 @@
 [
- {"id":"quick-question","name":"Quick Question","icon":"question"},
- {"id":"serious-discussion","name":"Serious Discussion","icon":"discussion"},
- {"id":"news","name":"News","icon":"news"},
- {"id":"analysis","name":"Analysis","icon":"analysis"},
- {"id":"chat","name":"Chat","icon":"chat"},
- {"id":"unit-showcase","name":"Unit Showcase","icon":"unit"},
- {"id":"memes","name":"Memes","icon":"humor"},
- {"id":"resource","name":"Resource","icon":"resource"},
- {"id":"gameplay","name":"Gameplay","icon":"gameplay"},
- {"id":"aether-showcase","name":"Aether Showcase","icon":"aether"},
- {"id":"new-hero-idea","name":"New Hero Idea","icon":"idea"}
+  {
+    "id": "quick-question",
+    "name": "Quick Question",
+    "color": "#9ad1f5"
+  },
+  {
+    "id": "serious-discussion",
+    "name": "Serious Discussion",
+    "color": "#c2b2ee"
+  },
+  {
+    "id": "news",
+    "name": "News",
+    "color": "#f2a4ac"
+  },
+  {
+    "id": "analysis",
+    "name": "Analysis",
+    "color": "#e8cf84"
+  },
+  {
+    "id": "chat",
+    "name": "Chat",
+    "color": "#a8d9cf"
+  },
+  {
+    "id": "unit-showcase",
+    "name": "Unit Showcase",
+    "color": "#c4df9a"
+  },
+  {
+    "id": "memes",
+    "name": "Memes",
+    "color": "#efb4d3"
+  },
+  {
+    "id": "resource",
+    "name": "Resource",
+    "color": "#a4cbe5"
+  },
+  {
+    "id": "gameplay",
+    "name": "Gameplay",
+    "color": "#e4b995"
+  },
+  {
+    "id": "aether-showcase",
+    "name": "Aether Showcase",
+    "color": "#b5c7ed"
+  },
+  {
+    "id": "new-hero-idea",
+    "name": "New Hero Idea",
+    "color": "#d3c098"
+  },
+  {
+    "id": "banner-megathread",
+    "name": "Banner Megathread",
+    "color": "#f0c15d"
+  },
+  {
+    "id": "binding-world-megathread",
+    "name": "Binding World Megathread",
+    "color": "#92d8b4"
+  }
 ]

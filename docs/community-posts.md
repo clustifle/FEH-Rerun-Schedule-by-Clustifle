@@ -2,7 +2,7 @@
 
 The website Community page uses the repository's GitHub Discussions. Posts and replies created on either website appear in the same discussion. Posts publish under the connected GitHub user's identity.
 
-- Categories, the eleven requested post flairs with SVG icons and flair filters, search, newest/recent activity/popularity sorting, and pagination. Flairs are stored as a visible flair line and an identifying Markdown comment in the GitHub post, so author edits preserve the association. They do not require granting ordinary members GitHub label-management permissions.
+- Categories, thirteen text-only post flairs with distinct colors and flair filters, search, newest/recent activity/popularity sorting, and pagination. Flairs are stored as a visible flair line and an identifying Markdown comment in the GitHub post, so author edits preserve the association. They do not require granting ordinary members GitHub label-management permissions.
 - Visual rich text editor: headings, bold, italic, strikethrough, lists, quotes, code blocks, tables, links, images, emoji, and undo/redo. Post and reply content use Segoe UI. GitHub-compatible Markdown is generated internally.
 - Picture uploads, pasted images, and drag/drop. Pictures are optimized to WebP, at most 1600 pixels and 512 KB, and served by Cloudflare. HTTPS picture URLs also work.
 - Drafts and bookmarked posts saved on the current device. Drafts are scoped to the website account.
