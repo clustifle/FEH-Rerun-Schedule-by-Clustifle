@@ -31,14 +31,28 @@ export async function handleData(request,env,owner){
  const heroes=async()=>((await db.prepare('SELECT record, revision FROM beta_heroes ORDER BY id').all()).results||[]).map(r=>({...JSON.parse(r.record),revision:r.revision}));
  const versions=async()=>(await db.prepare('SELECT * FROM beta_versions ORDER BY sort_order,version').all()).results||[];
  if(path==='heroes'&&request.method==='GET')return json(await heroes());
- if(path==='versions'&&request.method==='GET')return json(await versions());
+ if(path==='versions'&&request.method==='GET'){const all=await heroes();return json((await versions()).map(v=>({...v,hero_count:all.filter(h=>h.debut_version===v.version).length})));}
  if(path==='versions'&&request.method==='POST'){
   const b=await body(request);if(!/^\d{1,2}\.(?:0|[1-9]\d?)$/.test(b.version)||!Number.isSafeInteger(b.sort_order)||b.sort_order<0||b.sort_order>100000)throw Error('Use a version such as 10.1 and a valid order.');
   if(b.release_date&&(!/^\d{4}-\d{2}-\d{2}$/.test(b.release_date)||new Date(b.release_date).toISOString().slice(0,10)!==b.release_date))throw Error('Choose a valid release date.');
-  await db.prepare('INSERT INTO beta_versions(version,release_date,sort_order) VALUES(?,?,?) ON CONFLICT(version) DO UPDATE SET release_date=excluded.release_date,sort_order=excluded.sort_order').bind(b.version,b.release_date||null,b.sort_order).run();return json({ok:true});
+  const old=b.original_version||b.version,known=await versions();
+  if(b.original_version&&!known.some(v=>v.version===old))throw Error('Version no longer exists. Refresh and try again.');
+  if(old!==b.version&&known.some(v=>v.version===b.version))throw Error('That version already exists.');
+  const statements=[db.prepare('INSERT INTO beta_versions(version,release_date,sort_order) VALUES(?,?,?) ON CONFLICT(version) DO UPDATE SET release_date=excluded.release_date,sort_order=excluded.sort_order').bind(b.version,b.release_date||null,b.sort_order)];
+  if(old!==b.version)statements.push(db.prepare("UPDATE beta_heroes SET record=json_set(record,'$.debut_version',?),revision=revision+1 WHERE json_extract(record,'$.debut_version')=?").bind(b.version,old),db.prepare('DELETE FROM beta_versions WHERE version=?').bind(old));
+  statements.push(db.prepare('INSERT INTO beta_history VALUES(?,?,?,?,?,?)').bind(crypto.randomUUID(),owner,new Date().toISOString(),'Saved FEH version '+b.version,JSON.stringify(known.filter(v=>v.version===old)),JSON.stringify([{version:b.version,release_date:b.release_date||null,sort_order:b.sort_order}])));
+  await db.batch(statements);return json({ok:true});
  }
  if(path==='versions'&&request.method==='DELETE'){
-  const b=await body(request);if((await heroes()).some(h=>h.debut_version===b.version))throw Error('Reassign heroes using this version before deleting it.');await db.prepare('DELETE FROM beta_versions WHERE version=?').bind(b.version).run();return json({ok:true});
+  const b=await body(request),known=await versions();if(!known.some(v=>v.version===b.version))throw Error('Version no longer exists.');
+  if(Object.hasOwn(b,'replacement')&&b.replacement!==null&&(!known.some(v=>v.version===b.replacement)||b.replacement===b.version))throw Error('Choose a different replacement version.');
+  const assertion=crypto.randomUUID(),statements=[];
+  if(!Object.hasOwn(b,'replacement')){
+   if((await heroes()).some(h=>h.debut_version===b.version))throw Error('Reassign heroes using this version before deleting it.');
+   statements.push(db.prepare("INSERT INTO beta_assertions(id,valid) SELECT ?,CASE WHEN EXISTS(SELECT 1 FROM beta_heroes WHERE json_extract(record,'$.debut_version')=?) THEN 0 ELSE 1 END").bind(assertion,b.version));
+  }else statements.push(db.prepare("UPDATE beta_heroes SET record=json_set(record,'$.debut_version',?),revision=revision+1 WHERE json_extract(record,'$.debut_version')=?").bind(b.replacement,b.version));
+  statements.push(db.prepare('DELETE FROM beta_versions WHERE version=?').bind(b.version),db.prepare('INSERT INTO beta_history VALUES(?,?,?,?,?,?)').bind(crypto.randomUUID(),owner,new Date().toISOString(),'Deleted FEH version '+b.version,JSON.stringify(known.filter(v=>v.version===b.version)),JSON.stringify({replacement:b.replacement})),db.prepare('DELETE FROM beta_assertions WHERE id=?').bind(assertion));
+  await db.batch(statements);return json({ok:true});
  }
  if(path==='bulk'&&request.method==='POST'){
   const b=await body(request),all=await heroes(),known=(await versions()).map(v=>v.version);

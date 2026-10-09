@@ -1,6 +1,6 @@
 import {useEffect,useSyncExternalStore} from 'react';
 import {betaRequest,isBeta} from './beta';
-export type FehVersion={version:string;release_date:string|null;sort_order:number};
+export type FehVersion={version:string;release_date:string|null;sort_order:number;hero_count?:number};
 let versions:FehVersion[]=[],pending:Promise<void>|null=null;const listeners=new Set<()=>void>();
 export function loadVersions(force=false){if(!isBeta)return Promise.resolve();if(!pending&&(force||!versions.length))pending=betaRequest('versions').then(rows=>{versions=rows;listeners.forEach(fn=>fn());}).finally(()=>{pending=null;});return pending||Promise.resolve();}
 export function useVersions(){useEffect(()=>{void loadVersions().catch(()=>{});},[]);return useSyncExternalStore(fn=>{listeners.add(fn);return()=>listeners.delete(fn);},()=>versions);}
