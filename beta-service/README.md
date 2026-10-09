@@ -2,6 +2,8 @@
 
 Branch: `beta`. Private site: https://feh-rerun-beta.shyguyvn.workers.dev/
 
+Administrative Manager is a separate application at `/FEHRS_AdmManager/`, with a Server Manager inspired dashboard, left navigation, and Segoe UI. Its standalone bundle is built using `vite.administrative.config.ts`; all routes and assets remain protected by the beta Worker. Mods Edit combines bulk hero editing and FEH version management. The beta website links to this application instead of embedding the tools. The intended production address is `https://clustifle.github.io/FEHRS_AdmManager/`; publication there requires a separate production build and existing staff-authorized data services. Private beta deployment does not publish that GitHub Pages site.
+
 The public GitHub Pages site remains on `main` and version 1.0. Never deploy this branch through the Pages workflow. A separate Cloudflare Worker runs before **every** asset request and verifies the existing Supabase user and trusted `tracker_role()` result. Only `Owner` can access the application and its beta API. Visitors and Schedule Managers receive the beta sign-in screen or HTTP 403. Login code, the Beta logo, and its font are the only public assets. Search indexing and service workers are disabled.
 
 Authentication remains with the existing Supabase project and GitHub provider. Its allowed return URLs include `https://feh-rerun-beta.shyguyvn.workers.dev/?auth=github`. The live Site URL is unchanged. The beta session cookie is HttpOnly, Secure, SameSite=Lax, and renewed by the existing access token. Previously verified GET requests can reuse verification for at most 60 seconds and never beyond token expiry; writes and session creation reverify access.

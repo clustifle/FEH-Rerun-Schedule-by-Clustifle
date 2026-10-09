@@ -43,7 +43,8 @@ export function createWorker(fetcher=fetch){const verifiedReads=new Map();return
   }
   if(!['GET','HEAD'].includes(request.method))return json({error:'Method not allowed'},405);
   if(path==='/sw.js')return reply('/* Service workers disabled for private beta. */',404,{'Content-Type':'text/javascript'});
-  const asset=await env.ASSETS.fetch(request),h=new Headers(asset.headers);for(const [k,v] of Object.entries(headers))h.set(k,v);
+  const assetRequest=path==='/FEHRS_AdmManager'||path.startsWith('/FEHRS_AdmManager/')?new Request(new URL('/FEHRS_AdmManager/index.html',url),request):request;
+  const asset=await env.ASSETS.fetch(assetRequest),h=new Headers(asset.headers);for(const [k,v] of Object.entries(headers))h.set(k,v);
   return new Response(asset.body,{status:asset.status,headers:h});
  }catch{return json({error:'Could not verify beta access. Please try again.'},503);}
 }};}
