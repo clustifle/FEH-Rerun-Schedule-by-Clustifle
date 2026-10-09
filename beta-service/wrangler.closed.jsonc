@@ -1,0 +1,8 @@
+{
+ "name":"feh-rerun-beta",
+ "main":"closed-worker.mjs",
+ "compatibility_date":"2026-10-09",
+ "account_id":"405b9e7f6a8c405e417fd0eaad3af80d",
+ "workers_dev":true,
+ "preview_urls":false
+}

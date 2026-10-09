@@ -69,3 +69,12 @@
 }
 
 @media(max-width:600px){html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .banner-carousel-track{align-items:flex-start;height:var(--phone-banner-height,auto)}html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .home-banner{align-self:flex-start}}
+/* Staff controls must not expand the homepage grid on narrow phones. */
+@media(max-width:600px){
+ html[data-theme][data-theme][data-theme][data-theme] .tracker .homepage{min-width:0;max-width:100%}
+ html[data-theme][data-theme][data-theme][data-theme] .tracker .homepage-tools{min-width:0;grid-template-columns:minmax(0,1fr)}
+ html[data-theme][data-theme][data-theme][data-theme] .tracker .homepage-tools h2{min-width:0;max-width:100%;width:100%;padding-inline:35px}
+ html[data-theme][data-theme][data-theme][data-theme] .tracker .homepage-actions{max-width:100%;flex-wrap:wrap}
+ html[data-theme][data-theme][data-theme][data-theme] .tracker .schedule-stage{min-width:0;max-width:100%;grid-template-columns:minmax(0,1fr)}
+ html[data-theme][data-theme][data-theme][data-theme] .tracker .schedule-stage>section{min-width:0;max-width:100%;box-sizing:border-box}
+}

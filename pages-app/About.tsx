@@ -1,5 +1,5 @@
 import {isBeta} from './beta';
 import {assetUrl} from './static-data';
 export default function About(){
- return <section id="settings-About" className="settings-about about-minimal" aria-label="About"><img className="settings-about-logo" src={assetUrl('clustifle-feh-rerun-logo.png')} alt="FEH Rerun Schedule by Clustifle"/><h3>FEH Rerun Schedule by Clustifle</h3><p>{isBeta?'Version 2.0 Beta (Head Admin testing)':'Version 1.0 (first_release)'}</p><p>Made by Clustifle</p><p>Artwork © Nintendo / INTELLIGENT SYSTEMS</p><p>This is an unofficial fan project, unaffiliated with Nintendo or INTELLIGENT SYSTEMS.</p><p>Special thanks to u/King41bert0713 for features idea and feedback.</p></section>;
+ return <section id="settings-About" className="settings-about about-minimal" aria-label="About"><img className="settings-about-logo" src={assetUrl('clustifle-feh-rerun-logo.png')} alt="FEH Rerun Schedule by Clustifle"/><h3>FEH Rerun Schedule by Clustifle</h3><p>{isBeta?'Version 2.0 Beta (Head Admin testing)':'Version 2.0'}</p><p>Made by Clustifle</p><p>Artwork © Nintendo / INTELLIGENT SYSTEMS</p><p>This is an unofficial fan project, unaffiliated with Nintendo or INTELLIGENT SYSTEMS.</p><p>Special thanks to u/King41bert0713 for features idea and feedback.</p></section>;
 }

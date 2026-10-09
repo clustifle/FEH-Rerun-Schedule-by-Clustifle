@@ -1,6 +1,7 @@
 import {requestTimeout} from './browser-compat';
 export const isBeta=import.meta.env.VITE_SITE_CHANNEL==='beta';
 export async function betaRequest(path:string,init?:RequestInit){
+ if(!isBeta)return (await import('./production-tools')).productionRequest(path,init);
  const timeout=requestTimeout(15000);
  try{
  const response=await fetch('/_beta/api/'+path,{...init,signal:init?.signal||timeout.signal});
