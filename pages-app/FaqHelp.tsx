@@ -113,7 +113,7 @@ const entries:Entry[]=[
  {
   "section": "Browsing",
   "question": "Do I need an account to browse?",
-  "answer": "**No account is required** to browse schedules, heroes, waitlists, public profiles, Settings, or the FAQ.\n\nUse **Sign in** or **Sign up** in navigation for account features. You can continue with GitHub; linking GitHub to an existing account is optional.\n\nNew accounts have **Visitor** access. Creating an account does not grant schedule-editing permissions."
+  "answer": "**No account is required** to browse schedules, heroes, waitlists, public profiles, Settings, or the FAQ.\n\nUse **Sign in** or **Sign up** in navigation for account features. GitHub is required for new accounts. Existing email accounts without GitHub linked can use **Legacy Sign-in**. Link GitHub in **Settings → Account** to switch; once linked, use GitHub to sign in.\n\nNew accounts have **Visitor** access. Creating an account does not grant schedule-editing permissions."
  },
  {
   "section": "Browsing",

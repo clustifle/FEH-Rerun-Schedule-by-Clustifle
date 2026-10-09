@@ -11,7 +11,7 @@ export function githubAuthError(error:unknown){
  const code=error&&typeof error==='object'&&'code' in error?String(error.code):'';
  if(code==='identity_already_exists')return 'This GitHub account is already linked to another website account.';
  if(code==='manual_linking_disabled')return 'GitHub account linking is not available yet. Please try again later.';
- if(code==='provider_disabled')return 'GitHub sign-in is not available yet. You can still sign in with email.';
+ if(code==='provider_disabled')return 'GitHub sign-in is temporarily unavailable. Existing unlinked email accounts can use Legacy Sign-in.';
  if(code==='access_denied')return 'GitHub authorization was cancelled. Your account has not been changed.';
  return 'Could not connect to GitHub. Please try again.';
 }
