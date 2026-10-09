@@ -1,3 +1,5 @@
+import {isBeta} from './beta';
+import V2Workspace from './V2Workspace';
 import {PollManagement} from './Polls';
 import {useEffect,useState,useRef,type ReactNode} from 'react';
 import {LayoutDashboard,Shield,CalendarDays,Layers,FileText,Users,History,Plus,Pencil,RefreshCw} from 'lucide-react';
@@ -20,6 +22,7 @@ function UpcomingEvents({owner,onContent}:{owner:boolean;onContent:()=>void}){
 export default function ModsTool(p:Props){
  const [section,setSection]=useState(()=>readRoute().section||'overview');
  useEffect(()=>{const sync=()=>setSection(readRoute().section||'overview');window.addEventListener('route-change',sync);window.addEventListener('popstate',sync);return()=>{window.removeEventListener('route-change',sync);window.removeEventListener('popstate',sync);};},[]);
+ if(isBeta&&['bulk','versions','beta-history'].includes(section)&&p.ready&&p.role==='Owner')return <V2Workspace section={section==='versions'?'manage-versions':section} heroes={p.heroes} onView={h=>p.onView(h.id)} onRefresh={p.onRefresh}/>;
  if(section==='polls'&&(!p.ready||!['Owner','Manager'].includes(p.role||'')))return <section className="mods-tool"><header className="fb-heading mods-heading"><h2>Poll management</h2></header><div className="mods-body"><PollManagement/></div></section>;
  if(!p.ready)return <section className="mods-access" role="status">Checking staff access…</section>;
  if(!['Owner','Manager'].includes(p.role||''))return <section className="mods-access"><h2>Mods Tool</h2><p>Sign in as a Schedule Manager or Head Admin to use this page.</p><button className="primary" onClick={()=>window.dispatchEvent(new Event('open-owner-login'))}>Sign in</button></section>;

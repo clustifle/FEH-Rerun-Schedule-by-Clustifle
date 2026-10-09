@@ -1,4 +1,5 @@
 import portraitManifest from './portrait-manifest.json';
+import {isBeta} from './beta';
 import {isWaitlist} from './waitlist-types';
 import {moveTypes} from './move-types';
 import {weaponTypes} from './weapon-types';
@@ -9,7 +10,7 @@ import {upscalePortrait} from './portrait-upscale';
 export const supabaseUrl='https://aknsqeqykjgdyhdroqcx.supabase.co';
 export const supabasePublishableKey='sb_publishable_PiJIst1aSJtrYBiIvwDIVA_KS3c-E3g';
 export const supabase=createClient(supabaseUrl,supabasePublishableKey);
-export const assetUrl=(value:string)=>import.meta.env.BASE_URL+value.replace(/^\//,'');
+export const assetUrl=(value:string)=>import.meta.env.BASE_URL+(isBeta&&value==='clustifle-feh-rerun-logo.png'?'clustifle-feh-rerun-beta-logo.png':value).replace(/^\//,'');
 const deliveryPortraits=portraitManifest as Record<string,{thumb:string;detail:string}>;
 export const portraitUrl=(value:string,size:'thumb'|'detail'='thumb')=>value.startsWith('data/')?assetUrl(value):deliveryPortraits[value]?assetUrl(deliveryPortraits[value][size]):supabase.storage.from('portraits').getPublicUrl(value).data.publicUrl;
 export async function ownerSession(){const {data:{session}}=await supabase.auth.getSession();if(!session)return false;const {data,error}=await supabase.rpc('is_tracker_owner');return !error&&data===true;}
@@ -51,6 +52,16 @@ async function importImage(url:string){
 }
 const pendingReads=new Map<string,Promise<Response>>();
 export async function apiFetch(input:string,init?:RequestInit){
+ if(isBeta&&input==='/api/heroes'){
+  if(!init?.method||init.method==='GET')return fetch('/_beta/api/heroes');
+  if(init.method==='DELETE')return fetch('/_beta/api/hero',{method:'DELETE',headers:{'Content-Type':'application/json'},body:init.body});
+  if(init.method==='POST'){
+   const form=init.body as FormData;
+   if((form.get('portrait') instanceof File&&(form.get('portrait') as File).size)||form.get('portraitUrl'))return jsonResponse({error:'Portrait uploads are disabled in this beta build; existing portraits are preserved.'},{status:400});
+   const data=Object.fromEntries([...form.entries()].filter(([key,value])=>typeof value==='string'&&!['portrait','portraitPrepared'].includes(key)));
+   return fetch('/_beta/api/hero',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,revision:Number(form.get('revision')),heroic_grail:form.get('heroic_grail')==='on',demote:form.get('demote')==='on'})});
+  }
+ }
  if((!init?.method||init.method==='GET')&&['/api/heroes','/api/banners'].includes(input)){
   let pending=pendingReads.get(input);
   if(!pending){pending=runApiFetch(input,init);pendingReads.set(input,pending);const request=pending;void pending.finally(()=>{if(pendingReads.get(input)===request)pendingReads.delete(input);}).catch(()=>{});}
