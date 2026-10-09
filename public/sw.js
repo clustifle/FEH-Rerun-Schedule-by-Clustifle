@@ -1,9 +1,9 @@
-const CACHE='feh-rerun-static-v3';
+const CACHE='feh-rerun-static-v4';
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(['./offline.html','./themes/fire-emblem-heroes/feh.woff2','./icons/app-192.png?v=2','./icons/app-512.png?v=2','./icons/app-512-maskable.png?v=2'])));self.skipWaiting();});
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('feh-rerun-static-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{
  const url=new URL(event.request.url),scope=new URL(self.registration.scope);
  if(event.request.method!=='GET'||url.origin!==scope.origin||!url.pathname.startsWith(scope.pathname))return;
  if(event.request.mode==='navigate'){event.respondWith(fetch(event.request).catch(()=>caches.match(new URL('offline.html',scope).href)));return;}
- if(url.pathname.startsWith(scope.pathname+'assets/')||url.pathname.startsWith(scope.pathname+'hero-portraits/'))event.respondWith(caches.match(event.request).then(cached=>cached||fetch(event.request).then(response=>{if(response.ok){const copy=response.clone();event.waitUntil(caches.open(CACHE).then(cache=>cache.put(event.request,copy)).catch(()=>{}));}return response;})));
+ if(url.pathname.startsWith(scope.pathname+'themes/')||url.pathname.startsWith(scope.pathname+'icons/')||url.pathname.startsWith(scope.pathname+'assets/')||url.pathname.startsWith(scope.pathname+'hero-portraits/'))event.respondWith(caches.match(event.request).then(cached=>cached||fetch(event.request).then(response=>{if(response.ok){const copy=response.clone();event.waitUntil(caches.open(CACHE).then(cache=>cache.put(event.request,copy)).catch(()=>{}));}return response;})));
 });
