@@ -1,4 +1,4 @@
-const CACHE='feh-rerun-static-v6-public-v2';
+const CACHE='feh-rerun-static-v7-community';
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(['./offline.html','./themes/fire-emblem-heroes/feh.woff2','./icons/app-192.png?v=2','./icons/app-512.png?v=2','./icons/app-512-maskable.png?v=2'])));self.skipWaiting();});
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('feh-rerun-static-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{

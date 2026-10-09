@@ -10,7 +10,7 @@ export default function GitHubAuthReturn(){
  const [result,setResult]=useState<{message:string;error:boolean;link:boolean}|null>(null);
  useEffect(()=>{let alive=true;let pending:GitHubPending|null=null;
   try{pending=JSON.parse(sessionStorage.getItem(githubPendingKey)||'null');}catch{}
-  if(queryParams.get('auth')!=='github'||!pending||!['signin','link'].includes(pending.intent))return;
+  if(queryParams.get('auth')!=='github'||!pending||!['signin','link','community'].includes(pending.intent))return;
   const request=pending;
   async function finish(){
    try{
@@ -22,12 +22,17 @@ export default function GitHubAuthReturn(){
     if(!alive)return;
     if(userError||!user||!user.identities?.some(identity=>identity.provider==='github'))throw new Error('No GitHub identity');
     if(request.intent==='link'&&(user.id!==request.userId||!user.identities?.some(identity=>identity.provider==='github')))throw new Error('Identity not linked');
+    if(request.intent==='community'){
+     if(user.id!==request.userId||!session.provider_token)throw new Error('Authorize the GitHub account already linked to your website account.');
+     const {communityApi}=await import('./community-api');
+     await communityApi('/connect',{token:session.provider_token,publicReads:!!request.publicReads});
+    }
     sessionStorage.removeItem(githubPendingKey);
     // Supabase consumes the token fragment; remove remaining OAuth parameters.
     const clean=new URL(location.href);clean.hash='';for(const key of ['auth','code','error','error_code','error_description'])clean.searchParams.delete(key);history.replaceState(null,'',clean.pathname+clean.search);
     goTo(safeAuthReturn(request.path));
     window.dispatchEvent(new Event('owner-session-change'));
-    setResult({message:request.intent==='link'?'GitHub account linked.':'Signed in with GitHub.',error:false,link:request.intent==='link'});
+    setResult({message:request.intent==='community'?'Community posting enabled.':request.intent==='link'?'GitHub account linked.':'Signed in with GitHub.',error:false,link:request.intent==='link'});
    }catch(error){if(!alive)return;sessionStorage.removeItem(githubPendingKey);const clean=new URL(location.href);clean.hash='';for(const key of ['auth','code','error','error_code','error_description'])clean.searchParams.delete(key);history.replaceState(null,'',clean.pathname+clean.search);goTo(safeAuthReturn(request.path));setResult({message:githubAuthError(error),error:true,link:request.intent==='link'});}
   }
   void finish();return()=>{alive=false;};

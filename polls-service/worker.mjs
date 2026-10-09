@@ -1,3 +1,4 @@
+import {handleCommunity} from './community.mjs';
 const now=()=>new Date().toISOString();
 const epoch=()=>Math.floor(Date.now()/1000);
 const random=()=>Array.from(crypto.getRandomValues(new Uint8Array(32)),b=>b.toString(16).padStart(2,'0')).join('');
@@ -20,7 +21,7 @@ async function user(request,env){
   if(!roleResponse.ok)fail(503,'Could not verify website permissions. Please try again.');
   const role=await roleResponse.json(),identity=account.identities?.find(i=>i.provider==='github'),githubId=identity?.identity_data?.provider_id||identity?.identity_data?.sub;
   const github=githubId&&/^\d{1,20}$/.test(String(githubId))?String(githubId):null;
-  return {github_id:github||'site:'+account.id,login:identity?.identity_data?.user_name||'Website account',role:role==='Owner'?'owner':role==='Manager'?'manager':'voter',can_vote:!!github,website_account:true};
+  return {github_id:github||'site:'+account.id,website_id:account.id,login:identity?.identity_data?.user_name||'Website account',role:role==='Owner'?'owner':role==='Manager'?'manager':'voter',can_vote:!!github,website_account:true};
  }
  const token=bearer.match(/^[a-f0-9]{64}$/)?.[0];if(!token)return null;const u=await one(env,'SELECT github_id,login FROM poll_sessions WHERE token_hash=? AND expires_at>?',await hash(token),epoch());if(!u)return null;u.role=u.github_id===env.HEAD_ADMIN_GITHUB_ID?'owner':await one(env,'SELECT github_id FROM poll_staff WHERE github_id=?',u.github_id)?'manager':'voter';return u;
 }
@@ -62,6 +63,7 @@ export async function handle(request,env){
   if(url.pathname.startsWith('/auth/'))return await auth(request,env,url);
   if(from&&from!==origin)fail(403,'Invalid origin.');if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
   if(!['GET','POST','PATCH'].includes(request.method))fail(405,'Method not allowed.');
+  if(url.pathname.startsWith('/community/'))return handleCommunity(request,env,{user,rate,headers});
   const u=await user(request,env);
   if(url.pathname==='/session'&&request.method==='GET')return json({user:u});
   if(url.pathname==='/logout'&&request.method==='POST'){const token=request.headers.get('Authorization')?.slice(7);if(token)await stmt(env,'DELETE FROM poll_sessions WHERE token_hash=?',await hash(token)).run();return json({ok:true});}
@@ -103,4 +105,4 @@ export async function handle(request,env){
   fail(405,'Method not allowed.');
  }catch(e){return json({error:e instanceof HttpError?e.message:'The poll service is temporarily unavailable. Please try again.'},e instanceof HttpError?e.status:503);}
 }
-export default {fetch:handle,async scheduled(_controller,env){await env.DB.batch(['poll_sessions','poll_oauth','poll_rate_limits'].map(table=>stmt(env,'DELETE FROM '+table+' WHERE expires_at<?',epoch())));}};
+export default {fetch:handle,async scheduled(_controller,env){await env.DB.batch([...['poll_sessions','poll_oauth','poll_rate_limits'].map(table=>stmt(env,'DELETE FROM '+table+' WHERE expires_at<?',epoch())),stmt(env,'DELETE FROM community_cache WHERE expires_at<?',epoch()-86400)]);}};

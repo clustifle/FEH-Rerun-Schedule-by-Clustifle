@@ -1,0 +1,13 @@
+[
+ {"id":"quick-question","name":"Quick Question","icon":"question"},
+ {"id":"serious-discussion","name":"Serious Discussion","icon":"discussion"},
+ {"id":"news","name":"News","icon":"news"},
+ {"id":"analysis","name":"Analysis","icon":"analysis"},
+ {"id":"chat","name":"Chat","icon":"chat"},
+ {"id":"unit-showcase","name":"Unit Showcase","icon":"unit"},
+ {"id":"memes","name":"Memes","icon":"humor"},
+ {"id":"resource","name":"Resource","icon":"resource"},
+ {"id":"gameplay","name":"Gameplay","icon":"gameplay"},
+ {"id":"aether-showcase","name":"Aether Showcase","icon":"aether"},
+ {"id":"new-hero-idea","name":"New Hero Idea","icon":"idea"}
+]

@@ -2,7 +2,7 @@ import {supabase,supabaseUrl,supabasePublishableKey} from './static-data';
 import {settingsUrl,viewUrl} from './routes';
 import {requestTimeout} from './browser-compat';
 export const githubPendingKey='feh-github-auth-return';
-export type GitHubPending={intent:'signin'|'link';path:string;userId?:string};
+export type GitHubPending={intent:'signin'|'link'|'community';path:string;userId?:string;publicReads?:boolean};
 export function safeAuthReturn(path:string){
  const url=new URL(path,location.origin);
  return url.origin===location.origin&&url.pathname.startsWith(import.meta.env.BASE_URL)?url.pathname+url.search:viewUrl('Homepage');
@@ -15,8 +15,8 @@ export function githubAuthError(error:unknown){
  if(code==='access_denied')return 'GitHub authorization was cancelled. Your account has not been changed.';
  return 'Could not connect to GitHub. Please try again.';
 }
-export async function startGitHubAuth(userId?:string){
- const pending:GitHubPending={intent:userId?'link':'signin',path:userId?settingsUrl('Account'):safeAuthReturn(location.pathname+location.search),...(userId?{userId}:{})};
+export async function startGitHubAuth(userId?:string,community?:{publicReads:boolean}){
+ const pending:GitHubPending={intent:community?'community':userId?'link':'signin',path:community?import.meta.env.BASE_URL+'community/':userId?settingsUrl('Account'):safeAuthReturn(location.pathname+location.search),...(userId?{userId}:{}),...(community?{publicReads:community.publicReads}:{})};
  try{
   // Check availability before leaving the website for a disabled provider.
   const timeout=requestTimeout(12000);
@@ -26,8 +26,8 @@ export async function startGitHubAuth(userId?:string){
   const settings=await response.json();
   if(!settings.external?.github)throw {code:'provider_disabled'};
   sessionStorage.setItem(githubPendingKey,JSON.stringify(pending));
-  const options={redirectTo:location.origin+import.meta.env.BASE_URL+'?auth=github',scopes:'user:email',skipBrowserRedirect:true};
-  const result=userId?await supabase.auth.linkIdentity({provider:'github',options}):await supabase.auth.signInWithOAuth({provider:'github',options});
+  const options={redirectTo:location.origin+import.meta.env.BASE_URL+'?auth=github',scopes:community?'user:email public_repo':'user:email',skipBrowserRedirect:true};
+  const result=userId&&!community?await supabase.auth.linkIdentity({provider:'github',options}):await supabase.auth.signInWithOAuth({provider:'github',options});
   if(result.error)throw result.error;
   if(!result.data.url)throw new Error('Missing authorization URL');
   const authorize=new URL(result.data.url);
