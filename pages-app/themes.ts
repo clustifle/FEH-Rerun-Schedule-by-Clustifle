@@ -1,5 +1,5 @@
 export const themes=[
- {id:'fire-emblem-heroes',label:'Fire Emblem Heroes',realm:'base',background:'themes/fire-emblem-heroes/wallpaper.webp',header:'#113f4c',deep:'#062630',panel:'#123e49',field:'#06242d',accent:'#edcf84',line:'#91b3ad',spriteFilter:'none'},
+ {id:'fire-emblem-heroes',label:'Default',realm:'base',background:'themes/fire-emblem-heroes/wallpaper.webp',header:'#113f4c',deep:'#062630',panel:'#123e49',field:'#06242d',accent:'#edcf84',line:'#91b3ad',spriteFilter:'none'},
  {id:'midgard',label:'Midgard',realm:'midgard',background:'themes/realms/midgard.webp',header:'#304e78',deep:'#14253c',panel:'#20354c',field:'#101e30',accent:'#ebd49c',line:'#a9b7cd',spriteFilter:'hue-rotate(20deg)'},
  {id:'nifl',label:'Nifl',realm:'nifl',background:'themes/realms/nifl.webp',header:'#397e98',deep:'#153b53',panel:'#163c50',field:'#102937',accent:'#b3edff',line:'#9dcfdf',spriteFilter:'hue-rotate(15deg) saturate(.7)'},
  {id:'muspell',label:'Múspell',realm:'muspell',background:'themes/realms/muspell.webp',header:'#893b25',deep:'#35150f',panel:'#45241b',field:'#24130e',accent:'#ffc375',line:'#d5a37a',spriteFilter:'hue-rotate(165deg)'},
