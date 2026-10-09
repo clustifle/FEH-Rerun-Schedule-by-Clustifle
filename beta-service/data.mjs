@@ -13,6 +13,35 @@ export async function handleData(request,env,owner){
  const heroes=async()=>((await db.prepare('SELECT record, revision FROM beta_heroes ORDER BY id').all()).results||[]).map(r=>({...JSON.parse(r.record),revision:r.revision}));
  const versions=async()=>(await db.prepare('SELECT * FROM beta_versions ORDER BY sort_order,version').all()).results||[];
  if(path==='heroes'&&request.method==='GET')return json(await heroes());
+ if(path==='waitlists'&&request.method==='GET')return json((await db.prepare('SELECT * FROM beta_waitlist ORDER BY sort_order,hero_id').all()).results||[]);
+ if(path==='waitlists'&&request.method==='POST'){
+  const b=await body(request),all=await heroes();if(!['lme','dsh','nhr','remix','consideration'].includes(b.kind)||!Array.isArray(b.ids)||!b.ids.length||b.ids.length>500||new Set(b.ids).size!==b.ids.length||typeof b.add!=='boolean')throw Error('Choose a list and unique heroes.');
+  for(const id of b.ids){const h=all.find(h=>h.id===id);if(!h)throw Error('A selected hero no longer exists.');if(b.add&&b.kind==='remix'&&!['General Pool','Non-Seasonal Limited'].includes(h.pool))throw Error('Remix Waitlist requires General Pool or Non-Seasonal Limited.');}
+  await db.batch([...b.ids.map(id=>b.add?db.prepare('INSERT INTO beta_waitlist(list_kind,hero_id) VALUES(?,?) ON CONFLICT(list_kind,hero_id) DO NOTHING').bind(b.kind,id):db.prepare('DELETE FROM beta_waitlist WHERE list_kind=? AND hero_id=?').bind(b.kind,id)),db.prepare('INSERT INTO beta_history VALUES(?,?,?,?,?,?)').bind(crypto.randomUUID(),owner,new Date().toISOString(),(b.add?'Added to ':'Removed from ')+b.kind+' board','[]',JSON.stringify(b.ids))]);return json({ok:true,count:b.ids.length});
+ }
+ if(path==='waitlist-order'&&request.method==='POST'){
+  const b=await body(request);if(!['lme','dsh','nhr','remix','consideration'].includes(b.kind)||!['Red','Blue','Green','Colorless'].includes(b.color)||!Array.isArray(b.ids)||new Set(b.ids).size!==b.ids.length)throw Error('Invalid list order.');
+  const current=(await db.prepare("SELECT w.hero_id FROM beta_waitlist w JOIN beta_heroes h ON h.id=w.hero_id WHERE list_kind=? AND json_extract(h.record,'$.color')=?").bind(b.kind,b.color).all()).results||[];
+  if(current.length!==b.ids.length||current.some(h=>!b.ids.includes(h.hero_id)))throw Error('List changed. Refresh before reordering.');
+  const assertion=crypto.randomUUID(),statements=[db.prepare("INSERT INTO beta_assertions(id,valid) SELECT ?,CASE WHEN (SELECT count(*) FROM beta_waitlist w JOIN beta_heroes h ON h.id=w.hero_id WHERE list_kind=? AND json_extract(h.record,'$.color')=?)=? THEN 1 ELSE 0 END").bind(assertion,b.kind,b.color,b.ids.length)];
+  for(const [i,id] of b.ids.entries()){statements.push(db.prepare("INSERT INTO beta_assertions(id,valid) SELECT ?,CASE WHEN EXISTS(SELECT 1 FROM beta_waitlist w JOIN beta_heroes h ON h.id=w.hero_id WHERE list_kind=? AND hero_id=? AND json_extract(h.record,'$.color')=?) THEN 1 ELSE 0 END").bind(assertion+'-'+i,b.kind,id,b.color),db.prepare('UPDATE beta_waitlist SET sort_order=? WHERE list_kind=? AND hero_id=?').bind(i+1,b.kind,id));}
+  statements.push(db.prepare('DELETE FROM beta_assertions WHERE id LIKE ?').bind(assertion+'%'));await db.batch(statements);return json({ok:true});
+ }
+ if(path==='version-bulk'&&request.method==='POST'){
+  const b=await body(request),known=await versions();if(!Array.isArray(b.versions)||!b.versions.length||b.versions.length>100||new Set(b.versions).size!==b.versions.length||b.versions.some(v=>!known.some(k=>k.version===v)))throw Error('Select existing unique versions.');
+  const statements=[],assertion=crypto.randomUUID();for(const [i,v] of b.versions.entries())statements.push(db.prepare('INSERT INTO beta_assertions(id,valid) SELECT ?,CASE WHEN EXISTS(SELECT 1 FROM beta_versions WHERE version=?) THEN 1 ELSE 0 END').bind(assertion+'-'+i,v));
+  if(b.action==='delete'){
+   if(b.replacement!==null&&(!known.some(v=>v.version===b.replacement)||b.versions.includes(b.replacement)))throw Error('Choose a replacement outside the selected versions.');
+   for(const v of b.versions)statements.push(db.prepare("UPDATE beta_heroes SET record=json_set(record,'$.debut_version',?),revision=revision+1 WHERE json_extract(record,'$.debut_version')=?").bind(b.replacement,v),db.prepare('DELETE FROM beta_versions WHERE version=?').bind(v));
+  }else if(b.action==='update'){
+   const c=b.changes;if(!c||!Object.keys(c).length||Object.keys(c).some(k=>!['release_date','sort_order'].includes(k)))throw Error('Choose date or order changes.');
+   if(Object.hasOwn(c,'release_date')&&c.release_date!==null&&typeof c.release_date!=='string')throw Error('Choose a valid release date.');
+   if(c.release_date&&(!/^\d{4}-\d{2}-\d{2}$/.test(c.release_date)||new Date(c.release_date).toISOString().slice(0,10)!==c.release_date))throw Error('Choose a valid release date.');
+   if(Object.hasOwn(c,'sort_order')&&(!Number.isSafeInteger(c.sort_order)||c.sort_order<0||c.sort_order+b.versions.length-1>100000))throw Error('Choose a valid starting order.');
+   for(const [i,v] of b.versions.entries()){if(Object.hasOwn(c,'release_date'))statements.push(db.prepare('UPDATE beta_versions SET release_date=? WHERE version=?').bind(c.release_date||null,v));if(Object.hasOwn(c,'sort_order'))statements.push(db.prepare('UPDATE beta_versions SET sort_order=? WHERE version=?').bind(c.sort_order+i,v));}
+  }else throw Error('Choose an update or delete action.');
+  statements.push(db.prepare('INSERT INTO beta_history VALUES(?,?,?,?,?,?)').bind(crypto.randomUUID(),owner,new Date().toISOString(),'Bulk '+b.action+' versions',JSON.stringify(known.filter(v=>b.versions.includes(v.version))),JSON.stringify(b)),db.prepare('DELETE FROM beta_assertions WHERE id LIKE ?').bind(assertion+'%'));await db.batch(statements);return json({ok:true,count:b.versions.length});
+ }
  if(path==='versions'&&request.method==='GET'){const all=await heroes();return json((await versions()).map(v=>({...v,hero_count:all.filter(h=>h.debut_version===v.version).length})));}
  if(path==='versions'&&request.method==='POST'){
   const b=await body(request);if(!/^\d{1,2}\.(?:0|[1-9]\d?)$/.test(b.version)||!Number.isSafeInteger(b.sort_order)||b.sort_order<0||b.sort_order>100000)throw Error('Use a version such as 10.1 and a valid order.');

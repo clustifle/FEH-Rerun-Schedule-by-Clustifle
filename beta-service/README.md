@@ -16,16 +16,17 @@ Authentication remains with the existing Supabase project and GitHub provider. I
 - Explicit-field bulk editing, mixed-value indicators, review before save, transactional updates, and stale-preview protection.
 - Account-scoped personal watchlists and hero follow buttons.
 - Hero debut details, recorded banner appearances, and related variants.
-- Archive of currently recorded banners with year/category filters.
+- Multi-select Choose a Hero for all waitlists and Schedule Under Consideration, with selection preserved across filters.
+- Multi-select version management: reviewed date/order changes and deletion with hero reassignment.
 - Beta change history.
 
 No historical release version is inferred. Seeded versions 1.0–10.0 have no guessed release dates; add individual updates through **Versions** and assign heroes manually.
 
 ## Isolation and limitations
 
-Hero edits, version changes, and watchlists write only to `feh-rerun-beta` D1. Production Supabase data is read-only in this build. Other editing tools, staff/account/profile changes, live poll votes/management, and portrait uploads are blocked in the beta client. The original live authentication remains operational. Do not remove this protection until the corresponding beta data services exist.
+Hero edits, version changes, personal watchlists, and rerun waitlist/consideration memberships write only to `feh-rerun-beta` D1. Production Supabase data is read-only in this build. Other editing tools, staff/account/profile changes, live poll votes/management, and portrait uploads are blocked in the beta client. The original live authentication remains operational. Do not remove this protection until the corresponding beta data services exist.
 
-Banner, revival, and waitlist lineups currently read live published records; they are not editable beta copies yet. Assigning a hero a waitlist category does not add a lineup entry. Existing portraits are preserved. Historical banner coverage includes only records already stored on the website.
+Banner and revival lineups still read live published records. Waitlist and consideration memberships are isolated beta copies, seeded once from public memberships. Existing deployments can create their table using `beta-service/waitlist-schema.sql`; avoid reseeding after beta membership edits. Assigning a hero a waitlist category does not add a lineup entry. Existing portraits are preserved. Historical banner coverage includes only records already stored on the website.
 
 GitHub Discussions, contribution review, expanded polls, calendar export, archive backfill, and broader schedule tools remain subsequent beta work. The community page is a staged entry point; the public repository's Discussions are not enabled automatically during private testing.
 
