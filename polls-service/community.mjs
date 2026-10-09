@@ -1,7 +1,7 @@
 import flairs from '../lib/community-flairs.json' with {type:'json'};
 const REPO='clustifle/FEH-Rerun-Schedule-by-Clustifle',REPO_ID='R_kgDOU5Auog';
-const postFields='id number title body url createdAt updatedAt closed locked upvoteCount viewerHasUpvoted viewerCanUpdate viewerCanDelete author{login avatarUrl} category{id name isAnswerable} commentCount:comments{totalCount}';
-const commentFields='id body url createdAt isAnswer isMinimized viewerCanUpdate viewerCanDelete author{login avatarUrl}';
+const postFields='id number title body url createdAt updatedAt closed locked upvoteCount viewerHasUpvoted viewerCanUpdate viewerCanDelete author{login avatarUrl ...on User{databaseId}} category{id name isAnswerable} commentCount:comments{totalCount}';
+const commentFields='id body url createdAt isAnswer isMinimized viewerCanUpdate viewerCanDelete author{login avatarUrl ...on User{databaseId}}';
 class CommunityError extends Error{constructor(status,message){super(message);this.status=status;}}
 const fail=(s,m)=>{throw new CommunityError(s,m);};
 const statement=(e,q,...v)=>e.DB.prepare(q).bind(...v),one=(e,q,...v)=>statement(e,q,...v).first();
@@ -59,7 +59,7 @@ export async function handleCommunity(request,env,{user,rate,headers}){
   }
   const numberMatch=path.match(/^\/posts\/(\d+)(?:\/(comments|replies|upvote|close|answer|delete|delete-comment))?$/),number=numberMatch?Number(numberMatch[1]):null,action=numberMatch?.[2];
   if(method==='GET'&&(path==='/posts'||path==='/categories'||numberMatch&&(!action||action==='replies'))){
-   const cacheKey=url.pathname+url.search;
+   const cacheKey='author-profile-v1:'+url.pathname+url.search;
    const cached=await one(env,'SELECT payload,expires_at FROM community_cache WHERE key=?',cacheKey);
    if(!u&&cached&&cached.expires_at>time())return json(JSON.parse(cached.payload));
    await rate(env,'community-read:'+(u?.github_id||request.headers.get('CF-Connecting-IP')||'anonymous'),40);
@@ -75,6 +75,9 @@ export async function handleCommunity(request,env,{user,rate,headers}){
     if(q||flair||sort==='popular'){const escaped=q.replace(/["\\]/g,' ').replace(/\b(?:repo|org|user|author|category|is|type):\S*/gi,'');const d=await graphql(token,`query($q:String!,$after:String){search(query:$q,type:DISCUSSION,first:20,after:$after){pageInfo{endCursor hasNextPage} nodes{...on Discussion{${postFields} repository{nameWithOwner}}}}}`,{q:`repo:${REPO} ${escaped} ${flair?'"feh-flair: '+flair+'" in:body ':''}${sort==='popular'?'sort:reactions':sort==='newest'?'sort:created':'sort:updated'}`,after:after||null});data={posts:d.search.nodes.filter(p=>p.repository?.nameWithOwner===REPO&&(!category||p.category.id===category)&&(!flair||extractFlair(p.body).flair===flair)),pageInfo:d.search.pageInfo};}
     else{const d=await graphql(token,`query($after:String,$category:ID){repository(owner:"clustifle",name:"FEH-Rerun-Schedule-by-Clustifle"){discussions(first:20,after:$after,categoryId:$category,orderBy:{field:${sort==='newest'?'CREATED_AT':'UPDATED_AT'},direction:DESC}){pageInfo{endCursor hasNextPage} nodes{${postFields}}}}}`,{after:after||null,category:category||null});data={posts:d.repository.discussions.nodes,pageInfo:d.repository.discussions.pageInfo};}
    }
+   // Match immutable GitHub IDs, never assume a GitHub login equals a site username.
+   const authors=[];const collect=v=>{if(!v||typeof v!=='object')return;if(v.author?.databaseId)authors.push(v.author);for(const child of Object.values(v))if(Array.isArray(child))child.forEach(collect);else collect(child);};collect(data);
+   const ids=[...new Set(authors.map(a=>String(a.databaseId)))];if(ids.length){const rows=await statement(env,'SELECT github_id,website_id FROM community_connections WHERE github_id IN ('+ids.map(()=>'?').join(',')+')',...ids).all();const profiles=new Map(rows.results.map(r=>[r.github_id,r.website_id]));for(const author of authors)author.websiteProfileId=profiles.get(String(author.databaseId))||null;}
    // Public cache omits viewer permissions and never caches authenticated responses.
    for(const p of data.posts||[data.post].filter(Boolean)){const parsed=extractFlair(p.body);p.flair=parsed.flair;p.body=parsed.body;}
    const hideComments=v=>{if(!v||typeof v!=='object')return;if(v.isMinimized)v.body='This comment was hidden by the GitHub moderators.';for(const child of Object.values(v))if(Array.isArray(child))child.forEach(hideComments);else hideComments(child);};hideComments(data);

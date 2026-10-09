@@ -2,6 +2,7 @@ import {useEffect,useRef,useState,type FormEvent} from 'react';
 import {Plus,Search,RefreshCw,ArrowLeft,MessageSquare,ArrowUp,Bookmark,ExternalLink,ShieldCheck,Link,CheckCircle2} from 'lucide-react';
 import {communityApi,discussionUrl,type CommunitySession,type Post,type Category,type PageInfo,type Comment} from './community-api';
 import {supabase} from './static-data';
+import {viewUrl,goTo} from './routes';
 import {startGitHubAuth} from './github-auth';
 import CommunityEditor from './CommunityEditor';
 import CommunityMarkdown from './CommunityMarkdown';
@@ -9,7 +10,7 @@ import CommunityFlair,{flairs} from './CommunityFlair';
 import './Community.css';
 const errorText=(e:unknown)=>e instanceof Error?e.message:'Could not load Community.';
 const date=(s:string)=>new Date(s).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
-function Author({author,dateValue}:{author:Post['author'];dateValue:string}){return <span className="community-author">{author&&<img src={author.avatarUrl} alt="" loading="lazy" width={24} height={24}/>}<span>{author?'@'+author.login:'Deleted account'} · {date(dateValue)}</span></span>;}
+function Author({author,dateValue}:{author:Post['author'];dateValue:string}){const profile=author?.websiteProfileId?viewUrl('Profile','',author.websiteProfileId):author?'https://github.com/'+encodeURIComponent(author.login):'';return <span className="community-author">{author?<a className="community-author-link" href={profile} aria-label={'View @'+author.login+' profile'} onClick={e=>{if(author.websiteProfileId&&e.button===0&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&!e.altKey){e.preventDefault();goTo(profile);}}}>{<img src={author.avatarUrl} alt="" loading="lazy" width={24} height={24}/>}<span>@{author.login}</span></a>:<span>Deleted account</span>}<span>· {date(dateValue)}</span></span>;}
 export default function Community({manage=false}:{manage?:boolean}){
  const [session,setSession]=useState<CommunitySession|null>(null),[categories,setCategories]=useState<Category[]>([]),[posts,setPosts]=useState<Post[]>([]),[pageInfo,setPageInfo]=useState<PageInfo>({hasNextPage:false}),[post,setPost]=useState<Post|null>(null),[loading,setLoading]=useState(true),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState(''),[query,setQuery]=useState(''),[search,setSearch]=useState(''),[category,setCategory]=useState(''),[sort,setSort]=useState('updated'),[compose,setCompose]=useState(false),[editing,setEditing]=useState<Post|null>(null),[reply,setReply]=useState(''),[replyTo,setReplyTo]=useState<Comment|null>(null),[confirmClose,setConfirmClose]=useState(false),[bookmarks,setBookmarks]=useState<number[]>(()=>{try{return JSON.parse(localStorage.getItem('feh-community-bookmarks')||'[]');}catch{return [];}}),[savedOnly,setSavedOnly]=useState(false);
  const loadId=useRef(0),connected=!!session?.connected,user=session?.user,staff=user&&['owner','manager'].includes(user.role);
