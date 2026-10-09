@@ -7,6 +7,7 @@ Checked 9 October 2026. Changes remain on the private beta branch.
 - Compact the manager's hero picker and waitlist reorganizer at narrow, short phone sizes. Keep a usable hero list and visible actions.
 - Increase touch controls to at least 44px in the mobile manager.
 - Apply the FE Heroes font and white header to the manager's signed-out screen.
+- Remove solid teal button backgrounds underneath transparent FEH sprites in both the manager and the beta website.
 - Load bulk editing, version management, and the manager's hero editor when opened; show a recovery message if a tool fails to load.
 - Fetch beta waitlist memberships once per refresh and share concurrent hero reads.
 - Stop stalled beta requests after 15 seconds, with an actionable error. Preserve server validation errors and do not automatically retry writes.

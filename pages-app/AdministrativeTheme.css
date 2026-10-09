@@ -14,9 +14,9 @@ body{font-size:16px;line-height:1.45;background:#f5f6f4}
 .adm-tile header svg,.adm-overview-actions svg{color:#236678}
 .adm-quick-label{background:linear-gradient(#286878,#174450);color:#fff1cf;border-right:2px solid #b5a77a}
 .adm-tabs button[aria-selected=true]{color:#174450;border-bottom-color:#a99354}
-.primary,.adm-shell .primary{position:relative;isolation:isolate;background:#235665;border-color:#8a999d;color:#fff6df;min-height:40px;padding-inline:20px;text-shadow:0 1px 2px #183642}
+.primary,.adm-shell .primary{position:relative;isolation:isolate;background:transparent;border-color:transparent;color:#fff6df;min-height:40px;padding-inline:20px;text-shadow:0 1px 2px #183642}
 .primary::before{content:'';position:absolute;inset:0;z-index:-1;background:url('../public/themes/fire-emblem-heroes/Common_Button.webp') 0 10.9%/219.5% 1197.5%;clip-path:polygon(5% 0,95% 0,100% 50%,95% 100%,5% 100%,0 50%);pointer-events:none}
-.primary:hover:not(:disabled),.adm-shell .primary:hover:not(:disabled){background:#2b7183;filter:brightness(1.08)}
+.primary:hover:not(:disabled),.adm-shell .primary:hover:not(:disabled){background:transparent;filter:brightness(1.08)}
 .adm-loading{background:#fff}
 @media(max-width:600px){.adm-page-heading h2{min-width:180px;font-size:21px}.adm-navigation button{font-size:15px}}
 
