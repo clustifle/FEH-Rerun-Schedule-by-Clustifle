@@ -23,7 +23,8 @@ export function UpcomingEvents({owner,onContent}:{owner:boolean;onContent:()=>vo
 export default function ModsTool(p:Props){
  const [section,setSection]=useState(()=>readRoute().section||'overview');
  useEffect(()=>{const sync=()=>setSection(readRoute().section||'overview');window.addEventListener('route-change',sync);window.addEventListener('popstate',sync);return()=>{window.removeEventListener('route-change',sync);window.removeEventListener('popstate',sync);};},[]);
- return <section className="mods-access"><h2>Administrative Manager</h2><p>Management tools now have a dedicated workspace. Bulk Edit and Manage FEH Versions are together in Mods Edit.</p><a className="secondary" href={(isBeta?import.meta.env.BASE_URL+'FEHRS_AdmManager/':'/FEHRS_AdmManager/')+(['bulk','versions'].includes(section)?'mods-edit'+(section==='versions'?'?tool=versions':''):section==='overview'?'dashboard':section==='beta-history'?'history':section)}>Open Administrative Manager</a></section>;
+ useEffect(()=>{const destination=['bulk','versions'].includes(section)?'mods-edit/':section==='overview'?'dashboard/':section==='beta-history'?'history/':section+'/';location.replace((isBeta?import.meta.env.BASE_URL+'FEHRS_AdmManager/':'/FEHRS_AdmManager/')+destination+(section==='versions'?'?tool=versions':''));},[section]);
+ return null;
 }
 
 export function HeroManagement(p:Props&{owner:boolean}){
