@@ -57,5 +57,17 @@ class PortraitCopies(unittest.TestCase):
                 sync.main()
             self.assertEqual(json.loads(manifest.read_text()),{})
 
+    def test_custom_icons_are_copied_without_profile_media_or_traversal(self):
+        with TemporaryDirectory() as folder:
+            manifest=Path(folder)/"manifest.json"
+            responses=[json.dumps([{"portrait":"hero.webp"}]).encode(),json.dumps([
+                {"icon_path":"mods-icons/type.webp"},
+                {"icon_path":"profile-avatars/user/avatar.webp"},
+                {"icon_path":"mods-icons/../private.webp"}
+            ]).encode()]
+            with patch.object(sync,"MANIFEST",manifest),patch.object(sync,"existing",{}),patch.object(sync,"read",side_effect=responses),patch.object(sync,"render",side_effect=lambda path:(path,None,0)) as render:
+                sync.main()
+            self.assertEqual({call.args[0] for call in render.call_args_list},{"hero.webp","mods-icons/type.webp"})
+
 if __name__=="__main__":
     unittest.main()

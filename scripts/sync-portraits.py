@@ -70,6 +70,15 @@ def main():
         print("Could not refresh portrait catalog; bundled copies retained:",str(error))
         return
     manifest=dict(existing)
+    # Custom type and pool icons are public game-site assets, not profile media.
+    try:
+        definitions=json.loads(read(URL+"/rest/v1/tracker_definitions?select=icon_path",headers={"apikey":KEY}))
+        for row in definitions:
+            path=row.get("icon_path") or ""
+            if re.fullmatch(r"mods-icons/[a-zA-Z0-9_/-]+\.(?:png|jpg|jpeg|webp)",path) and ".." not in path:
+                paths.add(path)
+    except Exception:
+        print("Custom icon catalog unavailable; existing delivery copies retained.")
     downloaded=0
     with ThreadPoolExecutor(max_workers=4) as workers:
         for path,result,size in workers.map(render,sorted(paths)):

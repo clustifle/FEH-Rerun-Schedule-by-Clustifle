@@ -45,7 +45,7 @@ function HeroTypeTag({hero}:{hero:Hero}){
  if(hero.heroic_grail)return <span className="hero-type-signature grail-signature"><img src={assetUrl('hero-types/heroic-grails.webp')} alt="" width={32} height={32}/><span className="hero-type-copy"><strong>Heroic Grails</strong></span></span>;
  const label=hero.category==='Chosen Hero'?'Chosen':hero.category;
  const customIcon=definitionIcon(definitions,'hero_type',hero.category);
- if(customIcon&&!['Legendary','Mythic','Chosen Hero'].includes(hero.category))return <span className="hero-type-signature"><img src={customIcon.startsWith('mods-icons/')?supabase.storage.from('portraits').getPublicUrl(customIcon).data.publicUrl:assetUrl(customIcon)} alt="" width={32} height={32}/><span className="hero-type-copy"><strong>{label}</strong></span></span>;
+ if(customIcon&&!['Legendary','Mythic','Chosen Hero'].includes(hero.category))return <span className="hero-type-signature"><img src={customIcon.startsWith('mods-icons/')?heroPortraitUrl(customIcon):assetUrl(customIcon)} alt="" width={32} height={32}/><span className="hero-type-copy"><strong>{label}</strong></span></span>;
  if(['General','Special'].includes(hero.category))return <span className={'hero-type-signature '+hero.category.toLowerCase()+'-signature'}><img src={assetUrl('pools/'+(hero.category==='General'?'general':'special')+'.webp')} alt="" width={32} height={32}/><span className="hero-type-copy"><strong>{label}</strong></span></span>;
  if(['Emblem','Duo','Harmonized','Rearmed','Attuned','Aided','Entwined','Vista'].includes(hero.category))return <span className={'hero-type-signature '+hero.category.toLowerCase()+'-signature'}><img src={assetUrl('hero-types/'+hero.category.toLowerCase()+'.webp')} alt="" width={32} height={32}/><span className="hero-type-copy"><strong>{label}</strong></span></span>;
  if(!['Legendary','Mythic','Chosen Hero'].includes(hero.category))return <span className={'hero-kind '+kindClass(hero)}>{label}</span>;
@@ -55,7 +55,7 @@ function HeroTypeTag({hero}:{hero:Hero}){
  </span>;
 }
 
-function PoolTag({pool}:{pool:string}){const definitions=useDefinitions();const customIcon=definitionIcon(definitions,'pool',pool);const kind=pool==='Grail Pool'?'grail':pool==='L/M/E Pool'?'lme':pool==='Seasonal Limited'?'special':'general';return <span className={'pool-signature '+kind+(pool==='Non-Seasonal Limited'?' nonseasonal':'')}><img src={customIcon?(customIcon.startsWith('mods-icons/')?supabase.storage.from('portraits').getPublicUrl(customIcon).data.publicUrl:assetUrl(customIcon)):assetUrl(kind==='grail'?'hero-types/heroic-grails.webp':'pools/'+kind+'.webp')} alt="" width={24} height={24}/><strong>{pool}</strong></span>;}
+function PoolTag({pool}:{pool:string}){const definitions=useDefinitions();const customIcon=definitionIcon(definitions,'pool',pool);const kind=pool==='Grail Pool'?'grail':pool==='L/M/E Pool'?'lme':pool==='Seasonal Limited'?'special':'general';return <span className={'pool-signature '+kind+(pool==='Non-Seasonal Limited'?' nonseasonal':'')}><img src={customIcon?(customIcon.startsWith('mods-icons/')?heroPortraitUrl(customIcon):assetUrl(customIcon)):assetUrl(kind==='grail'?'hero-types/heroic-grails.webp':'pools/'+kind+'.webp')} alt="" width={24} height={24}/><strong>{pool}</strong></span>;}
 
 const shortMonth=(v:string)=>new Date(v+'-01T12:00:00').toLocaleDateString('en-US',{month:'short',year:'2-digit'});
 const monthName=(v:string)=>new Date(v+'-01T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'});

@@ -1,13 +1,13 @@
 const MAX_BYTES=3145728;
 // Legacy helper name retained for callers; delivery optimization never enlarges artwork.
-export async function upscalePortrait(file:File):Promise<{file:File;width:number;height:number;upscaled:boolean}>{
+export async function upscalePortrait(file:File,maxDimension=1024):Promise<{file:File;width:number;height:number;upscaled:boolean}>{
  const url=URL.createObjectURL(file);
  try{
   const image=new Image();image.decoding='async';
   await new Promise<void>((resolve,reject)=>{image.onload=()=>resolve();image.onerror=()=>reject(new Error('Could not read this portrait.'));image.src=url;});
   const width=image.naturalWidth,height=image.naturalHeight,longest=Math.max(width,height);
   if(!width||!height)throw new Error('Invalid portrait dimensions.');
-  const scale=Math.min(1,1024/longest),w=Math.max(1,Math.round(width*scale)),h=Math.max(1,Math.round(height*scale));
+  const scale=Math.min(1,maxDimension/longest),w=Math.max(1,Math.round(width*scale)),h=Math.max(1,Math.round(height*scale));
   const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
   const context=canvas.getContext('2d',{alpha:true});if(!context)return {file,width,height,upscaled:false};
   context.imageSmoothingEnabled=true;context.imageSmoothingQuality='high';context.drawImage(image,0,0,w,h);
