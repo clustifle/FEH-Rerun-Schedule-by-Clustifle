@@ -1,0 +1,2 @@
+import rules from '../lib/forum-rules.json';
+export default function ForumRules(){return <article className="forum-rules"><h3>Forum Rules</h3><p>Share predictions, ask questions, discuss heroes, and help other players. These rules apply to posts, replies, and uploaded pictures.</p><ol>{rules.map(r=><li key={r.title}><strong>{r.title}</strong><p>{r.body}</p></li>)}</ol><p>Questions about a moderation decision? Contact Forum staff calmly and include the relevant post link.</p></article>;}

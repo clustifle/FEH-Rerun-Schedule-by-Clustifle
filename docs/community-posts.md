@@ -32,3 +32,9 @@ Local validation passed: fourteen Community/polls security and lifecycle tests; 
 The website labels Community as Forum while preserving existing community URLs. MOD Banner, Binding World, and Hall of Forms megathreads are selectable and writable only by Head Admin, Schedule Managers, or Forum Moderators. The server checks both new and existing flairs during creation and editing. Head Admin manages forum-only moderator membership in Administrative Manager > Forum. Membership is stored in Cloudflare D1 and does not grant schedule or poll permissions.
 
 Browse by flair uses a compact selector and three megathread shortcuts. Post actions are borderless and left-aligned, with a visible upvote count.
+
+## Forum rules and moderation
+The Forum displays shared rules. Administrative Manager provides post and reply review, website-only hide/restore with a required reason, and moderation history. GitHub content remains on GitHub when hidden on the website. Closing or reopening discussions uses the staff member's GitHub repository permissions. Head Admin assigns Forum Moderators; their Administrative Manager access is limited to Forum tools.
+
+Poll management uses readable dark text on the light administrative interface, including forms and status filters.
+
