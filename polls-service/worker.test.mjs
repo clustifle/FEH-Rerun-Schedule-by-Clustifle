@@ -3,6 +3,25 @@ import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
 import {readFileSync} from 'node:fs';
 import {handle,hash} from './worker.mjs';
+test('Website sessions control staff access and GitHub-linked registered voting',async()=>{
+ const f=await fixture();f.env.SUPABASE_URL='https://website.test';f.env.SUPABASE_PUBLISHABLE_KEY='public-test';
+ let valid=true,role='Manager',linked=false;const original=globalThis.fetch;
+ globalThis.fetch=async(input,init)=>{assert.equal(init.headers.Authorization,'Bearer aaa.bbb.ccc');return new Response(JSON.stringify(String(input).endsWith('/user')?(valid?{id:'registered-user',identities:linked?[{provider:'github',identity_data:{sub:'3',user_name:'voter'}}]:[]}:{}):role),{status:valid?200:401,headers:{'Content-Type':'application/json'}});};
+ const api=async(path,body)=>{const r=await handle(new Request('https://polls.test'+path,{method:body?'POST':'GET',headers:{Origin:'https://clustifle.github.io',Authorization:'Bearer aaa.bbb.ccc','Content-Type':'application/json'},...(body?{body:JSON.stringify(body)}:{})}),f.env);return {status:r.status,data:await r.json()};};
+ try{
+  assert.equal((await api('/session')).data.user.role,'manager');
+  const id=(await api('/polls',f.input)).data.id;
+  assert.equal((await api('/polls/'+id+'/state',{status:'open',revision:1})).status,200);
+  const choice=(await api('/polls/'+id)).data.poll.choices[0].id;
+  assert.equal((await api('/polls/'+id+'/vote',{choice_id:choice})).status,403);
+  role='User';linked=true;
+  assert.equal((await api('/polls',f.input)).status,403);
+  assert.equal((await api('/polls/'+id+'/vote',{choice_id:choice})).status,200);
+  assert.equal(f.DB.sql.prepare('SELECT github_id FROM poll_votes').get().github_id,'3');
+  valid=false;assert.equal((await api('/polls/'+id+'/vote',{choice_id:choice})).status,401);
+  assert.equal((await f.api('/polls','owner',f.input)).status,403);
+ }finally{globalThis.fetch=original;}
+});
 function database(){const db=new DatabaseSync(':memory:');db.exec(readFileSync(new URL('./schema.sql',import.meta.url),'utf8'));const wrap=(sql,args=[])=>({bind(...values){return wrap(sql,values);},async first(){return db.prepare(sql).get(...args)||null;},async all(){return {results:db.prepare(sql).all(...args)};},async run(){const r=db.prepare(sql).run(...args);return {meta:{changes:Number(r.changes)}};}});return {sql:db,prepare:wrap,async batch(queries){db.exec('BEGIN');try{const results=[];for(const q of queries)results.push(await q.run());db.exec('COMMIT');return results;}catch(e){db.exec('ROLLBACK');throw e;}}};}
 async function fixture(){const DB=database(),env={DB,SITE_URL:'https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/',HEAD_ADMIN_GITHUB_ID:'1',GITHUB_CLIENT_ID:'test',GITHUB_CLIENT_SECRET:'fixture-secret'},tokens={owner:'a'.repeat(64),manager:'b'.repeat(64),voter:'c'.repeat(64)};for(const [role,id] of [['owner','1'],['manager','2'],['voter','3']])DB.sql.prepare('INSERT INTO poll_sessions VALUES(?,?,?,?)').run(await hash(tokens[role]),id,role,Math.floor(Date.now()/1000)+3600);DB.sql.prepare('INSERT INTO poll_staff VALUES(?,?)').run('2','manager');async function api(path,role,body,method=body?'POST':'GET'){const r=await handle(new Request('https://polls.test'+path,{method,headers:{Origin:'https://clustifle.github.io',...(role?{Authorization:'Bearer '+tokens[role]}:{}),...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{})}),env);return {status:r.status,data:await r.json()};}const input={question:'Which revival do you prefer?',description:'Community feedback',choices:['NH Revival','HoF Revival'],featured:true,allow_change:true,results_mode:'after_vote',closes_at:null};return {DB,env,tokens,api,input};}
 test('Draft privacy, staff access and publication lifecycle',async()=>{const f=await fixture();assert.equal((await f.api('/polls','voter',f.input)).status,403);const create=await f.api('/polls','manager',f.input);assert.equal(create.status,201);const id=create.data.id;assert.equal((await f.api('/polls/'+id)).status,404);assert.equal((await f.api('/polls?admin=1','voter')).status,403);assert.equal((await f.api('/polls')).data.polls.length,0);let p=(await f.api('/polls/'+id,'manager')).data.poll;assert.equal((await f.api('/polls/'+id+'/state','manager',{status:'open',revision:p.revision})).status,200);assert.equal((await f.api('/polls')).data.polls.length,1);p=(await f.api('/polls/'+id,'manager')).data.poll;assert.equal((await f.api('/polls/'+id,'manager',{...f.input,question:'Change after publication?',revision:p.revision},'PATCH')).status,400);assert.equal((await f.api('/polls/'+id+'/state','manager',{status:'closed',revision:p.revision})).status,200);p=(await f.api('/polls/'+id,'manager')).data.poll;assert.equal((await f.api('/polls/'+id+'/state','manager',{status:'archived',revision:p.revision})).status,200);assert.equal((await f.api('/polls')).data.polls.length,0);assert.equal(f.DB.sql.prepare('SELECT COUNT(*) AS n FROM poll_history').get().n,4);});

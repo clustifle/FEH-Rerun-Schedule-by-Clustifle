@@ -5,7 +5,7 @@
  "workers_dev": true,
  "preview_urls": false,
  "account_id":"405b9e7f6a8c405e417fd0eaad3af80d",
- "vars": {"SITE_URL":"https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/","GITHUB_CLIENT_ID":"Ov23liuj5Psr9KPPFCGm","HEAD_ADMIN_GITHUB_ID":"101106225"},
+ "vars": {"SUPABASE_URL":"https://aknsqeqykjgdyhdroqcx.supabase.co","SUPABASE_PUBLISHABLE_KEY":"sb_publishable_PiJIst1aSJtrYBiIvwDIVA_KS3c-E3g","SITE_URL":"https://clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/","GITHUB_CLIENT_ID":"Ov23liuj5Psr9KPPFCGm","HEAD_ADMIN_GITHUB_ID":"101106225"},
  "d1_databases": [{"binding":"DB","database_name":"feh-community-polls","database_id":"b483acf4-1742-46ce-a8f3-51f1329f92a2"}],
  "triggers": {"crons":["0 3 * * *"]}
 }

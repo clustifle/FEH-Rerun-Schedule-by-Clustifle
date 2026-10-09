@@ -1,8 +1,8 @@
 # Community polls service
 
-Cloudflare Workers and D1 store polls independently of Supabase. GitHub sign-in verifies each voter. Head Admin grants Schedule Managers access under **Poll staff**, using their numeric GitHub account ID. These permissions are separate from website staff roles.
+Cloudflare Workers and D1 store polls and votes. Authentication uses the registered website account: the Worker verifies its access token through Supabase Auth and checks the existing `tracker_role` RPC. Head Admin and Schedule Managers can manage polls without a separate GitHub login. Staff roles are managed through the existing website Mods Tool.
 
-Managers can create and review drafts, publish polls, close voting, archive polls, feature open polls on Home, and export aggregate results. Only Head Admin manages poll staff. Published questions, choices, and voting rules are locked. Individual voter identities are never returned by the API.
+Managers can create and review drafts, publish polls, close voting, archive polls, feature open polls on Home, and export aggregate results. Voting requires a registered, nonanonymous website account with a verified GitHub identity. Votes remain unique per GitHub account across linked website accounts. Published questions, choices, and voting rules are locked. Individual voter identities are never returned by the API.
 
 ## Deployment
 
@@ -14,4 +14,4 @@ Set `GITHUB_CLIENT_SECRET` as an encrypted Worker secret. Never put it in source
 
 Run `node --test polls-service/worker.test.mjs` before deploying with `wrangler deploy --config polls-service/wrangler.jsonc`. GitHub Pages deploys the frontend separately. Its service URL is in `pages-app/poll-config.json`.
 
-OAuth uses one-time browser-bound state and PKCE. Poll sessions last one day and only their hashes are stored. A scheduled cleanup removes expired authentication and rate-limit records. Votes are unique per poll and GitHub account; deadlines and access checks are enforced by the service.
+The original independent OAuth endpoints and session tables are retained for compatibility, but separate poll login is disabled when website authentication is configured. Website access tokens are verified per request and never stored in D1. Only the public Supabase key is configured; no service-role key is used. A scheduled cleanup removes expired legacy authentication and rate-limit records. Deadlines and access checks are enforced by the service.

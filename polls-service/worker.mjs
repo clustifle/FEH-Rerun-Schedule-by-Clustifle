@@ -9,18 +9,33 @@ const all=async(env,sql,...args)=>(await stmt(env,sql,...args).all()).results;
 const one=(env,sql,...args)=>stmt(env,sql,...args).first();
 const active=p=>p.status==='open'&&(!p.closes_at||p.closes_at>now());
 const staff=u=>u&&['owner','manager'].includes(u.role);
-async function user(request,env){const token=request.headers.get('Authorization')?.match(/^Bearer ([a-f0-9]{64})$/)?.[1];if(!token)return null;const u=await one(env,'SELECT github_id,login FROM poll_sessions WHERE token_hash=? AND expires_at>?',await hash(token),epoch());if(!u)return null;u.role=u.github_id===env.HEAD_ADMIN_GITHUB_ID?'owner':await one(env,'SELECT github_id FROM poll_staff WHERE github_id=?',u.github_id)?'manager':'voter';return u;}
+async function user(request,env){
+ const bearer=request.headers.get('Authorization')?.match(/^Bearer (.+)$/)?.[1];if(!bearer)return null;
+ if(env.SUPABASE_URL){
+  if(!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(bearer))return null;
+  const headers={apikey:env.SUPABASE_PUBLISHABLE_KEY,Authorization:'Bearer '+bearer};
+  const response=await fetch(env.SUPABASE_URL+'/auth/v1/user',{headers,signal:AbortSignal.timeout(10000)});if(!response.ok)return null;
+  const account=await response.json();if(!account.id||account.is_anonymous)return null;
+  const roleResponse=await fetch(env.SUPABASE_URL+'/rest/v1/rpc/tracker_role',{method:'POST',headers:{...headers,'Content-Type':'application/json'},body:'{}',signal:AbortSignal.timeout(10000)});
+  if(!roleResponse.ok)fail(503,'Could not verify website permissions. Please try again.');
+  const role=await roleResponse.json(),identity=account.identities?.find(i=>i.provider==='github'),githubId=identity?.identity_data?.provider_id||identity?.identity_data?.sub;
+  const github=githubId&&/^\d{1,20}$/.test(String(githubId))?String(githubId):null;
+  return {github_id:github||'site:'+account.id,login:identity?.identity_data?.user_name||'Website account',role:role==='Owner'?'owner':role==='Manager'?'manager':'voter',can_vote:!!github,website_account:true};
+ }
+ const token=bearer.match(/^[a-f0-9]{64}$/)?.[0];if(!token)return null;const u=await one(env,'SELECT github_id,login FROM poll_sessions WHERE token_hash=? AND expires_at>?',await hash(token),epoch());if(!u)return null;u.role=u.github_id===env.HEAD_ADMIN_GITHUB_ID?'owner':await one(env,'SELECT github_id FROM poll_staff WHERE github_id=?',u.github_id)?'manager':'voter';return u;
+}
 const requireStaff=u=>{if(!staff(u))fail(403,'Poll staff access is required.');};
 async function body(request){if(Number(request.headers.get('Content-Length')||0)>12000)fail(413,'The request is too large.');const text=await request.text();if(text.length>12000)fail(413,'The request is too large.');try{return JSON.parse(text);}catch{fail(400,'Invalid request.');}}
 async function rate(env,key,limit){const minute=Math.floor(epoch()/60),id=key+':'+minute;const r=await one(env,'INSERT INTO poll_rate_limits(key,count,expires_at) VALUES(?,1,?) ON CONFLICT(key) DO UPDATE SET count=count+1 RETURNING count',id,epoch()+120);if(r.count>limit)fail(429,'Please wait a minute before trying again.');}
 function validate(b){const question=String(b.question||'').trim(),description=String(b.description||'').trim(),choices=Array.isArray(b.choices)?b.choices.map(c=>String(c).trim()):[];if(question.length<5||question.length>240||description.length>2000)fail(400,'Use a question of 5–240 characters and a description under 2,000 characters.');if(choices.length<2||choices.length>8||choices.some(c=>!c||c.length>120)||new Set(choices.map(c=>c.toLowerCase())).size!==choices.length)fail(400,'Add 2–8 different choices, each under 120 characters.');if(!['public','after_vote','closed'].includes(b.results_mode))fail(400,'Choose when results become visible.');let closes=null;if(b.closes_at){const d=new Date(b.closes_at);if(!Number.isFinite(d.valueOf())||d<=new Date())fail(400,'Choose a future closing date.');closes=d.toISOString();}return {question,description,choices,featured:b.featured?1:0,allow_change:b.allow_change?1:0,results_mode:b.results_mode,closes_at:closes};}
 const audit=(env,u,action,id,label)=>stmt(env,'INSERT INTO poll_history(github_id,login,action,poll_id,label,created_at) VALUES(?,?,?,?,?,?)',u.github_id,u.login,action,id,label,now());
 async function writePoll(env,p,changes){const ticket=crypto.randomUUID();try{return await env.DB.batch([stmt(env,'INSERT INTO poll_write_guard VALUES(?,(SELECT COUNT(*) FROM polls WHERE id=? AND revision=?))',ticket,p.id,p.revision),...changes,stmt(env,'DELETE FROM poll_write_guard WHERE ticket=?',ticket)]);}catch(e){if(String(e).includes('CHECK constraint failed'))fail(409,'This poll changed. Reload it before saving.');throw e;}}
-async function detail(env,p,u){const my=u?await one(env,'SELECT choice_id FROM poll_votes WHERE poll_id=? AND github_id=?',p.id,u.github_id):null;const visible=staff(u)||p.results_mode==='public'||(p.results_mode==='after_vote'&&!!my)||(!active(p)&&p.status!=='draft');const choices=await all(env,'SELECT id,label,position FROM poll_choices WHERE poll_id=? ORDER BY position',p.id);let total=null;if(visible){const counts=await all(env,'SELECT choice_id,COUNT(*) AS votes FROM poll_votes WHERE poll_id=? GROUP BY choice_id',p.id);total=counts.reduce((sum,c)=>sum+c.votes,0);for(const c of choices)c.votes=counts.find(r=>r.choice_id===c.id)?.votes||0;}return {...p,status:p.status==='open'&&!active(p)?'closed':p.status,choices,total,my_choice:my?.choice_id||null,can_vote:!!u&&active(p)&&(!my||!!p.allow_change)};}
+async function detail(env,p,u){const my=u?await one(env,'SELECT choice_id FROM poll_votes WHERE poll_id=? AND github_id=?',p.id,u.github_id):null;const visible=staff(u)||p.results_mode==='public'||(p.results_mode==='after_vote'&&!!my)||(!active(p)&&p.status!=='draft');const choices=await all(env,'SELECT id,label,position FROM poll_choices WHERE poll_id=? ORDER BY position',p.id);let total=null;if(visible){const counts=await all(env,'SELECT choice_id,COUNT(*) AS votes FROM poll_votes WHERE poll_id=? GROUP BY choice_id',p.id);total=counts.reduce((sum,c)=>sum+c.votes,0);for(const c of choices)c.votes=counts.find(r=>r.choice_id===c.id)?.votes||0;}return {...p,status:p.status==='open'&&!active(p)?'closed':p.status,choices,total,my_choice:my?.choice_id||null,can_vote:!!u&&u.can_vote!==false&&active(p)&&(!my||!!p.allow_change)};}
 function redirect(url,cookie){return new Response(null,{status:302,headers:{Location:url,'Cache-Control':'no-store','Referrer-Policy':'no-referrer',...(cookie?{'Set-Cookie':cookie}:{})}});}
 async function auth(request,env,url){
  if(!env.GITHUB_CLIENT_ID||!env.GITHUB_CLIENT_SECRET)fail(503,'GitHub voting is being connected. Please check back soon.');
  if(url.pathname==='/auth/github'){
+  if(env.SUPABASE_URL)fail(400,'Sign in through your website account. Separate poll sign-in is no longer needed.');
   const nonce=url.searchParams.get('nonce');if(!nonce||!/^[a-f0-9]{64}$/.test(nonce))fail(400,'Start GitHub sign-in from the community polls page.');
   const site=new URL(env.SITE_URL);if(request.headers.get('Origin')&&request.headers.get('Origin')!==site.origin)fail(403,'Invalid origin.');
   await rate(env,'auth:'+await hash((request.headers.get('CF-Connecting-IP')||'local')+env.GITHUB_CLIENT_SECRET),12);
@@ -52,6 +67,7 @@ export async function handle(request,env){
   if(url.pathname==='/logout'&&request.method==='POST'){const token=request.headers.get('Authorization')?.slice(7);if(token)await stmt(env,'DELETE FROM poll_sessions WHERE token_hash=?',await hash(token)).run();return json({ok:true});}
   if(url.pathname==='/history'&&request.method==='GET'){requireStaff(u);return json({history:await all(env,'SELECT login,action,label,created_at FROM poll_history ORDER BY id DESC LIMIT 100')});}
   if(url.pathname==='/staff'){
+   if(env.SUPABASE_URL)fail(403,'Manage staff roles through the website Mods Tool.');
    if(u?.role!=='owner')fail(403,'Only Head Admin can manage poll staff.');
    if(request.method==='GET')return json({staff:await all(env,'SELECT github_id,login FROM poll_staff ORDER BY login')});
    const b=await body(request);if(!/^\d{1,20}$/.test(String(b.github_id))||String(b.github_id)===env.HEAD_ADMIN_GITHUB_ID)fail(400,'Head Admin access cannot be changed.');
@@ -69,7 +85,7 @@ export async function handle(request,env){
   const match=url.pathname.match(/^\/polls\/([a-f0-9-]{36})(?:\/(vote|state))?$/);if(!match)fail(404,'Not found.');const id=match[1],action=match[2];const p=await one(env,'SELECT * FROM polls WHERE id=?',id);if(!p||(['draft','archived'].includes(p.status)&&!staff(u)))fail(404,'Poll not found.');
   if(!action&&request.method==='GET')return json({poll:await detail(env,p,u)});
   if(action==='vote'&&request.method==='POST'){
-   if(!u)fail(401,'Sign in with GitHub to vote.');await rate(env,'vote:'+u.github_id,30);const b=await body(request);if(!active(p))fail(409,'Voting has closed.');
+   if(!u)fail(401,'Create or sign in to your website account to vote.');if(u.can_vote===false)fail(403,'Connect GitHub to your website account before voting.');await rate(env,'vote:'+u.github_id,30);const b=await body(request);if(!active(p))fail(409,'Voting has closed.');
    const r=await stmt(env,"INSERT INTO poll_votes(poll_id,github_id,choice_id,updated_at) SELECT p.id,?,c.id,? FROM polls p JOIN poll_choices c ON c.poll_id=p.id WHERE p.id=? AND c.id=? AND p.status='open' AND (p.closes_at IS NULL OR p.closes_at>?) ON CONFLICT(poll_id,github_id) DO UPDATE SET choice_id=excluded.choice_id,updated_at=excluded.updated_at WHERE (SELECT allow_change FROM polls WHERE id=excluded.poll_id)=1",u.github_id,now(),id,String(b.choice_id),now()).run();if(!r.meta.changes)fail(409,'Your vote could not be changed. Voting may have closed or your vote is already recorded.');return json({poll:await detail(env,await one(env,'SELECT * FROM polls WHERE id=?',id),u)});
   }
   requireStaff(u);await rate(env,'staff:'+u.github_id,30);const b=await body(request);if(b.revision!==p.revision)fail(409,'This poll changed. Reload it before saving.');
