@@ -32,7 +32,7 @@ export async function handleCommunity(request,env,{user,rate,headers}){
  try{
   // Images are public media, never HTML or executable SVG; allow only immutable random IDs.
   const image=path.match(/^\/images\/([a-f0-9-]{36})$/);
-  if(image&&method==='GET'){const row=await one(env,'SELECT bytes,content_type FROM community_images WHERE id=?',image[1]);if(!row)fail(404,'Image not found.');return new Response(row.bytes,{headers:{...headers,'Content-Type':row.content_type,'Content-Security-Policy':"default-src 'none'",'Cache-Control':'public, max-age=31536000, immutable'}});}
+  if(image&&method==='GET'){const row=await one(env,'SELECT hex(bytes) AS image_hex,content_type FROM community_images WHERE id=?',image[1]);if(!row)fail(404,'Image not found.');const bytes=Uint8Array.from(row.image_hex.match(/.{2}/g)||[],pair=>parseInt(pair,16));return new Response(bytes,{headers:{...headers,'Content-Type':row.content_type,'Content-Security-Policy':"default-src 'none'",'Cache-Control':'public, max-age=31536000, immutable'}});}
   const u=await user(request,env);
   if(path==='/session'&&method==='GET'){const connected=u?.website_id?await one(env,'SELECT login FROM community_connections WHERE github_id=? AND website_id=?',u.github_id,u.website_id):null;if(connected)u.login=connected.login;const reader=await one(env,'SELECT github_id FROM community_connections WHERE public_reads=1 LIMIT 1');return json({user:u,connected:!!connected,publicReady:!!reader});}
   if(path==='/connect'&&method==='POST'){
@@ -55,7 +55,7 @@ export async function handleCommunity(request,env,{user,rate,headers}){
    const bytes=new Uint8Array(await request.arrayBuffer());if(!bytes.length||bytes.length>524288)fail(413,'Choose an image under 512 KB after optimization.');const type=imageType(bytes);if(!type||request.headers.get('Content-Type')!==type)fail(400,'Use a PNG, JPEG, or WebP image.');
    const id=crypto.randomUUID();
    // Atomic quota check prevents concurrent uploads bypassing storage limits.
-   const result=await statement(env,"INSERT INTO community_images(id,github_id,content_type,bytes,size,created_at) SELECT ?,?,?,?,?,? WHERE (SELECT COALESCE(SUM(size),0) FROM community_images)<209190912 AND (SELECT COUNT(*) FROM community_images WHERE github_id=? AND datetime(created_at)>datetime('now','-1 day'))<50",id,u.github_id,type,bytes.buffer,bytes.length,new Date().toISOString(),u.github_id).run();if(!result.meta.changes)fail(429,'Community image storage is full or your daily upload limit was reached. You can insert an image URL instead.');return json({url:url.origin+'/community/images/'+id});
+   const result=await statement(env,"INSERT INTO community_images(id,github_id,content_type,bytes,size,created_at) SELECT ?,?,?,?,?,? WHERE (SELECT COALESCE(SUM(size),0) FROM community_images)<209190912 AND (SELECT COUNT(*) FROM community_images WHERE github_id=? AND datetime(created_at)>datetime('now','-1 day'))<50",id,u.github_id,type,bytes.buffer,bytes.length,new Date().toISOString(),u.github_id).run();if(!result.meta.changes)fail(429,'Community image storage is full or your daily upload limit was reached. You can insert an image URL instead.');return json({url:url.origin+'/community/images/'+id+'?media=2'});
   }
   const numberMatch=path.match(/^\/posts\/(\d+)(?:\/(comments|replies|upvote|close|answer|delete|delete-comment))?$/),number=numberMatch?Number(numberMatch[1]):null,action=numberMatch?.[2];
   if(method==='GET'&&(path==='/posts'||path==='/categories'||numberMatch&&(!action||action==='replies'))){
