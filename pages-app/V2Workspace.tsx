@@ -1,7 +1,6 @@
-import VersionsManagement from './VersionsManagement';
-import BulkEditor from './BulkEditor';
+import ToolBoundary from './ToolBoundary';
 import {Grid2X2,List,LayoutGrid,Shield} from 'lucide-react';
-import {useEffect,useMemo,useState} from 'react';
+import {useEffect,useMemo,useState,lazy} from 'react';
 import {betaRequest} from './beta';
 import {assetUrl,portraitUrl,apiFetch} from './static-data';
 import {useVersions,loadVersions} from './VersionSelect';
@@ -11,6 +10,8 @@ import {moveTypes} from './move-types';
 import {baseTypes,basePools} from './catalog';
 import {heroUrl} from './routes';
 import './V2Workspace.css';
+const BulkEditor=lazy(()=>import('./BulkEditor'));
+const VersionsManagement=lazy(()=>import('./VersionsManagement'));
 export type BetaHero={id:string;name:string;title:string;category:string;color:string;portrait:string|null;pool:string|null;schedule:string;month:string|null;notes:string;revision?:number;weapon_type?:string|null;move_type?:string|null;blessing?:string|null;demote?:boolean;heroic_grail?:boolean;debut_version?:string|null;release_date?:string|null;release_event?:string|null};
 type Props<T extends BetaHero>={section:string;heroes:T[];onView:(hero:T)=>void;onRefresh:()=>Promise<void>};
 const sections=[['My Watchlist','watchlist'],['Community','community'],['Administrative Manager','FEHRS_AdmManager/']] as const;
@@ -20,7 +21,7 @@ const title=(hero:BetaHero)=>hero.name+' — '+hero.title;
 function HeroRows<T extends BetaHero>({heroes,onView}:{heroes:T[];onView:(h:T)=>void}){const [limit,setLimit]=useState(60);return <><ul className="v2-hero-list">{heroes.slice(0,limit).map(h=><li key={h.id}><button onClick={()=>onView(h)}>{h.portrait&&<img src={portraitUrl(h.portrait)} alt="" loading="lazy"/>}<span><strong>{h.name}</strong><small>{h.title}</small><small>{h.debut_version?'FEH '+h.debut_version:'Version not recorded'}</small></span></button></li>)}</ul>{heroes.length>limit&&<button className="secondary" onClick={()=>setLimit(v=>v+60)}>Show more</button>}{!heroes.length&&<p>No heroes match this selection.</p>}</>;}
 export default function V2Workspace<T extends BetaHero>(p:Props<T>){
  const titleMap:Record<string,string>={'watchlist':'My Watchlist','community':'Community','bulk':'Bulk Edit Heroes','manage-versions':'Manage FEH Versions','beta-history':'Beta Change History'};
- return <section className="v2-workspace"><header className="fb-heading"><h2>{titleMap[p.section]||'Version 2.0'}</h2></header>{p.section==='watchlist'?<Watchlist {...p}/>:p.section==='bulk'?<BulkEditor {...p}/>:p.section==='manage-versions'?<VersionsManagement onRefresh={p.onRefresh}/>:p.section==='beta-history'?<BetaHistory/>:<Community/>}</section>;
+ return <section className="v2-workspace"><header className="fb-heading"><h2>{titleMap[p.section]||'Version 2.0'}</h2></header><ToolBoundary key={p.section}>{p.section==='watchlist'?<Watchlist {...p}/>:p.section==='bulk'?<BulkEditor {...p}/>:p.section==='manage-versions'?<VersionsManagement onRefresh={p.onRefresh}/>:p.section==='beta-history'?<BetaHistory/>:<Community/>}</ToolBoundary></section>;
 }
 type Follow={hero_id:string;list_name:string};
 function Watchlist<T extends BetaHero>(p:Props<T>){const [view,setView]=useState<'grid'|'list'|'icons'>(()=>{try{const saved=localStorage.getItem('feh-beta-watchlist-view');return saved==='list'||saved==='icons'?saved:'grid';}catch{return 'grid';}});useEffect(()=>{try{localStorage.setItem('feh-beta-watchlist-view',view);}catch{}},[view]);const [follows,setFollows]=useState<Follow[]>([]),[query,setQuery]=useState(''),[list,setList]=useState('All'),[sort,setSort]=useState('rerun'),[busy,setBusy]=useState(''),[loading,setLoading]=useState(true),[error,setError]=useState('');

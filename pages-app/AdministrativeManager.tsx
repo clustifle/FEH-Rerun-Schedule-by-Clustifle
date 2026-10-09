@@ -1,24 +1,25 @@
-import {useEffect,useState,type ReactNode} from 'react';
+import {useEffect,useState,lazy,type ReactNode} from 'react';
 import {LayoutDashboard,Shield,CalendarDays,Layers,FileText,Users,History,RefreshCw,ExternalLink,Settings2,Menu,CheckCircle2} from 'lucide-react';
 import {supabase} from './static-data';
 import {heroUrl} from './routes';
 import {betaRequest,isBeta} from './beta';
-import BulkEditor from './BulkEditor';
-import VersionsManagement from './VersionsManagement';
 import {HeroManagement,WaitlistManagement,ContentManagement,StaffManagement,HistoryPanel} from './ModsTool';
 import {BetaHistory,type BetaHero} from './V2Workspace';
 import {PollManagement} from './Polls';
-import AdminHeroEditor from './AdminHeroEditor';
+import ToolBoundary from './ToolBoundary';
 import AdministrativeDashboard from './AdministrativeDashboard';
 import AdministrativeLoading from './AdministrativeLoading';
 import managerLogo from './admin-assets/manager-logo.png';
+const BulkEditor=lazy(()=>import('./BulkEditor'));
+const VersionsManagement=lazy(()=>import('./VersionsManagement'));
+const AdminHeroEditor=lazy(()=>import('./AdminHeroEditor'));
 export const adminBase='/FEHRS_AdmManager/';
 const sections=[['dashboard','Dashboard',LayoutDashboard],['heroes','Heroes',Shield],['schedules','Schedules',CalendarDays],['waitlists','Waitlists',Layers],['mods-edit','Mods Edit',Settings2],['polls','Polls',FileText],['content','Site Content',FileText],['staff','Staff & Users',Users],['history','History',History]] as const;
 type AdminHero=BetaHero&{updated:string};
 const route=()=>location.pathname.startsWith(adminBase)?location.pathname.slice(adminBase.length).split('/')[0]||'dashboard':'dashboard';
 export function AdministrativeShell({role,heroes,section,onNavigate,onRefresh,refreshing,children}:{role:string;heroes:BetaHero[];section:string;onNavigate:(s:string)=>void;onRefresh:()=>void;refreshing:boolean;children:ReactNode}){
  const [menu,setMenu]=useState(false);const available=sections.filter(([key])=>role==='Owner'||!['content','staff'].includes(key));const label=available.find(([key])=>key===section)?.[1]||'Dashboard';
- return <div className="adm-shell"><header className="adm-command"><div className="adm-header-brand"><img src={managerLogo} alt="FEH Rerun Schedule by Clustifle Administrative Manager"/></div><button aria-label="Refresh data" disabled={refreshing} onClick={onRefresh}><RefreshCw size={20} className={refreshing?'adm-spinning':''}/></button><a href="/home" className="adm-site-link">Open website<ExternalLink size={15}/></a><span className="adm-role">{role==='Owner'?'Head Admin':'Schedule Manager'}</span><button className="adm-menu-toggle" aria-label="Toggle navigation" aria-expanded={menu} onClick={()=>setMenu(!menu)}><Menu/></button></header><div className="adm-layout"><nav className={menu?'adm-navigation is-open':'adm-navigation'} aria-label="Administrative sections">{available.map(([key,name,Icon])=><button key={key} aria-current={key===section?'page':undefined} onClick={()=>{onNavigate(key);setMenu(false);}}><Icon size={19}/>{name}</button>)}<small>{heroes.length} hero records<br/>{isBeta?'Isolated beta data':'Staff access required'}</small></nav><main className="adm-content" id="administrative-content"><div className="adm-page-heading"><h2>{label}</h2><span>FEH Rerun Schedule by Clustifle</span></div>{children}</main></div></div>;
+ return <div className="adm-shell"><header className="adm-command"><div className="adm-header-brand"><img src={managerLogo} alt="FEH Rerun Schedule by Clustifle Administrative Manager"/></div><button aria-label="Refresh data" disabled={refreshing} onClick={onRefresh}><RefreshCw size={20} className={refreshing?'adm-spinning':''}/></button><a href="/home" className="adm-site-link">Open website<ExternalLink size={15}/></a><span className="adm-role">{role==='Owner'?'Head Admin':'Schedule Manager'}</span><button className="adm-menu-toggle" aria-label="Toggle navigation" aria-expanded={menu} onClick={()=>setMenu(!menu)}><Menu/></button></header><div className="adm-layout"><nav className={menu?'adm-navigation is-open':'adm-navigation'} aria-label="Administrative sections">{available.map(([key,name,Icon])=><button key={key} aria-current={key===section?'page':undefined} onClick={()=>{onNavigate(key);setMenu(false);}}><Icon size={19}/>{name}</button>)}<small>{heroes.length} hero records<br/>{isBeta?'Isolated beta data':'Staff access required'}</small></nav><main className="adm-content" id="administrative-content"><div className="adm-page-heading"><h2>{label}</h2><span>FEH Rerun Schedule by Clustifle</span></div><ToolBoundary key={section}>{children}</ToolBoundary></main></div></div>;
 }
 export default function AdministrativeManager(){
  const [userId,setUserId]=useState('');

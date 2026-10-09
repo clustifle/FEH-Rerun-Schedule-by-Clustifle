@@ -45,3 +45,24 @@ dialog .waitlist-order-tools>div{flex-shrink:0}
 dialog .revival-picker-portrait{width:64px;height:64px}
 dialog .waitlist-order-portrait{width:48px;height:48px}
 @media(max-width:600px){dialog:is(.revival-hero-picker,.waitlist-reorganizer){padding:16px;width:calc(100% - 20px);max-height:calc(100dvh - 20px)}dialog .waitlist-order-portrait{width:36px;height:36px}dialog .revival-picker-tools{margin:12px 0}dialog .revival-picker-grid{grid-template-columns:repeat(auto-fill,minmax(105px,1fr))}}
+@media(max-width:600px),(pointer:coarse){.adm-navigation button{min-height:44px}.adm-command button,dialog .icon-button,dialog .reorder-drag-handle,dialog .waitlist-order-row-actions button{width:44px;height:44px;min-height:44px}dialog button,.adm-content :is(button,input,select){min-height:44px}.adm-content input[type=checkbox]{min-height:0}.adm-command{gap:8px}.waitlist-order-tools{gap:8px}}
+@media(max-width:600px){
+ dialog:is(.waitlist-reorganizer,.revival-hero-picker)[open]{max-height:calc(100dvh - 20px)}
+ dialog:is(.waitlist-reorganizer,.revival-hero-picker)>header h2{font-size:20px;line-height:1.2;margin:0;min-width:0;overflow-wrap:anywhere}
+ dialog.waitlist-reorganizer>header>div{flex:1;min-width:0}
+ dialog.waitlist-reorganizer>header p{display:none}
+ dialog.waitlist-reorganizer .waitlist-order-colors{gap:6px;margin:12px 0}
+ dialog.waitlist-reorganizer .waitlist-order-colors button{flex:1;min-width:0;font-size:14px;padding:8px 4px}
+ dialog.waitlist-reorganizer footer>p{display:none}
+ dialog.waitlist-reorganizer footer>div{flex-wrap:nowrap;gap:6px}
+ dialog.waitlist-reorganizer footer button{flex:1;min-width:0;font-size:14px;padding:8px 4px}
+ dialog.revival-hero-picker .revival-picker-footer>span{display:none}
+ dialog.revival-hero-picker .revival-picker-tools{margin:12px 0}
+ dialog.revival-hero-picker .revival-picker-colors{gap:6px}
+ dialog.revival-hero-picker .revival-picker-colors button{font-size:14px;padding:8px 6px}
+ dialog.revival-hero-picker .picker-multi-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+ dialog.revival-hero-picker .picker-multi-actions button{min-width:0;font-size:14px;padding:8px 4px}
+ dialog.revival-hero-picker .picker-multi-actions>span{grid-column:1/-1;font-size:13px}
+ dialog.revival-hero-picker .revival-picker-footer{flex-wrap:nowrap;gap:6px}
+ dialog.revival-hero-picker .revival-picker-footer button{flex:1;min-width:0;font-size:14px;padding:8px 4px;margin:0}
+}

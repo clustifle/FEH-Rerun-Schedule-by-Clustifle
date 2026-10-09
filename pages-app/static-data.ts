@@ -1,5 +1,5 @@
 import portraitManifest from './portrait-manifest.json';
-import {isBeta} from './beta';
+import {isBeta,betaRequest} from './beta';
 import {isWaitlist} from './waitlist-types';
 import {moveTypes} from './move-types';
 import {weaponTypes} from './weapon-types';
@@ -51,9 +51,15 @@ async function importImage(url:string){
  throw new Error(d.error||'Could not import portrait. Check the direct image link.');
 }
 const pendingReads=new Map<string,Promise<Response>>();
+async function sharedRead(input:string,request:()=>Promise<Response>){
+ let pending=pendingReads.get(input);
+ if(!pending){pending=request();pendingReads.set(input,pending);const active=pending;void pending.finally(()=>{if(pendingReads.get(input)===active)pendingReads.delete(input);}).catch(()=>{});}
+ return (await pending).clone();
+}
 export async function apiFetch(input:string,init?:RequestInit){
  if(isBeta&&input==='/api/heroes'){
-  if(!init?.method||init.method==='GET')return fetch('/_beta/api/heroes');
+  if(!init?.method||init.method==='GET')return sharedRead(input,()=>betaRequest('heroes').then(rows=>jsonResponse(rows)));
+  pendingReads.clear();
   if(init.method==='DELETE')return fetch('/_beta/api/hero',{method:'DELETE',headers:{'Content-Type':'application/json'},body:init.body});
   if(init.method==='POST'){
    const form=init.body as FormData;
@@ -63,9 +69,7 @@ export async function apiFetch(input:string,init?:RequestInit){
   }
  }
  if((!init?.method||init.method==='GET')&&['/api/heroes','/api/banners'].includes(input)){
-  let pending=pendingReads.get(input);
-  if(!pending){pending=runApiFetch(input,init);pendingReads.set(input,pending);const request=pending;void pending.finally(()=>{if(pendingReads.get(input)===request)pendingReads.delete(input);}).catch(()=>{});}
-  return (await pending).clone();
+  return sharedRead(input,()=>runApiFetch(input,init));
  }
  if(init?.method&&init.method!=='GET')pendingReads.clear();
  return runApiFetch(input,init);
