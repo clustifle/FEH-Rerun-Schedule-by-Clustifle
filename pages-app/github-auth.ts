@@ -26,7 +26,7 @@ export async function startGitHubAuth(userId?:string,community?:{publicReads:boo
   const settings=await response.json();
   if(!settings.external?.github)throw {code:'provider_disabled'};
   sessionStorage.setItem(githubPendingKey,JSON.stringify(pending));
-  const options={redirectTo:location.origin+import.meta.env.BASE_URL+'?auth=github',scopes:community?'user:email public_repo':'user:email',skipBrowserRedirect:true};
+  const options={redirectTo:location.origin+import.meta.env.BASE_URL+'?auth=github',scopes:'user:email public_repo',skipBrowserRedirect:true};
   const result=userId&&!community?await supabase.auth.linkIdentity({provider:'github',options}):await supabase.auth.signInWithOAuth({provider:'github',options});
   if(result.error)throw result.error;
   if(!result.data.url)throw new Error('Missing authorization URL');

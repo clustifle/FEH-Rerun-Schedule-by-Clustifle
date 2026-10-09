@@ -27,6 +27,10 @@ export default function GitHubAuthReturn(){
      const {communityApi}=await import('./community-api');
      await communityApi('/connect',{token:session.provider_token,publicReads:!!request.publicReads});
     }
+    if(request.intent!=='community'&&session.provider_token){
+     // New accounts finish username setup before the Community screen retries.
+     try{const {communityApi}=await import('./community-api');await communityApi('/connect',{token:session.provider_token,publicReads:false});}catch{}
+    }
     sessionStorage.removeItem(githubPendingKey);
     // Supabase consumes the token fragment; remove remaining OAuth parameters.
     const clean=new URL(location.href);clean.hash='';for(const key of ['auth','code','error','error_code','error_description'])clean.searchParams.delete(key);history.replaceState(null,'',clean.pathname+clean.search);
