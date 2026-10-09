@@ -1,0 +1,21 @@
+@font-face{font-family:FEHeroes;src:url('../public/themes/fire-emblem-heroes/feh.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+:root{font-family:FEHeroes,serif;--realm-accent:#236678;--cyan:#236678}
+body,body :is(button,input,select,textarea,a,label,p,span,small,strong,h1,h2,h3,h4,th,td,dialog),.adm-shell .adm-tool-pane :is(button,input,select,textarea){font-family:FEHeroes,serif}
+body{font-size:16px;line-height:1.45;background:#f5f6f4}
+.adm-command{border-bottom:2px solid #b5a77a;box-shadow:0 2px 6px #183e4810}
+.adm-navigation{background:#f1f5f4;border-right-color:#c7ceca}
+.adm-navigation button{font-size:15px;line-height:1.3}
+.adm-navigation button[aria-current=page]{background:linear-gradient(110deg,#174450,#286878);box-shadow:inset 3px 0 #c6b37c;color:#fff6db}
+.adm-navigation small,.adm-role,.adm-command>a{font-size:14px}
+.adm-page-heading h2{padding:9px 30px;min-width:220px;max-width:100%;font-size:23px;color:#fff1cf;text-shadow:0 1px 2px #08242e;background:url('../public/themes/fire-emblem-heroes/Common_Window.webp') 0 20.75%/170.5% 1084.8%;text-align:center}
+.adm-page-heading{flex-wrap:wrap}
+.adm-tile,.adm-overview-panel,.adm-shell :is(.version-list-panel,.version-editor-panel,.bulk-panel,.version-bulk-panel),dialog{border-color:#b6b59f;box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 4px #ddd9c9;border-radius:4px}
+.adm-tile header{border-bottom-color:#b5a77a}
+.adm-tile header svg,.adm-overview-actions svg{color:#236678}
+.adm-quick-label{background:linear-gradient(#286878,#174450);color:#fff1cf;border-right:2px solid #b5a77a}
+.adm-tabs button[aria-selected=true]{color:#174450;border-bottom-color:#a99354}
+.primary,.adm-shell .primary{position:relative;isolation:isolate;background:#235665;border-color:#8a999d;color:#fff6df;min-height:40px;padding-inline:20px;text-shadow:0 1px 2px #183642}
+.primary::before{content:'';position:absolute;inset:0;z-index:-1;background:url('../public/themes/fire-emblem-heroes/Common_Button.webp') 0 10.9%/219.5% 1197.5%;clip-path:polygon(5% 0,95% 0,100% 50%,95% 100%,5% 100%,0 50%);pointer-events:none}
+.primary:hover:not(:disabled),.adm-shell .primary:hover:not(:disabled){background:#2b7183;filter:brightness(1.08)}
+.adm-loading{background:#fff}
+@media(max-width:600px){.adm-page-heading h2{min-width:180px;font-size:21px}.adm-navigation button{font-size:15px}}
