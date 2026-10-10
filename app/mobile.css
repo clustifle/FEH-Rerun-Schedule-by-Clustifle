@@ -78,3 +78,6 @@
  html[data-theme][data-theme][data-theme][data-theme] .tracker .schedule-stage{min-width:0;max-width:100%;grid-template-columns:minmax(0,1fr)}
  html[data-theme][data-theme][data-theme][data-theme] .tracker .schedule-stage>section{min-width:0;max-width:100%;box-sizing:border-box}
 }
+
+/* Keep page-entry translations inside the viewport without adding a scroll container. */
+.tracker{overflow-x:clip}
