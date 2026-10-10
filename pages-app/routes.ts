@@ -10,7 +10,7 @@ export function readRoute(){
  const view=['versions','banner-archive'].includes(path)?'All Heroes':path.startsWith('mods-tool/')?'Mods Tool':path==='rerun-waitlist'?'Waitlist':profile?'Profile':Object.keys(viewPaths).find(key=>viewPaths[key]===path)||(params.get('schedule')&&viewPaths[params.get('schedule')!] ? params.get('schedule') : null);
  return {view,profile,hero,settings,faq,section:path==='account'?'Account':path.split('/')[1]||'',explicit:!!path||params.has('profile')||params.has('schedule')};
 }
-export function viewUrl(view:string,month='',profile=''){return import.meta.env.BASE_URL+(viewPaths[view]||'home')+(view==='Profile'&&profile?'/'+encodeURIComponent(profile):'')+(month?'?month='+encodeURIComponent(month):'');}
+export function viewUrl(view:string,month='',profile=''){return import.meta.env.BASE_URL+(viewPaths[view==='Weekly Revival'?'Weekly Revivals':view]||'home')+(view==='Profile'&&profile?'/'+encodeURIComponent(profile):'')+(month?'?month='+encodeURIComponent(month):'');}
 export function goTo(url:string,replace=false){if(location.pathname+location.search===url)return;history[replace?'replaceState':'pushState'](null,'',url+location.hash);window.dispatchEvent(new Event('route-change'));}
 export function settingsUrl(section=''){return import.meta.env.BASE_URL+'settings'+(section?'/'+section.toLowerCase().replace(/ & /g,'-').replace(/ /g,'-'):'');}
 // The generated GitHub Pages 404 redirects only within this project's base path.
