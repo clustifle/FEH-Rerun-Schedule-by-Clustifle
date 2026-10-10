@@ -22,3 +22,5 @@ export async function uploadCommunityImage(file:File,kind:'community'|'hero'='co
   const r=await fetch(pollApiUrl+(kind==='hero'?'/community/hero-images':'/community/images'),{method:'POST',headers:{Authorization:'Bearer '+session.access_token,'Content-Type':blob.type},body:blob,signal:AbortSignal.timeout(25000)}),data=await r.json();if(!r.ok)throw Error(data.error||'Could not upload the picture.');return String(data.url);
  }finally{bitmap.close();}
 }
+
+export async function importHeroPortrait(url:string){const {data:{session}}=await supabase.auth.getSession();if(!session)throw Error('Sign in to import a portrait.');const r=await fetch(pollApiUrl+'/community/hero-image-import',{method:'POST',headers:{Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify({url}),signal:AbortSignal.timeout(25000)});if(!r.ok){const data=await r.json();throw Error(data.error||'Could not import the image.');}const blob=await r.blob();return new File([blob],'imported-portrait',{type:blob.type});}
