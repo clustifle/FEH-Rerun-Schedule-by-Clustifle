@@ -55,13 +55,17 @@ export async function handleCommunity(request,env,{user,rate,headers}){
    await statement(env,'INSERT INTO community_connections(github_id,website_id,login,encrypted_token,public_reads,created_at) VALUES(?,?,?,?,?,?) ON CONFLICT(github_id) DO UPDATE SET website_id=excluded.website_id,login=excluded.login,encrypted_token=excluded.encrypted_token,public_reads=MAX(community_connections.public_reads,excluded.public_reads),created_at=excluded.created_at',u.github_id,u.website_id,account.login,encrypted,b.publicReads?1:0,new Date().toISOString()).run();return json({ok:true});
   }
   if(path==='/disconnect'&&method==='POST'){requireUser(u);await statement(env,'DELETE FROM community_connections WHERE github_id=? AND website_id=?',u.github_id,u.website_id).run();return json({ok:true});}
-  if(path==='/images'&&method==='POST'){
-   await connectedToken(env,u);await rate(env,'community-images:'+u.github_id,5);
+  if(path==='/hero-images'&&method==='POST'&&(!u?.website_account||!['owner','manager'].includes(u.role)))fail(403,'Hero uploads require Head Admin or Schedule Manager access.');
+  const heroDelete=path.match(/^\/hero-images\/([a-f0-9-]{36})$/);
+  if(heroDelete&&method==='DELETE'){if(!u?.website_account||!['owner','manager'].includes(u.role))fail(403,'Staff access required.');await statement(env,'DELETE FROM community_images WHERE id=? AND github_id=?',heroDelete[1],'portrait:'+u.website_id).run();return json({ok:true});}
+  if((path==='/images'||path==='/hero-images')&&method==='POST'){
+   const ownerId=path==='/hero-images'?'portrait:'+u.website_id:u?.github_id;
+   if(path==='/images')await connectedToken(env,u);await rate(env,'community-images:'+ownerId,5);
    if(Number(request.headers.get('Content-Length')||0)>524288)fail(413,'Choose an image under 512 KB after optimization.');
    const bytes=new Uint8Array(await request.arrayBuffer());if(!bytes.length||bytes.length>524288)fail(413,'Choose an image under 512 KB after optimization.');const type=imageType(bytes);if(!type||request.headers.get('Content-Type')!==type)fail(400,'Use a PNG, JPEG, or WebP image.');
    const id=crypto.randomUUID();
    // Atomic quota check prevents concurrent uploads bypassing storage limits.
-   const result=await statement(env,"INSERT INTO community_images(id,github_id,content_type,bytes,size,created_at) SELECT ?,?,?,?,?,? WHERE (SELECT COALESCE(SUM(size),0) FROM community_images)<209190912 AND (SELECT COUNT(*) FROM community_images WHERE github_id=? AND datetime(created_at)>datetime('now','-1 day'))<50",id,u.github_id,type,bytes.buffer,bytes.length,new Date().toISOString(),u.github_id).run();if(!result.meta.changes)fail(429,'Community image storage is full or your daily upload limit was reached. You can insert an image URL instead.');return json({url:url.origin+'/community/images/'+id+'?media=2'});
+   const result=await statement(env,"INSERT INTO community_images(id,github_id,content_type,bytes,size,created_at) SELECT ?,?,?,?,?,? WHERE (SELECT COALESCE(SUM(size),0) FROM community_images)<209190912 AND (SELECT COUNT(*) FROM community_images WHERE github_id=? AND datetime(created_at)>datetime('now','-1 day'))<50",id,ownerId,type,bytes.buffer,bytes.length,new Date().toISOString(),ownerId).run();if(!result.meta.changes)fail(429,'Community image storage is full or your daily upload limit was reached. You can insert an image URL instead.');return json({url:url.origin+'/community/images/'+id+'?media=2'});
   }
   const numberMatch=path.match(/^\/posts\/(\d+)(?:\/(comments|replies|upvote|close|answer|delete|delete-comment))?$/),number=numberMatch?Number(numberMatch[1]):null,action=numberMatch?.[2];
   if(method==='GET'&&(path==='/posts'||path==='/categories'||numberMatch&&(!action||action==='replies'))){

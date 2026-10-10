@@ -61,7 +61,7 @@ def main():
             rows=json.loads(read(URL+"/rest/v1/heroes?select=portrait&order=id&limit=1000&offset="+str(offset),headers={"apikey":KEY}))
             for row in rows:
                 path=row.get("portrait")
-                if path and not path.startswith("data/") and re.fullmatch(r"[a-zA-Z0-9_/-]+\.(?:png|jpg|jpeg|webp)",path) and ".." not in path:
+                if path and not path.startswith(("data/", "cloudflare/")) and re.fullmatch(r"[a-zA-Z0-9_/-]+\.(?:png|jpg|jpeg|webp)",path) and ".." not in path:
                     paths.add(path)
             if len(rows)<1000:
                 break

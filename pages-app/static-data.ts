@@ -12,7 +12,7 @@ export const supabasePublishableKey='sb_publishable_PiJIst1aSJtrYBiIvwDIVA_KS3c-
 export const supabase=createClient(supabaseUrl,supabasePublishableKey);
 export const assetUrl=(value:string)=>import.meta.env.BASE_URL+(isBeta&&value==='clustifle-feh-rerun-logo.png'?'clustifle-feh-rerun-beta-logo.png':value).replace(/^\//,'');
 const deliveryPortraits=portraitManifest as Record<string,{thumb:string;detail:string}>;
-export const portraitUrl=(value:string,size:'thumb'|'detail'='thumb')=>value.startsWith('data/')?assetUrl(value):deliveryPortraits[value]?assetUrl(deliveryPortraits[value][size]):supabase.storage.from('portraits').getPublicUrl(value).data.publicUrl;
+export const portraitUrl=(value:string,size:'thumb'|'detail'='thumb')=>/^cloudflare\/[a-f0-9-]{36}$/.test(value)?'https://feh-community-polls.shyguyvn.workers.dev/community/images/'+value.slice(11)+'?media=2':value.startsWith('data/')?assetUrl(value):deliveryPortraits[value]?assetUrl(deliveryPortraits[value][size]):supabase.storage.from('portraits').getPublicUrl(value).data.publicUrl;
 export async function ownerSession(){const {data:{session}}=await supabase.auth.getSession();if(!session)return false;const {data,error}=await supabase.rpc('is_tracker_owner');return !error&&data===true;}
 const fail=(error:unknown,status=400)=>jsonResponse({error:error instanceof Error?error.message:String(error)},{status});
 function portraitCandidates(value:string){
