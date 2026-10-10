@@ -29,7 +29,7 @@ export default function ScheduleExport({heroes,schedule,title,month}:{heroes:Her
    await document.fonts.load('18px FEHeroes');await document.fonts.ready;const font='FEHeroes, Georgia, serif',gap=14,pad=24;
    const cards=included.map(m=>{const groups=colors.map(color=>({color,heroes:selected.filter(h=>h.month?.slice(0,7)===m&&h.color===color)})).filter(g=>g.heroes.length);return {m,groups,width:Math.max(132,...groups.map(g=>Math.min(3,g.heroes.length)*112+20)),height:40+groups.reduce((sum,g)=>sum+Math.ceil(g.heroes.length/3)*112+8,0)};});
    const packing=(columns:number)=>{let bottom=154,width=0;for(let i=0;i<cards.length;i+=columns){const row=cards.slice(i,i+columns);bottom+=Math.max(...row.map(c=>c.height))+gap;width=Math.max(width,row.reduce((sum,c)=>sum+c.width,0)+(row.length-1)*gap);}return {width:pad*2+width,height:bottom+66};};
-   let cols=1;if(layout==='landscape'){let score=Infinity;for(let n=1;n<=Math.min(6,cards.length);n++){const p=packing(n),candidate=Math.abs(Math.log(p.width/p.height/(16/9)));if(candidate<score){score=candidate;cols=n;}}}
+   const cols=layout==='landscape'?cards.length:1;
    const w=Math.max(476,packing(cols).width);
    let y=154;const positioned:typeof cards[number][]=[];const positions:{x:number;y:number}[]=[];
    for(let start=0;start<cards.length;start+=cols){const row=cards.slice(start,start+cols);let x=pad;row.forEach(c=>{positioned.push(c);positions.push({x,y});x+=c.width+gap;});y+=Math.max(...row.map(c=>c.height))+gap;}
