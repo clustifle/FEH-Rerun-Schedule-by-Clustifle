@@ -17,7 +17,7 @@ const VersionsManagement=lazy(()=>import('./VersionsManagement'));
 const AdminHeroEditor=lazy(()=>import('./AdminHeroEditor'));
 const CommunityManagement=lazy(()=>import('./ForumManagement'));
 export const adminBase=location.pathname.startsWith('/FEHRS_AdmManager/')?'/FEHRS_AdmManager/':import.meta.env.BASE_URL+'FEHRS_AdmManager/';
-const sections=[['dashboard','Dashboard',LayoutDashboard],['heroes','Heroes',Shield],['schedules','Schedules',CalendarDays],['waitlists','Waitlists',Layers],['mods-edit','Mods Edit',Settings2],['community','Forum',FileText],['polls','Polls',FileText],['content','Site Content',FileText],['staff','Staff & Users',Users],['history','History',History]] as const;
+const sections=[['dashboard','Dashboard',LayoutDashboard],['heroes','Heroes',Shield],['schedules','Schedules',CalendarDays],['waitlists','Waitlists',Layers],['mods-edit','Mods Edit',Settings2],['community','Forum',FileText],['polls','Polls',FileText],['content','Site Content',FileText],['staff','Staff & Roles',Users],['history','History',History]] as const;
 type AdminHero=BetaHero&{updated:string};
 const route=()=>location.pathname.startsWith(adminBase)?location.pathname.slice(adminBase.length).split('/')[0]||'dashboard':'dashboard';
 export function AdministrativeShell({role,heroes,section,onNavigate,onRefresh,refreshing,children}:{role:string;heroes:BetaHero[];section:string;onNavigate:(s:string)=>void;onRefresh:()=>void;refreshing:boolean;children:ReactNode}){

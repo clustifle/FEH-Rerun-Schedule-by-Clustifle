@@ -20,3 +20,18 @@ begin
 end $$;
 revoke all on function public.reorder_extended_waitlist(text,text,uuid[]) from public,anon;
 grant execute on function public.reorder_extended_waitlist(text,text,uuid[]) to authenticated;
+create or replace function tracker_private.add_considered_hero_to_board()
+returns trigger language plpgsql security definer set search_path='' as $$
+begin
+ insert into public.tracker_extended_waitlist(list_kind,hero_id)
+ values('consideration',new.id) on conflict(list_kind,hero_id) do nothing;
+ return new;
+end $$;
+revoke all on function tracker_private.add_considered_hero_to_board() from public,anon,authenticated;
+drop trigger if exists add_considered_hero_to_board on public.heroes;
+create trigger add_considered_hero_to_board after insert or update of schedule on public.heroes
+for each row when (new.schedule='Schedule Under Consideration')
+execute function tracker_private.add_considered_hero_to_board();
+insert into public.tracker_extended_waitlist(list_kind,hero_id)
+select 'consideration',id from public.heroes where schedule='Schedule Under Consideration'
+on conflict(list_kind,hero_id) do nothing;

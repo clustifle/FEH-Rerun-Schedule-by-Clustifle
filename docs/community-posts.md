@@ -38,3 +38,6 @@ The Forum displays shared rules. Administrative Manager provides post and reply 
 
 Poll management uses readable dark text on the light administrative interface, including forms and status filters.
 
+
+Forum Moderator assignments are located in Administrative Manager > Staff & Roles and remain Head Admin-only. The Forum landing page omits the introductory Forum Posts heading and description.
+
