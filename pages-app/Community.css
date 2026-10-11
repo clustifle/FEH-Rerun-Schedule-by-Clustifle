@@ -22,3 +22,5 @@
 @media(max-width:600px){.community-workspace :is(input:not([type=checkbox]),select,textarea,.community-visual-input){font-size:16px}.community-editor-tools .icon-button{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important}.community-editor-tools{gap:5px}.community-post footer>.icon-button{min-width:44px!important;min-height:44px!important}.community-reading-pane>.secondary{min-height:44px}}
 
 html[data-theme] .tracker .community-workspace .community-post footer{flex-direction:row!important;align-items:center!important}html[data-theme] .tracker .community-workspace .community-post footer>.icon-button{width:auto!important;max-width:none!important;min-width:44px!important;flex:0 0 auto!important;margin:0!important}
+
+.forum-rules-editor{display:grid;gap:16px}.forum-rules-editor fieldset{display:grid;gap:12px;border:1px solid var(--border,#bbc7c9);min-width:0;padding:16px}.forum-rules-editor label{display:grid;gap:6px}.forum-rules-editor :is(input,textarea){width:100%;min-width:0;box-sizing:border-box;font:inherit;padding:10px}.forum-rules-editor button{min-height:44px}

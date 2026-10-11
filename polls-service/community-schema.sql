@@ -14,3 +14,5 @@ CREATE TABLE IF NOT EXISTS forum_moderators (github_id TEXT PRIMARY KEY,website_
 
 CREATE TABLE IF NOT EXISTS forum_moderation (post_number INTEGER NOT NULL,target_id TEXT NOT NULL,hidden INTEGER NOT NULL,reason TEXT NOT NULL,actor_login TEXT NOT NULL,updated_at TEXT NOT NULL,PRIMARY KEY(post_number,target_id));
 CREATE TABLE IF NOT EXISTS forum_audit (id INTEGER PRIMARY KEY AUTOINCREMENT,post_number INTEGER,target_id TEXT,action TEXT NOT NULL,reason TEXT NOT NULL,actor_login TEXT NOT NULL,actor_role TEXT NOT NULL,created_at TEXT NOT NULL);
+
+CREATE TABLE IF NOT EXISTS forum_rules (id INTEGER PRIMARY KEY CHECK(id=1), payload TEXT NOT NULL, revision INTEGER NOT NULL);
