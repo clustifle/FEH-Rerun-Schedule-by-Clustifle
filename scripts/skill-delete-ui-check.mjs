@@ -22,18 +22,18 @@ try{
   return r.fulfill({json:data});
  });
  await page.goto('http://127.0.0.1:5196/FEH-Rerun-Schedule-by-Clustifle/skills');
- await page.getByRole('button',{name:'Delete skill',exact:true}).waitFor();assert.equal(await page.locator('.skills-directory-card').count(),1);
+ await page.getByRole('button',{name:'Delete test',exact:true}).waitFor();assert.equal(await page.locator('.skills-directory-card').count(),1);
  const dialog=page.locator('dialog.skill-delete-dialog[open]');
  for(const width of [390,1280]){
-  await page.setViewportSize({width,height:900});await page.getByRole('button',{name:'Delete skill',exact:true}).click();
+  await page.setViewportSize({width,height:900});assert.equal(await page.locator('.skills-directory-grid .skill-description').count(),0);assert.equal(await page.locator('.skills-directory-grid').innerText(),'Delete test');await page.getByRole('button',{name:'Delete test',exact:true}).focus();await page.keyboard.press('Enter');const details=page.locator('dialog.skill-details-dialog[open]');await details.getByText('Test effect',{exact:true}).waitFor();assert.ok(await details.evaluate(e=>e.scrollWidth<=e.clientWidth+1));await page.keyboard.press('Escape');await details.waitFor({state:'hidden'});await page.getByRole('button',{name:'Delete test',exact:true}).click();await page.getByRole('button',{name:'Delete skill',exact:true}).click();
   await dialog.waitFor();assert.ok(await dialog.evaluate(e=>e.scrollWidth<=e.clientWidth+1));assert.equal(await dialog.getByRole('option').count(),2);
   await dialog.getByRole('button',{name:'Cancel',exact:true}).click();await dialog.waitFor({state:'hidden'});assert.equal(deletes,0);
  }
- await page.getByRole('button',{name:'Delete skill',exact:true}).click();await dialog.getByLabel('Skill record to delete').selectOption('unit');
+ await page.getByRole('button',{name:'Delete test',exact:true}).click();await page.getByRole('button',{name:'Delete skill',exact:true}).click();await dialog.getByLabel('Skill record to delete').selectOption('unit');
  await dialog.getByText('This removes the skill from this unit’s profile.',{exact:false}).waitFor();mode='error';
  await dialog.getByRole('button',{name:'Delete skill permanently',exact:true}).click();await dialog.getByRole('alert').getByText('Delete denied',{exact:true}).waitFor();assert.equal(rows.length,2);
  mode='stale';await dialog.getByRole('button',{name:'Delete skill permanently',exact:true}).click();await dialog.getByRole('alert').getByText('This skill changed or could not be deleted. Reload Skills List and try again.',{exact:true}).waitFor();assert.equal(rows.length,2);
  mode='success';await dialog.getByRole('button',{name:'Delete skill permanently',exact:true}).click();await dialog.waitFor({state:'hidden'});assert.deepEqual(rows.map(s=>s.id),['shared']);assert.equal(await page.locator('.skills-directory-card').count(),1);
- await page.getByRole('button',{name:'Delete skill',exact:true}).click();await dialog.getByRole('button',{name:'Delete skill permanently',exact:true}).click();await dialog.waitFor({state:'hidden'});assert.equal(rows.length,0);await page.getByText('No skills recorded yet.',{exact:true}).waitFor();assert.deepEqual(errors,[]);
+ await page.getByRole('button',{name:'Delete test',exact:true}).click();await page.getByRole('button',{name:'Delete skill',exact:true}).click();await dialog.getByRole('button',{name:'Delete skill permanently',exact:true}).click();await dialog.waitFor({state:'hidden'});assert.equal(rows.length,0);await page.getByText('No skills recorded yet.',{exact:true}).waitFor();assert.deepEqual(errors,[]);
  console.log('Delete Skills List: desktop/mobile confirmation, cancel, record selection, failure, revision conflict, and scoped deletion passed.');
 }finally{await browser.close()}
