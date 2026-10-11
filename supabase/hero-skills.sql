@@ -16,3 +16,5 @@ create policy skills_public_read on public.tracker_hero_skills for select to ano
 create policy skills_staff_insert on public.tracker_hero_skills for insert to authenticated with check((select public.tracker_role()) in ('Owner','Manager'));
 create policy skills_staff_update on public.tracker_hero_skills for update to authenticated using((select public.tracker_role()) in ('Owner','Manager')) with check((select public.tracker_role()) in ('Owner','Manager'));
 create policy skills_staff_delete on public.tracker_hero_skills for delete to authenticated using((select public.tracker_role()) in ('Owner','Manager'));
+
+alter table public.tracker_hero_skills add constraint passive_skill_icon_required check(slot not in ('A','B','C','X') or icon_url is not null);
