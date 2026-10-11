@@ -37,3 +37,4 @@ html[data-theme][data-theme][data-theme][data-theme] .tracker .hero-editor :is(i
 html[data-theme][data-theme][data-theme][data-theme] .tracker .hero-editor h3{color:var(--realm-accent)}
 html[data-theme][data-theme][data-theme][data-theme] .tracker .hero-editor :is(.editor-section p:not([role]),.upload p:not([role]),.demote-help){display:none}
 html[data-theme][data-theme][data-theme][data-theme] .tracker .hero-editor *{font-family:FEHeroes,Georgia,serif!important}
+.hero-editor .hero-skill-picker{margin-top:16px;padding:16px;border:1px solid var(--edit-line);border-radius:10px;background:var(--edit-field)}.hero-editor .hero-skill-picker-options{display:grid;gap:8px;max-height:280px;overflow:auto;margin:12px 0}.hero-editor .hero-skill-picker-options button{text-align:left;justify-content:flex-start;white-space:normal}
