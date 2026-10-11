@@ -35,3 +35,5 @@ html[data-theme][data-theme][data-theme][data-theme] .tracker dialog.hero-editor
 html[data-theme][data-theme][data-theme][data-theme] .tracker .hero-editor :is(.dialog-top,.form-actions){background:var(--edit-bg);border-color:var(--edit-line);box-shadow:none}
 html[data-theme][data-theme][data-theme][data-theme] .tracker .hero-editor :is(input:not([type=checkbox]):not([type=hidden]),select,textarea){background:var(--edit-field);color:var(--edit-text);border-color:var(--edit-line)}
 html[data-theme][data-theme][data-theme][data-theme] .tracker .hero-editor h3{color:var(--realm-accent)}
+html[data-theme][data-theme][data-theme][data-theme] .tracker .hero-editor :is(.editor-section p:not([role]),.upload p:not([role]),.demote-help){display:none}
+html[data-theme][data-theme][data-theme][data-theme] .tracker .hero-editor *{font-family:FEHeroes,Georgia,serif!important}
