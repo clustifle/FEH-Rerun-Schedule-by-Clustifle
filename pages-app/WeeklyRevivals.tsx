@@ -2,7 +2,6 @@ import {useEffect,useMemo,useRef,useState,type FormEvent} from 'react';
 import {ChevronLeft,ChevronRight,MoreHorizontal,Plus,Search,X,CalendarDays} from 'lucide-react';
 import {supabase,portraitUrl} from './static-data';
 import HeroPortraitMarks from './HeroPortraitMarks';
-import AdminHeroEditor from './AdminHeroEditor';
 import ProfileHeroPicker from './ProfileHeroPicker';
 import {bannerTiming} from './banner-time';
 import './WeeklyRevivals.css';
