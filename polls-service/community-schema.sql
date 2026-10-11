@@ -16,3 +16,7 @@ CREATE TABLE IF NOT EXISTS forum_moderation (post_number INTEGER NOT NULL,target
 CREATE TABLE IF NOT EXISTS forum_audit (id INTEGER PRIMARY KEY AUTOINCREMENT,post_number INTEGER,target_id TEXT,action TEXT NOT NULL,reason TEXT NOT NULL,actor_login TEXT NOT NULL,actor_role TEXT NOT NULL,created_at TEXT NOT NULL);
 
 CREATE TABLE IF NOT EXISTS forum_rules (id INTEGER PRIMARY KEY CHECK(id=1), payload TEXT NOT NULL, revision INTEGER NOT NULL);
+
+CREATE TABLE IF NOT EXISTS community_videos (id TEXT PRIMARY KEY,github_id TEXT NOT NULL,content_type TEXT NOT NULL,size INTEGER NOT NULL,created_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS community_video_chunks (video_id TEXT NOT NULL,position INTEGER NOT NULL,bytes BLOB NOT NULL,PRIMARY KEY(video_id,position));
+CREATE INDEX IF NOT EXISTS community_videos_owner ON community_videos(github_id,created_at);

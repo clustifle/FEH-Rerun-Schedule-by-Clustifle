@@ -57,7 +57,7 @@ async function auth(request,env,url){
 }
 export async function handle(request,env){
  const url=new URL(request.url),origin=new URL(env.SITE_URL).origin,from=request.headers.get('Origin');
- const headers={'Content-Type':'application/json','Cache-Control':'no-store','Referrer-Policy':'no-referrer','X-Content-Type-Options':'nosniff',Vary:'Origin',...(from===origin?{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Headers':'Authorization, Content-Type','Access-Control-Allow-Methods':'GET, POST, PATCH, OPTIONS'}:{})};
+ const headers={'Content-Type':'application/json','Cache-Control':'no-store','Referrer-Policy':'no-referrer','X-Content-Type-Options':'nosniff',Vary:'Origin',...(from===origin?{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Headers':'Authorization, Content-Type, Range','Access-Control-Allow-Methods':'GET, HEAD, POST, PATCH, OPTIONS'}:{})};
  const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers});
  try{
   if(url.pathname.startsWith('/auth/'))return await auth(request,env,url);
