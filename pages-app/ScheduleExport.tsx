@@ -6,7 +6,7 @@ import './ScheduleExport.css';
 import {useDefinitions,definitionIcon,baseTypes} from './catalog';
 type Hero={id:string;name:string;title:string;category:string;color:string;month:string|null;portrait:string|null;weapon_type?:string|null;move_type?:string|null;blessing?:string|null;heroic_grail?:boolean};
 const emptyHeroes:Hero[]=[];
-const colors=['Red','Blue','Green','Colorless'],ink:Record<string,string>={Red:'#a84855',Blue:'#357895',Green:'#477b57',Colorless:'#647078'};
+const colors=['Red','Blue','Green','Colorless'];
 function label(m:string){return new Date(m+'-01T12:00:00Z').toLocaleDateString('en-US',{month:'long',year:'numeric',timeZone:'UTC'});}
 function loadImage(url:string):Promise<HTMLImageElement|null>{return new Promise(resolve=>{const i=new Image();let done=false;const end=(image:HTMLImageElement|null)=>{if(done)return;done=true;clearTimeout(timer);resolve(image);};const timer=setTimeout(()=>end(null),8000);i.crossOrigin='anonymous';i.onload=()=>end(i);i.onerror=()=>end(null);i.src=url;});}
 export default function ScheduleExport({heroes,waitlistHeroes=emptyHeroes,schedule,title,month}:{heroes:Hero[];waitlistHeroes?:Hero[];schedule:string;title:string;month:string}){
@@ -50,7 +50,7 @@ export default function ScheduleExport({heroes,waitlistHeroes=emptyHeroes,schedu
     for(const group of card.groups){
      group.heroes.forEach((h,i)=>{const px=x+12+i*112,py=rowY,size=100,image=h.portrait?images.get(h.portrait):null;ctx.fillStyle='#264b59';ctx.fillRect(px,py,size,size);if(image){ctx.save();ctx.beginPath();ctx.rect(px+6,py+6,size-12,size-12);ctx.clip();const side=Math.min(image.naturalWidth,image.naturalHeight);ctx.drawImage(image,(image.naturalWidth-side)/2,(image.naturalHeight-side)/2,side,side,px,py,size,size);ctx.restore();}else{ctx.fillStyle='#bcd5df';text('No portrait',px+8,py+55,84,13);}if(frame){ctx.save();ctx.filter=h.color==='Red'?'hue-rotate(175deg) saturate(1.35)':h.color==='Blue'?'hue-rotate(20deg)':h.color==='Green'?'hue-rotate(285deg) saturate(1.2)':'grayscale(1)';ctx.drawImage(frame,px,py,size,size);ctx.restore();}
       const weapon=h.weapon_type?icons.get('weapon-types/'+h.color.toLowerCase()+'-'+h.weapon_type.toLowerCase()+'.webp'):null,movement=h.move_type?icons.get('move-types/'+h.move_type.toLowerCase()+'.webp'):null;
-      const type=types.get(typeIcon(h));if(type)ctx.drawImage(type,px+1,py+size-26,25,25);if(weapon)ctx.drawImage(weapon,px+1,py+1,25,25);if(movement)ctx.drawImage(movement,px+size-26,py+size-26,25,25);ctx.strokeStyle=ink[group.color];ctx.strokeRect(px+.5,py+.5,size-1,size-1);});rowY+=112+8;
+      const type=types.get(typeIcon(h));if(type)ctx.drawImage(type,px+1,py+size-26,25,25);if(weapon)ctx.drawImage(weapon,px+1,py+1,25,25);if(movement)ctx.drawImage(movement,px+size-26,py+size-26,25,25);});rowY+=112+8;
     }
    });
    ctx.fillStyle='#bcd5df';text('clustifle.github.io/FEH-Rerun-Schedule-by-Clustifle/',pad,height-42,w-pad*2,13);text('Rerun plans may change. Check the website for updates.',pad,height-20,w-pad*2,13);
