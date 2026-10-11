@@ -1,3 +1,4 @@
+import AdminHeroSkills from './AdminHeroSkills';
 import HeroSkills from './HeroSkills';
 import {isBeta} from './beta';
 import './HeroProfilePage.css';
@@ -11,9 +12,10 @@ import {isWaitlist,waitlistLabel} from './waitlist-types';
 type ProfileHero={debut_version?:string|null;release_date?:string|null;release_event?:string|null;id:string;name:string;title:string;category:string;color:string;portrait:string|null;pool:string|null;blessing:string|null;weapon_type?:string|null;move_type?:string|null;heroic_grail?:boolean;demote:boolean;schedule:string;month:string|null;notes:string;updated:string};
 const scheduleName=(s:string)=>isWaitlist(s)?waitlistLabel(s):({'General':'General Schedule','Remix':'Remix Schedule','Monthly Revival':'L/M Revival Schedule','Forging Bonds Revival':'NH Revival Schedule','Hall of Forms Revival':'HoF Revival Schedule'}[s]||s);
 export default function HeroProfilePage({hero,heroes=[],loading,error,tags,onBack,onEdit,onRemove,busy}:{hero:ProfileHero|null;heroes?:ProfileHero[];loading:boolean;error:string;tags:ReactNode;onBack:()=>void;onEdit?:()=>void;onRemove?:()=>void;busy:boolean}){
+ const skillsDialog=useRef<HTMLDialogElement>(null);const [skillsEditing,setSkillsEditing]=useState(false),[skillsSaving,setSkillsSaving]=useState(false),[skillsRevision,setSkillsRevision]=useState(0);useEffect(()=>{if(skillsEditing)skillsDialog.current?.showModal();else skillsDialog.current?.close()},[skillsEditing]);
  const [tab,setTab]=useState('Overview');const scroll=useRef<HTMLDivElement>(null);
  const heading=useRef<HTMLHeadingElement>(null);
- useEffect(()=>{setTab('Overview');heading.current?.focus({preventScroll:true});},[hero?.id]);
+ useEffect(()=>{setTab('Overview');setSkillsEditing(false);heading.current?.focus({preventScroll:true});},[hero?.id]);
  const month=hero?.month?new Date(hero.month.slice(0,7)+'-01T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'}):'';
  const updated=hero?.updated?new Date(hero.updated):null;
  return <main className="hero-profile-page" aria-labelledby="hero-detail-name">
@@ -30,8 +32,8 @@ export default function HeroProfilePage({hero,heroes=[],loading,error,tags,onBac
     {hero.blessing&&<div><dt>Blessing</dt><dd>{hero.blessing}</dd></div>}
    </dl>
    <section className="hero-owner-note" aria-labelledby="hero-note-label"><h2 id="hero-note-label">Notes</h2><p>{hero.notes||'No notes added yet.'}</p></section>
-   <footer className="hero-detail-bottom">{updated&&!Number.isNaN(updated.getTime())&&<span>Last updated {updated.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'Asia/Bangkok'})}</span>}{onRemove&&<button className="secondary" disabled={busy} onClick={onRemove}>Remove from Waitlist</button>}{onEdit&&<button className="secondary" onClick={onEdit}><Pencil size={16}/>Edit hero</button>}</footer>
-   </div><div role="tabpanel" id="hero-panel-Skills" aria-labelledby="hero-tab-Skills" hidden={tab!=='Skills'}>{tab==='Skills'&&<HeroSkills heroId={hero.id}/>}</div></div></div>
+   <footer className="hero-detail-bottom">{onEdit&&!isBeta&&<button className="secondary" onClick={()=>setSkillsEditing(true)}>Edit Skills on this unit</button>}{updated&&!Number.isNaN(updated.getTime())&&<span>Last updated {updated.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'Asia/Bangkok'})}</span>}{onRemove&&<button className="secondary" disabled={busy} onClick={onRemove}>Remove from Waitlist</button>}{onEdit&&<button className="secondary" onClick={onEdit}><Pencil size={16}/>Edit hero</button>}</footer>
+   </div><div role="tabpanel" id="hero-panel-Skills" aria-labelledby="hero-tab-Skills" hidden={tab!=='Skills'}>{onEdit&&!isBeta&&<button className="secondary unit-skills-edit" onClick={()=>setSkillsEditing(true)}>Edit Skills on this unit</button>}{tab==='Skills'&&<HeroSkills key={skillsRevision} heroId={hero.id}/>}</div></div></div>
   </article>:<section className="hero-page-empty"><h1 ref={heading} id="hero-detail-name" tabIndex={-1}>{loading?'Loading hero…':'Hero not found'}</h1><p>{error||(!loading?'This hero link is unavailable. Browse All Heroes to find the current profile.':'')}</p><button className="secondary" onClick={()=>goTo(viewUrl('All Heroes'))}>Browse All Heroes</button></section>}
- </main>;
+ {hero&&onEdit&&!isBeta&&<dialog className="hero-editor unit-skills-editor" ref={skillsDialog} aria-labelledby="unit-skills-title" onCancel={e=>{e.preventDefault();if(!skillsSaving)setSkillsEditing(false)}}><form onSubmit={e=>e.preventDefault()}><div className="dialog-top"><h2 id="unit-skills-title">Edit Skills · {hero.name}</h2><button className="secondary" type="button" disabled={skillsSaving} onClick={()=>setSkillsEditing(false)} aria-label="Close unit skills editor">×</button></div><div className="editor-body"><div className="editor-fields">{skillsEditing&&<AdminHeroSkills site heroId={hero.id} onBusyChange={setSkillsSaving} onSaved={()=>setSkillsRevision(n=>n+1)}/>}</div></div></form></dialog>}</main>;
 }
