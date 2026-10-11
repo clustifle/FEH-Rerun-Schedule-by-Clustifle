@@ -46,7 +46,7 @@ export default function ScheduleExport({heroes,waitlistHeroes=emptyHeroes,schedu
    const logo=await image(assetUrl('clustifle-feh-rerun-logo.png')),frame=await image(assetUrl('themes/fire-emblem-heroes/portrait-frame.webp'));
    if(background!=='transparent'){ctx.fillStyle=bg;ctx.fillRect(0,0,w,height);}ctx.fillStyle=heading;ctx.font='28px '+font;
    if(showLogo&&logo){ctx.save();if(light)ctx.filter='brightness(0)';ctx.drawImage(logo,pad,22,192,192*logo.naturalHeight/logo.naturalWidth);ctx.restore();}
-   ctx.fillText(title,pad,107,w-pad*2);ctx.font='18px '+font;ctx.fillStyle=muted;ctx.fillText(included.length?label(included[0])+(included.length>1?' – '+label(included.at(-1)!):''):consideration?'Rerun dates not confirmed':'L/M/E Waitlist',pad,134);
+   ctx.fillText(title,pad,107,w-pad*2);
    const text=(value:string,x:number,y:number,max:number,size:number)=>{ctx.font=size+'px '+font;let v=value;while(v.length&&ctx.measureText(v).width>max)v=v.slice(0,-1);ctx.fillText(v===value?v:v.slice(0,-1)+'…',x,y);}
    positioned.forEach((card,index)=>{const {x,y}=positions[index],cardW=card.width;ctx.fillStyle=light?'#ffffff':'#1b3c49';ctx.fillRect(x,y,cardW,card.height);if(showBorders){ctx.strokeStyle=light?'#8b9ca5':'#bda778';ctx.strokeRect(x+.5,y+.5,cardW-1,card.height-1);}ctx.fillStyle=heading;text(card.m==='waitlist'?(consideration?'Under consideration':'L/M/E Waitlist'):new Date(card.m+'-01T12:00:00Z').toLocaleDateString('en-US',{month:'short',year:'numeric',timeZone:'UTC'}),x+12,y+32,cardW-24,18);if(card.kind){ctx.fillStyle=card.kind==='Legendary'?(light?'#267a65':'#72cdb5'):(light?'#79509e':'#c9a1ec');ctx.fillRect(x+1,y+1,cardW-2,4);text(card.kind+' Revival',x+12,y+57,cardW-24,16);}let rowY=y+(card.kind?78:48);
     for(const group of card.groups){
