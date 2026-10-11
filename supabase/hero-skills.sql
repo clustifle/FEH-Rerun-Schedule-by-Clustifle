@@ -21,3 +21,5 @@ alter table public.tracker_hero_skills add constraint passive_skill_icon_require
 
 alter table public.tracker_hero_skills add column refine_effect text not null default '' check(length(refine_effect)<=10000);
 alter table public.tracker_hero_skills add column prerequisites text not null default '' check(length(prerequisites)<=2000);
+alter table public.tracker_hero_skills alter column hero_id drop not null;
+alter table public.tracker_hero_skills add column cooldown integer check(cooldown is null or (slot='Special' and cooldown between 0 and 99));
