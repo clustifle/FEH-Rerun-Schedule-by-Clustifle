@@ -14,3 +14,4 @@
 .hero-skills,.hero-skills *,.skills-directory .hero-skill,.skills-directory .hero-skill *{font-family:FEHeroes,Georgia,serif!important}.hero-skill .weapon-refine-effect{background:none;border:0;padding:0;margin:14px 0;color:#9fea9e;font-family:FEHeroes,Georgia,serif;white-space:pre-wrap}
 .hero-profile-page .hero-skill-name .passive-icon .passive-art,.passive-icon .passive-art{inset:0;width:32px;height:32px;border-radius:0}
 .skill-description .skill-prerequisites{white-space:pre-wrap}
+.hero-skill-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:12px;min-width:0;flex:1}.hero-skill-heading h3{min-width:0}.weapon-name-stats{display:inline-flex;gap:12px;white-space:nowrap;font-size:.8em;color:var(--realm-accent,#edcf84)}

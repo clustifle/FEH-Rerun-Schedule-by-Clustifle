@@ -23,3 +23,4 @@ alter table public.tracker_hero_skills add column refine_effect text not null de
 alter table public.tracker_hero_skills add column prerequisites text not null default '' check(length(prerequisites)<=2000);
 alter table public.tracker_hero_skills alter column hero_id drop not null;
 alter table public.tracker_hero_skills add column cooldown integer check(cooldown is null or (slot='Special' and cooldown between 0 and 99));
+alter table public.tracker_hero_skills add column might integer check(might is null or (slot='Weapon' and might between 0 and 99)), add column range integer check(range is null or (slot='Weapon' and range in (1,2)));
