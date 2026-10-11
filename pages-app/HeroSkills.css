@@ -13,3 +13,4 @@
 .hero-skill-name{font-size:20px}.hero-skill-name h3{font-size:inherit}.hero-skill-name>img{width:1em;height:1em}.hero-skills .skill-empty>img{width:1em;height:1em}
 .hero-skills,.hero-skills *,.skills-directory .hero-skill,.skills-directory .hero-skill *{font-family:FEHeroes,Georgia,serif!important}.hero-skill .weapon-refine-effect{background:none;border:0;padding:0;margin:14px 0;color:#9fea9e;font-family:FEHeroes,Georgia,serif;white-space:pre-wrap}
 .hero-profile-page .hero-skill-name .passive-icon .passive-art,.passive-icon .passive-art{inset:0;width:32px;height:32px;border-radius:0}
+.skill-description .skill-prerequisites{white-space:pre-wrap}
