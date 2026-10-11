@@ -18,3 +18,5 @@ create policy skills_staff_update on public.tracker_hero_skills for update to au
 create policy skills_staff_delete on public.tracker_hero_skills for delete to authenticated using((select public.tracker_role()) in ('Owner','Manager'));
 
 alter table public.tracker_hero_skills add constraint passive_skill_icon_required check(slot not in ('A','B','C','X') or icon_url is not null);
+
+alter table public.tracker_hero_skills add column refine_effect text not null default '' check(length(refine_effect)<=10000);
