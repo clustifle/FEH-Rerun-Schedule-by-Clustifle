@@ -1,4 +1,5 @@
 import {assetUrl} from './static-data';
+import {weaponTypes} from './weapon-types';
 import {supabase} from './static-data';
 export const skillSlots=['Weapon','Assist','Special','A','B','C','X'] as const;
 export type SkillSlot=typeof skillSlots[number];
@@ -9,4 +10,5 @@ export function bestSkills(rows:HeroSkill[]){const best=new Map<string,HeroSkill
 
 export async function loadSkillCatalog(){const all:HeroSkill[]=[];for(let start=0;;start+=1000){const {data,error}=await supabase.from("tracker_hero_skills").select("*").order("id").range(start,start+999);if(error)throw Error(error.message);all.push(...data);if(data.length<1000)break;}return all;}
 
-export function inheritanceWeaponIcon(type:string){const color=({Sword:"red",Lance:"blue",Axe:"green",Staff:"colorless"} as Record<string,string>)[type]||"colorless";return assetUrl("weapon-types/"+color+"-"+type.toLowerCase()+".webp");}
+export const inheritanceWeaponTypes=Object.entries(weaponTypes).flatMap(([color,types])=>types.map(type=>color+' '+type));
+export function inheritanceWeaponIcon(type:string){if(type.includes(' '))return assetUrl('weapon-types/'+type.toLowerCase().replace(' ','-')+'.webp');const color=({Sword:"red",Lance:"blue",Axe:"green",Staff:"colorless"} as Record<string,string>)[type]||"colorless";return assetUrl("weapon-types/"+color+"-"+type.toLowerCase()+".webp");}
