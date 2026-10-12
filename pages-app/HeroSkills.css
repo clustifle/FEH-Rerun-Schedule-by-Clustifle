@@ -23,3 +23,4 @@ html[data-theme] .tracker .hero-skill .skill-description .weapon-refine-effect{c
 .hero-skill-summary{cursor:default}.hero-skill-summary:hover{color:inherit}.hero-skill-summary small,.hero-skill .hero-skill-heading small{display:block;font-size:13px;margin:2px 0 0;padding:0;border:0;border-radius:0;color:var(--realm-accent)}
 .hero-skill-summary>img,.hero-skill-name>img{width:32px;height:32px;object-fit:contain;flex:none}
 .adm-skills-entry>img{width:32px;height:32px;object-fit:contain}
+.arcane-weapon-icon{display:inline-block;width:32px;height:32px;flex:none;background-repeat:no-repeat;background-size:126.3px 32px;background-position:-39.42px 0}
