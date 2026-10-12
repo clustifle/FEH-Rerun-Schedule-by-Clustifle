@@ -20,3 +20,6 @@
 .hero-skill .hero-skill-name{align-items:center}.hero-skill .hero-skill-heading{align-items:center}.hero-skill .hero-skill-heading h3{margin:0!important;line-height:1.4}
 html[data-theme] .tracker .hero-skill .skill-description .weapon-refine-effect{color:#9fea9e!important}
 .hero-skill-summary{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:6px 0;border:0;background:transparent;color:inherit;text-align:left;font:20px FEHeroes,Georgia,serif;cursor:pointer}.hero-skill-summary>img{width:1em;height:1em;object-fit:contain;flex:none}.hero-skill-summary h3{margin:0!important;font:inherit;line-height:1.4;overflow-wrap:anywhere}.hero-skill-summary:hover{color:var(--realm-accent)}.hero-skill-summary:focus-visible{outline:2px solid var(--realm-accent);outline-offset:3px;border-radius:4px}.hero-skill-group:has(.hero-skill-summary) .hero-skill-slot+.hero-skill-slot{margin-top:4px;padding-top:4px}
+.hero-skill-summary{cursor:default}.hero-skill-summary:hover{color:inherit}.hero-skill-summary small,.hero-skill .hero-skill-heading small{display:block;font-size:13px;margin:2px 0 0;padding:0;border:0;border-radius:0;color:var(--realm-accent)}
+.hero-skill-summary>img,.hero-skill-name>img{width:32px;height:32px;object-fit:contain;flex:none}
+.adm-skills-entry>img{width:32px;height:32px;object-fit:contain}
