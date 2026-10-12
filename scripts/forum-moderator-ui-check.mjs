@@ -11,7 +11,7 @@ try{
  await page.route('**/auth/v1/user',r=>r.fulfill({json:user}));
  await page.route('**/rest/v1/**',r=>{
   const url=new URL(r.request().url());let data=[];
-  if(url.pathname.includes('mods_forum_accounts'))data=[{github_id:'456',website_id:'new-user',login:'newmember'}];else if(url.pathname.includes('tracker_hero_skills')){
+  if(url.pathname.includes('mods_forum_accounts'))data=[{github_id:'456',website_id:'new-user',login:'website-member',username:'website-member'}];else if(url.pathname.includes('tracker_hero_skills')){
    if(r.request().method()==='DELETE'){
     deletes++;assert.equal(url.searchParams.get('revision'),'eq.1');const id=url.searchParams.get('id').replace('eq.','');
     if(mode==='error')return r.fulfill({status:403,json:{message:'Delete denied'}});
@@ -21,7 +21,8 @@ try{
   }else if(url.pathname.includes('tracker_role'))data='Owner';else if(url.pathname.includes('is_tracker_owner'))data=true;else if(url.pathname.includes('tracker_profiles'))data=[{id:user.id,username:'testmember',display_name:'Test Member'}];else if(url.pathname.includes('/heroes'))data=[hero];
   return r.fulfill({json:data});
  });
- let mods=[];await page.route('**/community/moderators',r=>{if(r.request().method()==='POST'){const b=r.request().postDataJSON();assert.equal(b.githubId,'456');mods=b.enabled?[{github_id:'456',login:'newmember',moderator:1}]:[];return r.fulfill({json:{ok:true}})}return r.fulfill({json:{users:mods}})});
+ let mods=[{github_id:'999',login:'stale-github-user',moderator:0}];await page.route('**/community/moderators',r=>{if(r.request().method()==='POST'){const b=r.request().postDataJSON();assert.equal(b.githubId,'456');mods=b.enabled?[{github_id:'456',login:'newmember',moderator:1}]:[];return r.fulfill({json:{ok:true}})}return r.fulfill({json:{users:mods}})});
  await page.goto('http://127.0.0.1:5196/FEH-Rerun-Schedule-by-Clustifle/FEHRS_AdmManager/staff/');
- await page.getByText('Forum Moderators',{exact:true}).click();const select=page.getByLabel('Forum moderator account');await select.selectOption('456');await page.getByRole('button',{name:'Make forum mods',exact:true}).click();await page.getByRole('button',{name:'Remove moderator',exact:true}).waitFor();assert.equal(mods.length,1);await page.getByRole('button',{name:'Remove moderator',exact:true}).click();await page.getByRole('button',{name:'Make forum mods',exact:true}).waitFor();assert.equal(mods.length,0);assert.deepEqual(errors,[]);console.log('Staff and Roles: select registered user, assign and remove Forum Moderator passed.');
+ await page.getByText('Forum Moderators',{exact:true}).click();const select=page.getByLabel('Forum moderator account');assert.equal(await select.locator('option[value="456"]').textContent(),'@website-member');assert.equal(await select.locator('option[value="999"]').count(),0);await select.selectOption('456');await page.getByRole('button',{name:'Make forum mods',exact:true}).click();await page.getByRole('button',{name:'Remove moderator',exact:true}).waitFor();assert.equal(mods.length,1);await page.getByRole('button',{name:'Remove moderator',exact:true}).click();await page.getByRole('button',{name:'Make forum mods',exact:true}).waitFor();assert.equal(mods.length,0);assert.deepEqual(errors,[]);console.log('Staff and Roles: select registered user, assign and remove Forum Moderator passed.');
 }finally{await browser.close()}
+
