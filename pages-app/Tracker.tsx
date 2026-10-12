@@ -191,7 +191,7 @@ export default function Home(){
  function showHeroPreview(h:Hero,event:{pointerType?:string;currentTarget:HTMLButtonElement}){
   if(event.pointerType==='touch')return;
   hideHeroPreview();const rect=event.currentTarget.getBoundingClientRect();
-  const width=Math.min(280,window.innerWidth-24),right=rect.right+14;
+  const width=Math.min(320,window.innerWidth-24),right=rect.right+14;
   const x=Math.max(12,Math.min(right+width<=window.innerWidth-12?right:rect.left-width-14,window.innerWidth-width-12));
   const y=Math.max(12,Math.min(rect.top,window.innerHeight-360-12));
   previewTimer.current=setTimeout(()=>{setHeroPreview({hero:h,x,y});previewTimer.current=null;},180);
