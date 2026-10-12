@@ -1,5 +1,6 @@
 import {useEffect,useRef} from 'react';
 import {Skill} from './HeroSkills';
+import './SkillsList.css';
 import type {HeroSkill} from './hero-skills';
 
 export default function SkillDetailsDialog<T extends {id:string;name:string;title:string}>({skill,heroes,onClose,onView,onEdit,onDelete}:{skill:HeroSkill;heroes:T[];onClose:()=>void;onView:(hero:T)=>void;onEdit?:()=>void;onDelete?:()=>void}){

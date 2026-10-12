@@ -2,12 +2,14 @@ import {useEffect,useState} from 'react';
 import {assetUrl} from './static-data';
 import {bestSkills,loadHeroSkills,inheritanceWeaponIcon,skillSlots,slotIcons,type HeroSkill} from './hero-skills';
 import './HeroSkills.css';
+import SkillDetailsDialog from './SkillDetailsDialog';
 export default function HeroSkills({heroId}:{heroId:string}){
+ const [selected,setSelected]=useState<HeroSkill|null>(null);
  const [rows,setRows]=useState<HeroSkill[]>([]),[loading,setLoading]=useState(true),[error,setError]=useState(''),[retry,setRetry]=useState(0);
  useEffect(()=>{let live=true;setLoading(true);setError('');loadHeroSkills(heroId).then(r=>{if(live)setRows(r)}).catch(e=>{if(live)setError(e.message)}).finally(()=>{if(live)setLoading(false)});return()=>{live=false}},[heroId,retry]);
  if(loading)return <p role="status">Loading skills…</p>;if(error)return <div role="alert">{error}<button onClick={()=>setRetry(n=>n+1)}>Retry</button></div>;
  const best=bestSkills(rows);
- return <section className="hero-skills hero-skills-section hero-skill-group" aria-label="Hero skills">{skillSlots.map(slot=><div key={slot} className="hero-skill-slot" aria-label={slot+' skill slot'}>{best.some(s=>s.slot===slot)?best.filter(s=>s.slot===slot).map(s=><Skill key={s.id} skill={s}/>):<div className="skill-empty" aria-label={slot+' not recorded'}>{['A','B','C','X'].includes(slot)?<PassiveIcon slot={slot as 'A'|'B'|'C'|'X'}/>:<img src={assetUrl('skill-slots/'+slotIcons[slot]+'.png')} alt=""/>}<span>Not recorded</span></div>}</div>)}</section>
+ return <section className="hero-skills hero-skills-section hero-skill-group" aria-label="Hero skills">{skillSlots.map(slot=><div key={slot} className="hero-skill-slot" aria-label={slot+' skill slot'}>{best.some(s=>s.slot===slot)?best.filter(s=>s.slot===slot).map(s=><button type="button" key={s.id} className="hero-skill-summary" aria-label={s.name} aria-haspopup="dialog" onClick={()=>setSelected(s)}><SkillIcon skill={s}/><h3>{s.name}</h3></button>):<div className="skill-empty" aria-label={slot+' not recorded'}>{['A','B','C','X'].includes(slot)?<PassiveIcon slot={slot as 'A'|'B'|'C'|'X'}/>:<img src={assetUrl('skill-slots/'+slotIcons[slot]+'.png')} alt=""/>}<span>Not recorded</span></div>}</div>)}{selected&&<SkillDetailsDialog skill={selected} heroes={[]} onView={()=>{}} onClose={()=>setSelected(null)}/>}</section>
 }
 function PassiveIcon({slot,url}:{slot:'A'|'B'|'C'|'X';url?:string|null}){return <span className="passive-icon">{!url&&<img className="passive-disc" src={assetUrl('skill-slots/passive-empty.png')} alt=""/>}{url&&<img className="passive-art" src={url} alt=""/>}<img className="passive-letter" src={assetUrl('skill-slots/'+slotIcons[slot]+'.png')} alt={slot+' slot'}/></span>}
 export function SkillIcon({skill:s}:{skill:HeroSkill}){return <>{['A','B','C','X'].includes(s.slot)?<PassiveIcon slot={s.slot as 'A'|'B'|'C'|'X'} url={s.icon_url}/>:<img src={s.icon_url||assetUrl('skill-slots/'+slotIcons[s.slot]+'.png')} alt=""/>}</>}
