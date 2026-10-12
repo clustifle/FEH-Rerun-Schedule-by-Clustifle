@@ -15,7 +15,7 @@ type Hero={heroic_grail?:boolean;id:string;name:string;title:string;color:string
 type Event={coming_soon?:boolean;ongoing:boolean;starts_on:string|null;ends_on:string|null;starts_time:string;ends_time:string;month:string;title:string;hero_1:string|null;hero_2:string|null;hero_3:string|null;hero_4:string|null};
 const keys=['hero_1','hero_2','hero_3','hero_4'] as const;
 const short=(month:string)=>new Date(month+'T12:00:00').toLocaleDateString('en-US',{month:'short',year:'2-digit'});
-export default function ForgingBonds({heroes,canEdit,onHero,onCreate,onHover,onLeave,hallOfForms=false,showGrails,onShowGrails}:{showGrails:boolean;onShowGrails:(value:boolean)=>void;hallOfForms?:boolean;heroes:Hero[];canEdit:boolean;onHero:(id:string,month:string)=>void;onCreate:(month:string,slot:string)=>void;onHover:(id:string,event:{pointerType?:string;currentTarget:HTMLButtonElement})=>void;onLeave:()=>void}){
+export default function ForgingBonds({heroes,canEdit,onHero,onCreate,onHover=()=>{},onLeave=()=>{},hallOfForms=false,showGrails,onShowGrails}:{showGrails:boolean;onShowGrails:(value:boolean)=>void;hallOfForms?:boolean;heroes:Hero[];canEdit:boolean;onHero:(id:string,month:string)=>void;onCreate:(month:string,slot:string)=>void;onHover?:(id:string,event:{pointerType?:string;currentTarget:HTMLButtonElement})=>void;onLeave?:()=>void}){
  const [moving,setMoving]=useState<{source:Event;target:string}|null>(null),[dragMonth,setDragMonth]=useState(''),[dropMonth,setDropMonth]=useState('');
  const preferences=usePreferences();
  const table=hallOfForms?'hall_of_forms_revivals':'forging_bonds_revivals';

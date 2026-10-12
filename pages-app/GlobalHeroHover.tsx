@@ -1,0 +1,22 @@
+import {useEffect,useRef,useState} from 'react';
+import {createPortal} from 'react-dom';
+import {Shield} from 'lucide-react';
+import {portraitUrl} from './static-data';
+import {HeroTypeTag,PoolTag,type Hero} from './HoverHeroTags';
+import HeroPortraitMarks from './HeroPortraitMarks';
+import HoverHeroSkills from './HoverHeroSkills';
+import {waitlistLabel,isWaitlist} from './waitlist-types';
+import './GlobalHeroHover.css';
+export default function GlobalHeroHover({heroes}:{heroes:Hero[]}){
+ const [preview,setPreview]=useState<{hero:Hero;x:number;y:number;container:HTMLElement}|null>(null),timer=useRef<ReturnType<typeof setTimeout>|undefined>(undefined);
+ const clear=()=>{clearTimeout(timer.current);timer.current=undefined};const hide=()=>{clear();setPreview(null)};
+ useEffect(()=>{const map=new Map(heroes.map(h=>[h.id,h]));let anchor:HTMLElement|null=null,lastTouch=0;
+  const target=(e:Event)=>e.target instanceof Element?e.target.closest<HTMLElement>('[data-hero-preview-id]'):null;
+  const show=(e:Event)=>{if(e instanceof PointerEvent&&e.pointerType==='touch'){lastTouch=Date.now();return}if(e.type==='focusin'&&Date.now()-lastTouch<1000)return;if(e.target instanceof Element&&e.target.closest('#hero-hover-preview')){clear();return}const element=target(e);if(!element||element===anchor)return;const hero=map.get(element.dataset.heroPreviewId||'');if(!hero)return;anchor=element;clear();const rect=element.getBoundingClientRect(),width=Math.min(320,innerWidth-24);timer.current=setTimeout(()=>{setPreview({hero,container:element.closest<HTMLElement>('dialog[open]')||element.closest<HTMLElement>('.adm-shell')||document.body,x:Math.max(12,Math.min(rect.right+14+width<=innerWidth-12?rect.right+14:rect.left-width-14,innerWidth-width-12)),y:Math.max(12,Math.min(rect.top,innerHeight-372))})},180)};
+  const leave=(e:Event)=>{const next=(e as PointerEvent).relatedTarget;if(next instanceof Element&&(next.closest('#hero-hover-preview')||next.closest('[data-hero-preview-id]')===anchor)){clear();return}anchor=null;clear();timer.current=setTimeout(()=>setPreview(null),220)};
+  const dismiss=(e:Event)=>{if(e.target instanceof Element&&e.target.closest('#hero-hover-preview'))return;anchor=null;hide()};
+  document.addEventListener('pointerover',show);document.addEventListener('focusin',show);document.addEventListener('pointerout',leave);document.addEventListener('focusout',leave);window.addEventListener('scroll',dismiss,true);window.addEventListener('resize',dismiss);window.addEventListener('route-change',dismiss);window.addEventListener('hero-preview-dismiss',dismiss);
+  return()=>{clear();document.removeEventListener('pointerover',show);document.removeEventListener('focusin',show);document.removeEventListener('pointerout',leave);document.removeEventListener('focusout',leave);window.removeEventListener('scroll',dismiss,true);window.removeEventListener('resize',dismiss);window.removeEventListener('route-change',dismiss);window.removeEventListener('hero-preview-dismiss',dismiss)};
+ },[heroes]);
+ if(!preview)return null;const h=preview.hero;return createPortal(<aside id="hero-hover-preview" className="hero-hover-preview global-hero-hover" role="tooltip" style={{left:preview.x,top:preview.y}} onPointerEnter={clear} onPointerLeave={()=>{clear();timer.current=setTimeout(()=>setPreview(null),220)}}><div className="hover-hero-identity"><div className="hover-portrait">{h.portrait?<img src={portraitUrl(h.portrait)} alt=""/>:<Shield size={36}/>}<HeroPortraitMarks hero={h}/></div><div><h2>{h.name}</h2>{h.title&&<p className="hover-hero-title">{h.title}</p>}</div></div><div className="hover-hero-tags"><HeroTypeTag hero={h}/>{h.pool&&<PoolTag pool={h.pool}/>}</div>{h.demote&&<p className="hero-demote-note">Demote · 4–5★ summonable</p>}{h.schedule&&h.schedule!=='None'&&<div className="hover-hero-rerun"><span>{isWaitlist(h.schedule)?waitlistLabel(h.schedule):h.schedule==='General'?'L/M/E Schedule':h.schedule}</span><strong>{isWaitlist(h.schedule)?'Awaiting a rerun':h.month?new Date(h.month.slice(0,7)+'-01T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'}):'Month not announced'}</strong></div>}{h.notes&&<p className="hover-hero-note">{h.notes.length>160?h.notes.slice(0,157)+'…':h.notes}</p>}<HoverHeroSkills key={h.id} heroId={h.id} attuned={h.category==='Attuned'}/><p className="hover-hero-hint">Open the hero profile for more</p></aside>,preview.container)
+}
