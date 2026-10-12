@@ -34,7 +34,7 @@ export function useAutoRefresh(refresh:()=>Promise<void>,watchWebsite=false){
    }catch{/* Failed or unfinished deployments leave the current page intact. */}
    finally{busy=false;}
   };
-  const manual=()=>{void tick(true);};window.addEventListener('refresh-now',manual);
+  const manual=()=>{void tick(true);};window.addEventListener('refresh-now',manual);window.addEventListener('account-connection-restored',manual);
   const resume=()=>{void tick();};
   const timer=watchWebsite?setInterval(resume,60000):undefined;
   if(watchWebsite){
@@ -42,7 +42,7 @@ export function useAutoRefresh(refresh:()=>Promise<void>,watchWebsite=false){
    document.addEventListener('visibilitychange',resume);document.addEventListener('close',resume,true);
   }
   return()=>{
-   disposed=true;window.removeEventListener('refresh-now',manual);clearInterval(timer);
+   disposed=true;window.removeEventListener('refresh-now',manual);window.removeEventListener('account-connection-restored',manual);clearInterval(timer);
    window.removeEventListener('focus',resume);window.removeEventListener('online',resume);
    document.removeEventListener('visibilitychange',resume);document.removeEventListener('close',resume,true);
   };
