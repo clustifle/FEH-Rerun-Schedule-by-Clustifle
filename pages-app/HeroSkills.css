@@ -24,4 +24,5 @@ html[data-theme] .tracker .hero-skill .skill-description .weapon-refine-effect{c
 .hero-skill-summary>img,.hero-skill-name>img{width:32px;height:32px;object-fit:contain;flex:none}
 .adm-skills-entry>img{width:32px;height:32px;object-fit:contain}
 .arcane-weapon-icon{display:inline-block;width:32px;height:32px;flex:none;background-repeat:no-repeat;background-size:126.3px 32px;background-position:-39.42px 0}
-.arcane-weapon-icon{transform:rotate(-45deg)}
+.arcane-weapon-icon{transform:rotate(45deg)}
+.hero-skill-picker .hero-skill-picker-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:16px}.hero-skill-picker-options>button{display:flex;align-items:center;gap:12px;min-height:56px;text-align:left;min-width:0}.hero-skill-picker-options>button>img{width:32px;height:32px;object-fit:contain;flex:none}.hero-skill-picker-options>button>span:not(.passive-icon){overflow-wrap:anywhere}.hero-skill-picker>label{display:grid;gap:8px;margin:16px}.hero-skill-picker>label>input{min-height:44px;padding:10px;width:100%}@media(max-width:600px){.hero-skill-picker .hero-skill-picker-options{grid-template-columns:1fr}}
