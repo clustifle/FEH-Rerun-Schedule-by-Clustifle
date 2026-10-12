@@ -15,3 +15,4 @@ Animations resized and compressed as WebP. Still frames are used for reduced mot
 Pedro: original 40,747,429 bytes; WebP 465,848 bytes; full 10-second loop retained.
 Ferran: the source GIF is a still image; WebP 6,404 bytes.
 Original FEH and meme files are not offered as a general asset library.
+Header Feh expressions: awake, happy and sleepy PNG artwork supplied for this website.
