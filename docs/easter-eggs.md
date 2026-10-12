@@ -15,17 +15,16 @@ Feh sits beside the navigation button. Hover to greet her. Tap once for a happy 
 | Interaction | Location | Effect |
 | --- | --- | --- |
 | Feh | Header navigation | Happy hops and sleepy expressions. |
-| Pixel owl | About page | A little hop in place. |
-| Maxwell's ears | Skills List footer | A spinning cat appears directly on the page. |
-| Raccoon paw | Weekly Revivals corner | Pedro dances beside the cards. |
-| Steaming cup | Rerun waitlist footer | The waiting meme appears in place. |
-| Gold coin | Beside schedule export | Gold coins spill into a purse. |
-| Askr emblem | Schedule footer | A glowing shield rises with expanding protection rings. |
-| Envelope | Below the last FAQ answer | An envelope releases a tiny owl and a gold sparkle. |
-| Seasonal decoration | Homepage footer | October: glowing pumpkin, ghosts and bats. December: gift, snow and orbs. Other months: flowers and butterflies. |
+| Pixel owl | Scroll to the bottom of About and pause | A little hop in place. |
+| Maxwell | Search Skills List for `Maxwell` | A spinning cat appears directly on the page. |
+| Pedro | Double-tap a Weekly Revivals section heading | Pedro dances beside the cards. |
+| Waiting meme | Scroll to the bottom of a rerun waitlist and pause | The waiting meme appears in place. |
+| Anna | Close the schedule export preview | Gold coins spill into a purse. |
+| Envelope | Scroll to the bottom of FAQ and pause | An envelope releases a tiny owl and a gold sparkle. |
+| Seasonal visitor | Scroll to the bottom of Home and pause | October: glowing pumpkin, ghosts and bats. December: gift, snow and orbs. Other months: flowers and butterflies. |
 | Search for Ferran | Find Users | Submit `Ferran` for the dog scene and shout. |
 
-There are no Easter egg popup windows, replay controls, collection or achievement list. Click the decorations themselves again to reuse them; click an active decoration to stop its effect. Brief effects also reset automatically.
+There are no Easter egg popup windows, replay controls, collection or achievement list. There are no separate clickable secret icons. Repeat the page action to reuse an effect; for scrolling discoveries, scroll up before returning to the bottom. Brief effects reset automatically, and Escape dismisses them. The shield Easter egg is removed.
 
 </details>
 

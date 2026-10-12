@@ -1,6 +1,5 @@
 import {useEffect,useRef,useState} from 'react';
 import {createPortal} from 'react-dom';
-import {Mail,Coins,Cat,Coffee,PawPrint} from 'lucide-react';
 import {assetUrl} from './static-data';
 import {usePreferences,reduceMotion} from './preferences';
 import './EasterEggs.css';
@@ -12,20 +11,17 @@ const eggs=[
  {id:'pedro',name:'Dance of the raccoon',image:'pedro.webp',selector:'.weekly-revivals',label:'Touch the hidden raccoon paw',icon:'paw',messages:['No orbs. No worries. Just Pedro.']},
  {id:'fine',name:'Perfectly reasonable waiting',image:'fine.webp',selector:'.waitlist-board',label:'Pick up the steaming cup',icon:'cup',messages:['My favourite hero has no announced rerun. This is fine.','I have checked the schedule seventeen times today. Still fine.','The tea is cold. The waitlist is long. Everything is fine.']},
  {id:'anna',name:'Anna’s special offer',image:'feh.png',selector:'.schedule-export',label:'Pick up the mysterious gold coin',icon:'coin',messages:['Guaranteed rerun predictions: 999 orbs. Delivery date: definitely someday. All sales imaginary.','Premium waiting service: 50 orbs. Includes exactly the same amount of waiting.','Buy one imaginary prediction, get two imaginary delays free.']},
- {id:'greeting',name:'Nothing to report!',image:'feh.png',selector:'.schedule',label:'Inspect the little shield',icon:'shield',messages:['Greetings, Summoner! Your watchlist is safe. Your orb stash? No comment.','Nothing to report! Someone is looking for a striker, though.','Welcome back! The Heroes are ready. The rerun dates are another matter.']},
  {id:'quotes',name:'A message from Askr',image:'pixel-feh.png',selector:'.faq-content',label:'Open the forgotten envelope',icon:'envelope',messages:['“I’m saving my orbs.” — Summoner, moments before the next trailer.','The real five-star was the friend who told you to stop summoning.','One free summon. Five minutes of optimism.','My strategy is flawless. My orb balance disagrees.']},
  {id:'seasonal',name:'A visitor from another season',image:'feh.png',selector:'.homepage',label:'Inspect the seasonal decoration',icon:'seasonal',messages:['A seasonal delivery has arrived.']},
 ] as const;
 type Egg=typeof eggs[number];type Mount={id:string;node:HTMLElement};
-function objectIcon(egg:Egg){switch(egg.icon){case'football':return <span aria-hidden="true">⚽</span>;case'pixel':return <img src={assetUrl('easter-eggs/pixel-feh.png')} alt=""/>;case'cat':return <Cat/>;case'paw':return <PawPrint/>;case'cup':return <Coffee/>;case'coin':return <Coins/>;case'shield':return <img src={assetUrl('easter-eggs/askr-emblem.png')} alt=""/>;case'envelope':return <Mail/>;default:return <span aria-hidden="true">{new Date().getMonth()===9?'🎃':new Date().getMonth()===11?'🎁':'🌼'}</span>;}}
-
 function VisualEffect({id}:{id:string}){
  const season=new Date().getMonth()===9?'halloween':new Date().getMonth()===11?'winter':'spring';
- if(!['seasonal','anna','greeting','quotes'].includes(id))return null;
- return <span className={'egg-visual egg-visual-'+id+' '+(id==='seasonal'?season:'')} role="img" aria-label={id==='seasonal'?season+' decoration comes to life':id==='anna'?'Gold coins spill into an orb purse':id==='greeting'?'Askr emblem rises inside a glowing shield':'An envelope opens with a tiny owl delivery'}>
+ if(!['seasonal','anna','quotes'].includes(id))return null;
+ return <span className={'egg-visual egg-visual-'+id+' '+(id==='seasonal'?season:'')} role="img" aria-label={id==='seasonal'?season+' decoration comes to life':id==='anna'?'Gold coins spill into an orb purse':'An envelope opens with a tiny owl delivery'}>
  {id==='seasonal'&&<><span className="season-center">{season==='halloween'?'🎃':season==='winter'?'🎁':'🌷'}</span>{Array.from({length:7},(_,i)=><span key={i} className={'egg-particle particle-'+i}>{season==='halloween'?(i%2?'🦇':'👻'):season==='winter'?(i%2?'❄':'🔮'):(i%2?'🌸':'🦋')}</span>)}</>}
  {id==='anna'&&<><span className="orb-purse">👝</span>{Array.from({length:7},(_,i)=><span key={i} className={'egg-particle particle-'+i}>🪙</span>)}</>}
- {id==='greeting'&&<><span className="askr-aegis"><img src={assetUrl('easter-eggs/askr-emblem.png')} alt=""/><span className="aegis-shine"/></span><span className="aegis-ring"/><span className="aegis-ring ring-two"/></>}
+
  {id==='quotes'&&<><span className="delivery-envelope">✉</span><img className="delivery-owl" src={assetUrl('easter-eggs/pixel-feh.png')} alt=""/><span className="delivery-star">✦</span></>}
  </span>;
 }
@@ -44,6 +40,20 @@ export default function EasterEggs(){
   clearTimeout(effectTimer.current);if(active===egg.id){setActive(null);return;}
   setVersion(v=>v+1);setActive(egg.id);effectTimer.current=setTimeout(()=>setActive(null),6500);
  }
+ const trigger=useRef(interact);trigger.current=interact;
+ useEffect(()=>{
+  let dwell:ReturnType<typeof setTimeout>|undefined;
+  const revealed=new Set<string>();let lastTap={target:null as Element|null,time:0};
+  const reveal=(id:string)=>{const egg=eggs.find(e=>e.id===id);if(egg)trigger.current(egg);};
+  const bottom=()=>{clearTimeout(dwell);if(document.hidden)return;const candidates=['pixel','fine','quotes','seasonal'];const id=candidates.find(id=>{const egg=eggs.find(e=>e.id===id)!;return document.querySelector(egg.selector);});if(!id)return;const host=document.querySelector(eggs.find(e=>e.id===id)!.selector)!;const edge=host.getBoundingClientRect().bottom;if(edge>innerHeight+200)revealed.delete(id);if(edge<=innerHeight+48&&edge>0&&!revealed.has(id))dwell=setTimeout(()=>{revealed.add(id);reveal(id);},1600);};
+
+  const tap=(e:MouseEvent)=>{const target=e.target instanceof Element?e.target.closest('.weekly-revivals h2,.weekly-revivals h3'):null;if(!target)return;const now=Date.now();if(lastTap.target===target&&now-lastTap.time<500){reveal('pedro');lastTap={target:null,time:0};}else lastTap={target,time:now};};
+  const input=(e:Event)=>{const target=e.target;if(target instanceof HTMLInputElement&&target.closest('.skills-directory')&&target.type==='search'&&target.value.trim().toLowerCase()==='maxwell')reveal('maxwell');};
+  const exported=(e:Event)=>{if(e.target instanceof HTMLDialogElement&&e.target.closest('.schedule-export'))reveal('anna');};
+  const reset=()=>{clearTimeout(dwell);revealed.clear();lastTap={target:null,time:0};};
+  document.addEventListener('scroll',bottom,{passive:true,capture:true});window.addEventListener('wheel',bottom,{passive:true});window.addEventListener('touchend',bottom,{passive:true});document.addEventListener('click',tap);document.addEventListener('input',input);document.addEventListener('close',exported,true);window.addEventListener('route-change',reset);window.addEventListener('popstate',reset);
+  return()=>{clearTimeout(dwell);document.removeEventListener('scroll',bottom,true);window.removeEventListener('wheel',bottom);window.removeEventListener('touchend',bottom);document.removeEventListener('click',tap);document.removeEventListener('input',input);document.removeEventListener('close',exported,true);window.removeEventListener('route-change',reset);window.removeEventListener('popstate',reset);};
+ },[]);
  useEffect(()=>{
   const surprise=()=>{if(!document.querySelector('.user-directory'))return;dismissScene();window.dispatchEvent(new Event('hero-preview-dismiss'));setVersion(v=>v+1);setScene(true);const sound=audio.current||new Audio(assetUrl('easter-eggs/ferraaaaan.mp3'));audio.current=sound;sound.volume=.65;sound.muted=false;sound.onended=dismissScene;void sound.play().catch(()=>{});sceneTimer.current=setTimeout(dismissScene,8000);};
   const key=(e:KeyboardEvent)=>{if(e.key==='Escape'){dismissScene();setActive(null);}};
@@ -58,10 +68,8 @@ export default function EasterEggs(){
   const observer=new MutationObserver(records=>{if(records.every(r=>r.target instanceof Element&&r.target.closest('[data-egg-mount],.ferran-scene')))return;cancelAnimationFrame(frame);frame=requestAnimationFrame(scan);});observer.observe(document.body,{childList:true,subtree:true});scan();
   return()=>{observer.disconnect();cancelAnimationFrame(frame);nodes.forEach(node=>node.remove());};
  },[]);
- return <>{mounts.map(m=>{const egg=eggs.find(e=>e.id===m.id)!,running=active===egg.id,animated=['maxwell','pedro','fine'].includes(egg.id),media=assetUrl('easter-eggs/'+(animated&&reduceMotion()?egg.id+'-still.webp':egg.image));return createPortal(<span className={'egg-direct'+(running?' is-active':'')}>
- <button type="button" className={'egg-object egg-object-'+egg.id+(running?' is-active':'')+(egg.id==='feh'?' owl-'+owlMood:'')} aria-label={egg.label} title={egg.label} onClick={()=>interact(egg)} onPointerEnter={()=>{if(egg.id==='feh'&&owlMood==='awake'&&taps.current.count===0)setOwlMood('happy');}} onPointerLeave={()=>{if(egg.id==='feh'&&owlMood==='happy'&&taps.current.count===0)setOwlMood('awake');}}>
- {egg.id==='feh'?<img key={version} src={assetUrl('easter-eggs/feh-'+owlMood+'.png')} alt={'Feh, '+owlMood}/>:running&&['pixel','maxwell','pedro','fine'].includes(egg.id)?<img key={version} className="egg-inline-art" src={media} alt={egg.name}/>:objectIcon(egg)}
- </button>{running&&<VisualEffect key={version} id={egg.id}/>}
+ return <>{mounts.map(m=>{const egg=eggs.find(e=>e.id===m.id)!,running=active===egg.id,animated=['maxwell','pedro','fine'].includes(egg.id),media=assetUrl('easter-eggs/'+(animated&&reduceMotion()?egg.id+'-still.webp':egg.image));if(egg.id!=='feh'&&!running)return null;return createPortal(<span className={'egg-direct'+(running?' is-active':'')}>
+ {egg.id==='feh'?<button type="button" className={'egg-object egg-object-feh owl-'+owlMood} aria-label={egg.label} title={egg.label} onClick={()=>interact(egg)} onPointerEnter={()=>{if(owlMood==='awake'&&taps.current.count===0)setOwlMood('happy');}} onPointerLeave={()=>{if(owlMood==='happy'&&taps.current.count===0)setOwlMood('awake');}}><img key={version} src={assetUrl('easter-eggs/feh-'+owlMood+'.png')} alt={'Feh, '+owlMood}/></button>:['pixel','maxwell','pedro','fine'].includes(egg.id)?<img key={version} className="egg-discovered-art" src={media} alt={egg.name}/>:<VisualEffect key={version} id={egg.id}/>}
  </span>,m.node,m.id);})}
  {scene&&createPortal(<div className="ferran-scene" role="img" aria-label="Ferran search surprise" onClick={dismissScene}><img key={version} src={assetUrl('easter-eggs/ferran.webp')} alt="Ferran dog meme"/><span>FEEEERRRRRRAAAAAAAAAN!</span></div>,document.body)}
  </>;
