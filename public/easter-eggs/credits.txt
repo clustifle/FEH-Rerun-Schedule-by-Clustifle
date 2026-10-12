@@ -16,3 +16,4 @@ Pedro: original 40,747,429 bytes; WebP 465,848 bytes; full 10-second loop retain
 Ferran: the source GIF is a still image; WebP 6,404 bytes.
 Original FEH and meme files are not offered as a general asset library.
 Header Feh expressions: awake, happy and sleepy PNG artwork supplied for this website.
+Askr emblem: transparent PNG supplied for this website; displayed upright without alteration.

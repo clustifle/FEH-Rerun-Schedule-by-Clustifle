@@ -19,10 +19,10 @@ Feh sits beside the navigation button. Hover to greet her. Tap once for a happy 
 | Maxwell's ears | Skills List footer | A spinning cat appears directly on the page. |
 | Raccoon paw | Weekly Revivals corner | Pedro dances beside the cards. |
 | Steaming cup | Rerun waitlist footer | The waiting meme appears in place. |
-| Gold coin | Beside schedule export | A coin toss and an absurd imaginary offer. |
-| Shield | Navigation footer | A salute and a friendly greeting. |
-| Envelope | Below the last FAQ answer | A brief joke from Askr. |
-| Seasonal decoration | Homepage footer | A seasonal delivery from Feh. |
+| Gold coin | Beside schedule export | Gold coins spill into a purse. |
+| Askr emblem | Schedule footer | A glowing shield rises with expanding protection rings. |
+| Envelope | Below the last FAQ answer | An envelope releases a tiny owl and a gold sparkle. |
+| Seasonal decoration | Homepage footer | October: glowing pumpkin, ghosts and bats. December: gift, snow and orbs. Other months: flowers and butterflies. |
 | Search for Ferran | Find Users | Submit `Ferran` for the dog scene and shout. |
 
 There are no Easter egg popup windows, replay controls, collection or achievement list. Click the decorations themselves again to reuse them; click an active decoration to stop its effect. Brief effects also reset automatically.
