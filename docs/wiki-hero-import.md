@@ -19,3 +19,5 @@ Data source: [Fire Emblem Heroes Wiki](https://feheroes.fandom.com/). The integr
 Verification uses a compact fixture from [Alm: Saint-King](https://feheroes.fandom.com/wiki/Alm:_Saint-King), with isolated database and image-upload responses. It covers variant matching, release fields, highest tiers, icon imports, duplicate skipping, stale previews, selected merges, mobile layout and both website entry points. No live records are filled by the test.
 
 Skills List groups copies of a skill by normalized name and slot, preserving hero associations and distinguishing custom weapon refinements. Duplicate manual entries and repeated imports into one hero are skipped or rejected without deleting existing records.
+
+For Rearmed heroes, imported weapons use the Rearmed emblem and retain the Arcane weapon flag. Selecting Refine displays its custom refinement icon instead.

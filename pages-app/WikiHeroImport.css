@@ -6,3 +6,5 @@
 .wiki-import-skills .wiki-import-prf{border-bottom:0;padding:0 0 12px 30px;font-size:14px}.wiki-import-skills li{border-bottom:1px solid #ddd}.wiki-import-skills li>label:first-child{border-bottom:0}.tracker .wiki-import-skills li{border-color:var(--realm-line)}
 
 .wiki-import-refine{padding:0 0 12px 30px}.wiki-import-refine label{border:0;padding:6px 0}.wiki-import-refine label:has(input[type=url]){display:grid;gap:8px}.wiki-import-refine input[type=url]{min-width:0}.wiki-import-refine small{display:block}
+
+.wiki-import-skills .arcane-weapon-icon{display:inline-block;width:32px;height:32px;flex:none;background-repeat:no-repeat;background-size:32px 117.91px;background-position:0 -13.84px;transform:none}
