@@ -2,7 +2,8 @@
 
 For Head Admin and Schedule Manager:
 
-- On the main website, open a hero profile and choose **Import from FEH Wiki**.
+- In the main Add/Edit Hero form, choose **Import from FEH Wiki**, preview the page, then **Apply to hero draft**. Imported fields and skills are saved only with **Save hero**; Cancel discards them. Blank new-hero names and titles can be filled from the wiki.
+- On a main-site hero profile, choose **Import from FEH Wiki** to merge selected info directly into the saved record.
 - In Administrative Manager, use **Records to check → Import wiki** beside a hero.
 
 The dialog suggests a wiki URL. Change it if needed, then choose **Preview wiki info**. The hero name and variant title must match.
@@ -16,3 +17,5 @@ Choose **Merge selected info** to save. Previewing makes no record changes. Wiki
 Data source: [Fire Emblem Heroes Wiki](https://feheroes.fandom.com/). The integration uses its public MediaWiki parse API. Wiki page availability and layout can change; failed or mismatched pages are shown as errors.
 
 Verification uses a compact fixture from [Alm: Saint-King](https://feheroes.fandom.com/wiki/Alm:_Saint-King), with isolated database and image-upload responses. It covers variant matching, release fields, highest tiers, icon imports, duplicate skipping, stale previews, selected merges, mobile layout and both website entry points. No live records are filled by the test.
+
+Skills List groups copies of a skill by normalized name and slot, preserving hero associations and distinguishing custom weapon refinements. Duplicate manual entries and repeated imports into one hero are skipped or rejected without deleting existing records.
