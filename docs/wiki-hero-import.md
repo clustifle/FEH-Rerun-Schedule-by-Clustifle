@@ -23,3 +23,5 @@ Skills List groups copies of a skill by normalized name and slot, preserving her
 For Rearmed heroes, imported weapons use the Rearmed emblem and retain the Arcane weapon flag. Selecting Refine displays its custom refinement icon instead.
 
 When a hero page separates Ally Weapons and Enemy Weapons, imports use Ally Weapons. Enemy-only tables are excluded, and a missing ally table never falls through to the enemy section. Normal Weapons sections remain supported.
+
+Wiki previews now use the staff-only Cloudflare import service first, so a Fandom verification challenge in a mobile browser does not block the normal preview path. Successful public wiki responses are cached for one hour. Browser API access remains a fallback if the service is temporarily unavailable. The backend accepts only supported HTTPS hero pages, uses the fixed public wiki API, limits response size, rejects redirects, and never forwards website tokens or cookies to Fandom. Challenge HTML is never cached.

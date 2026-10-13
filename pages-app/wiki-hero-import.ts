@@ -1,3 +1,4 @@
+import {communityApi} from './community-api';
 import {skillSlots,type SkillSlot} from './hero-skills';
 export type WikiSkill={slot:SkillSlot;name:string;icon:string|null;thumbnail?:string|null;refineIcon?:string|null};
 export type WikiHero={title:string;version:string|null;releaseDate:string|null;skills:WikiSkill[];url:string};
@@ -26,7 +27,20 @@ export function parseWikiHero(html:string,title:string,url:string):WikiHero{
  for(const skill of skills.filter(s=>s.slot==='Weapon')){const image=Array.from(doc.querySelectorAll('img')).find(img=>img.getAttribute('alt')===skill.name+' W'||img.getAttribute('data-image-name')===skill.name+' W.png');const raw=image?.getAttribute('data-src')||image?.getAttribute('src')||'';skill.refineIcon=/^https:\/\/static\.wikia\.nocookie\.net\//.test(raw)?raw.replace(/\/scale-to-width-down\/\d+/,''):null;}
  return {title,version,releaseDate,skills,url};
 }
-export async function fetchWikiHero(value:string){const {page,url}=wikiPageUrl(value);const endpoint=new URL('https://feheroes.fandom.com/api.php');endpoint.search=new URLSearchParams({action:'parse',page,prop:'text',format:'json',formatversion:'2',origin:'*'}).toString();const response=await fetch(endpoint,{credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error('The wiki is unavailable. Try again shortly.');const data=await response.json().catch(()=>{throw Error('The wiki returned a verification page. Open the source wiki page in your browser, then try again.');});if(data.error||!data.parse?.text)throw Error(data.error?.info||'Hero page not found.');if(data.parse.text.length>3000000)throw Error('This wiki page is too large.');return parseWikiHero(data.parse.text,data.parse.title,url);}
+export async function fetchWikiHero(value:string){
+ const {page,url}=wikiPageUrl(value);let data:{parse?:{title:string;text:string};error?:{info?:string}};
+ try{data=await communityApi('/wiki-hero-import',{url});}
+ catch(serverError){
+  // The public API remains a fallback if the import service is briefly unavailable.
+  // Never send website credentials or cookies to Fandom.
+  const endpoint=new URL('https://feheroes.fandom.com/api.php');endpoint.search=new URLSearchParams({action:'parse',page,prop:'text',format:'json',formatversion:'2',origin:'*'}).toString();
+  try{const response=await fetch(endpoint,{credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(15000)});if(!response.ok)throw Error();data=await response.json();}
+  catch{const message=serverError instanceof Error?serverError.message:'';throw Error(!message||/failed to fetch|networkerror|load failed/i.test(message)?'Could not connect to the wiki import service. Please check your connection and retry.':message);}
+ }
+ if(data.error||typeof data.parse?.text!=='string'||typeof data.parse?.title!=='string')throw Error(data.error?.info||'Hero page not found.');
+ if(data.parse.text.length>3000000)throw Error('This wiki page is too large.');
+ return parseWikiHero(data.parse.text,data.parse.title,url);
+}
 
 export async function downloadWikiSkillIcon(skill:WikiSkill){
  for(const value of [...new Set([skill.icon,skill.thumbnail].filter(Boolean))]){

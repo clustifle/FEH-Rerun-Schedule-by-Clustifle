@@ -10,7 +10,8 @@ try{
  let mismatch=false,changed=false,databaseFailure=false;hero.category='Rearmed';
  await page.addInitScript(({user,token})=>{localStorage.setItem('sb-aknsqeqykjgdyhdroqcx-auth-token',JSON.stringify({access_token:token,refresh_token:'test',expires_at:Math.floor(Date.now()/1000)+3600,token_type:'bearer',user}));localStorage.setItem('fehrs-admin-quickstart-seen:'+user.id,'1');},{user,token});
  await page.route('**/auth/v1/user',r=>r.fulfill({json:user}));
- await page.route('https://feheroes.fandom.com/api.php?**',r=>r.fulfill({json:{parse:{...wiki.parse,title:mismatch?'Alm: Hero of Prophecy':wiki.parse.title}}}));
+ let browserWikiCalls=0;await page.route('https://feheroes.fandom.com/api.php?**',r=>{browserWikiCalls++;return r.abort('failed');});
+ await page.route('**/community/wiki-hero-import',r=>r.fulfill({json:{parse:{...wiki.parse,title:mismatch?'Alm: Hero of Prophecy':wiki.parse.title}}}));
  await page.route('**/rest/v1/**',r=>{const path=new URL(r.request().url()).pathname;
   if(path.endsWith('tracker_role'))return r.fulfill({json:'Owner'});
   if(path.endsWith('tracker_v2_save_heroes')){const payload=r.request().postDataJSON();writes.push(payload);Object.assign(hero,payload.records[0],{revision:2});return r.fulfill({json:{count:1}});}
@@ -33,11 +34,11 @@ try{
  changed=true;await dialog.getByRole('button',{name:'Merge selected info'}).click();await dialog.getByRole('alert').waitFor();assert.equal(writes.length,0);changed=false;
  await dialog.getByRole('button',{name:'Merge selected info'}).click();await dialog.getByRole('status').waitFor();await dialog.getByRole('alert').waitFor();assert.ok((await dialog.getByRole('alert').innerText()).includes('Darting Blow 4'));assert.equal(hero.release_date,'2019-04-27');assert.equal(skills.filter(s=>s.slot==='A').length,0);iconFailure=false;databaseFailure=true;await dialog.getByRole('button',{name:'Merge selected info'}).click();await dialog.getByRole('alert').waitFor();assert.equal(await dialog.getByRole('alert').innerText(),'Skill save denied for test.');databaseFailure=false;await dialog.getByRole('button',{name:'Merge selected info'}).click();await dialog.getByRole('alert').waitFor({state:'hidden'});await dialog.getByRole('status').waitFor();assert.equal(hero.debut_version,'3.4');assert.equal(hero.release_date,'2019-04-27');assert.equal(skills.filter(s=>s.name==='Luna Arc'&&!s.refined).length,1);assert.equal(skills.filter(s=>s.name==='Luna Arc'&&s.refined&&s.arcane).length,1);assert.equal(upload,10);assert.ok(skills.some(s=>s.name==='Darting Blow 4'&&s.icon_url));assert.ok(skills.some(s=>s.name==='Lunar Flash II'&&s.exclusive));assert.ok(skills.some(s=>s.name==='Darting Blow 4'&&s.exclusive));await page.route('**/rest/v1/rpc/is_tracker_owner',r=>r.fulfill({json:true}));
  await page.route('**/rest/v1/tracker_profiles?**',r=>r.fulfill({json:[{id:user.id,username:'wikistaff',display_name:'Wiki Staff'}]}));
- await page.route('**/feh-community-polls.shyguyvn.workers.dev/**',r=>r.fulfill({json:{polls:[],posts:[],user:null,connected:false,publicReady:false}}));
+ await page.route('**/feh-community-polls.shyguyvn.workers.dev/**',r=>r.request().url().endsWith('/community/wiki-hero-import')?r.fulfill({json:wiki}):r.fulfill({json:{polls:[],posts:[],user:null,connected:false,publicReady:false}}));
  hero.updated='2026-10-13T00:00:00Z';hero.schedule='None';hero.pool='L/M/E Pool';hero.notes='';hero.demote=false;
  await page.goto('http://127.0.0.1:5196/FEH-Rerun-Schedule-by-Clustifle/hero_profile/Alm_Saint-King_Rearmed');
  await page.getByRole('button',{name:'Import from FEH Wiki',exact:true}).click();
- await page.getByRole('dialog',{name:'Import from FEH Wiki'}).waitFor();await page.getByRole('button',{name:'Merge selected info',exact:true}).waitFor();await page.screenshot({path:'wiki-import-main-site-check.png'});
- assert.deepEqual(errors,[]);
+ await page.getByRole('dialog',{name:'Import from FEH Wiki'}).waitFor();await page.getByRole('button',{name:'Merge selected info',exact:true}).waitFor().catch(async e=>{console.log('Main preview failed:',await page.getByRole('dialog',{name:'Import from FEH Wiki'}).innerText(),errors);throw e;});await page.screenshot({path:'wiki-import-main-site-check.png'});
+ assert.equal(browserWikiCalls,0);assert.deepEqual(errors,[]);
  console.log('Actual wiki page fixture: preview identity/date/version/best tiers/icons, no writes before merge, preserved existing skills, stale preview rejection, partial icon failure/retry without losing release info, selected merge and mobile passed.');
 }finally{await browser.close();}

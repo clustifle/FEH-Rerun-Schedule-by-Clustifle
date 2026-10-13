@@ -20,6 +20,16 @@ const headers={'Content-Type':'application/json','Cache-Control':'no-store'};
 async function request(env,path,body,u=voter,method=body?'POST':'GET'){return handleCommunity(new Request('https://service.test/community'+path,{method,headers:{Authorization:'Bearer test','Content-Type':'application/json'},...(body?{body:JSON.stringify(body)}:{})}),env,{user:async()=>u,rate:async()=>{},headers});}
 async function connection(env,u,publicReads=0){env.db.prepare('INSERT INTO community_connections VALUES(?,?,?,?,?,?)').run(u.github_id,u.website_id,u.login,await protect(env,'token-that-must-never-be-returned',u.github_id),publicReads,new Date().toISOString());}
 const mockFetch=fn=>{const old=globalThis.fetch;globalThis.fetch=fn;return()=>globalThis.fetch=old;};
+test('wiki previews are staff-only and work without a forum GitHub connection',async()=>{
+ const e=setup(),payload={parse:{title:'Alm: Saint-King',text:'<table>Hero information</table>'}};
+ let calls=0;const restore=mockFetch(async()=>{calls++;return Response.json(payload);});
+ try{
+  for(const u of [null,voter,{...voter,role:'moderator'}])assert.equal((await request(e,'/wiki-hero-import',{url:'https://feheroes.fandom.com/wiki/Alm:_Saint-King'},u)).status,403);
+  assert.equal(calls,0);
+  const result=await request(e,'/wiki-hero-import',{url:'https://feheroes.fandom.com/wiki/Alm:_Saint-King'},owner);assert.equal(result.status,200);assert.deepEqual(await result.json(),payload);
+  assert.equal((await request(e,'/wiki-hero-import',{url:'https://localhost/private'},owner)).status,400);
+ }finally{restore();e.db.close();}
+});
 test('a hidden parent comment cannot expose its reply thread to visitors',async()=>{
  const e=setup();await connection(e,owner,1);
  e.db.prepare('INSERT INTO forum_moderation VALUES(?,?,?,?,?,?)').run(9,'hidden-parent',1,'Spam','member',new Date().toISOString());

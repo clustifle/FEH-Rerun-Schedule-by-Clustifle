@@ -21,5 +21,6 @@ for(const path of ['/auth/github?nonce='+'a'.repeat(64),'/auth/callback?state=ol
 await check(worker,'/polls',{},[200]);await check(worker,'/community/rules',{},[200]);
 await check(worker,'/polls',{headers:{Origin:'https://untrusted.example'}},[403]);
 await check(worker,'/community/hero-images',{method:'POST',headers:{'Content-Type':'image/webp'},body:'invalid'},[403]);
+await check(worker,'/community/wiki-hero-import',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:'https://feheroes.fandom.com/wiki/Alm:_Saint-King'})},[403]);
 await check(worker,'/community/connections',{},[401,405]);
 console.log('Live anonymous access checks passed. No user records or credentials were printed.');
