@@ -2,3 +2,7 @@
 .tracker .wiki-hero-import{background:var(--realm-panel);color:var(--edit-text);border-color:var(--realm-line);font-family:FEHeroes,Georgia,serif}.tracker .wiki-hero-import button,.tracker .wiki-hero-import input[type=url]{background:var(--realm-field);color:var(--edit-text);border-color:var(--realm-line);font:inherit}.tracker .wiki-hero-import small{color:var(--edit-text);opacity:.8}.tracker .wiki-hero-import a{color:var(--realm-accent)}.tracker .wiki-import-comparison label,.tracker .wiki-import-skills label{border-color:var(--realm-line)}.tracker .wiki-hero-import h3,.tracker .wiki-hero-import h4{color:var(--realm-accent)}.hero-profile-import-action{margin-bottom:12px}
 
 .tracker .wiki-hero-import>header,.tracker .wiki-hero-import>header h3{background:transparent!important;box-shadow:none!important}
+
+.wiki-import-skills .wiki-import-prf{border-bottom:0;padding:0 0 12px 30px;font-size:14px}.wiki-import-skills li{border-bottom:1px solid #ddd}.wiki-import-skills li>label:first-child{border-bottom:0}.tracker .wiki-import-skills li{border-color:var(--realm-line)}
+
+.wiki-import-refine{padding:0 0 12px 30px}.wiki-import-refine label{border:0;padding:6px 0}.wiki-import-refine label:has(input[type=url]){display:grid;gap:8px}.wiki-import-refine input[type=url]{min-width:0}.wiki-import-refine small{display:block}
