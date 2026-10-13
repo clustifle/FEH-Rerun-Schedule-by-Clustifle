@@ -36,7 +36,8 @@ try{
  assert.equal(await page.locator('.hero-skill-slot[aria-label="X skill slot"]').count(),0);
  assert.equal(await page.locator('.hero-detail-identity').getByText('Of Awakening',{exact:true}).count(),1);
  assert.ok(await page.locator('.hero-detail-tags').innerText());
- await page.getByText('Recorded September banner',{exact:true}).waitFor();
+ assert.equal(await page.getByRole('heading',{name:'Recorded banner appearances',exact:true}).count(),0);
+ assert.equal(await page.locator('#hero-overview-heading svg,#hero-skills-heading svg').count(),0);
  for(const width of [1366,900,390,320]){
   await page.setViewportSize({width,height:width>700?768:844});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));

@@ -5,7 +5,7 @@ import {isBeta} from './beta';
 import './HeroProfilePage.css';
 import {V2HeroInfo} from './V2Workspace';
 import {useEffect,useRef,useState,type ReactNode} from 'react';
-import {Shield,Pencil,Info,Sparkles,ArrowUpRight,Download} from 'lucide-react';
+import {Shield,Pencil,ArrowUpRight,Download} from 'lucide-react';
 import HeroPortraitMarks from './HeroPortraitMarks';
 import {assetUrl,portraitUrl} from './static-data';
 import {viewUrl,goTo} from './routes';
@@ -32,7 +32,7 @@ export default function HeroProfilePage({hero,heroes=[],loading,error,tags,onBac
     <div className="hero-profile-scroll" tabIndex={0} role="region" aria-label="Hero profile details">
      <div className="hero-profile-summary-grid">
       <section className="hero-profile-overview hero-profile-card" aria-labelledby="hero-overview-heading">
-       <header className="hero-profile-card-heading"><h2 id="hero-overview-heading"><Info size={18} aria-hidden="true"/>Overview</h2></header>
+       <header className="hero-profile-card-heading"><h2 id="hero-overview-heading">Overview</h2></header>
        {hero.schedule&&hero.schedule!=='None'&&<div className="hero-profile-rerun" aria-labelledby="hero-rerun-heading">
         <h3 id="hero-rerun-heading">Rerun information</h3><p>{scheduleName(hero.schedule)}</p>
         <strong>{isWaitlist(hero.schedule)?'Awaiting a rerun':month||'Not scheduled yet'}</strong>
@@ -47,7 +47,7 @@ export default function HeroProfilePage({hero,heroes=[],loading,error,tags,onBac
        <div className="hero-owner-note" aria-labelledby="hero-note-label"><h3 id="hero-note-label">Notes</h3><p>{hero.notes||'No notes added yet.'}</p></div>
       </section>
       <section className="hero-profile-skills-card hero-profile-card" aria-labelledby="hero-skills-heading">
-       <header className="hero-profile-card-heading"><h2 id="hero-skills-heading"><Sparkles size={18} aria-hidden="true"/>Skills</h2>{onEdit&&!isBeta&&<button className="secondary" aria-label="Edit Skills on this unit" onClick={()=>setSkillsEditing(true)}><Pencil size={14} aria-hidden="true"/>Edit skills</button>}</header>
+       <header className="hero-profile-card-heading"><h2 id="hero-skills-heading">Skills</h2>{onEdit&&!isBeta&&<button className="secondary" aria-label="Edit Skills on this unit" onClick={()=>setSkillsEditing(true)}><Pencil size={14} aria-hidden="true"/>Edit skills</button>}</header>
        <HeroSkills key={hero.id+'-'+skillsRevision} heroId={hero.id} attuned={hero.category==="Attuned"} canEdit={!!onEdit}/>
       </section>
      </div>

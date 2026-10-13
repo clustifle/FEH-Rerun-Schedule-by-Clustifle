@@ -1,6 +1,6 @@
 import {useDefinitions,definitionIcon} from './catalog';
 import {portraitUrl as heroPortraitUrl,assetUrl} from './static-data';
-export type Hero={id:string;name:string;title:string;category:string;color:string;portrait:string|null;pool?:string|null;blessing?:string|null;heroic_grail?:boolean;weapon_type?:string|null;move_type?:string|null;schedule?:string;month?:string|null;notes?:string;demote?:boolean};
+export type Hero={debut_version?:string|null;release_date?:string|null;id:string;name:string;title:string;category:string;color:string;portrait:string|null;pool?:string|null;blessing?:string|null;heroic_grail?:boolean;weapon_type?:string|null;move_type?:string|null;schedule?:string;month?:string|null;notes?:string;demote?:boolean};
 const kindClass=(h:Hero)=>['Legendary','Mythic','Chosen Hero'].includes(h.category)?h.blessing?.toLowerCase()||'unblessed':h.category.toLowerCase();
 const blessingIcon=(category:string,blessing:string)=>assetUrl((category==='Chosen Hero'?'chosen/':'blessings/')+blessing.toLowerCase()+(category==='Chosen Hero'?'.png':'.webp'));export function HeroTypeTag({hero}:{hero:Hero}){
  const definitions=useDefinitions();
