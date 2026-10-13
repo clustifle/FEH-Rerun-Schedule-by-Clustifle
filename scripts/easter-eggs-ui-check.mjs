@@ -23,7 +23,7 @@ try{
   console.log('Checking hidden action',id);await page.goto(base+route);await page.locator(`[data-egg-mount="${id}"]`).waitFor({state:'attached'});
   assert.equal(await page.locator('[data-egg-mount]:not([data-egg-mount="feh"]) button').count(),0);
   assert.equal(await page.locator('[data-egg-mount="greeting"]').count(),0);
-  await discover(id);if(id==='anna'){assert.equal(await page.locator('.anna-orbit img').count(),6);await page.waitForFunction(()=>document.querySelector('.anna-prize-orb')?.naturalWidth===268);await page.waitForTimeout(1400);await page.screenshot({path:'anna-orbs-check.png'});}assert.equal(await page.locator('.egg-dialog,.egg-collection').count(),0);assert.equal(await page.getByRole('button',{name:'Replay',exact:true}).count(),0);
+  await discover(id);if(id==='anna'){assert.equal(await page.locator('.anna-rain-orb').count(),24);await page.waitForFunction(()=>document.querySelector('.anna-rain-orb')?.naturalWidth===268);await page.waitForTimeout(1400);await page.screenshot({path:'anna-orbs-check.png'});}assert.equal(await page.locator('.egg-dialog,.egg-collection').count(),0);assert.equal(await page.getByRole('button',{name:'Replay',exact:true}).count(),0);
   await page.keyboard.press('Escape');await page.locator(`[data-egg-mount="${id}"] .egg-direct.is-active`).waitFor({state:'hidden'});
   // Re-enter the route to verify the hidden action remains reusable.
   await page.goto(base+'users');await page.goto(base+route);await discover(id);

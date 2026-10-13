@@ -11,7 +11,7 @@ some bits hiding round the site lol
 - waitlist bottom, pause there. this is fine basically
 - home bottom, wait a little. pumpkin stuff in october, gift in december, flowers otherwise
 - faq bottom too. owl mail
-- anna: open share/export then close it. proper rainbow FEH orbs swirl in, bunch together, then she takes the lot lol
+- anna: open share/export then close it. rainbow FEH orbs just rain down the screen lol
 - find users, search Ferran and submit. yeah. caps/spaces/@ are fine
 - shield is gone
 

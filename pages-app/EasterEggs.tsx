@@ -18,9 +18,10 @@ type Egg=typeof eggs[number];type Mount={id:string;node:HTMLElement};
 function VisualEffect({id}:{id:string}){
  const season=new Date().getMonth()===9?'halloween':new Date().getMonth()===11?'winter':'spring';
  if(!['seasonal','anna','quotes'].includes(id))return null;
- return <span className={'egg-visual egg-visual-'+id+' '+(id==='seasonal'?season:'')} role="img" aria-label={id==='seasonal'?season+' decoration comes to life':id==='anna'?'FEH orbs swirl into Anna’s disappearing stash':'An envelope opens with a tiny owl delivery'}>
+ return <span className={'egg-visual egg-visual-'+id+' '+(id==='seasonal'?season:'')} role="img" aria-label={id==='seasonal'?season+' decoration comes to life':id==='anna'?'FEH orbs rain down the screen':'An envelope opens with a tiny owl delivery'}>
  {id==='seasonal'&&<><span className="season-center">{season==='halloween'?'🎃':season==='winter'?'🎁':'🌷'}</span>{Array.from({length:7},(_,i)=><span key={i} className={'egg-particle particle-'+i}>{season==='halloween'?(i%2?'🦇':'👻'):season==='winter'?(i%2?'❄':'🔮'):(i%2?'🌸':'🦋')}</span>)}</>}
- {id==='anna'&&<span className="anna-orb-scene"><span className="anna-summon-ring"/><span className="anna-summon-ring ring-inner"/><img className="anna-prize-orb" src={assetUrl('easter-eggs/orb.png')} alt=""/>{Array.from({length:6},(_,i)=><span key={i} className={'anna-orbit orbit-'+i}><img src={assetUrl('easter-eggs/orb.png')} alt=""/></span>)}<span className="anna-orb-spark">✦</span></span>}
+ {id==='anna'&&<span className="anna-orb-rain">{Array.from({length:24},(_,i)=><img key={i} className={'anna-rain-orb rain-orb-'+i} style={{left:((i*37+11)%100)+'%',width:(24+(i%4)*8)+'px',animationDelay:(i%8)*.23+'s',animationDuration:(2.7+(i%5)*.28)+'s'}} src={assetUrl('easter-eggs/orb.png')} alt=""/>)}</span>}
+
 
 
  {id==='quotes'&&<><span className="delivery-envelope">✉</span><img className="delivery-owl" src={assetUrl('easter-eggs/pixel-feh.png')} alt=""/><span className="delivery-star">✦</span></>}
