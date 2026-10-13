@@ -11,9 +11,13 @@ export function parseWikiHero(html:string,title:string,url:string):WikiHero{
  const version=metadata.get('Version')?.match(/^\d+\.\d+(?:\.\d+)?$/)?.[0]||null,releaseDate=metadata.get('Release Date')?.match(/^\d{4}-\d{2}-\d{2}$/)?.[0]||null;
  if(!version&&!releaseDate)throw Error('This page does not contain recognizable hero release information.');
  const skills:WikiSkill[]=[];
+ const headings=Array.from(doc.querySelectorAll('h2,h3,h4,h5,h6'));
+ const heading=(label:string)=>headings.find(h=>[h.id,h.querySelector('[id]')?.id,text(h).replace(/\[.*?\]/g,'')].some(value=>value?.replace(/_/g,' ').trim().toLowerCase()===label.toLowerCase()));
  for(const [section,slot] of [['Weapons','Weapon'],['Assists','Assist'],['Specials','Special'],['Passives','Passive']]){
-  let node=doc.getElementById(section)?.closest('h2,h3')?.nextElementSibling;let table:Element|undefined;
-  while(node&&!/^H[23]$/.test(node.tagName)){if(node.tagName==='TABLE'){table=node;break;}node=node.nextElementSibling;}
+  // Story enemies can have a different weapon: always prefer the playable unit's table.
+  const start=section==='Weapons'?(heading('Ally Weapons')||heading(section)):heading(section);
+  let node=start?.nextElementSibling;let table:Element|undefined;
+  while(node&&!/^H[2-6]$/.test(node.tagName)){if(node.tagName==='TABLE'){table=node;break;}node=node.nextElementSibling;}
   if(!table)continue;const grid=rows(table),header=grid.shift()?.map(text)||[],nameIndex=header.indexOf('Name'),typeIndex=header.indexOf('Type'),iconIndex=header.indexOf('Icon');
   if(nameIndex<0)continue;
   const candidates=grid.map(cells=>{const name=text(cells[nameIndex]),kind=slot==='Passive'?text(cells[typeIndex]):slot;const img=cells[iconIndex]?.querySelector('img');const raw=img?.getAttribute('data-src')||img?.getAttribute('src')||'';const linked=img?.closest('a')?.getAttribute('href')||'';const original=linked.startsWith('https://static.wikia.nocookie.net/')?linked:raw;const icon=/^https:\/\/static\.wikia\.nocookie\.net\//.test(original)?original.replace(/\/scale-to-width-down\/\d+/,''):null;const thumbnail=/^https:\/\/static\.wikia\.nocookie\.net\//.test(raw)?raw:null;return {slot:kind as SkillSlot,name,icon,thumbnail};}).filter(s=>skillSlots.includes(s.slot)&&s.name&&s.name.length<=150);

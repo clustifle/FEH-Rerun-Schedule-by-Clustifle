@@ -21,3 +21,5 @@ Verification uses a compact fixture from [Alm: Saint-King](https://feheroes.fand
 Skills List groups copies of a skill by normalized name and slot, preserving hero associations and distinguishing custom weapon refinements. Duplicate manual entries and repeated imports into one hero are skipped or rejected without deleting existing records.
 
 For Rearmed heroes, imported weapons use the Rearmed emblem and retain the Arcane weapon flag. Selecting Refine displays its custom refinement icon instead.
+
+When a hero page separates Ally Weapons and Enemy Weapons, imports use Ally Weapons. Enemy-only tables are excluded, and a missing ally table never falls through to the enemy section. Normal Weapons sections remain supported.
