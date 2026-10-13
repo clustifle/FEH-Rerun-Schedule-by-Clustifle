@@ -19,8 +19,9 @@ try{
   if(path.endsWith('tracker_hero_skills')){if(r.request().method()==='POST'){const payload=r.request().postDataJSON();writes.push(payload);skills.push(...payload);return r.fulfill({status:201,json:payload});}return r.fulfill({json:skills});}
   return r.fulfill({json:[]});
  });
- let upload=0;
- await page.route('**/community/hero-image-import',r=>r.fulfill({path:'public/skill-slots/a_passive.png',contentType:'image/png'}));
+ let upload=0,iconFailure=true;
+ await page.route('https://static.wikia.nocookie.net/**',r=>iconFailure?r.fulfill({status:404,body:'missing'}):r.fulfill({path:'public/skill-slots/a_passive.png',contentType:'image/png'}));
+ await page.route('**/community/hero-image-import',r=>iconFailure?r.fulfill({status:400,json:{error:'Could not fetch this image.'}}):r.fulfill({path:'public/skill-slots/a_passive.png',contentType:'image/png'}));
  await page.route('**/community/hero-images',r=>r.fulfill({json:{url:'https://feh-community-polls.shyguyvn.workers.dev/community/images/22222222-2222-4222-8222-'+String(++upload).padStart(12,'0')+'?media=2'}}));
  await page.goto('http://127.0.0.1:5196/FEH-Rerun-Schedule-by-Clustifle/FEHRS_AdmManager/dashboard/');
  await page.getByRole('button',{name:'Import wiki info for Alm',exact:true}).click();const dialog=page.getByRole('dialog',{name:'Import from FEH Wiki'});
@@ -30,7 +31,7 @@ try{
  await page.screenshot({path:'wiki-import-preview-check.png'});
  await page.setViewportSize({width:390,height:844});assert.ok(await dialog.evaluate(e=>e.scrollWidth<=e.clientWidth));await page.screenshot({path:'wiki-import-mobile-check.png'});
  changed=true;await dialog.getByRole('button',{name:'Merge selected info'}).click();await dialog.getByRole('alert').waitFor();assert.equal(writes.length,0);changed=false;
- await dialog.getByRole('button',{name:'Merge selected info'}).click();await dialog.getByRole('status').waitFor();assert.equal(hero.debut_version,'3.4');assert.equal(hero.release_date,'2019-04-27');assert.equal(skills.filter(s=>s.name==='Luna Arc').length,1);assert.equal(upload,4);assert.ok(skills.some(s=>s.name==='Darting Blow 4'&&s.icon_url));assert.ok(skills.some(s=>s.name==='Lunar Flash II'));await page.route('**/rest/v1/rpc/is_tracker_owner',r=>r.fulfill({json:true}));
+ await dialog.getByRole('button',{name:'Merge selected info'}).click();await dialog.getByRole('status').waitFor();await dialog.getByRole('alert').waitFor();assert.ok((await dialog.getByRole('alert').innerText()).includes('Darting Blow 4'));assert.equal(hero.release_date,'2019-04-27');assert.equal(skills.filter(s=>s.slot==='A').length,0);iconFailure=false;await dialog.getByRole('button',{name:'Merge selected info'}).click();await dialog.getByRole('alert').waitFor({state:'hidden'});await dialog.getByRole('status').waitFor();assert.equal(hero.debut_version,'3.4');assert.equal(hero.release_date,'2019-04-27');assert.equal(skills.filter(s=>s.name==='Luna Arc').length,1);assert.equal(upload,4);assert.ok(skills.some(s=>s.name==='Darting Blow 4'&&s.icon_url));assert.ok(skills.some(s=>s.name==='Lunar Flash II'));await page.route('**/rest/v1/rpc/is_tracker_owner',r=>r.fulfill({json:true}));
  await page.route('**/rest/v1/tracker_profiles?**',r=>r.fulfill({json:[{id:user.id,username:'wikistaff',display_name:'Wiki Staff'}]}));
  await page.route('**/feh-community-polls.shyguyvn.workers.dev/**',r=>r.fulfill({json:{polls:[],posts:[],user:null,connected:false,publicReady:false}}));
  hero.updated='2026-10-13T00:00:00Z';hero.schedule='None';hero.pool='L/M/E Pool';hero.notes='';hero.demote=false;
@@ -38,5 +39,5 @@ try{
  await page.getByRole('button',{name:'Import from FEH Wiki',exact:true}).click();
  await page.getByRole('dialog',{name:'Import from FEH Wiki'}).waitFor();await page.getByRole('button',{name:'Preview wiki info',exact:true}).click();await page.getByRole('button',{name:'Merge selected info',exact:true}).waitFor();await page.screenshot({path:'wiki-import-main-site-check.png'});
  assert.deepEqual(errors,[]);
- console.log('Actual wiki page fixture: preview identity/date/version/best tiers/icons, no writes before merge, preserved existing skills, stale preview rejection, selected merge and mobile passed.');
+ console.log('Actual wiki page fixture: preview identity/date/version/best tiers/icons, no writes before merge, preserved existing skills, stale preview rejection, partial icon failure/retry without losing release info, selected merge and mobile passed.');
 }finally{await browser.close();}
