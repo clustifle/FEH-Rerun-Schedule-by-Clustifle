@@ -20,6 +20,13 @@ const headers={'Content-Type':'application/json','Cache-Control':'no-store'};
 async function request(env,path,body,u=voter,method=body?'POST':'GET'){return handleCommunity(new Request('https://service.test/community'+path,{method,headers:{Authorization:'Bearer test','Content-Type':'application/json'},...(body?{body:JSON.stringify(body)}:{})}),env,{user:async()=>u,rate:async()=>{},headers});}
 async function connection(env,u,publicReads=0){env.db.prepare('INSERT INTO community_connections VALUES(?,?,?,?,?,?)').run(u.github_id,u.website_id,u.login,await protect(env,'token-that-must-never-be-returned',u.github_id),publicReads,new Date().toISOString());}
 const mockFetch=fn=>{const old=globalThis.fetch;globalThis.fetch=fn;return()=>globalThis.fetch=old;};
+test('a hidden parent comment cannot expose its reply thread to visitors',async()=>{
+ const e=setup();await connection(e,owner,1);
+ e.db.prepare('INSERT INTO forum_moderation VALUES(?,?,?,?,?,?)').run(9,'hidden-parent',1,'Spam','member',new Date().toISOString());
+ const restore=mockFetch(async()=>{assert.fail('Hidden reply thread must be blocked before querying GitHub');});
+ try{assert.equal((await request(e,'/posts/9/replies?commentId=hidden-parent',undefined,null)).status,404);}
+ finally{restore();e.db.close();}
+});
 test('Forum session displays the website username while keeping GitHub identity for permissions',async()=>{
  const e=setup();await connection(e,voter);const restore=mockFetch(async url=>{assert.ok(String(url).includes('tracker_profiles'));return new Response(JSON.stringify([{username:'website-member'}]));});
  try{const session=await (await request(e,'/session')).json();assert.equal(session.user.username,'website-member');assert.equal(session.user.login,'member');assert.equal(session.user.github_id,'123');assert.equal(session.connected,true);}finally{restore();e.db.close();}

@@ -3,6 +3,23 @@ import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
 import {readFileSync} from 'node:fs';
 import {handle,hash} from './worker.mjs';
+test('main Worker preserves video HEAD and rejects unauthorized portrait DELETE',async()=>{
+ const f=await fixture();f.DB.sql.exec(readFileSync(new URL('./community-schema.sql',import.meta.url),'utf8'));
+ const id=crypto.randomUUID();f.DB.sql.prepare('INSERT INTO community_videos VALUES(?,?,?,?,?)').run(id,'1','video/mp4',12,new Date().toISOString());
+ const head=await handle(new Request('https://polls.test/community/videos/'+id,{method:'HEAD',headers:{Origin:'https://clustifle.github.io'}}),f.env);
+ assert.equal(head.status,200);assert.equal(head.headers.get('Content-Length'),'12');assert.equal(await head.text(),'');
+ const remove=await handle(new Request('https://polls.test/community/hero-images/'+id,{method:'DELETE'}),f.env);assert.equal(remove.status,403);
+ const preflight=await handle(new Request('https://polls.test/community/hero-images/'+id,{method:'OPTIONS',headers:{Origin:'https://clustifle.github.io'}}),f.env);
+ assert.equal(preflight.status,204);assert.ok(preflight.headers.get('Access-Control-Allow-Methods').includes('DELETE'));
+});
+test('both retired OAuth endpoints are disabled with website authentication',async()=>{
+ const f=await fixture();f.env.SUPABASE_URL='https://website.test';
+ for(const path of ['/auth/github?nonce='+'d'.repeat(64),'/auth/callback?state=legacy&code=legacy']){
+  const r=await handle(new Request('https://polls.test'+path),f.env);
+  assert.equal(r.status,400);assert.equal(r.headers.get('Location'),null);
+ }
+ assert.equal(f.DB.sql.prepare('SELECT COUNT(*) AS n FROM poll_oauth').get().n,0);
+});
 test('Website sessions control staff access and GitHub-linked registered voting',async()=>{
  const f=await fixture();f.env.SUPABASE_URL='https://website.test';f.env.SUPABASE_PUBLISHABLE_KEY='public-test';
  let valid=true,role='Manager',linked=false;const original=globalThis.fetch;

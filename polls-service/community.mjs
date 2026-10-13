@@ -1,3 +1,4 @@
+import {readBoundedBody} from './request-body.mjs';
 import defaultRules from '../lib/forum-rules.json' with {type:'json'};
 import flairs from '../lib/community-flairs.json' with {type:'json'};
 const REPO='clustifle/FEH-Rerun-Schedule-by-Clustifle',REPO_ID='R_kgDOU5Auog';
@@ -19,7 +20,7 @@ async function graphql(token,query,variables={}){
  if(!r.ok||data.errors?.length){if(data.errors?.some(e=>e.type==='NOT_FOUND'))fail(404,'This community post or reply was not found.');const forbidden=data.errors?.some(e=>['FORBIDDEN','INSUFFICIENT_SCOPES'].includes(e.type));fail(forbidden?403:502,forbidden?'GitHub does not allow this action for your account. Check your community authorization and repository permissions.':'GitHub could not complete this request. Reload and try again.');}
  return data.data;
 }
-async function jsonBody(r){if(Number(r.headers.get('Content-Length')||0)>70000)fail(413,'The post is too large.');const text=await r.text();if(text.length>70000)fail(413,'The post is too large.');try{return JSON.parse(text);}catch{fail(400,'Invalid request.');}}
+async function jsonBody(r){if(Number(r.headers.get('Content-Length')||0)>70000)fail(413,'The post is too large.');const text=new TextDecoder().decode(await readBoundedBody(r,70000,()=>fail(413,'The post is too large.')));try{return JSON.parse(text);}catch{fail(400,'Invalid request.');}}
 export function extractFlair(body){const match=body.match(/^<!-- feh-flair: ([a-z-]+) -->\s*/),flair=flairs.find(f=>f.id===match?.[1]);let content=match?body.slice(match[0].length):body;if(flair)content=content.replace(/^\*\*Flair: [^\r\n]+\*\*\s*/, '');return {flair:flair?.id||null,body:content};}
 export function validatePost(b){const title=String(b.title||'').trim(),raw=String(b.body||'').trim(),body=extractFlair(raw).body;if(title.length<3||title.length>200||body.length<1||body.length>20000)fail(400,'Use a title of 3–200 characters and a post of 1–20,000 characters.');const flair=flairs.find(f=>f.id===b.flair);if(b.flair&&!flair)fail(400,'Choose a supported community flair.');return {title,body:flair?'<!-- feh-flair: '+flair.id+' -->\n\n**Flair: '+flair.name+'**\n\n'+body:body};}
 function checkFlairPermission(b,u,existing=''){const ids=[b.flair,extractFlair(String(b.body||'')).flair,extractFlair(existing).flair];if(ids.some(id=>flairs.find(f=>f.id===id)?.staffOnly)&&!['owner','manager','moderator'].includes(u.role))fail(403,'MOD megathreads are reserved for Forum Moderators, Schedule Managers, and Head Admin.');}
@@ -85,7 +86,7 @@ export async function handleCommunity(request,env,{user,rate,headers}){
    const ownerId=path==='/hero-images'?'portrait:'+u.website_id:u?.github_id;
    const unlimited=!!u?.website_account&&['owner','manager'].includes(u.role);if(path==='/images')await connectedToken(env,u);if(!unlimited)await rate(env,'community-images:'+ownerId,5);
    if(Number(request.headers.get('Content-Length')||0)>524288)fail(413,'Choose an image under 512 KB after optimization.');
-   const bytes=new Uint8Array(await request.arrayBuffer());if(!bytes.length||bytes.length>524288)fail(413,'Choose an image under 512 KB after optimization.');const type=imageType(bytes);if(!type||request.headers.get('Content-Type')!==type)fail(400,'Use a PNG, JPEG, or WebP image.');
+   const bytes=await readBoundedBody(request,524288,()=>fail(413,'Choose an image under 512 KB after optimization.'));if(!bytes.length||bytes.length>524288)fail(413,'Choose an image under 512 KB after optimization.');const type=imageType(bytes);if(!type||request.headers.get('Content-Type')!==type)fail(400,'Use a PNG, JPEG, or WebP image.');
    const id=crypto.randomUUID();
    // Atomic quota check prevents concurrent uploads bypassing storage limits.
    const dailyLimit=50;
@@ -96,6 +97,7 @@ export async function handleCommunity(request,env,{user,rate,headers}){
   const numberMatch=path.match(/^\/posts\/(\d+)(?:\/(comments|replies|upvote|close|answer|delete|delete-comment))?$/),number=numberMatch?Number(numberMatch[1]):null,action=numberMatch?.[2];
   if(method==='GET'&&(path==='/posts'||path==='/categories'||numberMatch&&(!action||action==='replies'))){
    if(number&&!moderationView&&await one(env,"SELECT target_id FROM forum_moderation WHERE post_number=? AND target_id='post' AND hidden=1",number))fail(404,'This post is unavailable in the Forum.');
+   if(number&&action==='replies'&&!moderationView&&await one(env,'SELECT target_id FROM forum_moderation WHERE post_number=? AND target_id=? AND hidden=1',number,url.searchParams.get('commentId')||''))fail(404,'This reply is unavailable in the Forum.');
    const cacheKey='forum-website-names-v2:'+url.pathname+url.search;
    const cached=await one(env,'SELECT payload,expires_at FROM community_cache WHERE key=?',cacheKey);
    if(!u&&cached&&cached.expires_at>time())return json(JSON.parse(cached.payload));

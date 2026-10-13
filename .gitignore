@@ -54,3 +54,12 @@ __pycache__/
 *.pyc
 
 admin-dist/
+
+# Cloudflare local secrets and database copies
+.dev.vars
+.dev.vars.*
+**/.dev.vars
+**/.dev.vars.*
+*.sqlite
+*.sqlite3
+*.db
