@@ -1,10 +1,46 @@
-.wiki-hero-import{width:min(720px,calc(100vw - 32px));max-height:85dvh;overflow:auto;padding:24px;border:1px solid #aaa;border-radius:8px;background:#fff;color:#222}.wiki-hero-import::backdrop{background:#0008}.wiki-hero-import header{display:flex;justify-content:space-between;align-items:center;gap:12px}.wiki-hero-import h3{margin:0}.wiki-hero-import form{display:grid;gap:12px;margin:16px 0}.wiki-hero-import form label{display:grid;gap:8px}.wiki-hero-import input[type=url]{width:100%;padding:10px;border:1px solid #aaa}.wiki-hero-import button{padding:9px 14px;border:1px solid #999;background:#f6f6f6;color:#222;border-radius:4px;cursor:pointer}.wiki-hero-import button:disabled{opacity:.5;cursor:default}.wiki-hero-import p{line-height:1.5}.wiki-hero-import [role=alert]{color:#a32424}.wiki-import-comparison label,.wiki-import-skills label{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #ddd}.wiki-import-comparison span,.wiki-import-skills span{display:grid;gap:5px}.wiki-import-skills{padding:0;list-style:none}.wiki-import-skills img{width:32px;height:32px;object-fit:contain}.wiki-hero-import small{font-size:13px;color:#666}.adm-record-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}@media(max-width:600px){.wiki-hero-import{padding:16px}.adm-attention-list li{align-items:flex-start}.adm-record-actions{max-width:110px}}
-.tracker .wiki-hero-import{background:var(--realm-panel);color:var(--edit-text);border-color:var(--realm-line);font-family:FEHeroes,Georgia,serif}.tracker .wiki-hero-import button,.tracker .wiki-hero-import input[type=url]{background:var(--realm-field);color:var(--edit-text);border-color:var(--realm-line);font:inherit}.tracker .wiki-hero-import small{color:var(--edit-text);opacity:.8}.tracker .wiki-hero-import a{color:var(--realm-accent)}.tracker .wiki-import-comparison label,.tracker .wiki-import-skills label{border-color:var(--realm-line)}.tracker .wiki-hero-import h3,.tracker .wiki-hero-import h4{color:var(--realm-accent)}.hero-profile-import-action{margin-bottom:12px}
-
+/* Compact, fixed chrome with one scrollable review area. */
+.wiki-hero-import{width:min(560px,calc(100vw - 24px));max-height:min(640px,calc(100dvh - 32px));padding:0;border:1px solid var(--realm-line,#b7b7bf);border-radius:12px;background:var(--realm-panel,#fff);color:var(--edit-text,#222);font:15px/1.45 FEHeroes,Georgia,serif;overflow:hidden;box-shadow:0 16px 48px #0005}
+.wiki-hero-import[open]{display:flex;flex-direction:column}
+.wiki-hero-import::backdrop{background:#0008;backdrop-filter:blur(3px)}
+.wiki-hero-import>header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--realm-line,#b7b7bf);flex:none}
+.wiki-hero-import>header>div{min-width:0}
+.wiki-hero-import h3{font-size:20px;font-weight:400;line-height:1.3;margin:0;color:var(--realm-accent,inherit);padding:0;border:0}
+.wiki-hero-import .wiki-import-hero{margin:4px 0 0;font-size:13px;line-height:1.4;opacity:.8;overflow-wrap:anywhere}
+.wiki-import-body{overflow-y:auto;overscroll-behavior:contain;min-height:0;padding:14px 18px;scrollbar-gutter:stable;scrollbar-width:thin}
+.wiki-hero-import form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:end;margin:0 0 12px}
+.wiki-hero-import form label{display:grid;gap:6px;font-size:13px;min-width:0}
+.wiki-hero-import input[type=url]{box-sizing:border-box;width:100%;min-width:0;min-height:38px;padding:8px 10px;border:1px solid var(--realm-line,#b7b7bf);border-radius:6px;background:var(--realm-field,#f5f5f7);color:inherit;font:14px FEHeroes,Georgia,serif}
+.wiki-hero-import button{min-height:38px;padding:8px 12px;border:1px solid var(--realm-line,#b7b7bf);background:var(--realm-field,#f5f5f7);color:inherit;border-radius:6px;font:14px FEHeroes,Georgia,serif;cursor:pointer}
+.wiki-hero-import button:disabled{opacity:.5;cursor:default}
+.wiki-hero-import>header button{width:36px;min-height:36px;flex:none;padding:0;font-size:20px}
+.wiki-hero-import p{font-size:14px;line-height:1.45;margin:8px 0}
+.wiki-hero-import [role=alert]{color:var(--edit-danger,#b42318);padding:9px 10px;border:1px solid currentColor;border-radius:6px;overflow-wrap:anywhere}
+.wiki-hero-import [role=status]{padding:8px 10px;background:var(--realm-field,#f5f5f7);border-radius:6px;overflow-wrap:anywhere}
+.wiki-hero-import a{display:block;font-size:13px;line-height:1.4;color:var(--realm-accent,#685223);text-underline-offset:3px;overflow-wrap:anywhere}
+.wiki-import-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.wiki-import-comparison>label{display:flex;align-items:flex-start;gap:8px;padding:10px;background:var(--realm-field,#f5f5f7);border:1px solid var(--realm-line,#b7b7bf);border-radius:8px;min-width:0}
+.wiki-import-comparison>label>span{display:grid;gap:3px;min-width:0}
+.wiki-import-comparison strong{font-size:14px;font-weight:400}
+.wiki-hero-import small{font-size:12px;line-height:1.4;opacity:.8;overflow-wrap:anywhere}
+.wiki-hero-import input[type=checkbox]{width:16px;height:16px;flex:none;margin:2px 0;accent-color:var(--realm-accent,#8b762f)}
+.wiki-hero-import h4{font-size:16px;font-weight:400;margin:14px 0 8px;color:var(--realm-accent,inherit)}
+.wiki-import-skills{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.wiki-import-skills li{padding:10px;border:1px solid var(--realm-line,#b7b7bf);border-radius:8px;background:var(--realm-field,#f5f5f7);min-width:0}
+.wiki-import-skills li>label{display:flex;align-items:center;gap:10px;border:0;padding:0;min-width:0}
+.wiki-import-skills li>label>span:not(.arcane-weapon-icon){display:grid;gap:2px;min-width:0;font-size:15px;line-height:1.35;overflow-wrap:anywhere}
+.wiki-import-skills .wiki-import-skill-icon{width:32px;height:32px;object-fit:contain;flex:none}
+.wiki-import-skill-options{display:flex;align-items:flex-start;flex-wrap:wrap;gap:5px 14px;padding-left:26px;margin-top:6px}
+.wiki-import-skill-options label{display:flex;align-items:center;gap:6px;padding:0;border:0;font-size:12px;line-height:1.4;min-height:24px}
+.wiki-import-refine{min-width:0;flex:1}
+.wiki-import-refine label:has(input[type=url]){display:grid;gap:5px;padding-top:6px}
+.wiki-import-refine input[type=url]{font-size:13px}
+.wiki-import-refine small{display:block;margin-top:4px}
+.wiki-import-footer{display:flex;justify-content:flex-end;padding:12px 18px;border-top:1px solid var(--realm-line,#b7b7bf);flex:none;background:var(--realm-panel,#fff)}
+.wiki-import-footer .wiki-import-submit{width:100%;min-height:42px;font-size:15px}
+.wiki-import-skills .arcane-weapon-icon{display:inline-block;background-repeat:no-repeat;background-size:32px 117.91px;background-position:0 -13.84px;transform:none}
+.adm-record-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .tracker .wiki-hero-import>header,.tracker .wiki-hero-import>header h3{background:transparent!important;box-shadow:none!important}
+@media(max-width:600px){.wiki-hero-import{max-height:calc(100dvh - 24px)}.wiki-hero-import>header{padding:12px 14px}.wiki-import-body{padding:12px 14px}.wiki-import-footer{padding:10px 14px}.wiki-hero-import form{grid-template-columns:minmax(0,1fr)}.wiki-hero-import form>button{justify-self:end}.wiki-hero-import input[type=url]{font-size:16px}.wiki-import-comparison{grid-template-columns:minmax(0,1fr)}.adm-attention-list li{align-items:flex-start}.adm-record-actions{max-width:110px}}
 
-.wiki-import-skills .wiki-import-prf{border-bottom:0;padding:0 0 12px 30px;font-size:14px}.wiki-import-skills li{border-bottom:1px solid #ddd}.wiki-import-skills li>label:first-child{border-bottom:0}.tracker .wiki-import-skills li{border-color:var(--realm-line)}
-
-.wiki-import-refine{padding:0 0 12px 30px}.wiki-import-refine label{border:0;padding:6px 0}.wiki-import-refine label:has(input[type=url]){display:grid;gap:8px}.wiki-import-refine input[type=url]{min-width:0}.wiki-import-refine small{display:block}
-
-.wiki-import-skills .arcane-weapon-icon{display:inline-block;width:32px;height:32px;flex:none;background-repeat:no-repeat;background-size:32px 117.91px;background-position:0 -13.84px;transform:none}
+.wiki-import-footer .wiki-import-submit{background:var(--realm-accent,#0078d4);color:var(--realm-deep,#fff)}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .wiki-import-footer .wiki-import-submit{background:var(--realm-accent);color:var(--realm-deep);font-size:15px}
