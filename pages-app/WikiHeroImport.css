@@ -44,3 +44,5 @@
 
 .wiki-import-footer .wiki-import-submit{background:var(--realm-accent,#0078d4);color:var(--realm-deep,#fff)}
 html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .wiki-import-footer .wiki-import-submit{background:var(--realm-accent);color:var(--realm-deep);font-size:15px}
+
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .wiki-hero-import>.wiki-import-footer{background:var(--realm-panel)!important;box-shadow:none!important;width:auto;margin:0;color:inherit}

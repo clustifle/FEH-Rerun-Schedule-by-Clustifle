@@ -42,3 +42,5 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][dat
 @media(max-width:360px){html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .schedule-export-options{grid-template-columns:1fr}html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .schedule-export-actions{flex-direction:column}html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .schedule-export-actions :is(button,a){flex:none}}
 
 html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .schedule-export-actions a{background:var(--realm-accent);color:var(--realm-deep)}
+
+.schedule-export-preview[hidden]{display:none!important}
