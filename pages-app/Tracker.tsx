@@ -185,7 +185,7 @@ export default function Home(){
  const [wikiEditorHero,setWikiEditorHero]=useState<BetaHero|null>(null),[editorVersion,setEditorVersion]=useState(''),[editorReleaseDate,setEditorReleaseDate]=useState('');
  const skillsEditor=useRef<HeroSkillsEditorHandle>(null);
  const [heroes,setHeroes]=useState<Hero[]>([]),[loading,setLoading]=useState(true),[error,setError]=useState(''),[filter,setFilter]=useState('All heroes'),[search,setSearch]=useState(''),[editing,setEditing]=useState<Hero|null|undefined>(undefined),[saving,setSaving]=useState(false),[preview,setPreview]=useState(''),[notice,setNotice]=useState('');
- const exportWaitlistHeroes=useMemo(()=>waitlistRows.filter(row=>row.list_kind==='lme').sort((a,b)=>a.sort_order-b.sort_order).flatMap(row=>{const hero=heroes.find(h=>h.id===row.hero_id);return hero?[hero]:[];}),[heroes,waitlistRows]);
+ const exportWaitlistHeroes=useMemo(()=>waitlistRows.filter(row=>row.list_kind===(activeSchedule==='Remix'?'remix':'lme')).sort((a,b)=>a.sort_order-b.sort_order).flatMap(row=>{const hero=heroes.find(h=>h.id===row.hero_id);return hero?[hero]:[];}),[heroes,waitlistRows,activeSchedule]);
  const categories=definitionNames(definitions,'hero_type',heroes.map(h=>h.category));
  const [portraitUrl,setPortraitUrl]=useState(''),[importing,setImporting]=useState(false),[importedPortrait,setImportedPortrait]=useState<File|null>(null),[portraitMessage,setPortraitMessage]=useState(''),[importedUrl,setImportedUrl]=useState('');
  const [viewedHero,setViewedHero]=useState<Hero|null>(null);

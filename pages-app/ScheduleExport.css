@@ -44,3 +44,24 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][dat
 html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .schedule-export-actions a{background:var(--realm-accent);color:var(--realm-deep)}
 
 .schedule-export-preview[hidden]{display:none!important}
+
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker dialog.schedule-export-dialog{width:min(1080px,calc(100vw - 32px));max-height:min(780px,calc(100dvh - 32px))}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .schedule-export-body{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);gap:20px;padding:18px 20px}
+.schedule-export-controls{min-width:0}
+.schedule-export-preview-pane{min-width:0;align-self:start;position:sticky;top:0;padding:14px;border:1px solid var(--realm-line);border-radius:10px;background:var(--realm-field)}
+.schedule-export-preview-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.schedule-export-preview-heading h3{font:18px FEHeroes,Georgia,serif;margin:0;background:none!important;padding:0;color:var(--realm-accent)}
+.schedule-export-preview-heading span{font:12px FEHeroes,Georgia,serif;opacity:.75}
+.schedule-export-preview-stage{min-height:280px;display:flex;align-items:center;justify-content:center;border-radius:8px;overflow:hidden;background:repeating-conic-gradient(#d9d9d9 0% 25%,#fff 0% 50%) 0/16px 16px}
+.schedule-export-preview-stage>p{padding:20px;text-align:center;background:var(--realm-panel);color:inherit;margin:0;font-size:14px}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .schedule-export-preview{margin:0;border:0;border-radius:0;max-height:480px;background:transparent}
+@media(max-width:760px){
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .schedule-export-body{grid-template-columns:minmax(0,1fr);padding:14px;gap:14px}
+ .schedule-export-preview-pane{position:static}
+ .schedule-export-preview-stage{min-height:180px}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .schedule-export-preview{max-height:300px}
+}
+
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .schedule-export-controls>.schedule-export-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+.schedule-export-controls>.schedule-export-fields>label:last-child{grid-column:1/-1}
+@media(max-width:600px){html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .schedule-export-controls>.schedule-export-fields{grid-template-columns:minmax(0,1fr)}}
