@@ -37,9 +37,9 @@ export default function ScheduleExport({heroes,waitlistHeroes=emptyHeroes,schedu
   try{
    await document.fonts.load('18px FEHeroes');await document.fonts.ready;const font='FEHeroes, Georgia, serif',gap=spacing==='compact'?8:14,pad=24,size=Number(portraitSize),step=size+(spacing==='compact'?6:12),rowStep=step+(spacing==='compact'?4:8),theme=exportThemes[background],chosenBackground=theme?.background||(background==='custom'?customColor:background==='light'?'#f4f6f7':'#102e3a'),light=[1,3,5].reduce((sum,start,index)=>sum+parseInt(chosenBackground.slice(start,start+2),16)*[.299,.587,.114][index],0)>160,bg=chosenBackground,heading=customText?textColor:light?'#243842':'#fff1cb',muted=customText?textColor:light?'#425b67':'#bcd5df',panel=customWindow?windowColor:theme?.window||(background==='custom'?customColor:light?'#ffffff':'#1b3c49');
    const sections=combined?[
-    {name:'L/M/E Schedule + Waitlist',schedule:'General',heroes:scheduled.filter(h=>(h.schedule||'General')==='General'),waiting:combined.lme,row:0},
-    {name:'Remix Schedule + Waitlist',schedule:'Remix',heroes:scheduled.filter(h=>h.schedule==='Remix'),waiting:combined.remix,row:1},
-    {name:'Monthly L/M Revival',schedule:'Monthly Revival',heroes:scheduled.filter(h=>h.schedule==='Monthly Revival'),waiting:[],row:2},
+    {name:'Legendary, Mythic, and Emblem Hero Schedule',schedule:'General',heroes:scheduled.filter(h=>(h.schedule||'General')==='General'),waiting:combined.lme,row:0},
+    {name:'Remix Schedule',schedule:'Remix',heroes:scheduled.filter(h=>h.schedule==='Remix'),waiting:combined.remix,row:1},
+    {name:'Monthly Legendary and Mythic Revival',schedule:'Monthly Revival',heroes:scheduled.filter(h=>h.schedule==='Monthly Revival'),waiting:[],row:2},
     {name:'Schedule Under Consideration',schedule:'Schedule Under Consideration',heroes:[],waiting:combined.consideration,row:2}
    ]:[{name:title,schedule,heroes:scheduled,waiting,row:0}];
    const cards=sections.flatMap((section,sectionIndex)=>[...included.filter(m=>section.heroes.some(h=>h.month?.slice(0,7)===m)),...(section.waiting.length?['waitlist']:[])].flatMap(m=>(section.schedule==='Monthly Revival'&&m!=='waitlist'?['Legendary','Mythic']:['']).map(kind=>{
@@ -48,6 +48,7 @@ export default function ScheduleExport({heroes,waitlistHeroes=emptyHeroes,schedu
     const hideHeading=combinedMode&&section.schedule==='Schedule Under Consideration';
     return {m,kind,groups,hideHeading,section:sectionIndex,row:section.row,waitingLabel:section.schedule==='Schedule Under Consideration'?'Under consideration':section.schedule==='Remix'?'Remix Waitlist':'L/M/E Waitlist',width:Math.max(kind?200:m==='waitlist'?240:132,...groups.map(g=>g.heroes.length*step+20)),height:(hideHeading?12:kind?70:40)+groups.length*rowStep};
    }).filter(card=>card.groups.length)));
+   if(combinedMode){const titleMeasure=document.createElement('canvas').getContext('2d')!;titleMeasure.font='20px '+font;sections.forEach((section,index)=>{const sectionCards=cards.filter(c=>c.section===index);if(!sectionCards.length)return;const width=sectionCards.reduce((sum,c)=>sum+c.width,0)+gap*(sectionCards.length-1),needed=Math.ceil(titleMeasure.measureText(section.name).width)+12;if(width<needed)sectionCards[sectionCards.length-1].width+=needed-width;});}
    const rows=[...new Set(cards.map(c=>c.row))],w=Math.max(476,pad*2,...rows.map(row=>pad*2+cards.filter(c=>c.row===row).reduce((sum,c)=>sum+c.width+gap,0)-gap+ (combinedMode?gap:0)));
    let y=154;const positioned:typeof cards[number][]=[];const positions:{x:number;y:number}[]=[];const sectionTitles:{text:string;x:number;y:number}[]=[];
    for(const row of rows){const rowCards=cards.filter(c=>c.row===row);let x=pad,lastSection=-1;
