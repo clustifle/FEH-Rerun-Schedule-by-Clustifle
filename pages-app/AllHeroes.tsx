@@ -3,7 +3,7 @@ import VersionSelect from './VersionSelect';
 import {useDefinitions,definitionNames} from './catalog';
 import HeroPortraitMarks from './HeroPortraitMarks';
 import AdvancedFilters from './AdvancedFilters';
-import {useMemo,useState,useRef,useEffect} from 'react';
+import {useMemo,useState,useRef,useEffect,useDeferredValue} from 'react';
 import {Plus,Search,Shield,X,RotateCcw} from 'lucide-react';
 import {portraitUrl} from './static-data';
 import {displayPool} from './hero-pools';
@@ -11,7 +11,8 @@ import './AllHeroes.css';
 type Hero={debut_version?:string|null;release_date?:string|null;id:string;name:string;title:string;category:string;heroic_grail?:boolean;demote?:boolean;pool?:string|null;schedule?:string;month?:string|null;updated?:string;blessing?:string|null;color:string;portrait:string|null;weapon_type?:string|null;move_type?:string|null;searchText?:string;notes?:string};
 const collator=new Intl.Collator('en',{sensitivity:'base',numeric:true});
 const scheduleName=(s:string)=>({'Weekly Revival':'Weekly Revival','Schedule Under Consideration':'Schedule Under Consideration','General':'General Schedule','Remix':'Remix Schedule','Monthly Revival':'L/M Revival','Forging Bonds Revival':'NH Revival','Hall of Forms Revival':'HoF Revival','Waitlist':'L/M/E Waitlist','DSH Waitlist':'DSH Waitlist','NHR Waitlist':'NHR Waitlist','Remix Waitlist':'Remix Waitlist'} as Record<string,string>)[s]||'Unscheduled';
-const monthName=(month?:string|null)=>month&&/^\d{4}-\d{2}/.test(month)?new Intl.DateTimeFormat('en',{month:'short',year:'numeric',timeZone:'UTC'}).format(new Date(month.slice(0,7)+'-01T00:00:00Z')):'Not recorded';
+const monthFormatter=new Intl.DateTimeFormat('en',{month:'short',year:'numeric',timeZone:'UTC'});
+const monthName=(month?:string|null)=>month&&/^\d{4}-\d{2}/.test(month)?monthFormatter.format(new Date(month.slice(0,7)+'-01T00:00:00Z')):'Not recorded';
 const sortOptions=[['name-asc','Name · A–Z'],['name-desc','Name · Z–A'],['title','Hero title'],['type','Hero type'],['color','Weapon color'],['weapon','Weapon type'],['movement','Movement type'],['month-asc','Rerun · earliest'],['month-desc','Rerun · latest'],['updated','Recently updated']];
 const viewOptions=[['small','Small icons'],['medium','Medium icons'],['large','Large icons'],['list','List'],['details','Details'],['tiles','Tiles'],['content','Content']];
 const searchKey=(value:string)=>value.normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[ðþæøœłß]/g,c=>({'ð':'d','þ':'th','æ':'ae','ø':'o','œ':'oe','ł':'l','ß':'ss'}[c]!)).replace(/[’‘]/g,"'");
@@ -19,16 +20,16 @@ export default function AllHeroes<T extends Hero>({heroes,onView,canEdit,onAdd}:
  const [version,setVersion]=useState('All');
  const [sort,setSort]=useState('name-asc'),[view,setView]=useState(()=>{try{const saved=localStorage.getItem('feh-all-heroes-view');return viewOptions.some(([key])=>key===saved)?saved!:'medium';}catch{return 'medium';}}),[search,setSearch]=useState('');
  const [type,setType]=useState('All heroes'),[color,setColor]=useState('All'),[weapon,setWeapon]=useState('All'),[move,setMove]=useState('All'),[pool,setPool]=useState('All'),[showGrails,setShowGrails]=useState(true),[schedule,setSchedule]=useState('All'),[blessing,setBlessing]=useState('All'),[demote,setDemote]=useState('All');
- const results=useRef<HTMLDivElement>(null);
+ const results=useRef<HTMLDivElement>(null),more=useRef<HTMLButtonElement>(null);
+ const [visibleCount,setVisibleCount]=useState(120);
  const definitions=useDefinitions();
- const categories=definitionNames(definitions,'hero_type',heroes.map(h=>h.category));
+ const categories=useMemo(()=>definitionNames(definitions,'hero_type',heroes.map(h=>h.category)),[definitions,heroes]);
  const schedules=useMemo(()=>Array.from(new Set(heroes.map(h=>h.schedule||'None'))).sort((a,b)=>collator.compare(scheduleName(a),scheduleName(b))),[heroes]);
  const blessings=useMemo(()=>Array.from(new Set(heroes.map(h=>h.blessing).filter((s):s is string=>Boolean(s)))).sort(collator.compare),[heroes]);
- const query=searchKey(search.trim());
- const rows=useMemo(()=>heroes.filter(h=>{
- const text=searchKey(h.name+' '+h.title+' '+h.category+' '+(h.notes||''));
- return versionMatches(h.debut_version,version)&&query.split(/\s+/).every(word=>text.includes(word))&&(type==='All heroes'||h.category===type)&&(color==='All'||h.color===color)&&(pool==='All'||displayPool(h)===pool)&&(showGrails||!h.heroic_grail)&&(weapon==='All'||(weapon==='Unassigned'?!h.weapon_type:h.weapon_type===weapon))&&(move==='All'||(move==='Unassigned'?!h.move_type:h.move_type===move))&&(schedule==='All'||(h.schedule||'None')===schedule)&&(blessing==='All'||(blessing==='Unassigned'?!h.blessing:h.blessing===blessing))&&(demote==='All'||Boolean(h.demote)===(demote==='Yes'));
- }).sort((a,b)=>{
+ const query=searchKey(useDeferredValue(search).trim());
+ const searchIndex=useMemo(()=>new Map(heroes.map(h=>[h.id,searchKey(h.name+' '+h.title+' '+h.category+' '+(h.notes||''))])),[heroes]);
+ const queryWords=useMemo(()=>query.split(/\s+/).filter(Boolean),[query]);
+ const sortedHeroes=useMemo(()=>[...heroes].sort((a,b)=>{
  const names=collator.compare(a.name,b.name)||collator.compare(a.title,b.title)||a.id.localeCompare(b.id);
  if(sort==='name-desc')return -names;
  if(sort.startsWith('month-')){const am=a.schedule==='None'?null:a.month,bm=b.schedule==='None'?null:b.month;if(!am||!bm)return am?-1:bm?1:names;return (sort==='month-desc'?-1:1)*collator.compare(am,bm)||names;}
@@ -36,8 +37,18 @@ export default function AllHeroes<T extends Hero>({heroes,onView,canEdit,onAdd}:
  if(sort==='color')return ['Red','Blue','Green','Colorless'].indexOf(a.color)-['Red','Blue','Green','Colorless'].indexOf(b.color)||names;
  const field=({title:'title',type:'category',weapon:'weapon_type',movement:'move_type'} as const)[sort as 'title'|'type'|'weapon'|'movement'];
  return field?collator.compare(a[field]||'',b[field]||'')||names:names;
- }),[heroes,query,type,color,pool,showGrails,weapon,move,schedule,blessing,demote,sort,version]);
- useEffect(()=>{if(results.current)results.current.scrollTop=0;},[query,type,color,pool,showGrails,weapon,move,schedule,blessing,demote,sort,view,version]);
+ }),[heroes,sort]);
+ const rows=useMemo(()=>sortedHeroes.filter(h=>{
+ const text=searchIndex.get(h.id)||'';
+ return versionMatches(h.debut_version,version)&&queryWords.every(word=>text.includes(word))&&(type==='All heroes'||h.category===type)&&(color==='All'||h.color===color)&&(pool==='All'||displayPool(h)===pool)&&(showGrails||!h.heroic_grail)&&(weapon==='All'||(weapon==='Unassigned'?!h.weapon_type:h.weapon_type===weapon))&&(move==='All'||(move==='Unassigned'?!h.move_type:h.move_type===move))&&(schedule==='All'||(h.schedule||'None')===schedule)&&(blessing==='All'||(blessing==='Unassigned'?!h.blessing:h.blessing===blessing))&&(demote==='All'||Boolean(h.demote)===(demote==='Yes'));
+ }),[sortedHeroes,searchIndex,queryWords,type,color,pool,showGrails,weapon,move,schedule,blessing,demote,version]);
+ const visibleRows=rows.slice(0,visibleCount);
+ useEffect(()=>{setVisibleCount(120);if(results.current)results.current.scrollTop=0;},[query,type,color,pool,showGrails,weapon,move,schedule,blessing,demote,sort,view,version]);
+ useEffect(()=>{
+  if(!more.current||!results.current||typeof IntersectionObserver==='undefined')return;
+  const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting))setVisibleCount(n=>Math.min(n+120,rows.length));},{root:results.current,rootMargin:'300px'});
+  observer.observe(more.current);return()=>observer.disconnect();
+ },[visibleCount,rows.length,view]);
  useEffect(()=>{try{localStorage.setItem('feh-all-heroes-view',view);}catch{}},[view]);
  function reset(){setVersion('All');setSearch('');setType('All heroes');setColor('All');setWeapon('All');setMove('All');setPool('All');setShowGrails(true);setSchedule('All');setBlessing('All');setDemote('All');}
  const chips:[string,()=>void][]=[];
@@ -50,6 +61,7 @@ export default function AllHeroes<T extends Hero>({heroes,onView,canEdit,onAdd}:
 
  {chips.length>0&&<div className="directory-filter-chips" aria-label="Active filters">{chips.map(([label,clear])=><button key={label} onClick={clear} aria-label={'Remove filter '+label}>{label}<X size={14}/></button>)}<button onClick={reset}><RotateCcw size={14}/>Clear all</button></div>}
  <div ref={results} className={'all-heroes-results '+view+'-view'} tabIndex={0} aria-label="Hero results; scroll to browse">
- {view==='details'&&rows.length>0?<table className="directory-table"><thead><tr><th>Hero</th><th>Type / pool</th><th>Weapon / movement</th><th>Schedule</th><th>Rerun month</th></tr></thead><tbody>{rows.map(h=><tr key={h.id}><td><button className="directory-table-hero" onClick={()=>onView(h)}>{portrait(h)}<span><strong>{h.name}</strong><span>{h.title||'Untitled hero'}</span></span></button></td><td>{h.category}<small>{displayPool(h)}{h.heroic_grail?' · Heroic Grails':''}</small></td><td>{h.color} {h.weapon_type||'weapon unassigned'}<small>{h.move_type||'Movement unassigned'}</small></td><td>{scheduleName(h.schedule||'None')}</td><td>{monthName(h.schedule==='None'?null:h.month)}</td></tr>)}</tbody></table>:rows.map(h=><button key={h.id} className={'all-heroes-card '+h.color.toLowerCase()} onClick={()=>onView(h)} aria-label={'View '+h.name+' · '+h.title}>{portrait(h)}<span className="all-heroes-copy"><strong>{h.name}</strong><span>{h.title||'Untitled hero'}</span>{['large','tiles','content'].includes(view)&&<span className="directory-hero-type">{h.category==='Chosen Hero'?'Chosen':h.category}{h.heroic_grail?' · Heroic Grails':''}</span>}</span>{view==='content'&&<span className="directory-content-facts"><span>{displayPool(h)}</span><span>{h.color} {h.weapon_type||'Weapon not assigned'} · {h.move_type||'Movement not assigned'}</span><span>Version {h.debut_version||'not recorded'}</span></span>}{['tiles','content'].includes(view)&&h.schedule&&h.schedule!=='None'&&<span className="directory-rerun"><span>{scheduleName(h.schedule||'None')}</span><strong>{monthName(h.schedule==='None'?null:h.month)}</strong></span>}</button>)}
+ {view==='details'&&rows.length>0?<table className="directory-table"><thead><tr><th>Hero</th><th>Type / pool</th><th>Weapon / movement</th><th>Schedule</th><th>Rerun month</th></tr></thead><tbody>{visibleRows.map(h=><tr key={h.id}><td><button className="directory-table-hero" onClick={()=>onView(h)}>{portrait(h)}<span><strong>{h.name}</strong><span>{h.title||'Untitled hero'}</span></span></button></td><td>{h.category}<small>{displayPool(h)}{h.heroic_grail?' · Heroic Grails':''}</small></td><td>{h.color} {h.weapon_type||'weapon unassigned'}<small>{h.move_type||'Movement unassigned'}</small></td><td>{scheduleName(h.schedule||'None')}</td><td>{monthName(h.schedule==='None'?null:h.month)}</td></tr>)}</tbody></table>:visibleRows.map(h=><button key={h.id} className={'all-heroes-card '+h.color.toLowerCase()} onClick={()=>onView(h)} aria-label={'View '+h.name+' · '+h.title}>{portrait(h)}<span className="all-heroes-copy"><strong>{h.name}</strong><span>{h.title||'Untitled hero'}</span>{['large','tiles','content'].includes(view)&&<span className="directory-hero-type">{h.category==='Chosen Hero'?'Chosen':h.category}{h.heroic_grail?' · Heroic Grails':''}</span>}</span>{view==='content'&&<span className="directory-content-facts"><span>{displayPool(h)}</span><span>{h.color} {h.weapon_type||'Weapon not assigned'} · {h.move_type||'Movement not assigned'}</span><span>Version {h.debut_version||'not recorded'}</span></span>}{['tiles','content'].includes(view)&&h.schedule&&h.schedule!=='None'&&<span className="directory-rerun"><span>{scheduleName(h.schedule||'None')}</span><strong>{monthName(h.schedule==='None'?null:h.month)}</strong></span>}</button>)}
+ {visibleCount<rows.length&&<button ref={more} className="directory-load-more secondary" onClick={()=>setVisibleCount(n=>Math.min(n+120,rows.length))}>Show more heroes</button>}
  {!rows.length&&<div className="all-heroes-empty"><Shield size={30}/><h3>{heroes.length?'No matching heroes':'No heroes yet'}</h3><p>{heroes.length?'Try another search or clear your filters.':'Heroes will appear here when they are added.'}</p>{chips.length>0&&<button className="secondary" onClick={reset}>Clear filters</button>}</div>}</div></section>;
 }

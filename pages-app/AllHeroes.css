@@ -23,3 +23,6 @@
 .directory-total{margin:0;font-size:13px;opacity:.7}.directory-workspace .all-heroes-search:focus-within{border-color:var(--realm-accent);box-shadow:0 0 0 1px var(--realm-accent)}.directory-workspace .all-heroes-search input:focus-visible{outline:none}
 
 .directory-workspace :is(.small-view,.medium-view) .all-heroes-copy strong,.directory-workspace .medium-view .all-heroes-copy>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal}
+
+.directory-workspace .directory-load-more{grid-column:1/-1;justify-self:center;margin:12px auto;display:block}
+@supports(content-visibility:auto){.directory-workspace .all-heroes-card{content-visibility:auto;contain-intrinsic-block-size:auto 130px}.directory-workspace .small-view .all-heroes-card{contain-intrinsic-block-size:auto 85px}.directory-workspace .list-view .all-heroes-card{contain-intrinsic-block-size:auto 70px}.directory-workspace .large-view .all-heroes-card{contain-intrinsic-block-size:auto 185px}}

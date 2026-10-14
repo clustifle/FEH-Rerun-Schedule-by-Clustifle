@@ -7,3 +7,7 @@ Views: Small icons (44 px), Medium icons (64 px), Large icons (96 px), List (40 
 Only results scroll; the toolbar stays visible. Mobile keeps the search full width and places sort/view/filter controls together. Legacy mobile directory rules exclude the new workspace to prevent layout conflicts. Cards use intrinsic grid row sizing so portraits cannot be squeezed by the scrolling container.
 
 Checks: scripts/all-heroes-views-check.mjs covers all views, image sizes, portrait containment, mobile overflow, toolbar width, search, persistence and derived pool filtering.
+
+Performance: the directory indexes normalized search text once per dataset and sorts only when data or sort order changes. Search input uses deferred filtering to keep typing responsive. Views render the first 120 results, adding 120 as the scroll boundary approaches; a keyboard-accessible Show more heroes button also advances the list. Counts and filters always include the full dataset. Offscreen cards skip painting where supported. Concurrent catalog reads share their in-flight request without retaining a stale cache.
+
+Monthly and Weekly Revival timers pause while the page is hidden, refresh when it returns, and use second updates only within the final day of a banner boundary.

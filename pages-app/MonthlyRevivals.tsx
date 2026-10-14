@@ -4,6 +4,7 @@ import {supabase,portraitUrl} from './static-data';
 import HeroPortraitMarks from './HeroPortraitMarks';
 import ProfileHeroPicker from './ProfileHeroPicker';
 import {bannerTiming} from './banner-time';
+import useBannerClock from './useBannerClock';
 import './WeeklyRevivals.css';
 import './MonthlyRevivals.css';
 type Hero={id:string;name:string;title:string;color:string;category:string;portrait:string|null;weapon_type?:string|null;move_type?:string|null;blessing?:string|null};
@@ -22,13 +23,15 @@ const addDays=(d:string,n:number)=>{const value=new Date(d+'T12:00:00Z');value.s
 const failure=(e:unknown)=>e&&typeof e==='object'&&'code' in e&&e.code==='PGRST116'?'This record changed. Refresh before editing again.':e&&typeof e==='object'&&'message' in e?String(e.message):'Could not save Monthly Revival.';
 export default function MonthlyRevivals({heroes,canEdit,onView,onChanged}:{heroes:Hero[];canEdit:boolean;onView:(h:Hero)=>void;onChanged?:()=>void}){
  const params=new URLSearchParams(location.search);
- const [tab,setTab]=useState(params.get('view')==='directory'?'directory':'schedule'),[kind,setKind]=useState(params.get('kind')==='Mythic'?'Mythic':'Legendary'),[month,setMonth]=useState(/^\d{4}-(0[1-9]|1[0-2])$/.test(params.get('month')||'')?params.get('month')!:todayMonth()),[query,setQuery]=useState(''),[banners,setBanners]=useState<Banner[]>([]),[events,setEvents]=useState<Appearance[]>([]),[selected,setSelected]=useState<string|null>(params.get('banner')),[draft,setDraft]=useState<Draft|null>(null),[busy,setBusy]=useState(false),[loading,setLoading]=useState(true),[error,setError]=useState(''),[notice,setNotice]=useState(''),[clock,setClock]=useState(Date.now());
+ const [tab,setTab]=useState(params.get('view')==='directory'?'directory':'schedule'),[kind,setKind]=useState(params.get('kind')==='Mythic'?'Mythic':'Legendary'),[month,setMonth]=useState(/^\d{4}-(0[1-9]|1[0-2])$/.test(params.get('month')||'')?params.get('month')!:todayMonth()),[query,setQuery]=useState(''),[banners,setBanners]=useState<Banner[]>([]),[events,setEvents]=useState<Appearance[]>([]),[selected,setSelected]=useState<string|null>(params.get('banner')),[draft,setDraft]=useState<Draft|null>(null),[busy,setBusy]=useState(false),[loading,setLoading]=useState(true),[error,setError]=useState(''),[notice,setNotice]=useState('');
  const [ids,setIds]=useState<string[]>([]),[bannerKind,setBannerKind]=useState('Legendary'),[picker,setPicker]=useState<number|null>(null),[scheduleNow,setScheduleNow]=useState(false),[enableSchedule,setEnableSchedule]=useState(false),[underConsideration,setUnderConsideration]=useState(false),[exact,setExact]=useState(false),[eventMonth,setEventMonth]=useState(month),[start,setStart]=useState(''),[duration,setDuration]=useState('');
  const savedBanner=useRef<Banner|null>(null);
  const dialog=useRef<HTMLDialogElement>(null),heroMap=useMemo(()=>new Map(heroes.map(h=>[h.id,h])),[heroes]);
  async function rows(table:string){const result:unknown[]=[];for(let offset=0;;offset+=500){const r=await supabase.from(table).select('*').order('id').range(offset,offset+499);if(r.error)throw r.error;result.push(...r.data);if(r.data.length<500)return result;}}
  async function load(){setLoading(true);try{const [b,e]=await Promise.all([rows('monthly_revival_banners'),rows('monthly_revival_events')]);setBanners((b as Banner[]).sort((a,b)=>a.kind.localeCompare(b.kind)||a.number-b.number));setEvents((e as Appearance[]).sort((a,b)=>(a.month||'9999').localeCompare(b.month||'9999')||(a.starts_on||'').localeCompare(b.starts_on||'')));setError('');}catch(e){setError(failure(e));}finally{setLoading(false);}}
- useEffect(()=>{void load();const timer=setInterval(()=>setClock(Date.now()),1000);return()=>clearInterval(timer);},[]);
+ const clockPeriods=useMemo(()=>events.filter(e=>e.confirmed&&e.starts_on&&e.ends_on).map(e=>({start:Date.parse(e.starts_on+'T07:00:00Z'),end:Date.parse(e.ends_on+'T06:59:59Z')})),[events]);
+ const clock=useBannerClock(clockPeriods);
+ useEffect(()=>{void load();},[]);
  useEffect(()=>{if(!canEdit)setDraft(null);},[canEdit]);
  useEffect(()=>{if(!draft){dialog.current?.close();return;}setError('');savedBanner.current=null;const b=draft.banner,e=draft.kind==='event'?draft.event:null;setIds(b?[b.hero_1,b.hero_2,b.hero_3]:['','','']);setBannerKind(b?.kind||kind);setEnableSchedule(draft.kind==='event');setScheduleNow(!!e?.starts_on&&!!e?.ends_on&&bannerTiming(e.starts_on,e.ends_on,Date.now(),'07:00','06:59:59').state==='Ongoing');setUnderConsideration(e?.under_consideration||false);setExact(!!e?.starts_on);setEventMonth(e?.month?.slice(0,7)||month);setStart(e?.starts_on||'');setDuration(e?.duration?String(e.duration):'');dialog.current?.showModal();},[draft]);
  function persist(nextTab=tab,nextMonth=month,nextKind=kind,nextSelected=selected){const p=new URLSearchParams(location.search);p.set('month',nextMonth);p.set('kind',nextKind);if(nextTab==='directory')p.set('view','directory');else p.delete('view');if(nextSelected)p.set('banner',nextSelected);else p.delete('banner');history.replaceState(null,'',location.pathname+'?'+p);}

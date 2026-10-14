@@ -11,7 +11,12 @@ export const supabaseUrl='https://aknsqeqykjgdyhdroqcx.supabase.co';
 export const supabasePublishableKey='sb_publishable_PiJIst1aSJtrYBiIvwDIVA_KS3c-E3g';
 export const supabase=createClient(supabaseUrl,supabasePublishableKey);
 // Page through the API limit so directories and duplicate checks see every hero.
-export async function loadAllHeroRows(){
+let pendingHeroes:ReturnType<typeof readAllHeroRows>|null=null;
+export function loadAllHeroRows(){
+ if(!pendingHeroes){pendingHeroes=readAllHeroRows();const active=pendingHeroes;void active.finally(()=>{if(pendingHeroes===active)pendingHeroes=null;}).catch(()=>{});}
+ return pendingHeroes;
+}
+async function readAllHeroRows(){
  const rows=[];const pageSize=1000;
  for(let start=0;;start+=pageSize){
   const {data,error}=await supabase.from('heroes').select('*').order('month',{nullsFirst:false}).order('name').order('id').range(start,start+pageSize-1);
@@ -81,7 +86,7 @@ export async function apiFetch(input:string,init?:RequestInit){
  if((!init?.method||init.method==='GET')&&['/api/heroes','/api/banners'].includes(input)){
   return sharedRead(input,()=>runApiFetch(input,init));
  }
- if(init?.method&&init.method!=='GET')pendingReads.clear();
+ if(init?.method&&init.method!=='GET'){pendingReads.clear();pendingHeroes=null;}
  return runApiFetch(input,init);
 }
 async function runApiFetch(input:string,init?:RequestInit){

@@ -4,6 +4,7 @@ import {supabase,portraitUrl} from './static-data';
 import HeroPortraitMarks from './HeroPortraitMarks';
 import ProfileHeroPicker from './ProfileHeroPicker';
 import {bannerTiming} from './banner-time';
+import useBannerClock from './useBannerClock';
 import './WeeklyRevivals.css';
 type Hero={id:string;name:string;title:string;color:string;category:string;portrait:string|null;weapon_type?:string|null;move_type?:string|null;blessing?:string|null};
 type Banner={number:number;hero_1:string|null;hero_2:string|null;hero_3:string|null;source_url:string;revision:number};
@@ -19,7 +20,7 @@ const label=(d:string)=>new Date(d+'T12:00:00Z').toLocaleDateString(undefined,{m
 const message=(e:unknown)=>e&&typeof e==='object'&&'code' in e&&e.code==='PGRST116'?'This record changed. Close the editor, refresh, and try again.':e&&typeof e==='object'&&'message' in e?String(e.message):'Could not save Weekly Revival changes.';
 export default function WeeklyRevivals({heroes,canEdit,onView,onAddHero}:{heroes:Hero[];canEdit:boolean;onView:(hero:Hero)=>void;onAddHero:(onSaved:(id?:string)=>Promise<void>,onClose:()=>void)=>void}){
  const params=new URLSearchParams(location.search);
- const [tab,setTab]=useState(params.get('view')==='directory'?'directory':'schedule'),[month,setMonth]=useState(/^\d{4}-(0[1-9]|1[0-2])$/.test(params.get('month')||'')?params.get('month')!:todayMonth()),[query,setQuery]=useState(''),[banners,setBanners]=useState<Banner[]>([]),[events,setEvents]=useState<Appearance[]>([]),[selected,setSelected]=useState<number|null>(Number(params.get('banner'))||null),[page,setPage]=useState(0),[loading,setLoading]=useState(true),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState(''),[draft,setDraft]=useState<Draft|null>(null),[clock,setClock]=useState(Date.now());
+ const [tab,setTab]=useState(params.get('view')==='directory'?'directory':'schedule'),[month,setMonth]=useState(/^\d{4}-(0[1-9]|1[0-2])$/.test(params.get('month')||'')?params.get('month')!:todayMonth()),[query,setQuery]=useState(''),[banners,setBanners]=useState<Banner[]>([]),[events,setEvents]=useState<Appearance[]>([]),[selected,setSelected]=useState<number|null>(Number(params.get('banner'))||null),[page,setPage]=useState(0),[loading,setLoading]=useState(true),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState(''),[draft,setDraft]=useState<Draft|null>(null);
  const [createdHeroes,setCreatedHeroes]=useState<Hero[]>([]);
  const roster=[...heroes,...createdHeroes.filter(h=>!heroes.some(old=>old.id===h.id))];
  async function heroCreated(slot:number,id?:string){if(!id)throw Error('Hero saved but its ID was not returned. Refresh the picker to select it.');const r=await supabase.from('heroes').select('*').eq('id',id).single();if(r.error)throw r.error;setCreatedHeroes(old=>[...old,r.data as Hero]);setPreviewIds(old=>old.map((v,i)=>i===slot-1?id:v));}
@@ -33,7 +34,9 @@ export default function WeeklyRevivals({heroes,canEdit,onView,onAddHero}:{heroes
  function usedHeroes(){return previewIds.filter((id,i)=>i!==pickerSlot!-1&&!!id);}
  async function allRows(table:string,order:string){const rows:unknown[]=[];for(let offset=0;;offset+=500){const r=await supabase.from(table).select('*').order(order).range(offset,offset+499);if(r.error)throw r.error;rows.push(...(r.data||[]));if(!r.data||r.data.length<500)return rows;}}
  async function load(){setLoading(true);try{const [a,b]=await Promise.all([allRows('weekly_revival_banners','number'),allRows('weekly_revival_events','starts_on')]);setBanners(a as Banner[]);setEvents(b as Appearance[]);setError('');}catch(e){setError(message(e));}finally{setLoading(false);}}
- useEffect(()=>{void load();const timer=setInterval(()=>setClock(Date.now()),60000);return()=>clearInterval(timer);},[]);
+ const clockPeriods=useMemo(()=>events.filter(e=>e.confirmed&&e.starts_on&&e.ends_on).map(e=>({start:Date.parse(e.starts_on+'T07:00:00Z'),end:Date.parse(e.ends_on+'T06:59:59Z')})),[events]);
+ const clock=useBannerClock(clockPeriods);
+ useEffect(()=>{void load();},[]);
  useEffect(()=>{if(draft){setError('');dialog.current?.showModal();}else dialog.current?.close();},[draft]);
  useEffect(()=>{if(!canEdit)setDraft(null);},[canEdit]);
  const heroMap=useMemo(()=>new Map(roster.map(h=>[h.id,h])),[heroes,createdHeroes]);
