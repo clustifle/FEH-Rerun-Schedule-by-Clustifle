@@ -1,10 +1,10 @@
 /* Phone layouts retain the shared FEH artwork and realm colors. */
 @media(max-width:600px){
- html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .all-heroes-tools{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;margin-bottom:8px}
- .all-heroes .all-heroes-tools .all-heroes-search{min-width:0;grid-column:1;flex-basis:auto;padding:10px}
- .all-heroes .all-heroes-tools .directory-filter-control{grid-column:2;justify-self:end}
- .all-heroes .all-heroes-tools:has(.directory-add){grid-template-columns:minmax(0,1fr) 44px 44px}
- .all-heroes .all-heroes-tools .directory-add{grid-column:3;padding:8px}
+ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .all-heroes:not(.directory-workspace) .all-heroes-tools{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;margin-bottom:8px}
+ .all-heroes:not(.directory-workspace) .all-heroes-tools .all-heroes-search{min-width:0;grid-column:1;flex-basis:auto;padding:10px}
+ .all-heroes:not(.directory-workspace) .all-heroes-tools .directory-filter-control{grid-column:2;justify-self:end}
+ .all-heroes:not(.directory-workspace) .all-heroes-tools:has(.directory-add){grid-template-columns:minmax(0,1fr) 44px 44px}
+ .all-heroes:not(.directory-workspace) .all-heroes-tools .directory-add{grid-column:3;padding:8px}
  .all-heroes .directory-display-tools{gap:8px;padding:8px 0}
  .all-heroes .all-heroes-sort{min-width:0;font-size:14px;gap:7px}
  .all-heroes .all-heroes-sort select{min-width:0;max-width:185px;padding:9px;font-size:16px}

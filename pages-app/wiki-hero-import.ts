@@ -13,6 +13,12 @@ const text=(el:Element|undefined|null)=>el?.textContent?.normalize('NFC').replac
 export const wikiHeroName=(name:string)=>name.normalize('NFC').replace(/\s*\((?:M|F|Y|A)\)\s*$/i,'').trim();
 const matchKey=(value:string)=>value.normalize('NFKD').toLowerCase().replace(/\p{M}/gu,'').replace(/[ðþæøœłß]/g,letter=>({'ð':'d','þ':'th','æ':'ae','ø':'o','œ':'oe','ł':'l','ß':'ss'}[letter]!)).replace(/\s*\((?:m|f|y|a)\)(?=\s*:|\s*$)/g,'').replace(/[^\p{L}\p{N}]/gu,'');
 export const wikiMatch=(a:string,b:string)=>!!matchKey(a)&&matchKey(a)===matchKey(b);
+export function wikiRefineMatch(candidate:string,weapon:string){
+ const clean=(input:string)=>{let value=input;for(let i=0;i<2;i++){try{const next=decodeURIComponent(value);if(next===value)break;value=next;}catch{break;}}
+ for(let i=0;i<2;i++)value=value.replace(/&(?:amp|quot|apos|nbsp|#\d+|#x[0-9a-f]+);/gi,entity=>{if(entity.startsWith('&#')){const hex=/^&#x/i.test(entity),code=parseInt(entity.slice(hex?3:2,-1),hex?16:10);return code>0&&code<=0x10ffff?String.fromCodePoint(code):entity;}return {'&amp;':'&','&quot;':'"','&apos;':"'",'&nbsp;':' '}[entity.toLowerCase()]!;});
+ return value.replace(/^File:/i,'').replace(/\.(?:png|webp|jpe?g)$/i,'').replace(/_/g,' ').replace(/\s*\[\d+\]/g,'').replace(/[†‡]/g,'').trim();};
+ return wikiMatch(clean(candidate),clean(weapon)+' W');
+}
 export function wikiHeroTypes(doc:Document){
  const values:string[]=[];
  for(const tr of doc.querySelectorAll('tr')){
@@ -68,7 +74,7 @@ export function parseWikiHero(html:string,title:string,url:string):WikiHero{
  for(const skill of skills.filter(s=>s.slot==='Weapon')){
   const images=Array.from(doc.querySelectorAll('img'));
   const sources=(img:Element)=>[img.closest('a')?.getAttribute('href'),img.getAttribute('data-src'),img.getAttribute('data-original'),img.getAttribute('src'),...(img.getAttribute('data-srcset')||img.getAttribute('srcset')||'').split(',').map(part=>part.trim().split(/\s+/)[0])].filter((v):v is string=>!!v).map(value=>value.startsWith('//')?'https:'+value:value);
-  const image=images.find(img=>{const names=[img.getAttribute('alt'),img.getAttribute('data-image-name'),img.getAttribute('data-image-key'),...sources(img).map(value=>{try{return decodeURIComponent(new URL(value).pathname.split('/revision')[0].split('/').at(-1)||'');}catch{return '';}})];return names.some(value=>value&&wikiMatch(value.replace(/\.(png|webp|jpe?g)$/i,'').replace(/_/g,' '),skill.name+' W'));});
+  const image=images.find(img=>{const names=[img.getAttribute('alt'),img.getAttribute('title'),img.getAttribute('aria-label'),img.getAttribute('data-image-name'),img.getAttribute('data-image-key'),...sources(img).map(value=>{try{return decodeURIComponent(new URL(value).pathname.split('/revision')[0].split('/').at(-1)||'');}catch{return '';}})];return names.some(value=>value&&wikiRefineMatch(value,skill.name));});
   const valid=image?sources(image).filter(value=>{try{const url=new URL(value);return url.protocol==='https:'&&url.hostname==='static.wikia.nocookie.net'&&!url.username&&!url.password&&!url.port;}catch{return false;}}):[];
   skill.refineIcon=valid[0]?.replace(/\/scale-to-width-down\/\d+/,'')||null;
   skill.refineThumbnail=valid.find(value=>value.includes('/scale-to-width-down/'))||valid[0]||null;

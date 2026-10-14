@@ -1,0 +1,9 @@
+# All Heroes directory
+
+The compact toolbar combines name/title/type/note search, sorting, a seven-option view selector, filters and Add Hero. Filters retain category, color, weapon, movement, pool, schedule, blessing, demote and debut-version controls. Active filters can be removed individually or reset together.
+
+Views: Small icons (44 px), Medium icons (64 px), Large icons (96 px), List (40 px rows), Details (table), Tiles (72 px portrait cards), and Content (expanded rows). The selected view is remembered in local browser preferences. Hero profile links and hover previews work in every view. Search ignores common accents and transliterates FEH special letters. Compact labels truncate without changing accessible hero names.
+
+Only results scroll; the toolbar stays visible. Mobile keeps the search full width and places sort/view/filter controls together. Legacy mobile directory rules exclude the new workspace to prevent layout conflicts. Cards use intrinsic grid row sizing so portraits cannot be squeezed by the scrolling container.
+
+Checks: scripts/all-heroes-views-check.mjs covers all views, image sizes, portrait containment, mobile overflow, toolbar width, search, persistence and derived pool filtering.
