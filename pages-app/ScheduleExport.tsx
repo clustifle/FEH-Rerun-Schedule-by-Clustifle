@@ -1,10 +1,11 @@
+import {blessingIcon} from './blessing-icons';
 import {useEffect,useRef,useState} from 'react';
 import {Share2,X,Download,Link} from 'lucide-react';
 import {assetUrl,portraitUrl} from './static-data';
 import {viewUrl} from './routes';
 import './ScheduleExport.css';
 import {useDefinitions,definitionIcon,baseTypes} from './catalog';
-type Hero={id:string;name:string;title:string;category:string;color:string;month:string|null;portrait:string|null;weapon_type?:string|null;move_type?:string|null;blessing?:string|null;heroic_grail?:boolean;schedule?:string;revival_id?:string;revival_label?:string;revival_order?:number};
+type Hero={debut_version?:string|null;release_date?:string|null;id:string;name:string;title:string;category:string;color:string;month:string|null;portrait:string|null;weapon_type?:string|null;move_type?:string|null;blessing?:string|null;heroic_grail?:boolean;schedule?:string;revival_id?:string;revival_label?:string;revival_order?:number};
 type CombinedExport={lme:Hero[];remix:Hero[];consideration:Hero[]};
 const emptyHeroes:Hero[]=[];
 const colors=['Red','Blue','Green','Colorless'];
@@ -15,7 +16,7 @@ export default function ScheduleExport({heroes,waitlistHeroes=emptyHeroes,schedu
  const combinedMode=!!combined;
  const consideration=schedule==='Schedule Under Consideration';
  const definitions=useDefinitions();
- const typeIcon=(h:Hero)=>{const type=h.heroic_grail?'Heroic Grails':h.category;if(['','General','Special'].includes(type))return '';if(h.heroic_grail)return assetUrl('hero-types/heroic-grails.webp');if(['Legendary','Mythic','Chosen Hero'].includes(type))return h.blessing?assetUrl((type==='Chosen Hero'?'chosen/':'blessings/')+h.blessing.toLowerCase()+(type==='Chosen Hero'?'.png':'.webp')):'';const icon=definitionIcon(definitions,'hero_type',type);return icon?(icon.startsWith('mods-icons/')?portraitUrl(icon):assetUrl(icon)):baseTypes.includes(type)?assetUrl('hero-types/'+type.toLowerCase()+'.webp'):'';};
+ const typeIcon=(h:Hero)=>{const type=h.heroic_grail?'Heroic Grails':h.category;if(['','General','Special'].includes(type))return '';if(h.heroic_grail)return assetUrl('hero-types/heroic-grails.webp');if(['Legendary','Mythic','Chosen Hero'].includes(type))return h.blessing?blessingIcon(type,h.blessing,h):'';const icon=definitionIcon(definitions,'hero_type',type);return icon?(icon.startsWith('mods-icons/')?portraitUrl(icon):assetUrl(icon)):baseTypes.includes(type)?assetUrl('hero-types/'+type.toLowerCase()+'.webp'):'';};
  const dialog=useRef<HTMLDialogElement>(null),generation=useRef(0),[open,setOpen]=useState(false),[from,setFrom]=useState(month),[to,setTo]=useState(month),[quality,setQuality]=useState('4k'),[includeWaitlist,setIncludeWaitlist]=useState(false),[preview,setPreview]=useState(''),[busy,setBusy]=useState(false),[message,setMessage]=useState('');
  const [background,setBackground]=useState('dark'),[customColor,setCustomColor]=useState('#102e3a'),[portraitSize,setPortraitSize]=useState('100'),[spacing,setSpacing]=useState('normal'),[showLogo,setShowLogo]=useState(true),[showFooter,setShowFooter]=useState(true),[showBorders,setShowBorders]=useState(true),[showIcons,setShowIcons]=useState(true);
  const [customWindow,setCustomWindow]=useState(false),[windowColor,setWindowColor]=useState('#1b3c49'),[customText,setCustomText]=useState(false),[textColor,setTextColor]=useState('#ffffff'),[notes,setNotes]=useState('');

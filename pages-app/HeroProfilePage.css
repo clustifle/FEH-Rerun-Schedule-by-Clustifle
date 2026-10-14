@@ -83,3 +83,5 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][dat
  html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-profile-page .hero-profile-release-card{grid-template-columns:minmax(0,1fr);gap:14px;padding:14px}
  html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .hero-profile-page .hero-profile-release-card .v2-actions{margin:0}
 }
+
+.mythic-bonus-note{margin-top:12px;padding-top:10px;border-top:1px solid var(--realm-line);font:14px/1.45 FEHeroes,Georgia,serif}.mythic-bonus-note summary{cursor:pointer}.mythic-bonus-note ul{padding-left:18px}.mythic-bonus-note li{margin:6px 0}.mythic-bonus-note a{color:inherit}

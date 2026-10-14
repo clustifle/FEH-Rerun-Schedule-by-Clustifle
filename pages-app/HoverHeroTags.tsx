@@ -1,8 +1,9 @@
+import {blessingIcon} from './blessing-icons';
 import {useDefinitions,definitionIcon} from './catalog';
 import {portraitUrl as heroPortraitUrl,assetUrl} from './static-data';
 export type Hero={debut_version?:string|null;release_date?:string|null;id:string;name:string;title:string;category:string;color:string;portrait:string|null;pool?:string|null;blessing?:string|null;heroic_grail?:boolean;weapon_type?:string|null;move_type?:string|null;schedule?:string;month?:string|null;notes?:string;demote?:boolean};
 const kindClass=(h:Hero)=>['Legendary','Mythic','Chosen Hero'].includes(h.category)?h.blessing?.toLowerCase()||'unblessed':h.category.toLowerCase();
-const blessingIcon=(category:string,blessing:string)=>assetUrl((category==='Chosen Hero'?'chosen/':'blessings/')+blessing.toLowerCase()+(category==='Chosen Hero'?'.png':'.webp'));export function HeroTypeTag({hero}:{hero:Hero}){
+export function HeroTypeTag({hero}:{hero:Hero}){
  const definitions=useDefinitions();
  if(hero.heroic_grail)return <span className="hero-type-signature grail-signature"><img src={assetUrl('hero-types/heroic-grails.webp')} alt="" width={32} height={32}/><span className="hero-type-copy"><strong>Heroic Grails</strong></span></span>;
  const label=hero.category==='Chosen Hero'?'Chosen':hero.category;
@@ -12,7 +13,7 @@ const blessingIcon=(category:string,blessing:string)=>assetUrl((category==='Chos
  if(['Emblem','Duo','Harmonized','Ascended','Rearmed','Attuned','Aided','Entwined','Vista'].includes(hero.category))return <span className={'hero-type-signature '+hero.category.toLowerCase()+'-signature'}><img src={assetUrl('hero-types/'+hero.category.toLowerCase()+'.webp')} alt="" width={32} height={32}/><span className="hero-type-copy"><strong>{label}</strong></span></span>;
  if(!['Legendary','Mythic','Chosen Hero'].includes(hero.category))return <span className={'hero-kind '+kindClass(hero)}>{label}</span>;
  return <span className={'hero-type-signature '+(hero.blessing?.toLowerCase()||'unblessed')}>
- {hero.blessing&&<img src={blessingIcon(hero.category,hero.blessing)} alt="" width={32} height={32}/>}
+ {hero.blessing&&<img src={blessingIcon(hero.category,hero.blessing,hero)} alt="" width={32} height={32}/>}
  <span className="hero-type-copy"><strong>{label}</strong>{hero.blessing&&<span>{hero.blessing}</span>}</span>
  </span>;
 }
