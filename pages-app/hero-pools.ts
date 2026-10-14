@@ -21,7 +21,7 @@ export function displayPool(hero:PoolHero){
  if(isStarterHero(hero))return 'Starter unit (no summoning pool)';
  const base=normalizePool(hero.pool,hero.category);
  if(hero.demote||hero.heroic_grail||['Rearmed','Attuned','Legendary','Mythic','Emblem','Chosen Hero'].includes(hero.category))return base;
- if(base==='General Pool'&&!hero.demote&&withinCutoff(hero,8,1,'2024-01-31'))return specialRatePools[0];
+ if(base==='General Pool'&&!hero.demote&&withinCutoff(hero,8,7,'2024-07-31'))return specialRatePools[0];
  if(base==='Seasonal Limited'&&withinCutoff(hero,7,1,'2023-01-31'))return specialRatePools[1];
  return base;
 }

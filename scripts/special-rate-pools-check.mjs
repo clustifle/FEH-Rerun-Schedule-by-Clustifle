@@ -5,8 +5,8 @@ const js=ts.transpileModule(await readFile('pages-app/hero-pools.ts','utf8'),{co
 const exports={};new Function('exports',js)(exports);
 const {displayPool,specialRatePools,pools}=exports;
 const general={category:'General',pool:'General Pool'},seasonal={category:'Special',pool:'Seasonal Limited'};
-assert.equal(displayPool({...general,debut_version:'8.1'}),specialRatePools[0]);
-assert.equal(displayPool({...general,debut_version:'8.2'}),'General Pool');
+assert.equal(displayPool({...general,debut_version:'8.7'}),specialRatePools[0]);
+assert.equal(displayPool({...general,debut_version:'8.8'}),'General Pool');
 assert.equal(displayPool({...general,debut_version:'8.8'}),'General Pool','CYL8 debut is outside the cutoff');
 assert.equal(displayPool({...seasonal,debut_version:'7.1.0'}),specialRatePools[1]);
 assert.equal(displayPool({...seasonal,debut_version:'7.2'}),'Seasonal Limited');
@@ -15,8 +15,8 @@ for(const category of ['Rearmed','Attuned','Mythic','Legendary','Emblem','Chosen
 assert.equal(displayPool({...general,debut_version:'4.0',demote:true}),'General Pool');
 assert.equal(displayPool({...seasonal,debut_version:'6.0',demote:true}),'Seasonal Limited','seasonal demotes excluded from SHSR');
 assert.equal(displayPool({...general,debut_version:'4.0',heroic_grail:true}),'General Pool');
-assert.equal(displayPool({...general,release_date:'2024-01-31'}),specialRatePools[0]);
-assert.equal(displayPool({...general,release_date:'2024-02-01'}),'General Pool');
+assert.equal(displayPool({...general,release_date:'2024-07-31'}),specialRatePools[0]);
+assert.equal(displayPool({...general,release_date:'2024-08-01'}),'General Pool');
 assert.equal(displayPool({...seasonal,release_date:'2023-01-31'}),specialRatePools[1]);
 assert.equal(displayPool({...seasonal,release_date:'2023-02-01'}),'Seasonal Limited');
 assert.equal(displayPool(general),'General Pool','missing metadata does not infer eligibility');
