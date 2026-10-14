@@ -1,0 +1,9 @@
+.monthly-revivals .mr-status{margin:0 0 10px;font-size:14px;color:var(--realm-accent);line-height:1.4}
+.monthly-revivals>section{margin-top:24px}
+.monthly-revivals .wr-detail{min-width:0}
+.monthly-revivals .wr-card>small{display:block;margin-top:12px;opacity:.8}
+.monthly-revivals .wr-directory>.wr-directory-grid{align-content:start}
+.monthly-revivals .wr-appearance>span{min-width:0;overflow-wrap:anywhere}
+
+.monthly-revivals .wr-month input{width:190px;flex:none}
+@media(max-width:420px){.monthly-revivals .wr-month input{width:180px;font-size:16px;padding:8px}.monthly-revivals .wr-month{gap:6px}}
