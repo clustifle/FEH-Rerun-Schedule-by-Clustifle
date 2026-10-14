@@ -12,6 +12,23 @@ const text=(el:Element|undefined|null)=>el?.textContent?.normalize('NFC').replac
 export const wikiHeroName=(name:string)=>name.normalize('NFC').replace(/\s*\((?:M|F|Y|A)\)\s*$/i,'').trim();
 const matchKey=(value:string)=>value.normalize('NFKD').toLowerCase().replace(/\p{M}/gu,'').replace(/[ðþæøœłß]/g,letter=>({'ð':'d','þ':'th','æ':'ae','ø':'o','œ':'oe','ł':'l','ß':'ss'}[letter]!)).replace(/\s*\((?:m|f|y|a)\)(?=\s*:|\s*$)/g,'').replace(/[^\p{L}\p{N}]/gu,'');
 export const wikiMatch=(a:string,b:string)=>!!matchKey(a)&&matchKey(a)===matchKey(b);
+export function wikiHeroTypes(doc:Document){
+ const values:string[]=[];
+ for(const tr of doc.querySelectorAll('tr')){
+  const cells=Array.from(tr.children),label=text(cells[0]).replace(/\[[^\]]*\]/g,'').replace(/:$/,'').trim();
+  if(!/^(?:hero types?|rarities|rarity)$/i.test(label))continue;
+  for(const cell of cells.slice(1)){
+   values.push(text(cell));
+   for(const node of cell.querySelectorAll('img,a,span'))for(const attr of ['alt','title','aria-label','data-image-name','data-image-key']){const value=node.getAttribute(attr);if(value)values.push(value.replace(/_/g,' '));}
+   for(const a of cell.querySelectorAll('a[href]')){try{values.push(decodeURIComponent(a.getAttribute('href')!).replace(/_/g,' '));}catch{}}
+  }
+ }
+ const combined=values.join(' ').replace(/Special\s+(?:Hero\s+)?(?:Special\s+)?Rate/gi,''),special=/\bSpecial(?:\s+Heroes?)?\b/i.test(combined);
+ // A seasonal Duo/Harmonized/etc. keeps its distinctive type. Special wins
+ // over a plain General tag, never over a recognized specialized hero type.
+ const primary=['Chosen Hero','Legendary','Mythic','Emblem','Attuned','Rearmed','Ascended','Harmonized','Duo','Aided','Entwined','Vista'].find(type=>new RegExp('\\b'+type.replace(' ','\\s+')+'(?:\\s+Heroes?)?\\b','i').test(combined));
+ return {heroType:primary||(special?'Special':'General'),special};
+}
 function rows(table:Element){const result:Element[][]=[],carry=new Map<number,{cell:Element;left:number}>();for(const tr of table.querySelectorAll('tr')){if(tr.closest('table')!==table)continue;const out:Element[]=[];for(const [i,c] of carry){out[i]=c.cell;if(--c.left===0)carry.delete(i);}let col=0;for(const cell of tr.children){if(!['TD','TH'].includes(cell.tagName))continue;while(out[col])col++;const colspan=Math.max(1,Number(cell.getAttribute('colspan')||1)),span=Number(cell.getAttribute('rowspan')||1);for(let n=0;n<colspan;n++){out[col+n]=cell;if(span>1)carry.set(col+n,{cell,left:span-1});}col+=colspan;}result.push(out);}return result;}
 export function highestWikiPassives(candidates:WikiSkill[]){const best=new Map<SkillSlot,WikiSkill>();const tier=(name:string)=>{const match=name.match(/\s+(\d+)$/);return match?{family:name.slice(0,match.index).normalize('NFKC').toLowerCase(),rank:Number(match[1])}:null;};for(const skill of candidates){if(!['A','B','C','X'].includes(skill.slot))continue;const old=best.get(skill.slot),nextTier=tier(skill.name),oldTier=old&&tier(old.name);if(old&&nextTier&&oldTier&&nextTier.rank<oldTier.rank)continue;
  // Wiki learnsets list upgrades in progression order, including renamed and exclusive finals.
@@ -49,7 +66,7 @@ export function parseWikiHero(html:string,title:string,url:string):WikiHero{
  const portraitImage=Array.from(doc.querySelectorAll('img')).find(img=>[img.getAttribute('alt'),img.getAttribute('data-image-name'),img.getAttribute('data-image-key')].some(value=>value&&wikiMatch(value.replace(/\.(webp|png|jpe?g)$/i,'').replace(/_/g,' '),title.replace(':',' ')+' Face FC')));
  const rawPortrait=portraitImage?.getAttribute('data-src')||portraitImage?.getAttribute('data-original')||portraitImage?.getAttribute('src')||'';
  let portrait:string|null=null;try{const source=new URL(rawPortrait),filename=decodeURIComponent(source.pathname.split('/revision')[0].split('/').at(-1)||'').replace(/\.(webp|png|jpe?g)$/i,'').replace(/_/g,' ');if(source.protocol==='https:'&&source.hostname==='static.wikia.nocookie.net'&&!source.username&&!source.password&&!source.port&&wikiMatch(filename,title.replace(':',' ')+' Face FC'))portrait=source.href.replace(/\/scale-to-width-down\/\d+/,'');}catch{}
- const heroType=text(info.get('Hero Type')).match(/Chosen Hero|Legendary|Mythic|Emblem|Attuned|Rearmed|Ascended|Harmonized|Duo|Special|Aided|Entwined|Vista/i)?.[0]||'General';
+ const {heroType}=wikiHeroTypes(doc);
  const effect=text(info.get('Legendary Effect')||info.get('Mythic Effect')),blessing=effect.match(/\b(Earth|Fire|Water|Wind|Light|Dark|Astra|Anima)\b/i)?.[0]||null;
  const colon=title.indexOf(':');const identity={name:title.slice(0,colon).trim(),title:title.slice(colon+1).trim(),portrait,portraitThumbnail:portrait?rawPortrait:null,moveType:(/Flying|Flier/i.test(move)?'Fliers':move.match(/Infantry|Cavalry|Armored/i)?.[0]||null),weaponType:weaponType?weaponType.toLowerCase()==='dragon'?'Breath':weaponType[0].toUpperCase()+weaponType.slice(1).toLowerCase():null,color:color?color[0].toUpperCase()+color.slice(1).toLowerCase():null,heroType:heroType.toLowerCase()==='chosen hero'?'Chosen Hero':heroType[0].toUpperCase()+heroType.slice(1).toLowerCase(),blessing:blessing?blessing[0].toUpperCase()+blessing.slice(1).toLowerCase():null};
  return {title,version,releaseDate,skills,url,identity};
