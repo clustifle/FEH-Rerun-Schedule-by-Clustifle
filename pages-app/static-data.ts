@@ -10,6 +10,16 @@ import {upscalePortrait} from './portrait-upscale';
 export const supabaseUrl='https://aknsqeqykjgdyhdroqcx.supabase.co';
 export const supabasePublishableKey='sb_publishable_PiJIst1aSJtrYBiIvwDIVA_KS3c-E3g';
 export const supabase=createClient(supabaseUrl,supabasePublishableKey);
+// Page through the API limit so directories and duplicate checks see every hero.
+export async function loadAllHeroRows(){
+ const rows=[];const pageSize=1000;
+ for(let start=0;;start+=pageSize){
+  const {data,error}=await supabase.from('heroes').select('*').order('month',{nullsFirst:false}).order('name').order('id').range(start,start+pageSize-1);
+  if(error)throw new Error('Could not load heroes. '+error.message);
+  rows.push(...(data||[]));
+  if(!data||data.length<pageSize)return rows;
+ }
+}
 export const assetUrl=(value:string)=>{const path=(isBeta&&value==='clustifle-feh-rerun-logo.png'?'clustifle-feh-rerun-beta-logo.png':value).replace(/^\//,'');return import.meta.env.BASE_URL+path+(/^(?:blessings\/(?:fire|water|wind|earth)\.webp|chosen\/(?:fire|water|wind|earth)\.png)$/.test(path)?'?v=blessing-hd-2':'');};
 const deliveryPortraits=portraitManifest as Record<string,{thumb:string;detail:string}>;
 export const portraitUrl=(value:string,size:'thumb'|'detail'='thumb')=>/^cloudflare\/[a-f0-9-]{36}$/.test(value)?'https://feh-community-polls.shyguyvn.workers.dev/community/images/'+value.slice(11)+'?media=2':value.startsWith('data/')?assetUrl(value):deliveryPortraits[value]?assetUrl(deliveryPortraits[value][size]):supabase.storage.from('portraits').getPublicUrl(value).data.publicUrl;
@@ -78,9 +88,7 @@ async function runApiFetch(input:string,init?:RequestInit){
  try{
   if(input==='/api/session'){const {data:role}=await supabase.rpc('tracker_role');return jsonResponse({canEdit:role==='Owner'||role==='Manager',role});}
   if(input==='/api/heroes'&&(!init?.method||init.method==='GET')){
-   const {data,error}=await supabase.from('heroes').select('*').order('month',{nullsFirst:false}).order('name');
-   if(error)throw new Error('Schedule unavailable. '+error.message);
-   return jsonResponse(data);
+   return jsonResponse(await loadAllHeroRows());
   }
   if(input==='/api/banners'&&(!init?.method||init.method==='GET')){const query=()=>supabase.from('tracker_banners').select('*,tracker_banner_heroes(hero_id,slot_index)');let {data,error}=await query().order('sort_order',{nullsFirst:true,ascending:true}).order('starts_on');if(error?.code==='42703'&&error.message.includes('sort_order'))({data,error}=await query().order('starts_on'));if(error)throw new Error(error.message);return jsonResponse(data);}
   if(!await ownerSession())return fail('Only the owner can edit the schedule.',403);

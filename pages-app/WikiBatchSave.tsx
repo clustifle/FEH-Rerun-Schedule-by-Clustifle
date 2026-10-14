@@ -1,7 +1,7 @@
 import {isWaitlist,waitlistViews,waitlistKind,waitlistTable,waitlistLabel,remixWaitlistEligible} from './waitlist-types';
 import {displayPool} from './hero-pools';
 import {useRef,useState} from 'react';
-import {apiFetch,supabase} from './static-data';
+import {apiFetch,supabase,loadAllHeroRows} from './static-data';
 import {uploadCommunityImage} from './community-api';
 import {downloadWikiImage,prepareWikiHeroSkills} from './wiki-hero-draft';
 import {definitionNames,useDefinitions} from './catalog';
@@ -24,7 +24,7 @@ export default function WikiBatchSave({items,heroes,onBusy,onSaved,loading}:{ite
   if(selected.some(w=>choice(w).schedule==='Remix Waitlist'&&!remixWaitlistEligible({pool:choice(w).pool}))){setError('Remix Waitlist accepts only General Pool and Non-Seasonal Limited heroes.');return;}
   if(selected.some(w=>choice(w).schedule==='Monthly Revival'&&!['Legendary','Mythic'].includes(w.identity!.heroType))){setError('Monthly Revival supports Legendary and Mythic heroes.');return;}
   setBusy(true);onBusy(true);setError('');let saved=0;
-  try{const {data:current,error:readError}=await supabase.from('heroes').select('id,name,title');if(readError)throw readError;
+  try{const current=await loadAllHeroRows();
    for(const wiki of selected){const identity=wiki.identity!,settings=choice(wiki);let entry=prepared.current.get(wiki.url);
     if(current?.some(h=>h.id!==entry?.id&&wikiMatch(wiki.title,h.name+': '+h.title))){change(wiki,{selected:false,status:'Already on site — skipped'});continue;}
     try{change(wiki,{status:'Preparing portrait and skills…'});

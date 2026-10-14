@@ -1,4 +1,4 @@
-import {supabase} from './static-data';
+import {supabase,loadAllHeroRows} from './static-data';
 import {validateHero} from '../beta-service/hero-validation.mjs';
 import type {BetaHero} from './V2Workspace';
 
@@ -6,9 +6,9 @@ async function result<T>(request:PromiseLike<{data:T;error:{message:string}|null
 export async function productionRequest(path:string,init?:RequestInit){
  const read=!init?.method||init.method==='GET';
  const body=init?.body?JSON.parse(String(init.body)):{};
- if(path==='heroes'&&read)return result(supabase.from('heroes').select('*').order('name'));
+ if(path==='heroes'&&read)return loadAllHeroRows();
  if(path==='versions'&&read){
-  const [versions,heroes]=await Promise.all([result(supabase.from('tracker_feh_versions').select('*').order('sort_order').order('version')),result(supabase.from('heroes').select('debut_version'))]);
+  const [versions,heroes]=await Promise.all([result(supabase.from('tracker_feh_versions').select('*').order('sort_order').order('version')),loadAllHeroRows()]);
   return versions.map(v=>({...v,hero_count:heroes.filter(h=>h.debut_version===v.version).length}));
  }
  if(path==='watchlist'){
