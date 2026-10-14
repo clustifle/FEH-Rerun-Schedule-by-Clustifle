@@ -21,3 +21,5 @@ Adjustable-duration update: supabase/monthly-revival-adjustable-duration.sql rep
 
 Local-time and export update: exact start/end instants are displayed in the viewer's local timezone. The start-date editor converts local calendar dates back to the stored UTC FEH reset date, including previous-day timezones. Month-only assignments retain their announced month.
 Exports preserve each numbered banner's hero order, show one panel per month with Legendary/Mythic lineups stacked vertically, and group consideration heroes by their banner rather than weapon color. This applies to standalone and combined exports. Tests include Bangkok, Los Angeles winter date rollover, and mixed-color lineup placement.
+
+Ongoing + consideration update: Schedule Under Consideration is independent of the current appearance's dates. A dated ongoing record can have the flag checked, retains its countdown, and displays Next rerun: Schedule Under Consideration. Exports include its current month lineup and consideration lineup. The date constraint adjustment is in supabase/monthly-revival-ongoing-consideration.sql.
