@@ -1,5 +1,5 @@
 export type RerunBanner={banner_type?:string;name:string;starts_on?:string;starts_time?:string;tracker_banner_heroes:{hero_id:string}[]};
-const rerunTypes=new Set(['Duo','Harmonized','Rearmed','Attuned','Aided','Entwined','Vista','Special','General']);
+const rerunTypes=new Set(['Duo','Harmonized','Ascended','Rearmed','Attuned','Aided','Entwined','Vista','Special','General']);
 function layout(b:RerunBanner){return b.banner_type||(/new heroes (?:return|revival)|double special heroes/i.test(b.name)?'revival':/new heroes|special heroes/i.test(b.name)?'featured':'lme');}
 function started(b:RerunBanner,now:number){if(!b.starts_on)return false;const time=b.starts_time||'07:00:00';const start=Date.parse(b.starts_on+'T'+(time.length===5?time+':00':time)+'Z');return Number.isFinite(start)&&start<=now;}
 export function listedLmeHeroes(banners:RerunBanner[],now=Date.now()){const ids=new Set<string>();for(const b of banners)if(layout(b)==='lme'&&started(b,now))for(const h of b.tracker_banner_heroes)ids.add(h.hero_id);return ids;}

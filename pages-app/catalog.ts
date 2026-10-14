@@ -1,6 +1,6 @@
 import {useSyncExternalStore} from 'react';
 export type Definition={kind:'hero_type'|'pool';name:string;description:string;icon_path:string;active:boolean;sort_order:number};
-export const baseTypes=['Legendary','Mythic','Emblem','Chosen Hero','Rearmed','Attuned','Aided','Entwined','Duo','Harmonized','Vista','General','Special'];
+export const baseTypes=['Legendary','Mythic','Emblem','Chosen Hero','Ascended','Rearmed','Attuned','Aided','Entwined','Duo','Harmonized','Vista','General','Special'];
 export const basePools=['General Pool','Non-Seasonal Limited','Seasonal Limited','L/M/E Pool','Grail Pool'];
 let definitions:Definition[]=[];
 const listeners=new Set<()=>void>();

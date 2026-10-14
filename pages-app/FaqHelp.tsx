@@ -43,7 +43,7 @@ const entries:Entry[]=[
  {
   "section": "Schedules",
   "question": "Which heroes can appear in the L/M/E Waitlist?",
-  "answer": "Alongside Legendary, Mythic, and Emblem Heroes, the L/M/E Waitlist may include **General, Special, Rearmed, Attuned, Aided, Entwined, and Vista Heroes** after their release in a New Heroes or Special Heroes summoning event.\n\nAn entry tracks a **possible rerun whose timing or banner is uncertain**. Inclusion does not confirm that the hero will return on an L/M/E banner or guarantee a rerun date.\n\nOnly the **Head Administrator** and authorized **Schedule Managers** manually add or edit entries. A hero’s debut does not add them automatically."
+  "answer": "Alongside Legendary, Mythic, and Emblem Heroes, the L/M/E Waitlist may include **General, Special, Ascended, Rearmed, Attuned, Aided, Entwined, and Vista Heroes** after their release in a New Heroes or Special Heroes summoning event.\n\nAn entry tracks a **possible rerun whose timing or banner is uncertain**. Inclusion does not confirm that the hero will return on an L/M/E banner or guarantee a rerun date.\n\nOnly the **Head Administrator** and authorized **Schedule Managers** manually add or edit entries. A hero’s debut does not add them automatically."
  },
  {
   "section": "Schedules",
