@@ -13,6 +13,7 @@ assert.equal(displayPool({...seasonal,debut_version:'7.2'}),'Seasonal Limited');
 assert.equal(displayPool({...general,category:'Ascended',debut_version:'6.0'}),specialRatePools[0]);
 for(const category of ['Rearmed','Attuned','Mythic','Legendary','Emblem','Chosen Hero'])assert.equal(displayPool({...general,category,debut_version:'4.0'}),'General Pool');
 assert.equal(displayPool({...general,debut_version:'4.0',demote:true}),'General Pool');
+assert.equal(displayPool({...seasonal,debut_version:'6.0',demote:true}),'Seasonal Limited','seasonal demotes excluded from SHSR');
 assert.equal(displayPool({...general,debut_version:'4.0',heroic_grail:true}),'General Pool');
 assert.equal(displayPool({...general,release_date:'2024-01-31'}),specialRatePools[0]);
 assert.equal(displayPool({...general,release_date:'2024-02-01'}),'General Pool');

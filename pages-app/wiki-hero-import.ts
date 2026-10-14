@@ -1,7 +1,7 @@
 import {communityApi} from './community-api';
 import {skillSlots,type SkillSlot} from './hero-skills';
 export type WikiSkill={slot:SkillSlot;name:string;icon:string|null;thumbnail?:string|null;refineIcon?:string|null;refineThumbnail?:string|null};
-export type WikiHero={title:string;version:string|null;releaseDate:string|null;skills:WikiSkill[];url:string;identity?:{name:string;title:string;portrait:string|null;portraitThumbnail?:string|null;moveType:string|null;weaponType:string|null;color:string|null;heroType:string;blessing:string|null}};
+export type WikiHero={title:string;version:string|null;releaseDate:string|null;skills:WikiSkill[];url:string;identity?:{name:string;title:string;portrait:string|null;portraitThumbnail?:string|null;moveType:string|null;weaponType:string|null;color:string|null;heroType:string;blessing:string|null;demote?:boolean;heroicGrail?:boolean}};
 export function wikiPageUrl(value:string){
  let url:URL,page:string;try{url=new URL(value.trim());page=decodeURIComponent(url.pathname.slice(url.pathname.startsWith('/wiki/')?6:url.hostname==='feheroes.gamepedia.com'?1:6));if(/%[0-9a-f]{2}/i.test(page))page=decodeURIComponent(page);if(/[\u0000-\u001f\u007f]/u.test(page))throw Error('Invalid page characters');page=page.normalize('NFC').replace(/[\u2018\u2019\u02bc]/g,"'").replace(/[\u2010-\u2015\u2212]/g,'-').replace(/_/g,' ').replace(/\s+/gu,' ').trim();}catch{throw Error('Use a valid FEH Wiki hero page URL.');}
  if(value.length>2000||url.protocol!=='https:'||!['feheroes.fandom.com','feheroes.gamepedia.com'].includes(url.hostname)||url.username||url.password||url.port||(!url.pathname.startsWith('/wiki/')&&url.hostname!=='feheroes.gamepedia.com'))throw Error('Use an HTTPS hero page from feheroes.fandom.com.');
@@ -28,6 +28,18 @@ export function wikiHeroTypes(doc:Document){
  // over a plain General tag, never over a recognized specialized hero type.
  const primary=['Chosen Hero','Legendary','Mythic','Emblem','Attuned','Rearmed','Ascended','Harmonized','Duo','Aided','Entwined','Vista'].find(type=>new RegExp('\\b'+type.replace(' ','\\s+')+'(?:\\s+Heroes?)?\\b','i').test(combined));
  return {heroType:primary||(special?'Special':'General'),special};
+}
+export function wikiAvailability(doc:Document){
+ const values:string[]=[];
+ for(const tr of doc.querySelectorAll('tr')){const cells=Array.from(tr.children);if(!/^rarities$/i.test(text(cells[0])))continue;for(const cell of cells.slice(1)){const clone=cell.cloneNode(true) as Element;for(const img of clone.querySelectorAll('img'))img.replaceWith(doc.createTextNode(' '+(img.getAttribute('alt')||'★')+' '));values.push(text(clone));for(const node of cell.querySelectorAll('a,img'))for(const attr of ['title','alt','href']){const value=node.getAttribute(attr);if(value)try{values.push(decodeURIComponent(value).replace(/_/g,' '));}catch{}}}break;}
+ const value=values.join(' '),rarities=[...value.matchAll(/(?:^|\s|—|–)([345])(?=\s|★|☆|—|–|$)/g)].map(m=>Number(m[1]));
+ const specialRate=/\b(?:SR|SHSR)\b|Special\s+(?:Hero\s+)?(?:Special\s+)?Rate/i.test(value),focus=/\bFocus\b/i.test(value);
+ // These are acquisition tags in the identity table, not later event history.
+ // Summonable seasonal reruns may now also have a Tempest Trials tag.
+ const ghb=/Grand\s+Hero\s+Battles?|\bGHB\b/i.test(value),tt=/Tempest\s+Trials?/i.test(value);
+ const heroicGrail=ghb||(/Heroic\s+Grails?/i.test(value)&&!specialRate&&!focus)||(tt&&!specialRate&&!focus&&rarities.includes(4)&&rarities.includes(5));
+ const demote=!heroicGrail&&!specialRate&&rarities.includes(4)&&(rarities.includes(3)||rarities.includes(5));
+ return {demote,heroicGrail};
 }
 function rows(table:Element){const result:Element[][]=[],carry=new Map<number,{cell:Element;left:number}>();for(const tr of table.querySelectorAll('tr')){if(tr.closest('table')!==table)continue;const out:Element[]=[];for(const [i,c] of carry){out[i]=c.cell;if(--c.left===0)carry.delete(i);}let col=0;for(const cell of tr.children){if(!['TD','TH'].includes(cell.tagName))continue;while(out[col])col++;const colspan=Math.max(1,Number(cell.getAttribute('colspan')||1)),span=Number(cell.getAttribute('rowspan')||1);for(let n=0;n<colspan;n++){out[col+n]=cell;if(span>1)carry.set(col+n,{cell,left:span-1});}col+=colspan;}result.push(out);}return result;}
 export function highestWikiPassives(candidates:WikiSkill[]){const best=new Map<SkillSlot,WikiSkill>();const tier=(name:string)=>{const match=name.match(/\s+(\d+)$/);return match?{family:name.slice(0,match.index).normalize('NFKC').toLowerCase(),rank:Number(match[1])}:null;};for(const skill of candidates){if(!['A','B','C','X'].includes(skill.slot))continue;const old=best.get(skill.slot),nextTier=tier(skill.name),oldTier=old&&tier(old.name);if(old&&nextTier&&oldTier&&nextTier.rank<oldTier.rank)continue;
@@ -68,7 +80,7 @@ export function parseWikiHero(html:string,title:string,url:string):WikiHero{
  let portrait:string|null=null;try{const source=new URL(rawPortrait),filename=decodeURIComponent(source.pathname.split('/revision')[0].split('/').at(-1)||'').replace(/\.(webp|png|jpe?g)$/i,'').replace(/_/g,' ');if(source.protocol==='https:'&&source.hostname==='static.wikia.nocookie.net'&&!source.username&&!source.password&&!source.port&&wikiMatch(filename,title.replace(':',' ')+' Face FC'))portrait=source.href.replace(/\/scale-to-width-down\/\d+/,'');}catch{}
  const {heroType}=wikiHeroTypes(doc);
  const effect=text(info.get('Legendary Effect')||info.get('Mythic Effect')),blessing=effect.match(/\b(Earth|Fire|Water|Wind|Light|Dark|Astra|Anima)\b/i)?.[0]||null;
- const colon=title.indexOf(':');const identity={name:title.slice(0,colon).trim(),title:title.slice(colon+1).trim(),portrait,portraitThumbnail:portrait?rawPortrait:null,moveType:(/Flying|Flier/i.test(move)?'Fliers':move.match(/Infantry|Cavalry|Armored/i)?.[0]||null),weaponType:weaponType?weaponType.toLowerCase()==='dragon'?'Breath':weaponType[0].toUpperCase()+weaponType.slice(1).toLowerCase():null,color:color?color[0].toUpperCase()+color.slice(1).toLowerCase():null,heroType:heroType.toLowerCase()==='chosen hero'?'Chosen Hero':heroType[0].toUpperCase()+heroType.slice(1).toLowerCase(),blessing:blessing?blessing[0].toUpperCase()+blessing.slice(1).toLowerCase():null};
+ const colon=title.indexOf(':');const identity={...wikiAvailability(doc),name:title.slice(0,colon).trim(),title:title.slice(colon+1).trim(),portrait,portraitThumbnail:portrait?rawPortrait:null,moveType:(/Flying|Flier/i.test(move)?'Fliers':move.match(/Infantry|Cavalry|Armored/i)?.[0]||null),weaponType:weaponType?weaponType.toLowerCase()==='dragon'?'Breath':weaponType[0].toUpperCase()+weaponType.slice(1).toLowerCase():null,color:color?color[0].toUpperCase()+color.slice(1).toLowerCase():null,heroType:heroType.toLowerCase()==='chosen hero'?'Chosen Hero':heroType[0].toUpperCase()+heroType.slice(1).toLowerCase(),blessing:blessing?blessing[0].toUpperCase()+blessing.slice(1).toLowerCase():null};
  return {title,version,releaseDate,skills,url,identity};
 }
 export async function fetchWikiHero(value:string){

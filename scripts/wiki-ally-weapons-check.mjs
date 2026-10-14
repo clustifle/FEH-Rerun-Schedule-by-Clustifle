@@ -34,5 +34,15 @@ try{
  ['<table><tr><th>Hero Type</th><td><a href="/wiki/Category:Special_Heroes"><img alt=""></a></td></tr></table>','Special'],
  ['<table><tr><th>Hero Type</th><td>Attuned</td></tr><tr><th>Rarities</th><td>5 ★</td></tr></table>','Attuned']
  ];return cases.map(([html,expected])=>({actual:exports.parseWikiHero(metadata+html,'Example: Hero','https://feheroes.fandom.com/wiki/Example:_Hero').identity.heroType,expected}));},{js,metadata});for(const result of heroTypes)assert.equal(result.actual,result.expected);console.log('Special Hero infobox text, rarity tags, icons, links, specialized types and false-positive protection: 8 cases passed.');
+ const availability=await page.evaluate(({js,metadata})=>{const exports={};new Function('require','exports',js)(()=>({skillSlots:[]}),exports);const cases=[
+ ['3 <img alt="★"> — 4 <img alt="★">',true,false],
+ ['4 ★ Focus — 5 ★ Focus — Special',true,false],
+ ['4 ★ SR — Special',false,false],
+ ['3 ★ — 4 ★ — Grand Hero Battle',false,true],
+ ['4 ★ — 5 ★ — Tempest Trials',false,true],
+ ['4 ★ SR — Special Tempest Trials',false,false],
+ ['5 ★ Focus — Special Tempest Trials',false,false],
+ ['5 ★',false,false]
+ ];return cases.map(([rarity,demote,grail])=>({actual:exports.parseWikiHero(metadata+'<table><tr><th>Rarities</th><td>'+rarity+'</td></tr></table><h2>Stats</h2><p>Tempest Trials, 3 ★ — 4 ★</p>','Example: Hero','https://feheroes.fandom.com/wiki/Example:_Hero').identity,demote,grail}));},{js,metadata});for(const row of availability){assert.equal(row.actual.demote,row.demote);assert.equal(row.actual.heroicGrail,row.grail);}console.log('Demote/GHB/original TT reward detection, Special Rate and reused TT reward exclusions: 8 cases passed.');
  console.log('Ally weapon preference, lowercase headings, normal weapons, and enemy-only/missing-table safety: 6 cases passed.');
 }finally{await browser.close();}
