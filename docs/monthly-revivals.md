@@ -5,7 +5,7 @@ Open /schedule/monthly-revival/. Schedule and Banner Directory reuse the Weekly 
 - 8 Legendary and 5 Mythic reusable lineups were linked to existing heroes from the supplied list. Roster labels include Robin (F), Corrin (F), Tiki (Y), Vallite Songstress, and Sweet Dreams.
 - Legendary and Mythic have separate directory tabs, searchable names/numbers, profile links, and lineup/appearance editors.
 - Existing unanimous Monthly Revival assignments were preserved as 10 month-only appearances. No exact dates or durations were inferred. The three undated lineups have no appearance until staff adds one.
-- Appearance month can be stored without dates. Exact dates require a 28-day or 35-day duration; 7-day and 30-day runs are rejected by database constraints.
+- Appearance month can be stored without dates. Exact dates require a positive whole-number duration. 28 and 35 days are quick presets; custom durations are supported.
 - Start is 07:00 UTC; stored end is 06:59:59 UTC after the chosen duration. Cards show the last active day and the actual end date.
 - Schedule Under Consideration is a checkbox. Its month is optional, and exact dates are omitted.
 - Add banner can optionally schedule an appearance at the same time. Add/Edit appearances is available from directory details and schedule cards. Status is derived from exact dates.
@@ -15,4 +15,6 @@ Open /schedule/monthly-revival/. Schedule and Banner Directory reuse the Weekly 
 
 Database schema and seeded roster lookup: supabase/monthly-revivals.sql.
 Browser verification: scripts/monthly-revivals-ui-check.mjs and scripts/schedule-export-ui-check.mjs.
-Database checks run in a rolled-back transaction: valid 28/35-day records, rejection of 7/30 days, public read, and unprivileged insert denial. Security advisor reported no findings on the new tables/function.
+Database checks run in a rolled-back transaction: valid exact-date records and positive duration validation, public read, and unprivileged insert denial. Security advisor reported no findings on the new tables/function.
+
+Adjustable-duration update: supabase/monthly-revival-adjustable-duration.sql replaces the initial duration restriction. Ongoing cards show the next recorded future month, or Next rerun: Not announced. The current appearance is retained separately; staff adds a new appearance when its next rerun is announced. Tests cover custom 31/32-day runs and ongoing editing without a future rerun.

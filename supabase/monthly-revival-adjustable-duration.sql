@@ -1,0 +1,2 @@
+alter table public.monthly_revival_events drop constraint monthly_revival_events_duration_check;
+alter table public.monthly_revival_events add constraint monthly_revival_events_duration_check check(duration>0);
