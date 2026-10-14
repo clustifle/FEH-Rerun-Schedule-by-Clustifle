@@ -8,6 +8,7 @@ import {Plus,Search,Shield,X,RotateCcw} from 'lucide-react';
 import {portraitUrl} from './static-data';
 import {displayPool} from './hero-pools';
 import './AllHeroes.css';
+import {resourceBudget} from './resource-budget';
 type Hero={debut_version?:string|null;release_date?:string|null;id:string;name:string;title:string;category:string;heroic_grail?:boolean;demote?:boolean;pool?:string|null;schedule?:string;month?:string|null;updated?:string;blessing?:string|null;color:string;portrait:string|null;weapon_type?:string|null;move_type?:string|null;searchText?:string;notes?:string};
 const collator=new Intl.Collator('en',{sensitivity:'base',numeric:true});
 const scheduleName=(s:string)=>({'Weekly Revival':'Weekly Revival','Schedule Under Consideration':'Schedule Under Consideration','General':'General Schedule','Remix':'Remix Schedule','Monthly Revival':'L/M Revival','Forging Bonds Revival':'NH Revival','Hall of Forms Revival':'HoF Revival','Waitlist':'L/M/E Waitlist','DSH Waitlist':'DSH Waitlist','NHR Waitlist':'NHR Waitlist','Remix Waitlist':'Remix Waitlist'} as Record<string,string>)[s]||'Unscheduled';
@@ -21,7 +22,8 @@ export default function AllHeroes<T extends Hero>({heroes,onView,canEdit,onAdd}:
  const [sort,setSort]=useState('name-asc'),[view,setView]=useState(()=>{try{const saved=localStorage.getItem('feh-all-heroes-view');return viewOptions.some(([key])=>key===saved)?saved!:'medium';}catch{return 'medium';}}),[search,setSearch]=useState('');
  const [type,setType]=useState('All heroes'),[color,setColor]=useState('All'),[weapon,setWeapon]=useState('All'),[move,setMove]=useState('All'),[pool,setPool]=useState('All'),[showGrails,setShowGrails]=useState(true),[schedule,setSchedule]=useState('All'),[blessing,setBlessing]=useState('All'),[demote,setDemote]=useState('All');
  const results=useRef<HTMLDivElement>(null),more=useRef<HTMLButtonElement>(null);
- const [visibleCount,setVisibleCount]=useState(120);
+ const [budget]=useState(resourceBudget),[pageIndex,setPageIndex]=useState(0);
+ const [visibleCount,setVisibleCount]=useState(budget.batchSize);
  const definitions=useDefinitions();
  const categories=useMemo(()=>definitionNames(definitions,'hero_type',heroes.map(h=>h.category)),[definitions,heroes]);
  const schedules=useMemo(()=>Array.from(new Set(heroes.map(h=>h.schedule||'None'))).sort((a,b)=>collator.compare(scheduleName(a),scheduleName(b))),[heroes]);
@@ -42,11 +44,14 @@ export default function AllHeroes<T extends Hero>({heroes,onView,canEdit,onAdd}:
  const text=searchIndex.get(h.id)||'';
  return versionMatches(h.debut_version,version)&&queryWords.every(word=>text.includes(word))&&(type==='All heroes'||h.category===type)&&(color==='All'||h.color===color)&&(pool==='All'||displayPool(h)===pool)&&(showGrails||!h.heroic_grail)&&(weapon==='All'||(weapon==='Unassigned'?!h.weapon_type:h.weapon_type===weapon))&&(move==='All'||(move==='Unassigned'?!h.move_type:h.move_type===move))&&(schedule==='All'||(h.schedule||'None')===schedule)&&(blessing==='All'||(blessing==='Unassigned'?!h.blessing:h.blessing===blessing))&&(demote==='All'||Boolean(h.demote)===(demote==='Yes'));
  }),[sortedHeroes,searchIndex,queryWords,type,color,pool,showGrails,weapon,move,schedule,blessing,demote,version]);
- const visibleRows=rows.slice(0,visibleCount);
- useEffect(()=>{setVisibleCount(120);if(results.current)results.current.scrollTop=0;},[query,type,color,pool,showGrails,weapon,move,schedule,blessing,demote,sort,view,version]);
+ const pageCount=Math.max(1,Math.ceil(rows.length/budget.batchSize)),currentPage=Math.min(pageIndex,pageCount-1);
+ const offset=budget.limited?currentPage*budget.batchSize:0;
+ const visibleRows=rows.slice(offset,budget.limited?offset+budget.batchSize:visibleCount);
+ function changePage(next:number){setPageIndex(next);if(results.current)results.current.scrollTop=0;window.dispatchEvent(new Event('hero-preview-dismiss'));}
+ useEffect(()=>{setVisibleCount(budget.batchSize);setPageIndex(0);if(results.current)results.current.scrollTop=0;},[query,type,color,pool,showGrails,weapon,move,schedule,blessing,demote,sort,view,version]);
  useEffect(()=>{
-  if(!more.current||!results.current||typeof IntersectionObserver==='undefined')return;
-  const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting))setVisibleCount(n=>Math.min(n+120,rows.length));},{root:results.current,rootMargin:'300px'});
+  if(budget.limited||!more.current||!results.current||typeof IntersectionObserver==='undefined')return;
+  const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting))setVisibleCount(n=>Math.min(n+budget.batchSize,rows.length));},{root:results.current,rootMargin:'300px'});
   observer.observe(more.current);return()=>observer.disconnect();
  },[visibleCount,rows.length,view]);
  useEffect(()=>{try{localStorage.setItem('feh-all-heroes-view',view);}catch{}},[view]);
@@ -62,6 +67,6 @@ export default function AllHeroes<T extends Hero>({heroes,onView,canEdit,onAdd}:
  {chips.length>0&&<div className="directory-filter-chips" aria-label="Active filters">{chips.map(([label,clear])=><button key={label} onClick={clear} aria-label={'Remove filter '+label}>{label}<X size={14}/></button>)}<button onClick={reset}><RotateCcw size={14}/>Clear all</button></div>}
  <div ref={results} className={'all-heroes-results '+view+'-view'} tabIndex={0} aria-label="Hero results; scroll to browse">
  {view==='details'&&rows.length>0?<table className="directory-table"><thead><tr><th>Hero</th><th>Type / pool</th><th>Weapon / movement</th><th>Schedule</th><th>Rerun month</th></tr></thead><tbody>{visibleRows.map(h=><tr key={h.id}><td><button className="directory-table-hero" onClick={()=>onView(h)}>{portrait(h)}<span><strong>{h.name}</strong><span>{h.title||'Untitled hero'}</span></span></button></td><td>{h.category}<small>{displayPool(h)}{h.heroic_grail?' · Heroic Grails':''}</small></td><td>{h.color} {h.weapon_type||'weapon unassigned'}<small>{h.move_type||'Movement unassigned'}</small></td><td>{scheduleName(h.schedule||'None')}</td><td>{monthName(h.schedule==='None'?null:h.month)}</td></tr>)}</tbody></table>:visibleRows.map(h=><button key={h.id} className={'all-heroes-card '+h.color.toLowerCase()} onClick={()=>onView(h)} aria-label={'View '+h.name+' · '+h.title}>{portrait(h)}<span className="all-heroes-copy"><strong>{h.name}</strong><span>{h.title||'Untitled hero'}</span>{['large','tiles','content'].includes(view)&&<span className="directory-hero-type">{h.category==='Chosen Hero'?'Chosen':h.category}{h.heroic_grail?' · Heroic Grails':''}</span>}</span>{view==='content'&&<span className="directory-content-facts"><span>{displayPool(h)}</span><span>{h.color} {h.weapon_type||'Weapon not assigned'} · {h.move_type||'Movement not assigned'}</span><span>Version {h.debut_version||'not recorded'}</span></span>}{['tiles','content'].includes(view)&&h.schedule&&h.schedule!=='None'&&<span className="directory-rerun"><span>{scheduleName(h.schedule||'None')}</span><strong>{monthName(h.schedule==='None'?null:h.month)}</strong></span>}</button>)}
- {visibleCount<rows.length&&<button ref={more} className="directory-load-more secondary" onClick={()=>setVisibleCount(n=>Math.min(n+120,rows.length))}>Show more heroes</button>}
- {!rows.length&&<div className="all-heroes-empty"><Shield size={30}/><h3>{heroes.length?'No matching heroes':'No heroes yet'}</h3><p>{heroes.length?'Try another search or clear your filters.':'Heroes will appear here when they are added.'}</p>{chips.length>0&&<button className="secondary" onClick={reset}>Clear filters</button>}</div>}</div></section>;
+ {!budget.limited&&visibleCount<rows.length&&<button ref={more} className="directory-load-more secondary" onClick={()=>setVisibleCount(n=>Math.min(n+budget.batchSize,rows.length))}>Show more heroes</button>}
+ {!rows.length&&<div className="all-heroes-empty"><Shield size={30}/><h3>{heroes.length?'No matching heroes':'No heroes yet'}</h3><p>{heroes.length?'Try another search or clear your filters.':'Heroes will appear here when they are added.'}</p>{chips.length>0&&<button className="secondary" onClick={reset}>Clear filters</button>}</div>}</div>{budget.limited&&rows.length>budget.batchSize&&<nav className="directory-page-controls" aria-label="Hero result pages"><button className="secondary" disabled={currentPage===0} onClick={()=>changePage(currentPage-1)}>Previous</button><p>{offset+1}–{Math.min(offset+budget.batchSize,rows.length)} of {rows.length}</p><button className="secondary" disabled={currentPage===pageCount-1} onClick={()=>changePage(currentPage+1)}>Next</button></nav>}</section>;
 }

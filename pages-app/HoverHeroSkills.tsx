@@ -2,8 +2,16 @@ import {useEffect,useRef,useState} from 'react';
 import {bestSkills,loadHeroSkills,skillSlots,type HeroSkill} from './hero-skills';
 import {SkillIcon} from './HeroSkills';
 import './HoverHeroSkills.css';
+import {resourceBudget} from './resource-budget';
 const cache=new Map<string,{expires:number;rows:Promise<HeroSkill[]>}>();
-function skills(id:string){const old=cache.get(id);if(old&&old.expires>Date.now())return old.rows;const rows=loadHeroSkills(id).catch(e=>{cache.delete(id);throw e});if(cache.size>=100)cache.clear();cache.set(id,{expires:Date.now()+15000,rows});return rows}
+function skills(id:string){
+ const now=Date.now();for(const [key,value] of cache)if(value.expires<=now)cache.delete(key);
+ const old=cache.get(id);if(old){cache.delete(id);cache.set(id,old);return old.rows;}
+ const rows=loadHeroSkills(id).catch(e=>{if(cache.get(id)?.rows===rows)cache.delete(id);throw e});
+ const limit=resourceBudget().limited?12:40;
+ while(cache.size>=limit)cache.delete(cache.keys().next().value!);
+ cache.set(id,{expires:now+15000,rows});return rows;
+}
 export default function HoverHeroSkills({heroId,attuned}:{heroId:string;attuned:boolean}){
  const [rows,setRows]=useState<HeroSkill[]>([]),[error,setError]=useState(false),root=useRef<HTMLDivElement>(null);
  useEffect(()=>{let live=true;setRows([]);setError(false);skills(heroId).then(rows=>{if(live)setRows(rows)}).catch(()=>{if(live)setError(true)});return()=>{live=false}},[heroId]);

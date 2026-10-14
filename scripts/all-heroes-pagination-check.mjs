@@ -4,7 +4,7 @@ const browser=await chromium.launch({headless:true,executablePath:'C:/Program Fi
 try{
  const p=await browser.newPage(), requests=[],errors=[];p.on('pageerror',e=>errors.push(e.message));
  const heroes=Array.from({length:2005},(_,i)=>({id:String(i),name:'Hero '+String(i).padStart(4,'0'),title:'Pagination test',category:'General',color:'Red',pool:'General Pool',schedule:'None',month:null,portrait:'',move_type:'Infantry',weapon_type:'Sword'}));
- await p.addInitScript(()=>localStorage.setItem('feh-preferences',JSON.stringify({autoRefresh:false})));
+ await p.addInitScript(()=>{Object.defineProperty(navigator,'deviceMemory',{get:()=>8});Object.defineProperty(navigator,'hardwareConcurrency',{get:()=>16});localStorage.setItem('feh-preferences',JSON.stringify({autoRefresh:false}));});
  await p.route('**/rest/v1/**',r=>{
   const url=new URL(r.request().url());
   if(url.pathname.endsWith('/heroes')){

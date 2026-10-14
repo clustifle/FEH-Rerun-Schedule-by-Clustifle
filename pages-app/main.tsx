@@ -1,4 +1,6 @@
 import './beta-safety';
+import {applyResourceBudget} from './resource-budget';
+import './resource-budget.css';
 import BetaSession from './BetaSession';
 import {isBeta} from './beta';
 import GitHubAuthReturn from './GitHubAuthReturn';
@@ -9,6 +11,7 @@ import ScrollbarActivity from './ScrollbarActivity';
 import {restorePagesRoute} from './routes';
 import React from 'react';import {createRoot} from 'react-dom/client';import Tracker from './Tracker';import OwnerLogin from './OwnerLogin';import '../app/globals.css';
 import '../app/mobile.css';
+applyResourceBudget();
 restorePagesRoute();
 createRoot(document.getElementById('root')!).render(<React.StrictMode><BetaSession/><ScrollbarActivity/><PageOverlayScrollbar/><Tracker/><GitHubAuthReturn/>{!isBeta&&<InstallApp/>}<OwnerLogin/><AccountSetup/></React.StrictMode>);
 
