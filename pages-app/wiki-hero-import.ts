@@ -1,6 +1,6 @@
 import {communityApi} from './community-api';
 import {skillSlots,type SkillSlot} from './hero-skills';
-export type WikiSkill={slot:SkillSlot;name:string;icon:string|null;thumbnail?:string|null;refineIcon?:string|null};
+export type WikiSkill={slot:SkillSlot;name:string;icon:string|null;thumbnail?:string|null;refineIcon?:string|null;refineThumbnail?:string|null};
 export type WikiHero={title:string;version:string|null;releaseDate:string|null;skills:WikiSkill[];url:string};
 export function wikiPageUrl(value:string){
  let url:URL,page:string;try{url=new URL(value.trim());page=decodeURIComponent(url.pathname.slice(6));if(/%[0-9a-f]{2}/i.test(page))page=decodeURIComponent(page);if(/[\u0000-\u001f\u007f]/u.test(page))throw Error('Invalid page characters');page=page.normalize('NFC').replace(/[\u2018\u2019\u02bc]/g,"'").replace(/[\u2010-\u2015\u2212]/g,'-').replace(/_/g,' ').replace(/\s+/gu,' ').trim();}catch{throw Error('Use a valid FEH Wiki hero page URL.');}
@@ -35,7 +35,14 @@ export function parseWikiHero(html:string,title:string,url:string):WikiHero{
   const candidates=grid.map(cells=>{const name=text(cells[nameIndex]),kind=slot==='Passive'?text(cells[typeIndex]).replace(/^Passive\s+/i,'').toUpperCase():slot;const img=cells[iconIndex]?.querySelector('img');const raw=img?.getAttribute('data-src')||img?.getAttribute('src')||'';const linked=img?.closest('a')?.getAttribute('href')||'';const original=linked.startsWith('https://static.wikia.nocookie.net/')?linked:raw;const icon=/^https:\/\/static\.wikia\.nocookie\.net\//.test(original)?original.replace(/\/scale-to-width-down\/\d+/,''):null;const thumbnail=/^https:\/\/static\.wikia\.nocookie\.net\//.test(raw)?raw:null;return {slot:kind as SkillSlot,name,icon,thumbnail};}).filter(s=>skillSlots.includes(s.slot)&&s.name&&s.name.length<=150);
   if(slot==='Passive'){skills.push(...highestWikiPassives(candidates));}else if(candidates.length)skills.push(candidates[candidates.length-1]);
  }
- for(const skill of skills.filter(s=>s.slot==='Weapon')){const image=Array.from(doc.querySelectorAll('img')).find(img=>img.getAttribute('alt')===skill.name+' W'||img.getAttribute('data-image-name')===skill.name+' W.png');const raw=image?.getAttribute('data-src')||image?.getAttribute('src')||'';skill.refineIcon=/^https:\/\/static\.wikia\.nocookie\.net\//.test(raw)?raw.replace(/\/scale-to-width-down\/\d+/,''):null;}
+ for(const skill of skills.filter(s=>s.slot==='Weapon')){
+  const images=Array.from(doc.querySelectorAll('img'));
+  const sources=(img:Element)=>[img.closest('a')?.getAttribute('href'),img.getAttribute('data-src'),img.getAttribute('data-original'),img.getAttribute('src'),...(img.getAttribute('data-srcset')||img.getAttribute('srcset')||'').split(',').map(part=>part.trim().split(/\s+/)[0])].filter((v):v is string=>!!v).map(value=>value.startsWith('//')?'https:'+value:value);
+  const image=images.find(img=>{const names=[img.getAttribute('alt'),img.getAttribute('data-image-name'),img.getAttribute('data-image-key'),...sources(img).map(value=>{try{return decodeURIComponent(new URL(value).pathname.split('/revision')[0].split('/').at(-1)||'');}catch{return '';}})];return names.some(value=>value&&wikiMatch(value.replace(/\.(png|webp|jpe?g)$/i,'').replace(/_/g,' '),skill.name+' W'));});
+  const valid=image?sources(image).filter(value=>{try{const url=new URL(value);return url.protocol==='https:'&&url.hostname==='static.wikia.nocookie.net'&&!url.username&&!url.password&&!url.port;}catch{return false;}}):[];
+  skill.refineIcon=valid[0]?.replace(/\/scale-to-width-down\/\d+/,'')||null;
+  skill.refineThumbnail=valid.find(value=>value.includes('/scale-to-width-down/'))||valid[0]||null;
+ }
  return {title,version,releaseDate,skills,url};
 }
 export async function fetchWikiHero(value:string){
