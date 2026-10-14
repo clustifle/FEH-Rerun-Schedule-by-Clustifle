@@ -1,3 +1,4 @@
+import {blessingIcon} from './blessing-icons';
 import WikiHeroImport from './WikiHeroImport';
 import AdminHeroSkills from './AdminHeroSkills';
 import HeroSkills from './HeroSkills';
@@ -22,7 +23,7 @@ export default function HeroProfilePage({hero,heroes=[],loading,error,tags,onBac
  return <main className="hero-profile-page" aria-labelledby="hero-detail-name">
   <header className="hero-page-heading"><button className="hero-page-back" aria-label="Back to previous page" onClick={onBack}/><span>Hero profile</span></header>
   {hero?<article className="hero-detail-layout">
-   <section className="hero-detail-top" aria-label="Hero identity"><div className="hero-detail-portrait">{hero.portrait?<img src={portraitUrl(hero.portrait,'detail')} alt={hero.name+' portrait'}/>:<Shield size={64}/>}<HeroPortraitMarks hero={hero}/></div><div className="hero-detail-identity"><h1 ref={heading} id="hero-detail-name" tabIndex={-1}>{hero.name}</h1>{hero.title&&<p className="hero-detail-title">{hero.title}</p>}<div className="hero-detail-tags">{tags}</div></div></section>
+   <section className="hero-detail-top" aria-label="Hero identity"><div className="hero-detail-portrait">{hero.portrait?<img src={portraitUrl(hero.portrait,'detail')} alt={hero.name+' portrait'}/>:<Shield size={64}/>}<HeroPortraitMarks hero={hero}/></div><div className="hero-detail-identity"><h1 ref={heading} id="hero-detail-name" tabIndex={-1}>{hero.name}</h1>{hero.title&&<p className="hero-detail-title">{hero.title}</p>}</div></section>
    <div className="hero-profile-content">
     {onEdit&&<div className="hero-profile-actions" aria-label="Hero management">
      {!isBeta&&<button className="secondary" onClick={()=>setWikiImport(true)}><Download size={16} aria-hidden="true"/>Import from FEH Wiki</button>}
@@ -38,11 +39,11 @@ export default function HeroProfilePage({hero,heroes=[],loading,error,tags,onBac
         <strong>{isWaitlist(hero.schedule)?'Awaiting a rerun':month||'Not scheduled yet'}</strong>
         <a href={viewUrl(hero.schedule,hero.month||'')} onClick={e=>{if(!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&!e.altKey){e.preventDefault();goTo(viewUrl(hero.schedule,hero.month||''));}}}>View {isWaitlist(hero.schedule)&&hero.schedule!=='Schedule Under Consideration'?'waitlist':'schedule'}<ArrowUpRight size={14} aria-hidden="true"/></a>
        </div>}
-       <dl className="hero-detail-facts">
+       <dl className="hero-detail-facts"><div><dt>Hero type</dt><dd>{hero.category==='Chosen Hero'?'Chosen':hero.category}</dd></div>
         <div><dt>Weapon type</dt><dd>{hero.weapon_type?<><img src={assetUrl('weapon-types/'+hero.color.toLowerCase()+'-'+hero.weapon_type.toLowerCase()+'.webp')} alt="" width={24} height={24}/>{hero.color} {hero.weapon_type}</>:<><img src={assetUrl('weapon-orbs/'+hero.color.toLowerCase()+'.webp')} alt="" width={24} height={24}/>{hero.color} · Not assigned</>}</dd></div>
         <div><dt>Movement type</dt><dd>{hero.move_type?<><img src={assetUrl('move-types/'+hero.move_type.toLowerCase()+'.webp')} alt="" width={24} height={24}/>{hero.move_type}</>:'Not assigned'}</dd></div>
         <div><dt>Summon availability</dt><dd>{hero.heroic_grail?'Heroic Grails':hero.demote?'4–5★ demote':hero.pool||'Not specified'}</dd></div>
-        {hero.blessing&&<div><dt>Blessing</dt><dd>{hero.blessing}</dd></div>}
+        {['Legendary','Mythic','Chosen Hero'].includes(hero.category)&&<div><dt>Blessing</dt><dd>{hero.blessing?<><img src={blessingIcon(hero.category,hero.blessing,hero)} alt="" width={24} height={24}/>{hero.blessing}</>:'Not assigned'}</dd></div>}
        </dl>
        <div className="hero-owner-note" aria-labelledby="hero-note-label"><h3 id="hero-note-label">Notes</h3><p>{hero.notes||'No notes added yet.'}</p></div>
       </section>
