@@ -4,7 +4,7 @@ import {assetUrl,portraitUrl} from './static-data';
 import {viewUrl} from './routes';
 import './ScheduleExport.css';
 import {useDefinitions,definitionIcon,baseTypes} from './catalog';
-type Hero={id:string;name:string;title:string;category:string;color:string;month:string|null;portrait:string|null;weapon_type?:string|null;move_type?:string|null;blessing?:string|null;heroic_grail?:boolean;schedule?:string};
+type Hero={id:string;name:string;title:string;category:string;color:string;month:string|null;portrait:string|null;weapon_type?:string|null;move_type?:string|null;blessing?:string|null;heroic_grail?:boolean;schedule?:string;revival_id?:string;revival_label?:string;revival_order?:number};
 type CombinedExport={lme:Hero[];remix:Hero[];consideration:Hero[]};
 const emptyHeroes:Hero[]=[];
 const colors=['Red','Blue','Green','Colorless'];
@@ -23,7 +23,7 @@ export default function ScheduleExport({heroes,waitlistHeroes=emptyHeroes,schedu
  const imageCache=useRef(new Map<string,Promise<HTMLImageElement|null>>());
  const image=(url:string)=>{let promise=imageCache.current.get(url);if(!promise){promise=loadImage(url);imageCache.current.set(url,promise);}return promise;};
  const months=[...new Set(heroes.map(h=>h.month?.slice(0,7)).filter((m):m is string=>!!m&&/^\d{4}-\d{2}$/.test(m)))].sort();
- const included=consideration?[]:months.filter(m=>m>=from&&m<=to),waiting=combined?[...combined.lme,...combined.remix,...combined.consideration]:consideration?heroes:['General','Remix'].includes(schedule)&&includeWaitlist?waitlistHeroes:[],scheduled=consideration?[]:heroes.filter(h=>h.month&&included.includes(h.month.slice(0,7))),selected=[...scheduled,...waiting];
+ const included=consideration?[]:months.filter(m=>m>=from&&m<=to),waiting=combined?[...combined.lme,...combined.remix,...combined.consideration]:consideration?heroes:schedule==='Monthly Revival'?waitlistHeroes:['General','Remix'].includes(schedule)&&includeWaitlist?waitlistHeroes:[],scheduled=consideration?[]:heroes.filter(h=>h.month&&included.includes(h.month.slice(0,7))),selected=[...scheduled,...waiting];
  useEffect(()=>{if(open)dialog.current?.showModal();else dialog.current?.close();},[open]);
  useEffect(()=>{generation.current++;setMessage('');if(!open){setPreview('');setBusy(false);return;}if((!included.length&&!waiting.length)||(!consideration&&from>to)||(!combinedMode&&included.length>12))setPreview('');setBusy(true);const frame=requestAnimationFrame(()=>void generate());return()=>{cancelAnimationFrame(frame);generation.current++;};},[from,to,quality,includeWaitlist,heroes,waitlistHeroes,open,combined,definitions,background,customColor,portraitSize,spacing,showLogo,showFooter,showBorders,showIcons,customWindow,windowColor,customText,textColor,notes]);
  useEffect(()=>()=>{if(preview.startsWith('blob:'))URL.revokeObjectURL(preview);},[preview]);
@@ -42,11 +42,14 @@ export default function ScheduleExport({heroes,waitlistHeroes=emptyHeroes,schedu
     {name:'Monthly Legendary and Mythic Revival',schedule:'Monthly Revival',heroes:scheduled.filter(h=>h.schedule==='Monthly Revival'),waiting:[],row:2},
     {name:'Schedule Under Consideration',schedule:'Schedule Under Consideration',heroes:[],waiting:combined.consideration,row:2}
    ]:[{name:title,schedule,heroes:scheduled,waiting,row:0}];
-   const cards=sections.flatMap((section,sectionIndex)=>[...included.filter(m=>section.heroes.some(h=>h.month?.slice(0,7)===m)),...(section.waiting.length?['waitlist']:[])].flatMap(m=>(section.schedule==='Monthly Revival'&&m!=='waitlist'?['Legendary','Mythic']:['']).map(kind=>{
+   const cards=sections.flatMap((section,sectionIndex)=>[...included.filter(m=>section.heroes.some(h=>h.month?.slice(0,7)===m)),...(section.waiting.length?['waitlist']:[])].flatMap(m=>(['']).map(kind=>{
     const entries=(m==='waitlist'?section.waiting:section.heroes.filter(h=>h.month?.slice(0,7)===m)).filter(h=>!kind||h.category===kind);
-    const groups=colors.map(color=>({color,heroes:entries.filter(h=>h.color===color)})).filter(g=>g.heroes.length);
+    const revivalEntries=entries.filter(h=>h.revival_id),ordinary=entries.filter(h=>!h.revival_id);
+    const groups:{color:string;heroes:Hero[];label?:string}[]=section.schedule==='Monthly Revival'&&!revivalEntries.length?['Legendary','Mythic'].map(kind=>({color:kind,heroes:ordinary.filter(h=>h.category===kind),label:kind+' Revival'})).filter(g=>g.heroes.length):colors.map(color=>({color,heroes:ordinary.filter(h=>h.color===color)})).filter(g=>g.heroes.length);
+    for(const id of [...new Set(revivalEntries.map(h=>h.revival_id))]){const lineup=revivalEntries.filter(h=>h.revival_id===id).sort((a,b)=>(a.revival_order||0)-(b.revival_order||0));groups.push({color:lineup[0].category,heroes:lineup,label:lineup[0].revival_label});}
+    groups.sort((a,b)=>a.label&&b.label?a.label.localeCompare(b.label,undefined,{numeric:true}):0);
     const hideHeading=combinedMode&&section.schedule==='Schedule Under Consideration';
-    return {m,kind,groups,hideHeading,section:sectionIndex,row:section.row,waitingLabel:section.schedule==='Schedule Under Consideration'?'Under consideration':section.schedule==='Remix'?'Remix Waitlist':'L/M/E Waitlist',width:Math.max(kind?200:m==='waitlist'?240:132,...groups.map(g=>g.heroes.length*step+20)),height:(hideHeading?12:kind?70:40)+groups.length*rowStep};
+    return {m,kind,groups,hideHeading,section:sectionIndex,row:section.row,waitingLabel:section.schedule==='Monthly Revival'?'Schedule Under Consideration':section.schedule==='Schedule Under Consideration'?'Under consideration':section.schedule==='Remix'?'Remix Waitlist':'L/M/E Waitlist',width:Math.max(kind?200:m==='waitlist'?240:132,...groups.map(g=>g.heroes.length*step+20)),height:(hideHeading?12:kind?70:40)+groups.reduce((sum,g)=>sum+rowStep+(g.label?26:0),0)};
    }).filter(card=>card.groups.length)));
    if(combinedMode){const titleMeasure=document.createElement('canvas').getContext('2d')!;titleMeasure.font='20px '+font;sections.forEach((section,index)=>{const sectionCards=cards.filter(c=>c.section===index);if(!sectionCards.length)return;const width=sectionCards.reduce((sum,c)=>sum+c.width,0)+gap*(sectionCards.length-1),needed=Math.ceil(titleMeasure.measureText(section.name).width)+12;if(width<needed)sectionCards[sectionCards.length-1].width+=needed-width;});}
    const rows=[...new Set(cards.map(c=>c.row))],w=Math.max(476,pad*2,...rows.map(row=>pad*2+cards.filter(c=>c.row===row).reduce((sum,c)=>sum+c.width+gap,0)-gap+ (combinedMode?gap:0)));
@@ -71,6 +74,7 @@ export default function ScheduleExport({heroes,waitlistHeroes=emptyHeroes,schedu
    ctx.fillStyle=heading;sectionTitles.forEach(section=>text(section.text,section.x,section.y,w-section.x-pad,20));
    positioned.forEach((card,index)=>{const {x,y}=positions[index],cardW=card.width;ctx.fillStyle=panel;ctx.fillRect(x,y,cardW,card.height);if(showBorders){ctx.strokeStyle=light?'#8b9ca5':'#bda778';ctx.strokeRect(x+.5,y+.5,cardW-1,card.height-1);}ctx.fillStyle=heading;if(!card.hideHeading)text(card.m==='waitlist'?card.waitingLabel:new Date(card.m+'-01T12:00:00Z').toLocaleDateString('en-US',{month:'short',year:'numeric',timeZone:'UTC'}),x+12,y+32,cardW-24,18);if(card.kind){ctx.fillStyle=card.kind==='Legendary'?(light?'#267a65':'#72cdb5'):(light?'#79509e':'#c9a1ec');ctx.fillRect(x+1,y+1,cardW-2,4);text(card.kind+' Revival',x+12,y+57,cardW-24,16);}let rowY=y+(card.hideHeading?20:card.kind?78:48);
     for(const group of card.groups){
+     if(group.label){ctx.fillStyle=heading;text(group.label,x+12,rowY+17,cardW-24,16);rowY+=26;}
      group.heroes.forEach((h,i)=>{const px=x+12+i*step,py=rowY,image=h.portrait?images.get(h.portrait):null;ctx.fillStyle=panel;ctx.fillRect(px,py,size,size);if(image){ctx.save();ctx.beginPath();ctx.rect(px+6,py+6,size-12,size-12);ctx.clip();const side=Math.min(image.naturalWidth,image.naturalHeight);ctx.drawImage(image,(image.naturalWidth-side)/2,(image.naturalHeight-side)/2,side,side,px,py,size,size);ctx.restore();}else{ctx.fillStyle=muted;text('No portrait',px+8,py+55,84,13);}if(frame){ctx.save();ctx.filter=h.color==='Red'?'hue-rotate(175deg) saturate(1.35)':h.color==='Blue'?'hue-rotate(20deg)':h.color==='Green'?'hue-rotate(285deg) saturate(1.2)':'grayscale(1)';ctx.drawImage(frame,px,py,size,size);ctx.restore();}
       const weapon=h.weapon_type?icons.get('weapon-types/'+h.color.toLowerCase()+'-'+h.weapon_type.toLowerCase()+'.webp'):null,movement=h.move_type?icons.get('move-types/'+h.move_type.toLowerCase()+'.webp'):null;
       const type=types.get(typeIcon(h));if(showIcons&&type)ctx.drawImage(type,px+1,py+size-26,25,25);if(showIcons&&weapon)ctx.drawImage(weapon,px+1,py+1,25,25);if(showIcons&&movement)ctx.drawImage(movement,px+size-26,py+size-26,25,25);});rowY+=rowStep;

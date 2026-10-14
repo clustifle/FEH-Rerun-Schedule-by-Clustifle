@@ -18,3 +18,6 @@ Browser verification: scripts/monthly-revivals-ui-check.mjs and scripts/schedule
 Database checks run in a rolled-back transaction: valid exact-date records and positive duration validation, public read, and unprivileged insert denial. Security advisor reported no findings on the new tables/function.
 
 Adjustable-duration update: supabase/monthly-revival-adjustable-duration.sql replaces the initial duration restriction. Ongoing cards show the next recorded future month, or Next rerun: Not announced. The current appearance is retained separately; staff adds a new appearance when its next rerun is announced. Tests cover custom 31/32-day runs and ongoing editing without a future rerun.
+
+Local-time and export update: exact start/end instants are displayed in the viewer's local timezone. The start-date editor converts local calendar dates back to the stored UTC FEH reset date, including previous-day timezones. Month-only assignments retain their announced month.
+Exports preserve each numbered banner's hero order, show one panel per month with Legendary/Mythic lineups stacked vertically, and group consideration heroes by their banner rather than weapon color. This applies to standalone and combined exports. Tests include Bangkok, Los Angeles winter date rollover, and mixed-color lineup placement.
