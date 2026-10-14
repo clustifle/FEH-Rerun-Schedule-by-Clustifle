@@ -52,3 +52,7 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][dat
 .wiki-import-refine-found>span{display:grid;gap:3px;min-width:0}
 .wiki-import-refine-found strong{font-size:14px;font-weight:400;color:var(--realm-accent)}
 .wiki-import-refine-found small{font-size:12px}
+
+.wiki-import-refine{flex:1 0 100%;width:100%;box-sizing:border-box}
+.wiki-import-refine-found{box-sizing:border-box;width:100%}
+.wiki-import-refine-found>span{flex:1;overflow-wrap:anywhere}
