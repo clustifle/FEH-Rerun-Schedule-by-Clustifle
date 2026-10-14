@@ -38,3 +38,5 @@
 @media(max-width:800px){.wiki-add-hero .wiki-add-workspace{display:flex;flex-direction:column;overflow:auto}.wiki-add-controls,.wiki-add-live-preview{overflow:visible;flex:none;padding:18px}.wiki-add-live-preview{border-left:0;border-top:1px solid var(--realm-line)}.wiki-preview-empty{min-height:180px}.wiki-add-hero{width:calc(100vw - 20px)}.wiki-add-live-preview .wiki-add-review{grid-template-columns:72px minmax(0,1fr)}.wiki-preview-portrait{width:72px;height:72px}.wiki-add-live-preview .wiki-add-review h3{font-size:24px}.wiki-add-live-preview .wiki-add-review dl>div{grid-template-columns:80px minmax(0,1fr)}}
 
 .wiki-preview-jump{display:none}@media(max-width:800px){.wiki-preview-jump{display:block;margin:12px 0;min-height:42px}}
+
+.wiki-add-hero .wiki-preview-portrait>img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:0;clip-path:inset(6% round 9%)}.wiki-add-hero .wiki-preview-portrait>.portrait-marks{position:absolute;inset:0;width:100%;height:100%}.wiki-add-hero .wiki-preview-portrait .hero-portrait-frame{inset:0;width:100%;height:100%;background-size:100% 100%}
