@@ -1,10 +1,10 @@
 import {communityApi} from './community-api';
 import {skillSlots,type SkillSlot} from './hero-skills';
 export type WikiSkill={slot:SkillSlot;name:string;icon:string|null;thumbnail?:string|null;refineIcon?:string|null;refineThumbnail?:string|null};
-export type WikiHero={title:string;version:string|null;releaseDate:string|null;skills:WikiSkill[];url:string};
+export type WikiHero={title:string;version:string|null;releaseDate:string|null;skills:WikiSkill[];url:string;identity?:{name:string;title:string;portrait:string|null;moveType:string|null;weaponType:string|null;color:string|null;heroType:string;blessing:string|null}};
 export function wikiPageUrl(value:string){
- let url:URL,page:string;try{url=new URL(value.trim());page=decodeURIComponent(url.pathname.slice(6));if(/%[0-9a-f]{2}/i.test(page))page=decodeURIComponent(page);if(/[\u0000-\u001f\u007f]/u.test(page))throw Error('Invalid page characters');page=page.normalize('NFC').replace(/[\u2018\u2019\u02bc]/g,"'").replace(/[\u2010-\u2015\u2212]/g,'-').replace(/_/g,' ').replace(/\s+/gu,' ').trim();}catch{throw Error('Use a valid FEH Wiki hero page URL.');}
- if(value.length>2000||url.protocol!=='https:'||url.hostname!=='feheroes.fandom.com'||url.username||url.password||url.port||!url.pathname.startsWith('/wiki/'))throw Error('Use an HTTPS hero page from feheroes.fandom.com.');
+ let url:URL,page:string;try{url=new URL(value.trim());page=decodeURIComponent(url.pathname.slice(url.pathname.startsWith('/wiki/')?6:url.hostname==='feheroes.gamepedia.com'?1:6));if(/%[0-9a-f]{2}/i.test(page))page=decodeURIComponent(page);if(/[\u0000-\u001f\u007f]/u.test(page))throw Error('Invalid page characters');page=page.normalize('NFC').replace(/[\u2018\u2019\u02bc]/g,"'").replace(/[\u2010-\u2015\u2212]/g,'-').replace(/_/g,' ').replace(/\s+/gu,' ').trim();}catch{throw Error('Use a valid FEH Wiki hero page URL.');}
+ if(value.length>2000||url.protocol!=='https:'||!['feheroes.fandom.com','feheroes.gamepedia.com'].includes(url.hostname)||url.username||url.password||url.port||(!url.pathname.startsWith('/wiki/')&&url.hostname!=='feheroes.gamepedia.com'))throw Error('Use an HTTPS hero page from feheroes.fandom.com.');
  if(!page.includes(':')||/^(File|Template|Category|Special|Module|User|Talk):/i.test(page)||page.includes('/')||/[\u0000-\u001f\u007f]/u.test(page))throw Error('Choose a hero page, not an image, category or subpage.');
  return {page,url:'https://feheroes.fandom.com/wiki/'+encodeURIComponent(page.replace(/ /g,'_'))};
 }
@@ -43,7 +43,16 @@ export function parseWikiHero(html:string,title:string,url:string):WikiHero{
   skill.refineIcon=valid[0]?.replace(/\/scale-to-width-down\/\d+/,'')||null;
   skill.refineThumbnail=valid.find(value=>value.includes('/scale-to-width-down/'))||valid[0]||null;
  }
- return {title,version,releaseDate,skills,url};
+ const info=new Map<string,Element>();for(const tr of doc.querySelectorAll('tr')){const cells=Array.from(tr.children),label=text(cells[0]);if(cells[1]&&!info.has(label))info.set(label,cells[1]);}
+ const weapon=text(info.get('Weapon Type')),move=text(info.get('Move Type')||info.get('Movement Type'));
+ const weaponType=weapon.match(/sword|lance|axe|staff|beast|bow|breath|dragon|dagger|tome/i)?.[0],color=weapon.match(/red|blue|green|colorless/i)?.[0]||(weaponType?({sword:'Red',lance:'Blue',axe:'Green',staff:'Colorless'}[weaponType.toLowerCase()]||null):null);
+ const portraitImage=Array.from(doc.querySelectorAll('img')).find(img=>[img.getAttribute('alt'),img.getAttribute('data-image-name'),img.getAttribute('data-image-key')].some(value=>value&&wikiMatch(value.replace(/\.(webp|png|jpe?g)$/i,'').replace(/_/g,' '),title.replace(':',' ')+' Face FC')));
+ const rawPortrait=portraitImage?.getAttribute('data-src')||portraitImage?.getAttribute('data-original')||portraitImage?.getAttribute('src')||'';
+ let portrait:string|null=null;try{const source=new URL(rawPortrait),filename=decodeURIComponent(source.pathname.split('/revision')[0].split('/').at(-1)||'').replace(/\.(webp|png|jpe?g)$/i,'').replace(/_/g,' ');if(source.protocol==='https:'&&source.hostname==='static.wikia.nocookie.net'&&!source.username&&!source.password&&!source.port&&wikiMatch(filename,title.replace(':',' ')+' Face FC'))portrait=source.href.replace(/\/scale-to-width-down\/\d+/,'');}catch{}
+ const heroType=text(info.get('Hero Type')).match(/Chosen Hero|Legendary|Mythic|Emblem|Attuned|Rearmed|Ascended|Harmonized|Duo|Special|Aided|Entwined|Vista/i)?.[0]||'General';
+ const effect=text(info.get('Legendary Effect')||info.get('Mythic Effect')),blessing=effect.match(/\b(Earth|Fire|Water|Wind|Light|Dark|Astra|Anima)\b/i)?.[0]||null;
+ const colon=title.indexOf(':');const identity={name:title.slice(0,colon).trim(),title:title.slice(colon+1).trim(),portrait,moveType:(/Flying|Flier/i.test(move)?'Fliers':move.match(/Infantry|Cavalry|Armored/i)?.[0]||null),weaponType:weaponType?weaponType.toLowerCase()==='dragon'?'Breath':weaponType[0].toUpperCase()+weaponType.slice(1).toLowerCase():null,color:color?color[0].toUpperCase()+color.slice(1).toLowerCase():null,heroType:heroType.toLowerCase()==='chosen hero'?'Chosen Hero':heroType[0].toUpperCase()+heroType.slice(1).toLowerCase(),blessing:blessing?blessing[0].toUpperCase()+blessing.slice(1).toLowerCase():null};
+ return {title,version,releaseDate,skills,url,identity};
 }
 export async function fetchWikiHero(value:string){
  const {page,url}=wikiPageUrl(value);let data:{parse?:{title:string;text:string};error?:{info?:string}};
