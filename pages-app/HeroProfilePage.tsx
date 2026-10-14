@@ -1,4 +1,3 @@
-import MythicBonusNote from './MythicBonusNote';
 import WikiHeroImport from './WikiHeroImport';
 import AdminHeroSkills from './AdminHeroSkills';
 import HeroSkills from './HeroSkills';
@@ -23,7 +22,7 @@ export default function HeroProfilePage({hero,heroes=[],loading,error,tags,onBac
  return <main className="hero-profile-page" aria-labelledby="hero-detail-name">
   <header className="hero-page-heading"><button className="hero-page-back" aria-label="Back to previous page" onClick={onBack}/><span>Hero profile</span></header>
   {hero?<article className="hero-detail-layout">
-   <section className="hero-detail-top" aria-label="Hero identity"><div className="hero-detail-portrait">{hero.portrait?<img src={portraitUrl(hero.portrait,'detail')} alt={hero.name+' portrait'}/>:<Shield size={64}/>}<HeroPortraitMarks hero={hero}/></div><div className="hero-detail-identity"><h1 ref={heading} id="hero-detail-name" tabIndex={-1}>{hero.name}</h1>{hero.title&&<p className="hero-detail-title">{hero.title}</p>}<div className="hero-detail-tags">{tags}</div><MythicBonusNote hero={hero}/></div></section>
+   <section className="hero-detail-top" aria-label="Hero identity"><div className="hero-detail-portrait">{hero.portrait?<img src={portraitUrl(hero.portrait,'detail')} alt={hero.name+' portrait'}/>:<Shield size={64}/>}<HeroPortraitMarks hero={hero}/></div><div className="hero-detail-identity"><h1 ref={heading} id="hero-detail-name" tabIndex={-1}>{hero.name}</h1>{hero.title&&<p className="hero-detail-title">{hero.title}</p>}<div className="hero-detail-tags">{tags}</div></div></section>
    <div className="hero-profile-content">
     {onEdit&&<div className="hero-profile-actions" aria-label="Hero management">
      {!isBeta&&<button className="secondary" onClick={()=>setWikiImport(true)}><Download size={16} aria-hidden="true"/>Import from FEH Wiki</button>}
