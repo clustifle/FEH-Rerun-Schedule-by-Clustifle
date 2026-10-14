@@ -1,6 +1,12 @@
 export const pools=['General Pool','Non-Seasonal Limited','Seasonal Limited','L/M/E Pool','Grail Pool'];
 export const specialRatePools=['General Pool (4★ SR)','Seasonal Limited Pool (4★ SHSR)'];
-type PoolHero={name?:string;title?:string;category:string;pool?:string|null;debut_version?:string|null;release_date?:string|null;heroic_grail?:boolean;demote?:boolean};
+type PoolHero={name?:string;title?:string;category:string;pool?:string|null;debut_version?:string|null;release_date?:string|null;heroic_grail?:boolean;demote?:boolean;isSpecial?:boolean};
+export function autoImportPool(hero:PoolHero){
+ if(isStarterHero(hero))return null;
+ if(hero.heroic_grail)return 'Grail Pool';
+ if(hero.isSpecial&&!['Legendary','Mythic','Emblem','Chosen Hero'].includes(hero.category))return 'Seasonal Limited';
+ return defaultPool(hero.category);
+}
 export function isStarterHero(hero:{name?:string;title?:string;category?:string}|null|undefined){
  if(!hero||hero.category!=='General')return false;
  const key=[hero.name,hero.title].map(s=>s?.normalize('NFKC').trim().toLowerCase()||'').join('|');

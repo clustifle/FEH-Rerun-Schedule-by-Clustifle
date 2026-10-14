@@ -4,7 +4,7 @@ The main site's Add Hero action opens Add Hero from FEH Wiki. It reads Fire Embl
 
 1. Paste the hero page URL. Preview loads automatically.
 2. Review identity, face icon, move type, weapon/color, hero type, release date and version.
-3. Continue to choose a pool, schedule, and optional next rerun month. Use None or Skip next rerun month when no date is known.
+3. Continue to review the detected pool and choose a schedule, and optional next rerun month. Use None or Skip next rerun month when no date is known.
 4. Save hero publishes through the existing staff-authorized save path.
 
 Only an exact variant-matched Face FC asset is used, including a check of the actual image filename. Full artwork is excluded. Portrait processing stays in the draft until Save hero. No hero or image upload is published during preview.
@@ -17,10 +17,12 @@ The new flow preserves banner/revival creation context. Schedule changes do not 
 
 Checks: scripts/wiki-first-add-hero-ui-check.mjs, scripts/wiki-editor-ui-check.mjs, scripts/wiki-import-ui-check.mjs, scripts/wiki-ally-weapons-check.mjs.
 
-Multiple imports: paste up to 20 page URLs, one per line. Canonical Fandom/Gamepedia duplicates and repeated hero variants are collapsed. Preview each queued hero; failed rows and already-recorded heroes are identified separately. Each save opens the remaining queue. Cancelling stops the queue and leaves already saved heroes intact. Pool and schedule are chosen per hero.
+Multiple imports: paste up to 20 page URLs, one per line. Canonical Fandom/Gamepedia duplicates and repeated hero variants are collapsed. Preview each queued hero; failed rows and already-recorded heroes are identified separately. Each save opens the remaining queue. Cancelling stops the queue and leaves already saved heroes intact. Pool is detected automatically; schedule is chosen per hero.
 
-Batch saving: Save multiple heroes appears for a multi-page preview. Choose each hero’s pool, schedule, and required rerun month, select the imports, and click Save selected heroes. Existing heroes and incomplete previews are excluded. Saves run sequentially with per-hero progress. Completed imports are marked Saved. If skills fail after the hero saves, retry resumes those skills with the same IDs and already uploaded icons; previously completed heroes are skipped. The batch is not an atomic database transaction.
+Batch saving: Save multiple heroes appears for a multi-page preview. Review each detected pool and choose the schedule, and required rerun month, select the imports, and click Save selected heroes. Existing heroes and incomplete previews are excluded. Saves run sequentially with per-hero progress. Completed imports are marked Saved. If skills fail after the hero saves, retry resumes those skills with the same IDs and already uploaded icons; previously completed heroes are skipped. The batch is not an atomic database transaction.
 
 Infobox classification: Special tags are recognized in Hero Type and Rarities, including image/link labels. Specialized hero types remain intact. Demote detection reads actual 3–4 or 4–5 rarity combinations and excludes Special Rate and reward-only heroes. Grand Hero Battle acquisition marks Heroic Grails. Original 4–5-star non-focus TT rewards also mark Heroic Grails; seasonal focus/SR heroes reused as later TT rewards keep their summonable classification. Detection is based on original acquisition evidence rather than a blanket December 2025 cutoff, which could exclude genuine original reward heroes around the transition. Single and batch imports persist demote/Grail flags; Grail Pool is preselected for original reward heroes.
 
 Starter exception: Alfonse: Prince of Askr, Anna: Commander and Sharena: Princess of Askr (General) are identified by exact name/title/type. They have no summoning pool, are not demotes/Grail heroes, and save with a null pool. Their variants are unaffected.
+
+Wiki-first Add Hero and batch import have no pool selector. The parsed identity sets the base pool automatically, prioritizing starter and Grail exceptions and seasonal tags before hero-type defaults. Preview and schedule review display the derived current pool, including eligible Special Rate labels. Legacy editing retains its manual pool choices.
