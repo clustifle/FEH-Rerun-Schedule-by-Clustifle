@@ -18,3 +18,5 @@ The new flow preserves banner/revival creation context. Schedule changes do not 
 Checks: scripts/wiki-first-add-hero-ui-check.mjs, scripts/wiki-editor-ui-check.mjs, scripts/wiki-import-ui-check.mjs, scripts/wiki-ally-weapons-check.mjs.
 
 Multiple imports: paste up to 20 page URLs, one per line. Canonical Fandom/Gamepedia duplicates and repeated hero variants are collapsed. Preview each queued hero; failed rows and already-recorded heroes are identified separately. Each save opens the remaining queue. Cancelling stops the queue and leaves already saved heroes intact. Pool and schedule are chosen per hero.
+
+Batch saving: Save multiple heroes appears for a multi-page preview. Choose each hero’s pool, schedule, and required rerun month, select the imports, and click Save selected heroes. Existing heroes and incomplete previews are excluded. Saves run sequentially with per-hero progress. Completed imports are marked Saved. If skills fail after the hero saves, retry resumes those skills with the same IDs and already uploaded icons; previously completed heroes are skipped. The batch is not an atomic database transaction.
