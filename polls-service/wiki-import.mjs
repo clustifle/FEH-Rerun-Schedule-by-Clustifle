@@ -2,8 +2,8 @@ import {readBoundedBody} from './request-body.mjs';
 export class WikiImportError extends Error{constructor(status,message){super(message);this.status=status;}}
 const fail=(status,message)=>{throw new WikiImportError(status,message);};
 export function wikiImportPage(value){
- let url,page;try{url=new URL(value);page=decodeURIComponent(url.pathname.slice(6)).replace(/_/g,' ');}catch{fail(400,'Use a valid FEH Wiki hero page URL.');}
- if(typeof value!=='string'||value.length>2000||url.protocol!=='https:'||url.hostname!=='feheroes.fandom.com'||url.username||url.password||url.port||!url.pathname.startsWith('/wiki/')||!page.includes(':')||/^(File|Template|Category|Special|Module|User|Talk):/i.test(page)||page.includes('/')||/[\u0000-\u001f]/.test(page))fail(400,'Use an HTTPS hero page from feheroes.fandom.com.');
+ let url,page;try{url=new URL(typeof value==='string'?value.trim():value);page=decodeURIComponent(url.pathname.slice(6));if(/%[0-9a-f]{2}/i.test(page))page=decodeURIComponent(page);if(/[\u0000-\u001f\u007f]/u.test(page))throw Error('Invalid page characters');page=page.normalize('NFC').replace(/[\u2018\u2019\u02bc]/g,"'").replace(/[\u2010-\u2015\u2212]/g,'-').replace(/_/g,' ').replace(/\s+/gu,' ').trim();}catch{fail(400,'Use a valid FEH Wiki hero page URL.');}
+ if(typeof value!=='string'||value.length>2000||url.protocol!=='https:'||url.hostname!=='feheroes.fandom.com'||url.username||url.password||url.port||!url.pathname.startsWith('/wiki/')||!page.includes(':')||/^(File|Template|Category|Special|Module|User|Talk):/i.test(page)||page.includes('/')||/[\u0000-\u001f\u007f]/.test(page))fail(400,'Use an HTTPS hero page from feheroes.fandom.com.');
  return page;
 }
 export async function fetchWikiImport(value){

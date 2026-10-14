@@ -1,7 +1,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {supabase,assetUrl} from './static-data';
 import {loadHeroSkills,slotIcons,normalizedSkillName,type HeroSkill} from './hero-skills';
-import {fetchWikiHero,wikiMatch,downloadWikiSkillIcon,type WikiHero} from './wiki-hero-import';
+import {fetchWikiHero,wikiMatch,wikiHeroName,downloadWikiSkillIcon,type WikiHero} from './wiki-hero-import';
 import {importHeroPortrait,uploadCommunityImage} from './community-api';
 import type {ImportedHeroSkill} from './AdminHeroSkills';
 import type {BetaHero} from './V2Workspace';
@@ -9,7 +9,7 @@ import './WikiHeroImport.css';
 export type WikiHeroDraft={name?:string;title?:string;debut_version?:string|null;release_date?:string|null;skills:ImportedHeroSkill[]};
 export default function WikiHeroImport({hero,onClose,onSaved,draftMode=false,draftSkills=[],onApplyDraft}:{hero:BetaHero;onClose:()=>void;onSaved:()=>void;draftMode?:boolean;draftSkills?:HeroSkill[];onApplyDraft?:(draft:WikiHeroDraft)=>void}){
  const dialog=useRef<HTMLDialogElement>(null);
- const [url,setUrl]=useState(hero.name||hero.title?'https://feheroes.fandom.com/wiki/'+encodeURIComponent((hero.name.replace(/\s*\([MF]\)/g,'')+': '+hero.title).replace(/ /g,'_')):''),[preview,setPreview]=useState<WikiHero|null>(null),[current,setCurrent]=useState<BetaHero>(hero),[existing,setExisting]=useState<HeroSkill[]>([]),[versions,setVersions]=useState<string[]>([]),[chosen,setChosen]=useState<Set<string>>(new Set()),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
+ const [url,setUrl]=useState(hero.name||hero.title?'https://feheroes.fandom.com/wiki/'+encodeURIComponent((wikiHeroName(hero.name)+': '+hero.title).replace(/ /g,'_')):''),[preview,setPreview]=useState<WikiHero|null>(null),[current,setCurrent]=useState<BetaHero>(hero),[existing,setExisting]=useState<HeroSkill[]>([]),[versions,setVersions]=useState<string[]>([]),[chosen,setChosen]=useState<Set<string>>(new Set()),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
  useEffect(()=>{dialog.current?.showModal();},[]);
  const [refined,setRefined]=useState<Set<string>>(new Set()),[refineIcons,setRefineIcons]=useState<Record<string,string>>({});
  const request=useRef(0),previewTimer=useRef<ReturnType<typeof setTimeout>|undefined>(undefined);

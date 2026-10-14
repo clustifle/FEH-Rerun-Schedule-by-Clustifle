@@ -26,3 +26,15 @@ test('verification HTML and upstream failures never become cached previews',asyn
   assert.equal(writes,0);
  }finally{globalThis.fetch=previousFetch;globalThis.caches=previousCache;}
 });
+
+test('special letters, decomposed accents and double-encoded copied links resolve consistently',()=>{
+ for(const title of ['Heiðr: Innocent Goddess','Nerþuz: God of the Land','Læraðr: Quieting Heart','Hræsvelgr: Quieting Blade','Gunnthrá: Voice of Dreams','Ótr: Kingsbrother']){
+  const encoded=encodeURIComponent(title.replace(/ /g,'_'));
+  assert.equal(wikiImportPage('https://feheroes.fandom.com/wiki/'+encoded),title);
+  assert.equal(wikiImportPage('https://feheroes.fandom.com/wiki/'+encodeURIComponent(encoded)),title);
+  assert.equal(wikiImportPage('https://feheroes.fandom.com/wiki/'+encodeURIComponent(title.normalize('NFD').replace(/ /g,'_'))),title);
+ }
+ assert.equal(wikiImportPage('https://feheroes.fandom.com/wiki/'+encodeURIComponent('Altina: Dawn’s_Trueblade')),"Altina: Dawn's Trueblade");
+ assert.equal(wikiImportPage('https://feheroes.fandom.com/wiki/'+encodeURIComponent('Alm: Saint‑King')),'Alm: Saint-King');
+ for(const value of ['File%253AImage.png','Hero%253A_Title%252FStats','Hero%253A_Title%2500'])assert.throws(()=>wikiImportPage('https://feheroes.fandom.com/wiki/'+value));
+});

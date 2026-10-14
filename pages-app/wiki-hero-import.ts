@@ -2,9 +2,16 @@ import {communityApi} from './community-api';
 import {skillSlots,type SkillSlot} from './hero-skills';
 export type WikiSkill={slot:SkillSlot;name:string;icon:string|null;thumbnail?:string|null;refineIcon?:string|null};
 export type WikiHero={title:string;version:string|null;releaseDate:string|null;skills:WikiSkill[];url:string};
-export function wikiPageUrl(value:string){const url=new URL(value);if(url.protocol!=='https:'||url.hostname!=='feheroes.fandom.com'||url.username||url.password||url.port||!url.pathname.startsWith('/wiki/'))throw Error('Use an HTTPS hero page from feheroes.fandom.com.');const page=decodeURIComponent(url.pathname.slice(6)).replace(/_/g,' ');if(!page.includes(':')||/^(File|Template|Category|Special|Module|User|Talk):/i.test(page)||page.includes('/'))throw Error('Choose a hero page, not an image, category or subpage.');return {page,url:'https://feheroes.fandom.com/wiki/'+encodeURIComponent(page.replace(/ /g,'_'))};}
-const text=(el:Element|undefined|null)=>el?.textContent?.replace(/\s+/g,' ').trim()||'';
-export const wikiMatch=(a:string,b:string)=>a.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/\s*\([MF]\)/g,'').replace(/[^a-z0-9]/gi,'').toLowerCase()===b.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/\s*\([MF]\)/g,'').replace(/[^a-z0-9]/gi,'').toLowerCase();
+export function wikiPageUrl(value:string){
+ let url:URL,page:string;try{url=new URL(value.trim());page=decodeURIComponent(url.pathname.slice(6));if(/%[0-9a-f]{2}/i.test(page))page=decodeURIComponent(page);if(/[\u0000-\u001f\u007f]/u.test(page))throw Error('Invalid page characters');page=page.normalize('NFC').replace(/[\u2018\u2019\u02bc]/g,"'").replace(/[\u2010-\u2015\u2212]/g,'-').replace(/_/g,' ').replace(/\s+/gu,' ').trim();}catch{throw Error('Use a valid FEH Wiki hero page URL.');}
+ if(value.length>2000||url.protocol!=='https:'||url.hostname!=='feheroes.fandom.com'||url.username||url.password||url.port||!url.pathname.startsWith('/wiki/'))throw Error('Use an HTTPS hero page from feheroes.fandom.com.');
+ if(!page.includes(':')||/^(File|Template|Category|Special|Module|User|Talk):/i.test(page)||page.includes('/')||/[\u0000-\u001f\u007f]/u.test(page))throw Error('Choose a hero page, not an image, category or subpage.');
+ return {page,url:'https://feheroes.fandom.com/wiki/'+encodeURIComponent(page.replace(/ /g,'_'))};
+}
+const text=(el:Element|undefined|null)=>el?.textContent?.normalize('NFC').replace(/\s+/g,' ').trim()||'';
+export const wikiHeroName=(name:string)=>name.normalize('NFC').replace(/\s*\((?:M|F|Y|A)\)\s*$/i,'').trim();
+const matchKey=(value:string)=>value.normalize('NFKD').toLowerCase().replace(/\p{M}/gu,'').replace(/[ðþæøœłß]/g,letter=>({'ð':'d','þ':'th','æ':'ae','ø':'o','œ':'oe','ł':'l','ß':'ss'}[letter]!)).replace(/\s*\((?:m|f|y|a)\)(?=\s*:|\s*$)/g,'').replace(/[^\p{L}\p{N}]/gu,'');
+export const wikiMatch=(a:string,b:string)=>!!matchKey(a)&&matchKey(a)===matchKey(b);
 function rows(table:Element){const result:Element[][]=[],carry=new Map<number,{cell:Element;left:number}>();for(const tr of table.querySelectorAll('tr')){const out:Element[]=[];for(const [i,c] of carry){out[i]=c.cell;if(--c.left===0)carry.delete(i);}let col=0;for(const cell of tr.children){if(!['TD','TH'].includes(cell.tagName))continue;while(out[col])col++;out[col]=cell;const span=Number(cell.getAttribute('rowspan')||1);if(span>1)carry.set(col,{cell,left:span-1});col++;}result.push(out);}return result;}
 export function parseWikiHero(html:string,title:string,url:string):WikiHero{
  const doc=new DOMParser().parseFromString(html,'text/html');
@@ -33,7 +40,7 @@ export async function fetchWikiHero(value:string){
  catch(serverError){
   // The public API remains a fallback if the import service is briefly unavailable.
   // Never send website credentials or cookies to Fandom.
-  const endpoint=new URL('https://feheroes.fandom.com/api.php');endpoint.search=new URLSearchParams({action:'parse',page,prop:'text',format:'json',formatversion:'2',origin:'*'}).toString();
+  const endpoint=new URL('https://feheroes.fandom.com/api.php');endpoint.search=new URLSearchParams({action:'parse',page,prop:'text',format:'json',formatversion:'2',redirects:'1',origin:'*'}).toString();
   try{const response=await fetch(endpoint,{credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(15000)});if(!response.ok)throw Error();data=await response.json();}
   catch{const message=serverError instanceof Error?serverError.message:'';throw Error(!message||/failed to fetch|networkerror|load failed/i.test(message)?'Could not connect to the wiki import service. Please check your connection and retry.':message);}
  }
