@@ -13,3 +13,28 @@
 .wiki-batch-save{margin:16px 0;padding:14px;border:1px solid var(--realm-line);border-radius:8px;background:var(--realm-field)}.wiki-batch-save h3{font-size:20px}.wiki-batch-save fieldset{margin:10px 0;padding:12px;border:1px solid var(--realm-line);border-radius:6px;min-width:0}.wiki-batch-save fieldset>label{display:flex;align-items:center;gap:8px}.wiki-batch-save input[type=checkbox]{width:auto}.wiki-batch-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.wiki-batch-fields label{display:grid;gap:5px;font-size:14px}.wiki-batch-fields select{width:100%;min-width:0;padding:8px;border:1px solid var(--realm-line);border-radius:6px;background:var(--realm-panel);color:inherit;font:inherit}.wiki-batch-save fieldset p{margin:6px 0;font-size:14px;overflow-wrap:anywhere}@media(max-width:500px){.wiki-batch-fields{grid-template-columns:1fr}}
 
 .wiki-detected-pool{display:grid;gap:6px;padding:12px;border:1px solid var(--realm-line);border-radius:8px;background:var(--realm-field)}.wiki-batch-pool{display:block;margin-top:5px;overflow-wrap:anywhere}
+.wiki-add-hero{width:min(1120px,calc(100vw - 32px));}
+.wiki-add-heading{display:flex;gap:12px;align-items:center;min-width:0}
+.wiki-add-heading>svg{flex:none;opacity:.8}
+.wiki-add-hero .wiki-add-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,.95fr);padding:0;overflow:hidden;flex:1}
+.wiki-add-controls{padding:20px 24px;overflow:auto;min-height:0;min-width:0}
+.wiki-add-controls>p{margin:0 0 16px;opacity:.8}
+.wiki-add-controls>label{display:grid;gap:8px}
+.wiki-add-controls textarea{resize:vertical;min-height:100px;line-height:1.5}
+.wiki-add-live-preview{min-width:0;min-height:0;overflow:auto;padding:20px 24px;border-left:1px solid var(--realm-line);background:var(--realm-field)}
+.wiki-preview-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--realm-line)}
+.wiki-preview-heading h3{font-size:19px}.wiki-preview-heading>span{font-size:14px;opacity:.7}
+.wiki-preview-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:340px;gap:14px;opacity:.75}.wiki-preview-empty h3{font-size:23px}.wiki-preview-empty p{max-width:280px;margin:0}.wiki-preview-empty svg{opacity:.5}
+.wiki-add-live-preview .wiki-add-review{display:grid;grid-template-columns:94px minmax(0,1fr);gap:16px;margin:20px 0;padding:0;border:0;background:none}
+.wiki-preview-portrait{width:94px;height:94px;position:relative;align-self:start;border-radius:8px;background:var(--realm-panel)}
+.wiki-preview-portrait>img{width:100%;height:100%;object-fit:contain;border-radius:8px}
+.wiki-add-live-preview .wiki-add-review h3{font-size:28px;line-height:1.15}.wiki-add-live-preview .wiki-add-review dl{margin-top:16px}.wiki-add-live-preview .wiki-add-review dl>div{grid-template-columns:90px minmax(0,1fr);gap:10px;font-size:15px}.wiki-add-live-preview .wiki-add-review dd{line-height:1.4}.wiki-add-live-preview .wiki-add-review p{opacity:.8;margin-top:7px}
+.wiki-add-live-preview .wiki-add-skill-review{margin-top:22px;background:var(--realm-panel);padding:16px;border-radius:10px}.wiki-add-skill-review>h3{margin-bottom:10px;font-size:18px}
+.wiki-preview-skill{display:flex;align-items:center;gap:12px;padding:9px 0}.wiki-preview-skill+.wiki-preview-skill{border-top:1px solid var(--realm-line)}
+.wiki-preview-skill-icon{display:flex;width:32px;height:32px;flex:none;align-items:center;justify-content:center}.wiki-preview-skill-icon>img,.wiki-preview-skill-icon>.passive-icon,.wiki-preview-skill-icon>.arcane-weapon-icon{width:32px;height:32px;object-fit:contain}.wiki-preview-skill strong{font-size:17px;font-weight:400}.wiki-preview-skill>div{min-width:0;overflow-wrap:anywhere}.wiki-preview-refine{display:block;font-size:13px;color:var(--edit-text);opacity:.7}
+.wiki-preview-source{display:inline-block;margin-top:4px;font-size:14px}.wiki-preview-save-note{margin:14px 0 0;font-size:14px;opacity:.65}
+.wiki-add-queue button{padding:12px}.wiki-add-queue button:hover{border-color:var(--edit-text)}
+.wiki-add-hero .wiki-batch-save{padding:16px;margin-top:20px}.wiki-batch-save fieldset>label{font-size:17px}.wiki-add-hero>footer{padding:16px 24px}
+@media(max-width:800px){.wiki-add-hero .wiki-add-workspace{display:flex;flex-direction:column;overflow:auto}.wiki-add-controls,.wiki-add-live-preview{overflow:visible;flex:none;padding:18px}.wiki-add-live-preview{border-left:0;border-top:1px solid var(--realm-line)}.wiki-preview-empty{min-height:180px}.wiki-add-hero{width:calc(100vw - 20px)}.wiki-add-live-preview .wiki-add-review{grid-template-columns:72px minmax(0,1fr)}.wiki-preview-portrait{width:72px;height:72px}.wiki-add-live-preview .wiki-add-review h3{font-size:24px}.wiki-add-live-preview .wiki-add-review dl>div{grid-template-columns:80px minmax(0,1fr)}}
+
+.wiki-preview-jump{display:none}@media(max-width:800px){.wiki-preview-jump{display:block;margin:12px 0;min-height:42px}}
