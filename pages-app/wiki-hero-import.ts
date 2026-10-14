@@ -1,3 +1,4 @@
+import {isStarterHero} from './hero-pools';
 import {communityApi} from './community-api';
 import {skillSlots,type SkillSlot} from './hero-skills';
 export type WikiSkill={slot:SkillSlot;name:string;icon:string|null;thumbnail?:string|null;refineIcon?:string|null;refineThumbnail?:string|null};
@@ -81,7 +82,7 @@ export function parseWikiHero(html:string,title:string,url:string):WikiHero{
  const {heroType}=wikiHeroTypes(doc);
  const effect=text(info.get('Legendary Effect')||info.get('Mythic Effect')),blessing=effect.match(/\b(Earth|Fire|Water|Wind|Light|Dark|Astra|Anima)\b/i)?.[0]||null;
  const colon=title.indexOf(':');const identity={...wikiAvailability(doc),name:title.slice(0,colon).trim(),title:title.slice(colon+1).trim(),portrait,portraitThumbnail:portrait?rawPortrait:null,moveType:(/Flying|Flier/i.test(move)?'Fliers':move.match(/Infantry|Cavalry|Armored/i)?.[0]||null),weaponType:weaponType?weaponType.toLowerCase()==='dragon'?'Breath':weaponType[0].toUpperCase()+weaponType.slice(1).toLowerCase():null,color:color?color[0].toUpperCase()+color.slice(1).toLowerCase():null,heroType:heroType.toLowerCase()==='chosen hero'?'Chosen Hero':heroType[0].toUpperCase()+heroType.slice(1).toLowerCase(),blessing:blessing?blessing[0].toUpperCase()+blessing.slice(1).toLowerCase():null};
- return {title,version,releaseDate,skills,url,identity};
+ if(isStarterHero({name:identity.name,title:identity.title,category:identity.heroType})){identity.demote=false;identity.heroicGrail=false;}return {title,version,releaseDate,skills,url,identity};
 }
 export async function fetchWikiHero(value:string){
  const {page,url}=wikiPageUrl(value);let data:{parse?:{title:string;text:string};error?:{info?:string}};

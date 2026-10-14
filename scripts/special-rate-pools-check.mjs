@@ -23,3 +23,5 @@ assert.equal(displayPool(general),'General Pool','missing metadata does not infe
 assert.ok(specialRatePools.every(pool=>!pools.includes(pool)),'derived pools are not editor choices');
 assert.equal(general.pool,'General Pool');
 console.log('Special Rate cutoff boundaries, date fallback, missing metadata, CYL8/type/demote/Grail exclusions and unchanged editor pools passed.');
+
+for(const [name,title] of [['Alfonse','Prince of Askr'],['Anna','Commander'],['Sharena','Princess of Askr']]){const hero={...general,name,title,debut_version:'1.0',demote:true};assert.equal(displayPool(hero),'Starter unit (no summoning pool)');assert.equal(exports.isStarterHero(hero),true);assert.equal(exports.isStarterHero({...hero,title:'Seasonal Variant'}),false);assert.equal(exports.isStarterHero({...hero,category:'Special'}),false);}console.log('Exact starter variants excluded from all summoning pools; other variants preserved.');
