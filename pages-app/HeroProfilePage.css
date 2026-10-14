@@ -85,3 +85,5 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][dat
 }
 
 .mythic-bonus-note{margin-top:12px;padding-top:10px;border-top:1px solid var(--realm-line);font:14px/1.45 FEHeroes,Georgia,serif}.mythic-bonus-note summary{cursor:pointer}.mythic-bonus-note ul{padding-left:18px}.mythic-bonus-note li{margin:6px 0}.mythic-bonus-note a{color:inherit}
+
+.hero-pool-rate-note{font:14px/1.45 FEHeroes,Georgia,serif;margin:8px 0 14px;opacity:.85}

@@ -1,4 +1,18 @@
 export const pools=['General Pool','Non-Seasonal Limited','Seasonal Limited','L/M/E Pool','Grail Pool'];
+export const specialRatePools=['General Pool (4★ SR)','Seasonal Limited Pool (4★ SHSR)'];
+type PoolHero={category:string;pool?:string|null;debut_version?:string|null;release_date?:string|null;heroic_grail?:boolean;demote?:boolean};
+function withinCutoff(hero:PoolHero,major:number,minor:number,lastDate:string){
+ const version=hero.debut_version?.trim().match(/^v?(\d+)\.(\d+)(?:\.\d+)?$/i);
+ if(version){const a=Number(version[1]),b=Number(version[2]);return a>=1&&(a<major||(a===major&&b<=minor));}
+ return !!hero.release_date&&/^\d{4}-\d{2}-\d{2}$/.test(hero.release_date)&&hero.release_date>='2017-02-02'&&hero.release_date<=lastDate;
+}
+export function displayPool(hero:PoolHero){
+ const base=normalizePool(hero.pool,hero.category);
+ if(hero.heroic_grail||['Rearmed','Attuned','Legendary','Mythic','Emblem','Chosen Hero'].includes(hero.category))return base;
+ if(base==='General Pool'&&!hero.demote&&withinCutoff(hero,8,1,'2024-01-31'))return specialRatePools[0];
+ if(base==='Seasonal Limited'&&withinCutoff(hero,7,1,'2023-01-31'))return specialRatePools[1];
+ return base;
+}
 export function defaultPool(category:string){
  if(['Legendary','Mythic','Emblem'].includes(category))return 'L/M/E Pool';
  if(['Special','Duo','Harmonized'].includes(category))return 'Seasonal Limited';

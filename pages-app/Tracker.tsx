@@ -45,7 +45,7 @@ import MonthNavigator from './MonthNavigator';
 import ForgingBonds from './ForgingBonds';
 import {upscalePortrait} from './portrait-upscale';
 import {buildScheduleIndex} from './schedule-index';
-import {defaultPool,normalizePool} from './hero-pools';
+import {defaultPool,normalizePool,displayPool} from './hero-pools';
 import ProfileHeroPicker from './ProfileHeroPicker';
 import {usePreferences,getPreferences,setPreferences,reduceMotion,recordUpdate} from './preferences';
 import {useAutoRefresh} from './useAutoRefresh';
@@ -249,7 +249,7 @@ export default function Home(){
  useEffect(()=>{const link=portraitUrl.trim();if(saving||!link||!link.toLowerCase().startsWith('https://')||importedUrl===link)return;const timer=setTimeout(()=>{void importLink(link);},600);return()=>clearTimeout(timer);},[portraitUrl,saving]);
  const scheduleHeroes=useMemo(()=>activeSchedule==='Homepage'?heroes:heroes.filter(h=>isWaitlist(activeSchedule)?waitlistIds.has(h.id):(h.schedule||'General')===activeSchedule).sort((a,b)=>isWaitlist(activeSchedule)?(waitlistOrder[a.id]??2147483647)-(waitlistOrder[b.id]??2147483647):0),[heroes,activeSchedule,waitlistIds,waitlistOrder]);
  const normalizedSearch=search.toLowerCase();
- const visible=useMemo(()=>activeSchedule==='Homepage'?scheduleHeroes:scheduleHeroes.filter(h=>(showGrails||!h.heroic_grail)&&(filter==='All heroes'||(filter==='Heroic Grails'?h.heroic_grail:h.category===filter))&&(colorFilter==='All'||h.color===colorFilter)&&(moveFilter==='All'||(moveFilter==='Unassigned'?!h.move_type:h.move_type===moveFilter))&&(weaponFilter==='All'||(weaponFilter==='Unassigned'?!h.weapon_type:h.weapon_type===weaponFilter))&&(poolFilter==='All'||h.pool===poolFilter)&&h.searchText.includes(normalizedSearch)&&versionMatches(h.debut_version,versionFilter)),[scheduleHeroes,activeSchedule,showGrails,filter,colorFilter,weaponFilter,moveFilter,poolFilter,normalizedSearch,versionFilter]);
+ const visible=useMemo(()=>activeSchedule==='Homepage'?scheduleHeroes:scheduleHeroes.filter(h=>(showGrails||!h.heroic_grail)&&(filter==='All heroes'||(filter==='Heroic Grails'?h.heroic_grail:h.category===filter))&&(colorFilter==='All'||h.color===colorFilter)&&(moveFilter==='All'||(moveFilter==='Unassigned'?!h.move_type:h.move_type===moveFilter))&&(weaponFilter==='All'||(weaponFilter==='Unassigned'?!h.weapon_type:h.weapon_type===weaponFilter))&&(poolFilter==='All'||displayPool(h)===poolFilter)&&h.searchText.includes(normalizedSearch)&&versionMatches(h.debut_version,versionFilter)),[scheduleHeroes,activeSchedule,showGrails,filter,colorFilter,weaponFilter,moveFilter,poolFilter,normalizedSearch,versionFilter]);
  const heroOrder=useMemo(()=>{const order=new Map<string,number>(),groups=new Map<string,number>();for(const h of visible){const group=h.month+'|'+h.color,index=groups.get(group)||0;order.set(h.id,index);groups.set(group,index+1);}return order;},[visible]);
  const now=new Date(),currentMonth=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
  const heroIndex=useMemo(()=>buildScheduleIndex(visible),[visible]);
