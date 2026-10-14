@@ -46,7 +46,6 @@ export default function HeroProfilePage({hero,heroes=[],loading,error,tags,onBac
         <div><dt>Summon availability</dt><dd>{isStarterHero(hero)?displayPool(hero):hero.heroic_grail?'Heroic Grails':specialRatePools.includes(displayPool(hero))?displayPool(hero):hero.demote?'4–5★ demote':displayPool(hero)}</dd></div>
         {['Legendary','Mythic','Chosen Hero'].includes(hero.category)&&<div><dt>Blessing</dt><dd>{hero.blessing?<><img src={blessingIcon(hero.category,hero.blessing,hero)} alt="" width={24} height={24}/>{hero.blessing}</>:'Not assigned'}</dd></div>}
        </dl>
-       {isStarterHero(hero)&&<p className="hero-starter-note">Starter unit · one permanent copy per player, received when starting the game. Cannot be lost or summoned from any pool.</p>}
        <div className="hero-owner-note" aria-labelledby="hero-note-label"><h3 id="hero-note-label">Notes</h3><p>{hero.notes||'No notes added yet.'}</p></div>
       </section>
       <section className="hero-profile-skills-card hero-profile-card" aria-labelledby="hero-skills-heading">
