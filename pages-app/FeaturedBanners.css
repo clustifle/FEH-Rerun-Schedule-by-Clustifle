@@ -1,0 +1,9 @@
+html[data-theme][data-theme] .tracker .home-banner .featured-banner-heroes{grid-template-columns:repeat(var(--featured-count,4),minmax(0,1fr));align-items:start}
+html[data-theme][data-theme] .tracker .home-banner .featured-banner-heroes[data-hero-count="0"] .featured-banner-empty{grid-column:1/-1;display:flex;flex-direction:column;gap:12px;width:100%}
+html[data-theme][data-theme] .tracker .home-banner .featured-banner-heroes[data-hero-count="3"]{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,1.5vw,18px)}
+@media(max-width:760px){
+ html[data-theme][data-theme] .tracker .home-banner .featured-banner-heroes{grid-template-columns:repeat(2,minmax(0,1fr))}
+ html[data-theme][data-theme] .tracker .home-banner .featured-banner-heroes[data-hero-count="1"]{grid-template-columns:minmax(0,1fr);max-width:180px;margin-inline:auto;width:100%}
+ html[data-theme][data-theme] .tracker .home-banner .featured-banner-heroes[data-hero-count="3"] .hero-tile{min-width:0;padding-inline:0}
+ html[data-theme][data-theme] .tracker .home-banner .featured-banner-heroes[data-hero-count="3"] .tile-name{font-size:clamp(14px,3.8vw,19px);overflow-wrap:anywhere;min-width:0}
+}
