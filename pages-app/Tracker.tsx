@@ -8,6 +8,7 @@ import type {BetaHero} from './V2Workspace';
 import HeaderFeh from './HeaderFeh';
 import HeaderNavigation from './HeaderNavigation';
 import './NavigationMenu.css';
+import './CompactGamePanels.css';
 import GlobalHeroHover from './GlobalHeroHover';
 import './HeroEditorDesign.css';
 import AdminHeroSkills,{type HeroSkillsEditorHandle,type ImportedHeroSkill} from './AdminHeroSkills';

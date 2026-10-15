@@ -15,6 +15,8 @@ try{
    await p.evaluate(t=>document.documentElement.dataset.theme=t,theme);
    await settings.getByRole('navigation',{name:'Settings sections'}).getByRole('button',{name:'Personalization',exact:true}).click();
    assert.ok(await settings.locator('.settings-body').isVisible());
+   assert.ok(await settings.locator('.settings-sections button').first().evaluate(e=>getComputedStyle(e,'::before').backgroundImage.includes('compact-menu-button')));
+   assert.ok(await p.locator('.has-settings[open]').evaluate(e=>getComputedStyle(e,'::after').backgroundImage.includes('compact-menu-window')));
    assert.ok(await settings.evaluate(e=>e.scrollWidth<=e.clientWidth+1),'settings overflow '+width);
    const bounds=await p.locator('.has-settings[open]').boundingBox();assert.ok(bounds.x>=0&&bounds.x+bounds.width<=width+1);
    assert.equal(await settings.locator('.settings-group').first().evaluate(e=>getComputedStyle(e).backgroundImage),'none');
@@ -30,8 +32,10 @@ try{
  assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('feh-preferences')).clock),'24');
  await sections.getByRole('button',{name:'Updates',exact:true}).click();await settings.getByRole('button',{name:'Refresh now',exact:true}).waitFor();
  await sections.getByRole('button',{name:'About',exact:true}).click();assert.ok(await settings.locator('.settings-body').isVisible());
+   assert.ok(await settings.locator('.settings-sections button').first().evaluate(e=>getComputedStyle(e,'::before').backgroundImage.includes('compact-menu-button')));
+   assert.ok(await p.locator('.has-settings[open]').evaluate(e=>getComputedStyle(e,'::after').backgroundImage.includes('compact-menu-window')));
  await sections.getByRole('button',{name:'Personalization',exact:true}).click();await settings.getByRole('button',{name:'Reset settings',exact:true}).click();await settings.getByRole('button',{name:'Cancel',exact:true}).click();assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('feh-preferences')).compact),true);
  await p.locator('.settings-mobile-back').click();await p.getByRole('button',{name:'Skills List',exact:true}).waitFor();
  assert.deepEqual(errors,[]);console.log('Settings: themed 320/390/768/1280 layouts, visible mobile sections, theme and preference persistence, reset cancellation, Updates/About and return to menu passed.');
-}catch(e){await browser.contexts()[0].pages()[0].screenshot({path:'settings-failure.png'});console.log(await browser.contexts()[0].pages()[0].locator('.minimal-settings').evaluate(e=>({html:e.outerHTML.slice(0,4000),css:getComputedStyle(e.querySelector('.settings-sections')).display})));throw e;}finally{await browser.close();}
+}catch(e){await browser.contexts()[0].pages()[0].screenshot({path:'settings-failure.png'});throw e;}finally{await browser.close();}
 

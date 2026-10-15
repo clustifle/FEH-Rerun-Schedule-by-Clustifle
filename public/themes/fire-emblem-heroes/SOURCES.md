@@ -13,3 +13,5 @@ The SRPG Status sheet supplies an empty blue status strip for rerun-window month
 Browser and PWA icons use the project-owner-supplied `feh site icon symbol.png`, resized with padding onto a dark teal background. The maskable variant keeps the symbol inside its safe area.
 
 `portrait-frame.webp`: project-owner-supplied `Frame_4.webp` from Fire Emblem Heroes. The original transparent image is preserved; CSS applies Red, Blue, Green, and Colorless weapon-color treatments. Game asset rights remain with Nintendo / INTELLIGENT SYSTEMS.
+
+`compact-menu-button.webp` and `compact-menu-window.webp` are lossless UI-region crops of the existing `Common_Button.webp` (0,192–840,356) and `Common_Window.webp` (0,0–1472,372). They supply compact navigation and Settings controls; no AI generation or upscaling is used.
