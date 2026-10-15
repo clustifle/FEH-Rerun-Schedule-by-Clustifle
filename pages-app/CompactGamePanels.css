@@ -61,3 +61,20 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][dat
 html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-navigation.has-settings:has(>.minimal-settings)>.settings-mobile-back{min-height:44px!important}
 html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-navigation:not(.has-settings) .mobile-navigation-top button{min-height:44px!important}
 }
+
+/* Final polish: one-line heading, clear selection, and fully visible mobile sections. */
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-navigation.has-settings:has(>.minimal-settings)>.settings-mobile-back{position:absolute!important;top:14px!important;right:18px!important;margin:0!important;z-index:3!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-settings .settings-header{min-height:42px!important;padding:2px 100px 10px 0!important;position:relative!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-settings .settings-sections button[aria-current]::after{content:""!important;position:absolute!important;left:15px!important;right:15px!important;bottom:5px!important;height:2px!important;background:var(--realm-accent)!important;opacity:.9!important;pointer-events:none!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-settings .theme-picker legend{font-size:13px!important;color:var(--muted)!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-settings .settings-toggle:has(input:checked)>span{color:var(--realm-accent)!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-settings .settings-toggle:has(input:checked)::after{content:""!important;position:absolute!important;width:4px!important;height:4px!important;right:8px!important;bottom:6px!important;border-radius:50%!important;background:var(--realm-accent)!important;pointer-events:none!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-navigation:not(.has-settings) .navigation-auth-links>span{display:none!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-navigation:not(.has-settings) .main-menu-links button:focus-visible{outline:2px solid var(--realm-accent)!important;outline-offset:2px!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-navigation:not(.has-settings) .main-menu-links button.is-active::after{content:""!important;position:absolute!important;left:15px!important;right:15px!important;bottom:5px!important;height:2px!important;background:var(--realm-accent)!important;border:0!important;opacity:.9!important;pointer-events:none!important}
+@media(max-width:480px){
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-navigation.has-settings:has(>.minimal-settings)>.settings-mobile-back{top:12px!important;right:12px!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-settings .settings-layout>.settings-sections{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;overflow:visible!important;gap:4px 6px!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-settings .settings-sections button{width:100%!important;min-width:0!important;white-space:normal!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .minimal-settings .settings-header{min-height:46px!important}
+}

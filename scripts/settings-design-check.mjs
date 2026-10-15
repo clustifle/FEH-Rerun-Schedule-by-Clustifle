@@ -21,6 +21,7 @@ try{
    const bounds=await p.locator('.has-settings[open]').boundingBox();assert.ok(bounds.x>=0&&bounds.x+bounds.width<=width+1);
    assert.equal(await settings.locator('.settings-group').first().evaluate(e=>getComputedStyle(e).backgroundImage),'none');
   }
+  if(width<=480){const boxes=await settings.locator('.settings-sections button').evaluateAll(nodes=>nodes.map(e=>{const r=e.getBoundingClientRect();return {left:r.left,right:r.right};}));assert.ok(boxes.every(b=>b.left>=0&&b.right<=width));}
   await p.screenshot({path:'settings-minimal-'+width+'.png'});
  }
  await settings.locator('.settings-row').filter({hasText:'Compact view by default'}).locator('input').check();
