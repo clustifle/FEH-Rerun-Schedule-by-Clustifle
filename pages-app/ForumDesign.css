@@ -34,3 +34,20 @@ html[data-theme][data-theme][data-theme] .tracker .forum-plus :is(.primary,.seco
 .forum-plus .community-feed-tools>button.icon-button[aria-pressed=true]{color:var(--accent)!important;border-color:var(--accent)!important}
 @container(max-width:740px){.forum-plus .community-feed-tools>label{flex-basis:calc(100% - 159px);order:0;min-width:90px}.forum-plus .community-feed-tools>button{order:1}.forum-plus .community-feed-tools>select{order:2;flex:1 1 calc(33.333% - 7px);width:0;min-width:0}}
 @media(pointer:coarse){.forum-plus .community-feed-tools>label,.forum-plus .community-feed-tools :is(input,select,button){height:44px;min-height:44px}.forum-plus .community-feed-tools>button.icon-button{flex-basis:44px;width:44px}}
+
+/* Flat forum rows and a compact utility strip, without card framing. */
+.community-workspace.forum-plus{padding:0;border:0;border-radius:0;background:transparent;gap:14px}
+.forum-plus .community-intro{padding-bottom:12px;gap:12px}.forum-plus .forum-welcome h3{font-size:20px}.forum-plus .forum-welcome p{font-size:12px}
+.forum-utility-bar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:0 0 12px;border-bottom:1px solid var(--border)}
+.forum-utility-bar .forum-rules-panel{flex:1;min-width:0;padding-top:8px}.forum-utility-bar .community-account{flex:0 1 auto;display:flex;align-items:center;padding:0;border:0;gap:10px;margin:0;font-size:12px}.forum-utility-bar .community-account>div{display:flex;width:auto}
+.forum-plus .community-main-info{padding-left:16px}.forum-plus .community-main-info>.primary,.forum-plus .community-main-info>p,.forum-plus .community-main-info>a{display:none}
+.forum-plus .community-feed-tools>select{flex-basis:125px;width:125px}.forum-plus .community-feed-card{padding:16px}.forum-plus .community-feed-card .community-post-link p{opacity:.8}
+@container(max-width:740px){.forum-plus .community-feed-tools>select{flex:1 1 calc(50% - 7px);width:0}}
+@media(max-width:600px){.community-workspace.forum-plus{padding:0;gap:12px}.forum-plus .community-intro>a{font-size:11px;padding:6px 9px}.forum-utility-bar{flex-wrap:wrap;gap:6px}.forum-utility-bar .forum-rules-panel{flex:1 1 100%}.forum-utility-bar .community-account{width:100%;justify-content:space-between}.forum-plus .community-feed-card{padding:14px 10px}}
+
+.forum-plus .community-feed{border:0;border-radius:0;background:none;overflow:visible;border-top:1px solid var(--border)}
+.forum-plus .community-feed-card{border:0;border-bottom:1px solid var(--border);border-radius:0;background:none;padding:18px 0;box-shadow:none}
+.forum-plus .community-feed-card:last-child{border-bottom:1px solid var(--border)}
+.forum-plus .community-feed-card:hover{background:transparent}
+.forum-plus .community-main-info{background:none;border-radius:0}
+@media(max-width:600px){.forum-plus .community-feed-card{padding:16px 0}}

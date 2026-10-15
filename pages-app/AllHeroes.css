@@ -26,3 +26,15 @@
 
 .directory-workspace .directory-load-more{grid-column:1/-1;justify-self:center;margin:12px auto;display:block}
 @supports(content-visibility:auto){.directory-workspace .all-heroes-card{content-visibility:auto;contain-intrinsic-block-size:auto 130px}.directory-workspace .small-view .all-heroes-card{contain-intrinsic-block-size:auto 85px}.directory-workspace .list-view .all-heroes-card{contain-intrinsic-block-size:auto 70px}.directory-workspace .large-view .all-heroes-card{contain-intrinsic-block-size:auto 185px}}
+
+/* Flat directory entries: portraits and typography, without card framing. */
+.all-heroes.directory-workspace{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;gap:10px}
+.all-heroes.directory-workspace .all-heroes-results{border:0;border-radius:0;background:transparent;padding:8px 0;border-top:1px solid var(--realm-line)}
+html[data-theme][data-theme][data-theme] .tracker .all-heroes.directory-workspace .all-heroes-card{border:0!important;border-radius:0!important;background:transparent!important;background-image:none!important;box-shadow:none!important;text-shadow:none!important;transition:none}
+html[data-theme][data-theme][data-theme] .tracker .all-heroes.directory-workspace .all-heroes-card::before,html[data-theme][data-theme][data-theme] .tracker .all-heroes.directory-workspace .all-heroes-card::after{content:none!important}
+.directory-workspace .all-heroes-card:hover .all-heroes-copy strong{color:var(--realm-accent);text-decoration:underline;text-underline-offset:3px}
+.all-heroes.directory-workspace :is(.list-view,.tiles-view,.content-view){gap:0 18px}
+html[data-theme][data-theme][data-theme] .tracker .all-heroes.directory-workspace :is(.list-view,.tiles-view,.content-view) .all-heroes-card{border-bottom:1px solid var(--realm-line)!important;padding-block:12px}
+.directory-workspace .directory-table td{background:transparent}.directory-workspace .directory-table tbody tr:hover td{background:var(--realm-field)}
+.directory-workspace .directory-rerun{font-size:12px;border:0;padding-top:0}.directory-workspace .directory-page-controls{padding-top:8px;border-top:1px solid var(--realm-line)}
+@media(max-width:650px){.all-heroes.directory-workspace{padding:0}.all-heroes.directory-workspace .all-heroes-results{padding:8px 0}}

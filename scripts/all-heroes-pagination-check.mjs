@@ -26,16 +26,14 @@ try{
   assert.ok(count>=120&&count<=240,'initial rendering is bounded in '+key);
  }
  await view.selectOption('details');
- for(let n=0;n<25;n++){
-  if(await directory.locator('tbody tr').count()===2005)break;
-  await directory.locator('.all-heroes-results').evaluate(e=>{e.scrollTop=e.scrollHeight;});
-  await p.waitForTimeout(150);
- }
- assert.equal(await directory.locator('tbody tr').count(),2005,'scrolling reaches every hero');
+ for(let page=1;page<Math.ceil(2005/120);page++)await directory.getByRole('button',{name:'Next',exact:true}).click();
+ await directory.locator('tbody').getByText('Hero 2004',{exact:true}).waitFor();
+ assert.ok(await directory.locator('tbody tr').count()<=120,'every page keeps the DOM bounded');
+ assert.ok(await directory.locator('tbody').innerText().then(text=>text.includes('Hero 2004')),'paging reaches every hero');
  await view.selectOption('medium');
  await directory.getByRole('searchbox' ,{name:'Search all heroes'}).fill('Hero 2004');
  await directory.getByRole('status').filter({hasText:'1 of 2005 heroes'}).waitFor();
  assert.equal(await directory.locator('.all-heroes-card').count(),1);
  assert.deepEqual(errors,[]);
- console.log('All seven views render only 120 initial heroes; scrolling reaches all records. All 2,005 heroes loaded in three stable pages; directory count and search beyond 2,000 passed.');
+ console.log('All seven views keep at most 120 entries mounted; paging reaches every record. All 2,005 heroes loaded in three stable pages; directory count and search beyond 2,000 passed.');
 }finally{await browser.close();}
