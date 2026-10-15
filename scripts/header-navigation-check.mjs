@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{
  const p=await browser.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
- await p.addInitScript(()=>localStorage.setItem('feh-preferences',JSON.stringify({autoRefresh:false,carouselAutoplay:false})));
+ await p.addInitScript(()=>{Object.defineProperty(navigator,'deviceMemory',{get:()=>8});Object.defineProperty(navigator,'hardwareConcurrency',{get:()=>16});localStorage.setItem('feh-preferences',JSON.stringify({autoRefresh:false,carouselAutoplay:false}));});
  await p.route('**/rest/v1/**',r=>r.fulfill({json:new URL(r.request().url()).pathname.endsWith('tracker_role')?'Visitor':[]}));
  await p.goto('http://127.0.0.1:5196/FEH-Rerun-Schedule-by-Clustifle/');
  const nav=p.getByRole('navigation',{name:'Primary navigation'});await nav.waitFor();
@@ -27,7 +27,8 @@ try{
  await p.evaluate(()=>{document.documentElement.dataset.theme='fire-emblem-heroes';document.body.style.minHeight='2500px';});
  const header=p.locator('.masthead');const expanded=await header.evaluate(e=>e.getBoundingClientRect().height);
  await p.evaluate(()=>window.scrollTo(0,300));await p.waitForFunction(()=>document.querySelector('.masthead').classList.contains('is-compact'));
- assert.ok(await header.evaluate(e=>e.getBoundingClientRect().height)<expanded);
+ await p.waitForFunction(h=>document.querySelector('.masthead').getBoundingClientRect().height<h,expanded);await p.waitForTimeout(250);assert.ok(await nav.evaluate(e=>getComputedStyle(e).transform!=='none'));
+ await p.evaluate(()=>document.documentElement.dataset.motion='reduced');assert.equal(await nav.evaluate(e=>getComputedStyle(e).transform),'none');await p.evaluate(()=>document.documentElement.dataset.motion='device');
  await p.evaluate(()=>window.scrollTo(0,0));await p.waitForFunction(()=>!document.querySelector('.masthead').classList.contains('is-compact'));
 
  for(const width of [1280,390]){await p.setViewportSize({width,height:900});await p.screenshot({path:'header-navigation-'+width+'.png'});}

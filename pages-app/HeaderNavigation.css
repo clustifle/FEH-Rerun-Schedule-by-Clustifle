@@ -46,3 +46,11 @@ html[data-theme][data-theme][data-theme] .tracker .masthead.has-primary-nav.is-c
 .header-navigation-dropdown:last-of-type .header-navigation-options{left:auto;right:0}
 
 html[data-theme][data-theme][data-theme] .tracker .masthead .header-primary-navigation .header-navigation-options a{font-size:14px!important;min-height:42px;border-radius:5px}
+
+@media(prefers-reduced-motion:no-preference){
+ html:not([data-motion=reduced]):not([data-resource-budget=limited]) .masthead.has-primary-nav .header-primary-navigation{transform-origin:center;transition:transform .22s ease,font-size .22s ease,padding .22s ease}
+ html:not([data-motion=reduced]):not([data-resource-budget=limited]) .masthead.has-primary-nav.is-compact .header-primary-navigation{transform:scale(.97)}
+ html:not([data-motion=reduced]):not([data-resource-budget=limited]) .masthead.has-primary-nav :is(.header-profile-link,.mobile-menu-toggle,.header-feh){transition:transform .22s ease,height .22s ease;transform-origin:center}
+ html:not([data-motion=reduced]):not([data-resource-budget=limited]) .masthead.has-primary-nav.is-compact :is(.header-profile-link,.mobile-menu-toggle,.header-feh){transform:scale(.92)}
+}
+html[data-motion=reduced] .masthead.has-primary-nav,html[data-motion=reduced] .masthead.has-primary-nav .feh-wordmark img{transition:none!important}
