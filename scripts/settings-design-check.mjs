@@ -26,7 +26,9 @@ try{
  }
  await settings.locator('.settings-row').filter({hasText:'Compact view by default'}).locator('input').check();
  assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('feh-preferences')).compact),true);
+ assert.equal(await settings.locator('.theme-option-copy small').count(),0);assert.equal(await settings.locator('.theme-mini-header').count(),11);
  await settings.locator('input[value=midgard]').check();assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('feh-preferences')).theme),'midgard');
+ await settings.locator('input[value=midgard]').focus();await p.keyboard.press('ArrowRight');assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('feh-preferences')).theme),'nifl');
  const sections=settings.getByRole('navigation',{name:'Settings sections'});
  await sections.getByRole('button',{name:'Date & time',exact:true}).click();
  await settings.locator('.settings-row').filter({hasText:'Clock format'}).locator('select').selectOption('24');
