@@ -4,7 +4,7 @@ import defaultRules from '../lib/forum-rules.json' with {type:'json'};
 import flairs from '../lib/community-flairs.json' with {type:'json'};
 const REPO='clustifle/FEH-Rerun-Schedule-by-Clustifle',REPO_ID='R_kgDOU5Auog';
 const postFields='id number title body url createdAt updatedAt closed locked upvoteCount viewerHasUpvoted viewerCanUpdate viewerCanDelete author{login avatarUrl ...on User{databaseId}} category{id name isAnswerable} commentCount:comments{totalCount}';
-const commentFields='id body url createdAt isAnswer isMinimized viewerCanUpdate viewerCanDelete author{login avatarUrl ...on User{databaseId}}';
+const commentFields='upvoteCount viewerHasUpvoted viewerCanUpvote id body url createdAt isAnswer isMinimized viewerCanUpdate viewerCanDelete author{login avatarUrl ...on User{databaseId}}';
 class CommunityError extends Error{constructor(status,message){super(message);this.status=status;}}
 const fail=(s,m)=>{throw new CommunityError(s,m);};
 const statement=(e,q,...v)=>e.DB.prepare(q).bind(...v),one=(e,q,...v)=>statement(e,q,...v).first();
@@ -104,7 +104,7 @@ export async function handleCommunity(request,env,{user,rate,headers}){
   if(method==='GET'&&(path==='/posts'||path==='/categories'||numberMatch&&(!action||action==='replies'))){
    if(number&&!moderationView&&await one(env,"SELECT target_id FROM forum_moderation WHERE post_number=? AND target_id='post' AND hidden=1",number))fail(404,'This post is unavailable in the Forum.');
    if(number&&action==='replies'&&!moderationView&&await one(env,'SELECT target_id FROM forum_moderation WHERE post_number=? AND target_id=? AND hidden=1',number,url.searchParams.get('commentId')||''))fail(404,'This reply is unavailable in the Forum.');
-   const cacheKey='forum-website-names-v2:'+url.pathname+url.search;
+   const cacheKey='forum-comment-votes-v3:'+url.pathname+url.search;
    const cached=await one(env,'SELECT payload,expires_at FROM community_cache WHERE key=?',cacheKey);
    if(!u&&cached&&cached.expires_at>time())return json(JSON.parse(cached.payload));
    await rate(env,'community-read:'+(u?.github_id||request.headers.get('CF-Connecting-IP')||'anonymous'),40);
@@ -147,7 +147,17 @@ export async function handleCommunity(request,env,{user,rate,headers}){
    const body=String(b.body||'').trim();if(!body||body.length>20000)fail(400,'Use a reply of 1–20,000 characters.');if(post.closed||post.locked)fail(403,'This discussion is closed or locked.');
    if(b.replyToId){const d=await graphql(token,'query($id:ID!){node(id:$id){...on DiscussionComment{id discussion{id} replyTo{id}}}}',{id:b.replyToId});if(d.node?.discussion?.id!==post.id||d.node.replyTo)fail(400,'Reply to a top-level comment in this discussion.');}
    result=await graphql(token,'mutation($input:AddDiscussionCommentInput!){addDiscussionComment(input:$input){comment{id}}}',{input:{discussionId:post.id,body,...(b.replyToId?{replyToId:b.replyToId}:{})}});
-  }else if(action==='upvote'&&method==='POST'){const mutation=b.remove?'removeUpvote':'addUpvote';result=await graphql(token,`mutation($id:ID!){${mutation}(input:{subjectId:$id}){subject{upvoteCount}}}`,{id:post.id});}
+  }else if(action==='upvote'&&method==='POST'){
+   let subjectId=post.id;
+   if(b.commentId!==undefined){
+    if(typeof b.commentId!=='string'||!b.commentId||b.commentId.length>200)fail(400,'Choose a valid reply.');
+    const d=await graphql(token,'query($id:ID!){node(id:$id){...on DiscussionComment{id discussion{id} viewerCanUpvote isMinimized replyTo{id isMinimized}}}}',{id:b.commentId}),c=d.node;
+    if(!c||c.discussion?.id!==post.id||c.isMinimized||c.replyTo?.isMinimized)fail(404,'This reply is unavailable.');
+    for(const id of [c.id,c.replyTo?.id].filter(Boolean))if(await one(env,'SELECT target_id FROM forum_moderation WHERE post_number=? AND target_id=? AND hidden=1',number,id))fail(404,'This reply is unavailable.');
+    if(!c.viewerCanUpvote)fail(403,'GitHub does not allow upvoting this reply.');subjectId=c.id;
+   }
+   const mutation=b.remove===true?'removeUpvote':'addUpvote';result=await graphql(token,`mutation($id:ID!){${mutation}(input:{subjectId:$id}){subject{upvoteCount viewerHasUpvoted}}}`,{id:subjectId});
+  }
   else if(action==='close'&&method==='POST'){if(!forumStaff)fail(403,'Forum moderation requires a staff role.');const mutation=b.reopen?'reopenDiscussion':'closeDiscussion';result=await graphql(token,`mutation($id:ID!){${mutation}(input:{discussionId:$id}){discussion{closed}}}`,{id:post.id});}
   else if(action==='answer'&&method==='POST'){if(post.author?.login!==u.login&&!['owner','manager'].includes(u.role))fail(403,'Only the author or staff can mark an answer.');const d=await graphql(token,'query($id:ID!){node(id:$id){...on DiscussionComment{id discussion{id}}}}',{id:b.commentId});if(d.node?.discussion?.id!==post.id)fail(400,'Choose an answer from this discussion.');result=await graphql(token,'mutation($id:ID!){markDiscussionCommentAsAnswer(input:{id:$id}){discussion{number}}}',{id:b.commentId});}
   else fail(405,'Method not allowed.');
