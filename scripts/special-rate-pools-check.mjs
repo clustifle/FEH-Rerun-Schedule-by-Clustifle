@@ -2,7 +2,9 @@ import ts from '../node_modules/typescript/lib/typescript.js';
 import {readFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const js=ts.transpileModule(await readFile('pages-app/hero-pools.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText;
-const exports={};new Function('exports',js)(exports);
+const sharedJs=ts.transpileModule(await readFile('lib/special-rate-ranges.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText;
+const shared={};new Function('exports',sharedJs)(shared);
+const exports={};new Function('exports','require',js)(exports,()=>shared);
 const {displayPool,specialRatePools,pools}=exports;
 const general={category:'General',pool:'General Pool'},seasonal={category:'Special',pool:'Seasonal Limited'};
 assert.equal(displayPool({...general,debut_version:'8.7'}),specialRatePools[0]);
@@ -27,3 +29,19 @@ console.log('Special Rate cutoff boundaries, date fallback, missing metadata, CY
 for(const [name,title] of [['Alfonse','Prince of Askr'],['Anna','Commander'],['Sharena','Princess of Askr']]){const hero={...general,name,title,debut_version:'1.0',demote:true};assert.equal(displayPool(hero),'Starter unit (no summoning pool)');assert.equal(exports.isStarterHero(hero),true);assert.equal(exports.isStarterHero({...hero,title:'Seasonal Variant'}),false);assert.equal(exports.isStarterHero({...hero,category:'Special'}),false);}console.log('Exact starter variants excluded from all summoning pools; other variants preserved.');
 
 assert.equal(exports.autoImportPool({category:'General'}),'General Pool');assert.equal(exports.autoImportPool({category:'Special'}),'Seasonal Limited');assert.equal(exports.autoImportPool({category:'Attuned',isSpecial:true}),'Seasonal Limited');assert.equal(exports.autoImportPool({category:'Attuned'}),'Non-Seasonal Limited');assert.equal(exports.autoImportPool({category:'General',heroic_grail:true}),'Grail Pool');assert.equal(exports.autoImportPool({category:'General',name:'Anna',title:'Commander'}),null);console.log('Automatic import pools cover seasonal specialized types, regular/limited heroes, Grail and starter exceptions.');
+
+const custom=structuredClone(shared.defaultSpecialRateRanges);custom.sr.from='4.0';custom.sr.to='9.10';custom.sr.toDate='2025-10-31';custom.shsr.to='8.1';custom.shsr.toDate='2024-01-31';
+exports.setPoolRangeSettings({ranges:custom,revision:1,updatedAt:null});
+assert.equal(displayPool({...general,debut_version:'3.9'}),'General Pool');
+assert.equal(displayPool({...general,debut_version:'4.0'}),specialRatePools[0]);
+assert.equal(displayPool({...general,debut_version:'9.10'}),specialRatePools[0]);
+assert.equal(displayPool({...general,debut_version:'9.11'}),'General Pool');
+assert.equal(displayPool({...general,pool:specialRatePools[0],debut_version:'3.9'}),'General Pool','Stored derived labels obey the new range');
+assert.equal(displayPool({...seasonal,debut_version:'8.1'}),specialRatePools[1]);
+assert.equal(displayPool({...seasonal,debut_version:'8.2'}),'Seasonal Limited');
+assert.equal(displayPool({...general,debut_version:'8.8',demote:true}),'General Pool');
+assert.equal(displayPool({...general,category:'Rearmed',debut_version:'8.8'}),'General Pool');
+assert.equal(displayPool({...general,release_date:'2025-10-31'}),specialRatePools[0]);
+assert.throws(()=>shared.validateSpecialRateRanges({...custom,sr:{...custom.sr,from:'10.0',to:'9.0'}}));
+assert.throws(()=>shared.validateSpecialRateRanges({...custom,sr:{...custom.sr,toDate:'2024-02-30'}}));
+console.log('Adjustable SR/SHSR boundaries, numeric minor versions, date fallbacks, legacy derived labels and exclusions passed.');

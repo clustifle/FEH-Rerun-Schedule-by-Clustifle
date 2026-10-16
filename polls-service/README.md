@@ -25,3 +25,11 @@ Apply `migrations/003-private-forum-drafts.sql` to an existing forum database be
 The main forum composer keeps one working new-post draft per account, saves locally immediately, and syncs after a short typing pause. Opening the composer, focusing the page, reconnecting, or choosing Sync now refreshes it. Visible composers also check every 15 seconds. Conflicts preserve the current text until the user chooses either version. Existing device drafts are imported when there is no conflicting cloud draft. Editing a published post continues to use explicit publishing. Successful publication clears only matching draft text and revision; cleanup failures are retried safely on the next composer visit.
 
 Run `node --test scripts/forum-draft-sync.test.mjs polls-service/community.test.mjs polls-service/worker.test.mjs polls-service/request-body.test.mjs` plus `scripts/forum-draft-ui-check.mjs` against the local Pages preview to verify ownership, stale saves, offline recovery, two-device conflicts and publish cleanup without making public posts.
+
+## SR / SHSR eligibility ranges
+
+Apply `migrations/004-special-rate-settings.sql` before deploying configurable pool ranges. The table is also included in fresh `community-schema.sql` installs. With no saved row, defaults remain SR v1.0–v8.7 and SHSR v1.0–v7.1, including the existing release-date fallbacks.
+
+`GET /community/pool-ranges` returns public eligibility rules, revision and update time. Only verified website Head Admin and Schedule Manager accounts may `POST /community/pool-ranges` with `{ranges,revision}`. Inputs are bounded, version ranges are compared numerically, and stale saves return 409. The updater account is stored internally and is never included in the public response.
+
+Administrative Manager → Mods Edit → SR / SHSR ranges provides inclusive first/last versions, fallback dates for missing version metadata, counts and a changed-label preview. Defaults are loaded into the form for review and require an explicit save. A failed initial read disables saving. Private beta cannot change live ranges. Main-site pool labels and filters subscribe to the shared rules, refreshing on focus/reconnection and once per minute while visible. Existing hero records are not rewritten, and demote, Grail, starter and limited-type exclusions remain enforced.

@@ -116,3 +116,18 @@ test('publishing clears only the exact draft revision and leaves newer drafts in
   const stale=await (await request(e,'/posts',{...body,draftRevision:3})).json();assert.equal(stale.draftCleared,false);assert.equal((await (await request(e,'/draft')).json()).draft.body,'New work');
  }finally{restore();e.db.close();}
 });
+
+test('SR/SHSR settings are public to read, staff-only to change, validated and revision protected',async()=>{
+ const e=setup();try{
+  const initial=await (await request(e,'/pool-ranges',undefined,null)).json();assert.equal(initial.ranges.sr.to,'8.7');assert.equal(initial.ranges.shsr.to,'7.1');assert.equal(initial.revision,0);
+  const ranges=structuredClone(initial.ranges);ranges.sr.to='9.1';ranges.shsr.to='8.1';
+  for(const [u,status] of [[null,401],[voter,403],[{...voter,role:'moderator'},403]])assert.equal((await request(e,'/pool-ranges',{ranges,revision:0},u)).status,status);
+  assert.equal((await request(e,'/pool-ranges',{ranges:{...ranges,sr:{...ranges.sr,from:'10.0',to:'9.1'}},revision:0},owner)).status,400);
+  assert.equal((await request(e,'/pool-ranges',{ranges:{...ranges,shsr:{...ranges.shsr,toDate:'2024-02-30'}},revision:0},owner)).status,400);
+  assert.equal((await request(e,'/pool-ranges',{ranges,revision:0},owner)).status,200);
+  assert.equal((await request(e,'/pool-ranges',{ranges,revision:0},owner)).status,409);
+  const saved=await (await request(e,'/pool-ranges',undefined,null)).json();assert.equal(saved.ranges.sr.to,'9.1');assert.equal(saved.revision,1);assert.ok(!JSON.stringify(saved).includes('updated_by'));
+  assert.equal((await request(e,'/pool-ranges',{ranges,revision:1},{...owner,role:'manager',can_vote:false})).status,200);
+  assert.equal((await (await request(e,'/pool-ranges',undefined,null)).json()).revision,2);
+ }finally{e.db.close();}
+});

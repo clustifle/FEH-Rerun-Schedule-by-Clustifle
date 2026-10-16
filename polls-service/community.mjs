@@ -1,3 +1,4 @@
+import {defaultSpecialRateRanges,validateSpecialRateRanges} from '../lib/special-rate-ranges.ts';
 import {readBoundedBody} from './request-body.mjs';
 import {fetchWikiImport,WikiImportError} from './wiki-import.mjs';
 import defaultRules from '../lib/forum-rules.json' with {type:'json'};
@@ -40,6 +41,7 @@ async function readToken(env,u){if(u?.can_vote){const row=await one(env,'SELECT 
 export function videoType(bytes){if(bytes.length>=12&&new TextDecoder().decode(bytes.slice(4,8))==='ftyp')return 'video/mp4';if(bytes.slice(0,4).join(',')==='26,69,223,163'&&new TextDecoder().decode(bytes.slice(0,4096)).includes('webm'))return 'video/webm';return null;}
 export function imageType(bytes){if(bytes[0]===255&&bytes[1]===216&&bytes[2]===255)return 'image/jpeg';if(bytes.slice(0,8).join(',')==='137,80,78,71,13,10,26,10')return 'image/png';if(new TextDecoder().decode(bytes.slice(0,4))==='RIFF'&&new TextDecoder().decode(bytes.slice(8,12))==='WEBP')return 'image/webp';return null;}
 async function discussion(token,number,extra=''){const d=await graphql(token,`query($number:Int!){repository(owner:"clustifle",name:"FEH-Rerun-Schedule-by-Clustifle"){discussion(number:$number){${postFields} ${extra}}}}`,{number});if(!d.repository?.discussion)fail(404,'This community post was not found.');return d.repository.discussion;}
+async function poolRangeRecord(env){const row=await one(env,'SELECT ranges_json,revision,updated_at FROM special_rate_settings WHERE id=1');return {ranges:row?JSON.parse(row.ranges_json):defaultSpecialRateRanges,revision:row?.revision||0,updatedAt:row?.updated_at||null};}
 function draftRecord(row){return {draft:row&&!row.deleted?{title:row.title,body:row.body,category:row.category_id,flair:row.flair}:null,revision:row?.revision||0,updatedAt:row?.updated_at||null};}
 async function readDraft(env,id){return draftRecord(await one(env,'SELECT * FROM community_drafts WHERE website_id=?',id));}
 function validDraft(b){
@@ -52,6 +54,7 @@ export async function handleCommunity(request,env,{user,rate,headers}){
  const url=new URL(request.url),path=url.pathname.slice('/community'.length),method=request.method;
  const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers});
  try{
+  if(path==='/pool-ranges'&&method==='GET')return json(await poolRangeRecord(env));
   // Images are public media, never HTML or executable SVG; allow only immutable random IDs.
   const image=path.match(/^\/images\/([a-f0-9-]{36})$/);
   if(image&&method==='GET'){const row=await one(env,'SELECT hex(bytes) AS image_hex,content_type FROM community_images WHERE id=?',image[1]);if(!row)fail(404,'Image not found.');const bytes=Uint8Array.from(row.image_hex.match(/.{2}/g)||[],pair=>parseInt(pair,16));return new Response(bytes,{headers:{...headers,'Content-Type':row.content_type,'Content-Security-Policy':"default-src 'none'",'Cache-Control':'public, max-age=31536000, immutable'}});}
@@ -59,6 +62,18 @@ export async function handleCommunity(request,env,{user,rate,headers}){
   const video=path.match(/^\/videos\/([a-f0-9-]{36})$/);
   if(video&&(method==='GET'||method==='HEAD')){const row=await one(env,'SELECT content_type,size FROM community_videos WHERE id=?',video[1]);if(!row)fail(404,'Video not found.');const range=request.headers.get('Range');let start=0,end=row.size-1,status=200;if(range){const match=range.match(/^bytes=(\d*)-(\d*)$/);if(!match||(!match[1]&&!match[2]))return new Response(null,{status:416,headers:{...headers,'Content-Range':'bytes */'+row.size}});if(match[1]){start=Number(match[1]);end=match[2]?Math.min(Number(match[2]),end):end;}else start=Math.max(0,row.size-Number(match[2]));if(!Number.isSafeInteger(start)||!Number.isSafeInteger(end)||start>end||start>=row.size)return new Response(null,{status:416,headers:{...headers,'Content-Range':'bytes */'+row.size}});status=206;}const mediaHeaders={...headers,'Content-Type':row.content_type,'X-Content-Type-Options':'nosniff','Accept-Ranges':'bytes','Content-Length':String(end-start+1),'Cache-Control':'public, max-age=31536000, immutable',...(status===206?{'Content-Range':'bytes '+start+'-'+end+'/'+row.size}:{})};if(method==='HEAD')return new Response(null,{status,headers:mediaHeaders});const rows=await statement(env,'SELECT position,hex(bytes) AS chunk FROM community_video_chunks WHERE video_id=? AND position>=? AND position<=? ORDER BY position',video[1],Math.floor(start/524288),Math.floor(end/524288)).all();const output=new Uint8Array(end-start+1);for(const part of rows.results){const bytes=Uint8Array.from(part.chunk.match(/.{2}/g)||[],pair=>parseInt(pair,16)),offset=part.position*524288,from=Math.max(start-offset,0),through=Math.min(end-offset+1,bytes.length);output.set(bytes.subarray(from,through),Math.max(offset-start,0));}return new Response(output,{status,headers:mediaHeaders});}
   const u=await user(request,env);
+  if(path==='/pool-ranges'){
+   if(!u?.website_account||!u.website_id)fail(401,'Sign in to your website account.');
+   if(!['owner','manager'].includes(u.role))fail(403,'Head Admin or Schedule Manager access is required.');
+   if(method!=='POST')fail(405,'Method not allowed.');
+   await rate(env,'pool-ranges:'+u.website_id,10);const b=await jsonBody(request);
+   if(!b||!Number.isSafeInteger(b.revision)||b.revision<0)fail(400,'Reload pool settings before saving.');
+   let ranges;try{ranges=validateSpecialRateRanges(b.ranges);}catch(error){fail(400,error.message);}
+   const updatedAt=new Date().toISOString(),payload=JSON.stringify(ranges);
+   const result=b.revision===0?await statement(env,'INSERT OR IGNORE INTO special_rate_settings(id,ranges_json,revision,updated_at,updated_by) VALUES(1,?,1,?,?)',payload,updatedAt,u.website_id).run():await statement(env,'UPDATE special_rate_settings SET ranges_json=?,revision=revision+1,updated_at=?,updated_by=? WHERE id=1 AND revision=?',payload,updatedAt,u.website_id,b.revision).run();
+   if(!result.meta.changes)fail(409,'Pool ranges changed since you opened them. Reload before saving.');
+   return json({ranges,revision:b.revision+1,updatedAt});
+  }
   if(path==='/draft'){
    // Private website-account data; never read via a public GitHub token or request-supplied account ID.
    if(!u?.website_account||!u.website_id)fail(401,'Sign in to your website account to sync drafts.');

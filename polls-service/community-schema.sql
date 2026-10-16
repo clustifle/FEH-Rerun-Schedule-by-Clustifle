@@ -27,3 +27,8 @@ CREATE TABLE IF NOT EXISTS community_drafts (
  category_id TEXT NOT NULL, flair TEXT NOT NULL, revision INTEGER NOT NULL CHECK(revision>0),
  deleted INTEGER NOT NULL DEFAULT 0 CHECK(deleted IN (0,1)), updated_at TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS special_rate_settings (
+ id INTEGER PRIMARY KEY CHECK(id=1), ranges_json TEXT NOT NULL, revision INTEGER NOT NULL,
+ updated_at TEXT NOT NULL, updated_by TEXT NOT NULL
+);

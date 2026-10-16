@@ -1,0 +1,16 @@
+.adm-shell .pool-range-manager{padding-block:20px;max-width:1080px}
+.adm-shell .pool-range-manager>header{display:flex;justify-content:space-between;align-items:start;gap:16px;margin-bottom:22px}
+.adm-shell .pool-range-manager h3{margin:0 0 8px;font-size:21px}
+.adm-shell .pool-range-manager p{font-size:13px;line-height:1.6;margin:6px 0 12px}
+.adm-shell .pool-range-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.adm-shell .pool-range-columns fieldset{min-width:0;border:0;border-top:1px solid var(--realm-line);border-radius:0;padding:16px 0;background:transparent;box-shadow:none}
+.adm-shell .pool-range-columns legend{padding-right:10px;font-weight:600;font-size:15px}
+.adm-shell .pool-range-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.adm-shell .pool-range-fields label{min-width:0;font-size:13px;display:grid;gap:6px}
+.adm-shell .pool-range-fields input{width:100%;min-width:0;box-sizing:border-box;font-size:15px}
+.adm-shell .pool-range-columns details{margin-top:16px;font-size:12px}
+.adm-shell .pool-range-columns summary{cursor:pointer;line-height:1.6}
+.adm-shell .pool-range-exclusions{opacity:.8}
+.adm-shell .pool-range-preview{display:flex;flex-wrap:wrap;gap:10px 24px;padding:16px 0;border-block:1px solid var(--realm-line);font-size:13px}
+.adm-shell .pool-range-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:20px}
+@media(max-width:700px){.adm-shell .pool-range-columns{grid-template-columns:minmax(0,1fr);gap:12px}.adm-shell .pool-range-manager>header{flex-wrap:wrap}.adm-shell .pool-range-fields input{font-size:16px}}

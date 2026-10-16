@@ -1,3 +1,4 @@
+import {usePoolRangeSettings} from './pool-range-settings';
 import MythicBonusNote from './MythicBonusNote';
 import {blessingIcon} from './blessing-icons';
 import WikiAddHero from './WikiAddHero';
@@ -82,6 +83,7 @@ function PoolTag({pool}:{pool:string}){const definitions=useDefinitions();const 
 const shortMonth=(v:string)=>new Date(v+'-01T12:00:00').toLocaleDateString('en-US',{month:'short',year:'2-digit'});
 const monthName=(v:string)=>new Date(v+'-01T12:00:00').toLocaleDateString('en-US',{month:'long',year:'numeric'});
 export default function Home(){
+ const poolRanges=usePoolRangeSettings();
  const preferences=usePreferences();
  const definitions=useDefinitions();
  useEffect(()=>{const refresh=()=>{void supabase.from('tracker_definitions').select('*').order('sort_order').then(({data,error})=>{if(!error&&data)setDefinitions(data as Definition[]);});};refresh();window.addEventListener('catalog-change',refresh);window.addEventListener('refresh-now',refresh);return()=>{window.removeEventListener('catalog-change',refresh);window.removeEventListener('refresh-now',refresh);};},[]);
@@ -253,7 +255,7 @@ export default function Home(){
  useEffect(()=>{const link=portraitUrl.trim();if(saving||!link||!link.toLowerCase().startsWith('https://')||importedUrl===link)return;const timer=setTimeout(()=>{void importLink(link);},600);return()=>clearTimeout(timer);},[portraitUrl,saving]);
  const scheduleHeroes=useMemo(()=>activeSchedule==='Homepage'?heroes:heroes.filter(h=>isWaitlist(activeSchedule)?waitlistIds.has(h.id):(h.schedule||'General')===activeSchedule).sort((a,b)=>isWaitlist(activeSchedule)?(waitlistOrder[a.id]??2147483647)-(waitlistOrder[b.id]??2147483647):0),[heroes,activeSchedule,waitlistIds,waitlistOrder]);
  const normalizedSearch=search.toLowerCase();
- const visible=useMemo(()=>activeSchedule==='Homepage'?scheduleHeroes:scheduleHeroes.filter(h=>(showGrails||!h.heroic_grail)&&(filter==='All heroes'||(filter==='Heroic Grails'?h.heroic_grail:h.category===filter))&&(colorFilter==='All'||h.color===colorFilter)&&(moveFilter==='All'||(moveFilter==='Unassigned'?!h.move_type:h.move_type===moveFilter))&&(weaponFilter==='All'||(weaponFilter==='Unassigned'?!h.weapon_type:h.weapon_type===weaponFilter))&&(poolFilter==='All'||displayPool(h)===poolFilter)&&h.searchText.includes(normalizedSearch)&&versionMatches(h.debut_version,versionFilter)),[scheduleHeroes,activeSchedule,showGrails,filter,colorFilter,weaponFilter,moveFilter,poolFilter,normalizedSearch,versionFilter]);
+ const visible=useMemo(()=>activeSchedule==='Homepage'?scheduleHeroes:scheduleHeroes.filter(h=>(showGrails||!h.heroic_grail)&&(filter==='All heroes'||(filter==='Heroic Grails'?h.heroic_grail:h.category===filter))&&(colorFilter==='All'||h.color===colorFilter)&&(moveFilter==='All'||(moveFilter==='Unassigned'?!h.move_type:h.move_type===moveFilter))&&(weaponFilter==='All'||(weaponFilter==='Unassigned'?!h.weapon_type:h.weapon_type===weaponFilter))&&(poolFilter==='All'||displayPool(h)===poolFilter)&&h.searchText.includes(normalizedSearch)&&versionMatches(h.debut_version,versionFilter)),[scheduleHeroes,activeSchedule,showGrails,filter,colorFilter,weaponFilter,moveFilter,poolFilter,normalizedSearch,versionFilter,poolRanges]);
  const heroOrder=useMemo(()=>{const order=new Map<string,number>(),groups=new Map<string,number>();for(const h of visible){const group=h.month+'|'+h.color,index=groups.get(group)||0;order.set(h.id,index);groups.set(group,index+1);}return order;},[visible]);
  const now=new Date(),currentMonth=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
  const heroIndex=useMemo(()=>buildScheduleIndex(visible),[visible]);
