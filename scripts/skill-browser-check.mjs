@@ -14,7 +14,7 @@ try{
  await p.goto(base+'skills/');
  await p.getByLabel('Search skills',{exact:true}).waitFor();await p.locator('.skill-browser-row').first().waitFor();assert.equal(await p.locator('.skill-browser-row').count(),60);
  await p.getByRole('button',{name:'Next skills page'}).click();await p.getByText('Page 2 of 3',{exact:true}).waitFor();assert.equal(await p.locator('.skill-browser-row').count(),60);
- await p.getByLabel('Search skills',{exact:true}).fill("elan's grace");await p.getByRole('button',{name:'Élan’s Grace',exact:true}).waitFor();assert.equal(await p.locator('.skill-browser-row').count(),1);await p.getByRole('button',{name:'Élan’s Grace',exact:true}).click();await p.getByRole('button',{name:'Close skill details'}).click();
+ await p.getByLabel('Search skills',{exact:true}).fill("elan's grace");await p.getByRole('button',{name:'Élan’s Grace',exact:true}).waitFor();await p.waitForFunction(()=>document.querySelectorAll('.skill-browser-row').length===1);assert.equal(await p.locator('.skill-browser-row').count(),1);await p.getByRole('button',{name:'Élan’s Grace',exact:true}).click();await p.getByRole('button',{name:'Close skill details'}).click();
  await p.getByLabel('Search skills',{exact:true}).fill('');await p.getByLabel('Skill slot filter').selectOption('A');await p.getByText('90 skills · 1–60',{exact:true}).waitFor();
  for(const width of [320,390,768,1280]){await p.setViewportSize({width,height:900});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));if(width===390||width===1280)await p.screenshot({path:'skills-compact-'+width+'.png'});}
  await p.goto(base+'hero_profile/Test_Hero_Test_Title_General');await p.getByRole('button',{name:'Edit Skills on this unit',exact:true}).click();

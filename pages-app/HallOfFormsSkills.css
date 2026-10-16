@@ -9,4 +9,27 @@
 .hof-skill-choices{max-height:300px;overflow:auto;overscroll-behavior:contain}.hof-skill-choices>label{cursor:pointer;margin:0;min-height:48px}.hof-skill-choices input{width:18px;height:18px;flex:none}
 .hof-skill-editor{min-width:0}.hof-skill-editor>p{font-size:13px}.hof-skill-editor .form-row>*{min-width:0}
 
-html[data-theme] .tracker .hof-skills-dialog h2{font-size:22px;line-height:1.25;margin:0}html[data-theme] .tracker .hof-skills-dialog .dialog-top{gap:16px}html[data-theme] .tracker .hof-skills-dialog .dialog-top .icon-button{flex:none;width:40px;height:40px}
+html[data-theme] .tracker .hof-skills-dialog h2{font-size:22px;line-height:1.25;margin:0}html[data-theme] .tracker .hof-skills-dialog .dialog-top{gap:16px}html[data-theme] .tracker .hof-skills-dialog .dialog-top .icon-button{flex:none;width:44px;height:44px;display:grid;place-items:center}
+html[data-theme][data-theme] .tracker dialog.hof-skills-dialog{width:min(700px,calc(100vw - 24px));max-height:88dvh;min-height:0;overflow:hidden;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto}
+html[data-theme][data-theme] .tracker dialog.hof-skills-dialog[open]{display:grid}
+.hof-skills-dialog::backdrop{background:rgb(0 0 0 / 60%)}
+html[data-theme] .tracker .hof-skills-dialog .dialog-top{padding:20px;margin:0;border-bottom:1px solid color-mix(in srgb,var(--realm-line) 40%,transparent);background:transparent}
+.hof-dialog-eyebrow{color:var(--realm-accent)}.hof-dialog-eyebrow span{color:var(--realm-text);opacity:.75}
+.hof-added-skills{display:block;padding:16px 20px;overflow:auto;min-height:0;overscroll-behavior:contain;scrollbar-gutter:stable}.hof-added-skills>div{display:block;border:0;padding:0}
+.hof-added-skills .skill-browser-list{grid-template-columns:repeat(2,minmax(0,1fr))}.skill-browser-row.is-readonly{cursor:default}.skill-browser-row.is-readonly:hover{background:transparent!important}
+.hof-skills-footer{display:flex;justify-content:flex-end;padding:12px 20px;border-top:1px solid color-mix(in srgb,var(--realm-line) 35%,transparent)}.hof-skills-footer button{min-height:44px}
+.hof-skills-empty{padding:24px 0!important}.hof-skills-empty h3{font-size:18px;margin:0 0 8px}.hof-skills-empty p{font-size:14px;opacity:.75;margin:0}
+.hof-editor-help{font-size:13px;line-height:1.5;opacity:.8}.hof-editor-help button{font:inherit;color:inherit;display:inline;background:transparent;border:0;text-decoration:underline;padding:0;cursor:pointer}
+.hof-selected-skills{border-block:1px solid color-mix(in srgb,var(--realm-line) 40%,transparent);margin:14px 0;padding:12px 0}.hof-selected-skills summary{font-size:14px;cursor:pointer}.hof-selected-skills summary span{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:20px;background:var(--realm-field);font-size:12px}
+.hof-selected-skills>p{font-size:13px;opacity:.7;margin:12px 0 0}.hof-selected-list{display:flex;flex-wrap:wrap;gap:8px;max-height:150px;overflow:auto;padding:12px 2px 2px;overscroll-behavior:contain}
+html[data-theme] .tracker .hof-selected-list>button{display:flex;align-items:center;gap:8px;max-width:100%;min-height:44px;padding:6px 10px;border:1px solid var(--realm-line);border-radius:5px;background:var(--realm-field);color:var(--realm-text);font:inherit;font-size:13px;text-align:left}
+.hof-selected-list>button>img{width:28px;height:28px;object-fit:contain}.hof-selected-list>button>span:not(.passive-icon):not(.arcane-weapon-icon){min-width:0;overflow-wrap:anywhere}.hof-selected-list svg{flex:none}
+.hof-catalog-search{max-height:430px;overflow:auto;overscroll-behavior:contain;padding:2px}.hof-catalog-search .skill-browser-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+.skill-browser-row.is-selected{background:color-mix(in srgb,var(--realm-accent) 9%,transparent)!important}.skill-browser-check{width:16px;height:16px;border:1px solid var(--realm-line);border-radius:3px;flex:none}.skill-browser-row[role=checkbox]>svg{flex:none;color:var(--realm-accent)}
+@media(max-width:480px){.hof-added-skills{padding:12px}.hof-added-skills .skill-browser-list,.hof-catalog-search .skill-browser-list{grid-template-columns:minmax(0,1fr)}html[data-theme] .tracker .hof-skills-dialog .dialog-top{padding:16px 12px}html[data-theme] .tracker .hof-skills-dialog h2{font-size:21px}.hof-skills-footer{padding:10px 12px}.hof-catalog-search{max-height:380px}}
+
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker :is(.hof-skill-editor,.hof-skills-dialog) .skill-browser-tools{display:grid!important;grid-template-columns:minmax(0,1fr) 150px!important;gap:10px}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker :is(.hof-skill-editor,.hof-skills-dialog) .skill-browser-search{display:flex!important;width:auto!important;min-width:0!important;margin:0!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker :is(.hof-skill-editor,.hof-skills-dialog) .skill-browser-tools input{display:block!important;width:100%!important;min-width:0!important;height:44px!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker :is(.hof-skill-editor,.hof-skills-dialog) .skill-browser-tools select{width:100%!important}
+@media(max-width:480px){html[data-theme][data-theme][data-theme][data-theme][data-theme] .tracker :is(.hof-skill-editor,.hof-skills-dialog) .skill-browser-tools{grid-template-columns:minmax(0,1fr) 120px!important}}
