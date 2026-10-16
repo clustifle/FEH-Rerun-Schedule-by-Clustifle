@@ -308,3 +308,6 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme] .github-account
 .github-auth-notice p{min-width:0;line-height:1.5}
 .github-auth-notice .icon-button{flex:none;background:transparent;border:0;color:inherit;min-width:40px;min-height:40px;display:grid;place-items:center}
 @media(max-width:600px){.github-auth-notice{flex-wrap:wrap;bottom:16px}.github-auth-notice p{flex:1}}
+
+/* Shared page and nested scrollbar colors follow every realm selection. */
+html[data-theme][data-realm]{--scroll-thumb:color-mix(in srgb,var(--realm-line) 75%,var(--realm-accent));--scroll-thumb-hover:var(--realm-accent);--scroll-track:color-mix(in srgb,var(--realm-deep) 40%,transparent)}

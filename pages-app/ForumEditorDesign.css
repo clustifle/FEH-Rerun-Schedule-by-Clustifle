@@ -44,3 +44,16 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][dat
 
 html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .forum-plus:has(>.community-composer)>button.secondary{justify-self:start!important;align-self:start!important;width:auto!important;min-height:36px!important;border:0!important;border-radius:0!important;padding:8px 0!important;margin-left:max(0px,calc((100% - 900px)/2))!important;background:transparent!important;box-shadow:none!important;font-size:13px!important;text-shadow:none!important}
 html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .forum-plus:has(>.community-composer)>button.secondary::before{content:none!important}
+
+/* Only the editable text surface receives a quiet card treatment. */
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .forum-plus .community-visual-input{margin-block:10px!important;padding:14px!important;border:1px solid color-mix(in srgb,var(--border) 55%,transparent)!important;border-radius:6px!important;background:color-mix(in srgb,var(--realm-field) 88%,transparent)!important;box-shadow:none!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .forum-plus .community-visual-input:focus{border-color:var(--realm-accent)!important}
+@media(max-width:600px){html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .forum-plus .community-visual-input{padding:12px!important}}
+
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .forum-plus .community-visual-input{height:clamp(240px,38dvh,380px)!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior-y:contain!important;scrollbar-width:thin!important;scrollbar-gutter:stable!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .forum-plus .community-reply-form .community-visual-input{height:clamp(150px,24dvh,240px)!important;min-height:0!important}
+@media(max-width:600px){html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .forum-plus .community-visual-input{height:clamp(220px,35dvh,320px)!important}html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .forum-plus .community-reply-form .community-visual-input{height:clamp(150px,24dvh,220px)!important}}
+
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .forum-plus .community-editor{grid-template-columns:minmax(0,1fr)!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .forum-plus .community-editor>div{min-width:0!important;max-width:100%!important}
+html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .forum-plus .community-visual-input{width:100%!important;max-width:100%!important;overflow-wrap:anywhere!important;word-break:normal!important}
