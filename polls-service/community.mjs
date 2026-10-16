@@ -40,6 +40,14 @@ async function readToken(env,u){if(u?.can_vote){const row=await one(env,'SELECT 
 export function videoType(bytes){if(bytes.length>=12&&new TextDecoder().decode(bytes.slice(4,8))==='ftyp')return 'video/mp4';if(bytes.slice(0,4).join(',')==='26,69,223,163'&&new TextDecoder().decode(bytes.slice(0,4096)).includes('webm'))return 'video/webm';return null;}
 export function imageType(bytes){if(bytes[0]===255&&bytes[1]===216&&bytes[2]===255)return 'image/jpeg';if(bytes.slice(0,8).join(',')==='137,80,78,71,13,10,26,10')return 'image/png';if(new TextDecoder().decode(bytes.slice(0,4))==='RIFF'&&new TextDecoder().decode(bytes.slice(8,12))==='WEBP')return 'image/webp';return null;}
 async function discussion(token,number,extra=''){const d=await graphql(token,`query($number:Int!){repository(owner:"clustifle",name:"FEH-Rerun-Schedule-by-Clustifle"){discussion(number:$number){${postFields} ${extra}}}}`,{number});if(!d.repository?.discussion)fail(404,'This community post was not found.');return d.repository.discussion;}
+function draftRecord(row){return {draft:row&&!row.deleted?{title:row.title,body:row.body,category:row.category_id,flair:row.flair}:null,revision:row?.revision||0,updatedAt:row?.updated_at||null};}
+async function readDraft(env,id){return draftRecord(await one(env,'SELECT * FROM community_drafts WHERE website_id=?',id));}
+function validDraft(b){
+ if(!b||typeof b!=='object'||!Number.isSafeInteger(b.revision)||b.revision<0)fail(400,'Reload your draft before saving.');
+ for(const [field,limit] of [['title',200],['body',20000],['category',200],['flair',100]])if(typeof b[field]!=='string'||b[field].length>limit)fail(400,'Drafts allow a title up to 200 characters and a post up to 20,000 characters.');
+ if(b.flair&&!flairs.some(f=>f.id===b.flair))fail(400,'Choose a supported community flair.');
+ return b;
+}
 export async function handleCommunity(request,env,{user,rate,headers}){
  const url=new URL(request.url),path=url.pathname.slice('/community'.length),method=request.method;
  const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers});
@@ -51,6 +59,20 @@ export async function handleCommunity(request,env,{user,rate,headers}){
   const video=path.match(/^\/videos\/([a-f0-9-]{36})$/);
   if(video&&(method==='GET'||method==='HEAD')){const row=await one(env,'SELECT content_type,size FROM community_videos WHERE id=?',video[1]);if(!row)fail(404,'Video not found.');const range=request.headers.get('Range');let start=0,end=row.size-1,status=200;if(range){const match=range.match(/^bytes=(\d*)-(\d*)$/);if(!match||(!match[1]&&!match[2]))return new Response(null,{status:416,headers:{...headers,'Content-Range':'bytes */'+row.size}});if(match[1]){start=Number(match[1]);end=match[2]?Math.min(Number(match[2]),end):end;}else start=Math.max(0,row.size-Number(match[2]));if(!Number.isSafeInteger(start)||!Number.isSafeInteger(end)||start>end||start>=row.size)return new Response(null,{status:416,headers:{...headers,'Content-Range':'bytes */'+row.size}});status=206;}const mediaHeaders={...headers,'Content-Type':row.content_type,'X-Content-Type-Options':'nosniff','Accept-Ranges':'bytes','Content-Length':String(end-start+1),'Cache-Control':'public, max-age=31536000, immutable',...(status===206?{'Content-Range':'bytes '+start+'-'+end+'/'+row.size}:{})};if(method==='HEAD')return new Response(null,{status,headers:mediaHeaders});const rows=await statement(env,'SELECT position,hex(bytes) AS chunk FROM community_video_chunks WHERE video_id=? AND position>=? AND position<=? ORDER BY position',video[1],Math.floor(start/524288),Math.floor(end/524288)).all();const output=new Uint8Array(end-start+1);for(const part of rows.results){const bytes=Uint8Array.from(part.chunk.match(/.{2}/g)||[],pair=>parseInt(pair,16)),offset=part.position*524288,from=Math.max(start-offset,0),through=Math.min(end-offset+1,bytes.length);output.set(bytes.subarray(from,through),Math.max(offset-start,0));}return new Response(output,{status,headers:mediaHeaders});}
   const u=await user(request,env);
+  if(path==='/draft'){
+   // Private website-account data; never read via a public GitHub token or request-supplied account ID.
+   if(!u?.website_account||!u.website_id)fail(401,'Sign in to your website account to sync drafts.');
+   if(method==='GET')return json(await readDraft(env,u.website_id));
+   if(!['POST','DELETE'].includes(method))fail(405,'Method not allowed.');
+   await rate(env,'forum-draft:'+u.website_id,60);const b=await jsonBody(request);
+   if(!b||!Number.isSafeInteger(b.revision)||b.revision<0)fail(400,'Reload your draft before saving.');
+   const clearing=method==='DELETE',d=clearing?{title:'',body:'',category:'',flair:''}:validDraft(b),updatedAt=new Date().toISOString();
+   const result=b.revision===0?
+    await statement(env,'INSERT OR IGNORE INTO community_drafts(website_id,title,body,category_id,flair,revision,deleted,updated_at) VALUES(?,?,?,?,?,1,?,?)',u.website_id,d.title,d.body,d.category,d.flair,clearing?1:0,updatedAt).run():
+    await statement(env,'UPDATE community_drafts SET title=?,body=?,category_id=?,flair=?,revision=revision+1,deleted=?,updated_at=? WHERE website_id=? AND revision=?',d.title,d.body,d.category,d.flair,clearing?1:0,updatedAt,u.website_id,b.revision).run();
+   const record=result.meta.changes?{draft:clearing?null:{title:d.title,body:d.body,category:d.category,flair:d.flair},revision:b.revision+1,updatedAt}:await readDraft(env,u.website_id);
+   return result.meta.changes?json(record):json({error:'Your draft changed on another device.',...record},409);
+  }
   if(path==='/wiki-hero-import'&&method==='POST'){
    if(!u?.website_account||!['owner','manager'].includes(u.role))fail(403,'Staff access required.');
    await rate(env,'wiki-import:'+u.website_id,20);const b=await jsonBody(request);
@@ -133,7 +155,10 @@ export async function handleCommunity(request,env,{user,rate,headers}){
   }
   if(!['POST','PATCH'].includes(method))fail(405,'Method not allowed.');
   const token=await connectedToken(env,u);await rate(env,'community-write:'+u.github_id,10);const b=await jsonBody(request);
-  if(path==='/posts'&&method==='POST'){const input=validatePost(b);checkFlairPermission(b,u);if(typeof b.categoryId!=='string')fail(400,'Choose a category.');const categories=await graphql(token,'{repository(owner:"clustifle",name:"FEH-Rerun-Schedule-by-Clustifle"){discussionCategories(first:25){nodes{id slug}}}}');const c=categories.repository.discussionCategories.nodes.find(c=>c.id===b.categoryId);if(!c)fail(400,'Choose a valid community category.');if(c.slug==='announcements'&&!['owner','manager'].includes(u.role))fail(403,'Announcements are reserved for staff.');const d=await graphql(token,'mutation($input:CreateDiscussionInput!){createDiscussion(input:$input){discussion{number url}}}',{input:{repositoryId:REPO_ID,categoryId:c.id,...input}});await statement(env,'DELETE FROM community_cache').run();return json(d.createDiscussion);}
+  if(path==='/posts'&&method==='POST'){const input=validatePost(b);checkFlairPermission(b,u);if(typeof b.categoryId!=='string')fail(400,'Choose a category.');const categories=await graphql(token,'{repository(owner:"clustifle",name:"FEH-Rerun-Schedule-by-Clustifle"){discussionCategories(first:25){nodes{id slug}}}}');const c=categories.repository.discussionCategories.nodes.find(c=>c.id===b.categoryId);if(!c)fail(400,'Choose a valid community category.');if(c.slug==='announcements'&&!['owner','manager'].includes(u.role))fail(403,'Announcements are reserved for staff.');const d=await graphql(token,'mutation($input:CreateDiscussionInput!){createDiscussion(input:$input){discussion{number url}}}',{input:{repositoryId:REPO_ID,categoryId:c.id,...input}});let draftCleared=false,draftRevision=null;
+   // Publishing must never erase a newer draft or report a failed post just because cleanup failed.
+   if(Number.isSafeInteger(b.draftRevision)&&b.draftRevision>0)try{const cleared=await statement(env,"UPDATE community_drafts SET title='',body='',category_id='',flair='',deleted=1,revision=revision+1,updated_at=? WHERE website_id=? AND revision=? AND title=? AND body=? AND category_id=? AND flair=?",new Date().toISOString(),u.website_id,b.draftRevision,b.title,b.body,b.categoryId,b.flair||'').run();draftCleared=!!cleared.meta.changes;if(draftCleared)draftRevision=b.draftRevision+1;}catch{}
+   await statement(env,'DELETE FROM community_cache').run();return json({...d.createDiscussion,draftCleared,draftRevision});}
   if(!numberMatch||!Number.isSafeInteger(number)||number<1)fail(404,'Not found.');
   const post=await discussion(token,number);if(!forumStaff&&await one(env,"SELECT target_id FROM forum_moderation WHERE post_number=? AND target_id='post' AND hidden=1",number))fail(404,'This post is unavailable in the Forum.');
   let result;

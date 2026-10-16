@@ -1,0 +1,9 @@
+.community-workspace .forum-draft-status{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 0 16px;color:var(--muted);font-size:12px}
+.community-workspace .forum-draft-status small{font-size:12px;line-height:1.5}
+.community-workspace .forum-draft-retry{flex:none;background:transparent;border:0;padding:5px 0;color:var(--realm-accent);font:inherit;text-decoration:underline;text-underline-offset:3px}
+.community-workspace .forum-draft-conflict{border-block:1px solid var(--realm-line);padding:12px 0;margin-bottom:18px;font-size:13px;line-height:1.6}
+.community-workspace .forum-draft-conflict p{margin:0 0 8px}
+.community-workspace .forum-draft-conflict>div{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.community-workspace .forum-draft-conflict details{padding:8px 0}
+.community-workspace .forum-draft-conflict pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;max-height:180px;overflow:auto}
+@media(pointer:coarse){.community-workspace .forum-draft-retry{min-height:44px}}

@@ -20,3 +20,10 @@ CREATE TABLE IF NOT EXISTS forum_rules (id INTEGER PRIMARY KEY CHECK(id=1), payl
 CREATE TABLE IF NOT EXISTS community_videos (id TEXT PRIMARY KEY,github_id TEXT NOT NULL,content_type TEXT NOT NULL,size INTEGER NOT NULL,created_at TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS community_video_chunks (video_id TEXT NOT NULL,position INTEGER NOT NULL,bytes BLOB NOT NULL,PRIMARY KEY(video_id,position));
 CREATE INDEX IF NOT EXISTS community_videos_owner ON community_videos(github_id,created_at);
+
+-- One private working draft per website account. Clearing keeps its revision so stale devices cannot revive it.
+CREATE TABLE IF NOT EXISTS community_drafts (
+ website_id TEXT PRIMARY KEY, title TEXT NOT NULL, body TEXT NOT NULL,
+ category_id TEXT NOT NULL, flair TEXT NOT NULL, revision INTEGER NOT NULL CHECK(revision>0),
+ deleted INTEGER NOT NULL DEFAULT 0 CHECK(deleted IN (0,1)), updated_at TEXT NOT NULL
+);

@@ -79,3 +79,40 @@ test('comment upvotes validate discussion membership, permission and moderation 
   assert.equal(mutations.length,2);
  }finally{restore();e.db.close();}
 });
+
+test('drafts are private to the website account, permit incomplete text, and reject stale writes',async()=>{
+ const e=setup(),other={...voter,website_id:'other-account'};
+ const draft={title:'',body:'Unfinished **prediction**',category:'general',flair:'',revision:0};
+ try{
+  for(const method of ['GET','POST','DELETE'])assert.equal((await request(e,'/draft',method==='GET'?undefined:draft,null,method)).status,401);
+  assert.equal((await request(e,'/draft',undefined,{github_id:'123',can_vote:true})).status,401);
+  assert.equal((await request(e,'/draft',{...draft,website_id:other.website_id})).status,200);
+  const own=await (await request(e,'/draft')).json();assert.equal(own.draft.body,draft.body);assert.equal(own.revision,1);
+  assert.equal((await request(e,'/draft')).headers.get('Cache-Control'),'no-store');
+  assert.deepEqual(await (await request(e,'/draft',undefined,other)).json(),{draft:null,revision:0,updatedAt:null});
+  const stale=await request(e,'/draft',{...draft,body:'Old device overwrite',revision:0});assert.equal(stale.status,409);assert.equal((await stale.json()).draft.body,draft.body);
+  assert.equal((await request(e,'/draft',{...draft,body:'x'.repeat(20001),revision:1})).status,400);
+  assert.equal((await request(e,'/draft',{...draft,revision:-1})).status,400);
+  assert.equal((await request(e,'/draft',{...draft,flair:'made-up',revision:1})).status,400);
+  assert.equal((await request(e,'/draft',{revision:1},other,'DELETE')).status,409);
+  const cleared=await (await request(e,'/draft',{revision:1},voter,'DELETE')).json();assert.equal(cleared.draft,null);assert.equal(cleared.revision,2);
+  assert.equal((await request(e,'/draft',{...draft,revision:1})).status,409);
+  assert.equal((await request(e,'/draft',{...draft,revision:2})).status,200);
+  // Saving drafts does not need a GitHub posting token or expose them to staff accounts.
+  assert.equal((await (await request(e,'/draft',undefined,owner)).json()).draft,null);
+  assert.equal((await request(e,'/draft',{...draft,revision:0},{...other,can_vote:false})).status,200);
+ }finally{e.db.close();}
+});
+
+test('publishing clears only the exact draft revision and leaves newer drafts intact',async()=>{
+ const e=setup();await connection(e,voter);
+ const restore=mockFetch(async(_url,init)=>{const q=JSON.parse(init.body).query;return Response.json({data:q.startsWith('mutation')?{createDiscussion:{discussion:{number:8}}}:{repository:{discussionCategories:{nodes:[{id:'general',slug:'general'}]}}}});});
+ try{
+  const draft={title:'Draft title',body:'A prediction',category:'general',flair:'quick-question'};
+  await request(e,'/draft',{...draft,revision:0});
+  const body={title:draft.title,body:draft.body,categoryId:draft.category,flair:draft.flair,draftRevision:1};
+  const published=await (await request(e,'/posts',body)).json();assert.equal(published.draftCleared,true);assert.equal(published.draftRevision,2);assert.equal((await (await request(e,'/draft')).json()).draft,null);
+  await request(e,'/draft',{...draft,revision:2});await request(e,'/draft',{...draft,body:'New work',revision:3});
+  const stale=await (await request(e,'/posts',{...body,draftRevision:3})).json();assert.equal(stale.draftCleared,false);assert.equal((await (await request(e,'/draft')).json()).draft.body,'New work');
+ }finally{restore();e.db.close();}
+});

@@ -15,3 +15,13 @@ Set `GITHUB_CLIENT_SECRET` as an encrypted Worker secret. Never put it in source
 Run `node --test polls-service/worker.test.mjs` before deploying with `wrangler deploy --config polls-service/wrangler.jsonc`. GitHub Pages deploys the frontend separately. Its service URL is in `pages-app/poll-config.json`.
 
 The original independent OAuth endpoints and session tables are retained for compatibility, but separate poll login is disabled when website authentication is configured. Website access tokens are verified per request and never stored in D1. Only the public Supabase key is configured; no service-role key is used. A scheduled cleanup removes expired legacy authentication and rate-limit records. Deadlines and access checks are enforced by the service.
+
+## Private forum drafts
+
+Apply `migrations/003-private-forum-drafts.sql` to an existing forum database before deploying the draft API; `community-schema.sql` includes it for fresh forum installs. The migration only adds `community_drafts`. A direct `wrangler d1 execute --command` can apply its single statement if file imports are unavailable.
+
+`GET /community/draft`, `POST /community/draft`, and `DELETE /community/draft` operate on the verified website account only. No account ID supplied by a client selects the owner, and responses are never publicly cached. A draft contains title, body, category and flair; incomplete drafts are allowed within the existing post limits. Writes and clears require the last observed revision. A stale revision returns 409 with only that account's current draft. Clearing retains a revision marker to prevent old devices silently reviving published text.
+
+The main forum composer keeps one working new-post draft per account, saves locally immediately, and syncs after a short typing pause. Opening the composer, focusing the page, reconnecting, or choosing Sync now refreshes it. Visible composers also check every 15 seconds. Conflicts preserve the current text until the user chooses either version. Existing device drafts are imported when there is no conflicting cloud draft. Editing a published post continues to use explicit publishing. Successful publication clears only matching draft text and revision; cleanup failures are retried safely on the next composer visit.
+
+Run `node --test scripts/forum-draft-sync.test.mjs polls-service/community.test.mjs polls-service/worker.test.mjs polls-service/request-body.test.mjs` plus `scripts/forum-draft-ui-check.mjs` against the local Pages preview to verify ownership, stale saves, offline recovery, two-device conflicts and publish cleanup without making public posts.
