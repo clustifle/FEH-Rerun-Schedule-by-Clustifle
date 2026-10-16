@@ -76,7 +76,7 @@ export default function BannerReorganizer({banners,onClose,onSaved}:{banners:Ban
         <strong>{banner.name}</strong>
         <small>{dateLabel(banner.starts_on)} – {dateLabel(banner.ends_on)}</small>
        </span>
-       <span className="banner-order-meta">{({lme:'L/M/E',featured:'New / Special',revival:'Return / DSH',remix:'Remix'} as Record<string,string>)[banner.banner_type||'lme']}</span>
+       <span className="banner-order-meta">{banner.event_type==='hof'?'Hall of Forms':({lme:'L/M/E',featured:'New / Special',revival:'Return / DSH',remix:'Remix'} as Record<string,string>)[banner.banner_type||'lme']}</span>
       </button>
       <div className="banner-order-row-actions"><button type="button" className="icon-button" aria-label={'Move '+banner.name+' up'} disabled={saving||i===0} onClick={()=>moveId(banner.id,i-1)}><ArrowUp size={18}/></button><button type="button" className="icon-button" aria-label={'Move '+banner.name+' down'} disabled={saving||i===rows.length-1} onClick={()=>moveId(banner.id,i+1)}><ArrowDown size={18}/></button></div>
      </div>
