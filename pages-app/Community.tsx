@@ -11,6 +11,7 @@ import './Community.css';
 import './ForumDesign.css';
 import {useForumDraft} from './useForumDraft';
 import './ForumDraft.css';
+import './ForumEditorDesign.css';
 import ForumRules from './ForumRules';
 const errorText=(e:unknown)=>e instanceof Error?e.message:'Could not load Community.';
 const date=(s:string)=>new Date(s).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
