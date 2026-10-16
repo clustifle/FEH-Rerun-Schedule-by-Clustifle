@@ -55,9 +55,11 @@ export function highestWikiPassives(candidates:WikiSkill[]){const best=new Map<S
 }return [...best.values()];}
 export function parseWikiHero(html:string,title:string,url:string):WikiHero{
  const doc=new DOMParser().parseFromString(html,'text/html');
- const metadata=new Map<string,string>();for(const tr of doc.querySelectorAll('tr')){const cells=Array.from(tr.children);const label=text(cells[0]);if(['Version','Release Date'].includes(label)&&cells[1])metadata.set(label,text(cells[1]));}
- const version=metadata.get('Version')?.match(/^\d+\.\d+(?:\.\d+)?$/)?.[0]||null,releaseDate=metadata.get('Release Date')?.match(/^\d{4}-\d{2}-\d{2}$/)?.[0]||null;
- if(!version&&!releaseDate)throw Error('This page does not contain recognizable hero release information.');
+ const metadata=new Map<string,string>();for(const tr of doc.querySelectorAll('tr')){const cells=Array.from(tr.children);const label=text(cells[0]).replace(/\[[^\]]*\]/g,'').replace(/:$/,'').trim().toLowerCase();if(['version','release date'].includes(label)&&cells[1])metadata.set(label,text(cells[1]));}
+ const version=metadata.get('version')?.match(/(?:^|\s)v?(\d+\.\d+(?:\.\d+)?)(?=\s|\[|$)/i)?.[1]||null;
+ const rawDate=metadata.get('release date')?.replace(/\[[^\]]*\]/g,'').trim()||'';
+ let releaseDate=rawDate.match(/\b\d{4}-\d{2}-\d{2}\b/)?.[0]||null;
+ if(!releaseDate&&/^(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}$/i.test(rawDate)){const parsed=new Date(rawDate+' 00:00:00 UTC');if(Number.isFinite(parsed.getTime()))releaseDate=parsed.toISOString().slice(0,10);}
  const skills:WikiSkill[]=[];
  const headings=Array.from(doc.querySelectorAll('h2,h3,h4,h5,h6'));
  const heading=(label:string)=>headings.find(h=>[h.id,h.querySelector('[id]')?.id,text(h).replace(/\[.*?\]/g,'')].some(value=>value?.replace(/_/g,' ').trim().toLowerCase()===label.toLowerCase()));
@@ -85,6 +87,7 @@ export function parseWikiHero(html:string,title:string,url:string):WikiHero{
  const portraitImage=Array.from(doc.querySelectorAll('img')).find(img=>[img.getAttribute('alt'),img.getAttribute('data-image-name'),img.getAttribute('data-image-key')].some(value=>value&&wikiMatch(value.replace(/\.(webp|png|jpe?g)$/i,'').replace(/_/g,' '),title.replace(':',' ')+' Face FC')));
  const rawPortrait=portraitImage?.getAttribute('data-src')||portraitImage?.getAttribute('data-original')||portraitImage?.getAttribute('src')||'';
  let portrait:string|null=null;try{const source=new URL(rawPortrait),filename=decodeURIComponent(source.pathname.split('/revision')[0].split('/').at(-1)||'').replace(/\.(webp|png|jpe?g)$/i,'').replace(/_/g,' ');if(source.protocol==='https:'&&source.hostname==='static.wikia.nocookie.net'&&!source.username&&!source.password&&!source.port&&wikiMatch(filename,title.replace(':',' ')+' Face FC'))portrait=source.href.replace(/\/scale-to-width-down\/\d+/,'');}catch{}
+ if(!version&&!releaseDate&&!weaponType&&!move&&!portrait&&!skills.length)throw Error('This page does not contain recognizable hero information. Check that this is a hero page, or retry once the wiki has added their details.');
  const {heroType,special}=wikiHeroTypes(doc);
  const effect=text(info.get('Legendary Effect')||info.get('Mythic Effect')),blessing=effect.match(/\b(Earth|Fire|Water|Wind|Light|Dark|Astra|Anima)\b/i)?.[0]||null;
  const colon=title.indexOf(':');const identity={pool:null as string|null,isSpecial:special,...wikiAvailability(doc),name:title.slice(0,colon).trim(),title:title.slice(colon+1).trim(),portrait,portraitThumbnail:portrait?rawPortrait:null,moveType:(/Flying|Flier/i.test(move)?'Fliers':move.match(/Infantry|Cavalry|Armored/i)?.[0]||null),weaponType:weaponType?weaponType.toLowerCase()==='dragon'?'Breath':weaponType[0].toUpperCase()+weaponType.slice(1).toLowerCase():null,color:color?color[0].toUpperCase()+color.slice(1).toLowerCase():null,heroType:heroType.toLowerCase()==='chosen hero'?'Chosen Hero':heroType[0].toUpperCase()+heroType.slice(1).toLowerCase(),blessing:blessing?blessing[0].toUpperCase()+blessing.slice(1).toLowerCase():null};

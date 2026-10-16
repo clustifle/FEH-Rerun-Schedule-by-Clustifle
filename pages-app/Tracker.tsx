@@ -1,3 +1,4 @@
+import {normalizePortraitFile} from './portrait-file';
 import {usePoolRangeSettings} from './pool-range-settings';
 import MythicBonusNote from './MythicBonusNote';
 import {blessingIcon} from './blessing-icons';
@@ -241,10 +242,9 @@ export default function Home(){
  async function acceptPortrait(file:File){
   if(isBeta){setError('Portrait uploads are not enabled in this beta build. Existing portraits are preserved.');return;}
   if(saving||importing)return;
-  if(!['image/png','image/jpeg','image/webp'].includes(file.type)){setError('Choose a PNG, JPG, or WebP image.');return;}
   if(file.size>3145728){setError('Portrait must be under 3 MB.');return;}
   setImporting(true);setError('');setPortraitMessage('Preparing portrait…');
-  try{const result=await upscalePortrait(file);setPortraitUrl('');setImportedUrl('');setImportedPortrait(result.file);if(fileRef.current)fileRef.current.value='';const preview=await new Promise<string>((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(new Error('Could not preview this image.'));reader.readAsDataURL(result.file);});setPreview(preview);setPortraitMessage('Optimized portrait · '+result.width+' × '+result.height+'. Save the hero to keep it.');}catch(e){setError((e as Error).message);setPortraitMessage('');}finally{setImporting(false);}
+  try{file=await normalizePortraitFile(file);const result=await upscalePortrait(file);setPortraitUrl('');setImportedUrl('');setImportedPortrait(result.file);if(fileRef.current)fileRef.current.value='';const preview=await new Promise<string>((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result));reader.onerror=()=>reject(new Error('Could not preview this image.'));reader.readAsDataURL(result.file);});setPreview(preview);setPortraitMessage('Optimized portrait · '+result.width+' × '+result.height+'. Save the hero to keep it.');}catch(e){setError((e as Error).message);setPortraitMessage('');}finally{setImporting(false);}
  }
 
  function pastePortrait(e:React.ClipboardEvent){
