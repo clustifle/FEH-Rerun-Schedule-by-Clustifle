@@ -1,3 +1,4 @@
+import RefineProfileInfo from './RefineProfileInfo';
 import {displayPool,specialRatePools,isStarterHero} from './hero-pools';
 import {blessingIcon} from './blessing-icons';
 import WikiHeroImport from './WikiHeroImport';
@@ -34,7 +35,7 @@ export default function HeroProfilePage({hero,heroes=[],loading,error,tags,onBac
     <div className="hero-profile-scroll" tabIndex={0} role="region" aria-label="Hero profile details">
      <div className="hero-profile-summary-grid">
       <section className="hero-profile-overview hero-profile-card" aria-labelledby="hero-overview-heading">
-       <header className="hero-profile-card-heading"><h2 id="hero-overview-heading">Overview</h2></header>
+       <header className="hero-profile-card-heading"><h2 id="hero-overview-heading">Overview</h2></header><RefineProfileInfo hero={hero}/>
        {hero.schedule&&hero.schedule!=='None'&&<div className="hero-profile-rerun" aria-labelledby="hero-rerun-heading">
         <h3 id="hero-rerun-heading">Rerun information</h3><p>{scheduleName(hero.schedule)}</p>
         <strong>{isWaitlist(hero.schedule)?'Awaiting a rerun':month||'Not scheduled yet'}</strong>

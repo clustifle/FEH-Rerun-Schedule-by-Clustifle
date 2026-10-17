@@ -85,3 +85,5 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][dat
 }
 
 .mythic-bonus-note{margin-top:12px;padding-top:10px;border-top:1px solid var(--realm-line);font:14px/1.45 FEHeroes,Georgia,serif}.mythic-bonus-note summary{cursor:pointer}.mythic-bonus-note ul{padding-left:18px}.mythic-bonus-note li{margin:6px 0}.mythic-bonus-note a{color:inherit}
+
+.refine-profile-link{display:flex;gap:10px;align-items:center;font-size:14px;border-top:1px solid var(--realm-line);padding-top:12px;margin-top:12px;flex-wrap:wrap}.refine-profile-link a{color:var(--realm-accent)}

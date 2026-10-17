@@ -1,3 +1,4 @@
+import {readRefines,saveRefines} from './refines.mjs';
 import {defaultSpecialRateRanges,validateSpecialRateRanges} from '../lib/special-rate-ranges.ts';
 import {readBoundedBody} from './request-body.mjs';
 import {fetchWikiImport,WikiImportError} from './wiki-import.mjs';
@@ -54,6 +55,7 @@ export async function handleCommunity(request,env,{user,rate,headers}){
  const url=new URL(request.url),path=url.pathname.slice('/community'.length),method=request.method;
  const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers});
  try{
+  if(path==='/refines'&&method==='GET')return json(await readRefines(env));
   if(path==='/pool-ranges'&&method==='GET')return json(await poolRangeRecord(env));
   // Images are public media, never HTML or executable SVG; allow only immutable random IDs.
   const image=path.match(/^\/images\/([a-f0-9-]{36})$/);
@@ -62,6 +64,7 @@ export async function handleCommunity(request,env,{user,rate,headers}){
   const video=path.match(/^\/videos\/([a-f0-9-]{36})$/);
   if(video&&(method==='GET'||method==='HEAD')){const row=await one(env,'SELECT content_type,size FROM community_videos WHERE id=?',video[1]);if(!row)fail(404,'Video not found.');const range=request.headers.get('Range');let start=0,end=row.size-1,status=200;if(range){const match=range.match(/^bytes=(\d*)-(\d*)$/);if(!match||(!match[1]&&!match[2]))return new Response(null,{status:416,headers:{...headers,'Content-Range':'bytes */'+row.size}});if(match[1]){start=Number(match[1]);end=match[2]?Math.min(Number(match[2]),end):end;}else start=Math.max(0,row.size-Number(match[2]));if(!Number.isSafeInteger(start)||!Number.isSafeInteger(end)||start>end||start>=row.size)return new Response(null,{status:416,headers:{...headers,'Content-Range':'bytes */'+row.size}});status=206;}const mediaHeaders={...headers,'Content-Type':row.content_type,'X-Content-Type-Options':'nosniff','Accept-Ranges':'bytes','Content-Length':String(end-start+1),'Cache-Control':'public, max-age=31536000, immutable',...(status===206?{'Content-Range':'bytes '+start+'-'+end+'/'+row.size}:{})};if(method==='HEAD')return new Response(null,{status,headers:mediaHeaders});const rows=await statement(env,'SELECT position,hex(bytes) AS chunk FROM community_video_chunks WHERE video_id=? AND position>=? AND position<=? ORDER BY position',video[1],Math.floor(start/524288),Math.floor(end/524288)).all();const output=new Uint8Array(end-start+1);for(const part of rows.results){const bytes=Uint8Array.from(part.chunk.match(/.{2}/g)||[],pair=>parseInt(pair,16)),offset=part.position*524288,from=Math.max(start-offset,0),through=Math.min(end-offset+1,bytes.length);output.set(bytes.subarray(from,through),Math.max(offset-start,0));}return new Response(output,{status,headers:mediaHeaders});}
   const u=await user(request,env);
+  if(path==='/refines'){try{return json(await saveRefines(request,env,u,rate))}catch(e){if([400,401,403,405,409,413].includes(e.status))fail(e.status,e.message);throw e;}}
   if(path==='/pool-ranges'){
    if(!u?.website_account||!u.website_id)fail(401,'Sign in to your website account.');
    if(!['owner','manager'].includes(u.role))fail(403,'Head Admin or Schedule Manager access is required.');

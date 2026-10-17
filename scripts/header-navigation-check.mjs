@@ -13,7 +13,7 @@ try{
   assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),theme+' overflow '+width);
   const boxes=await nav.locator(':scope > a, :scope > details').evaluateAll(nodes=>nodes.map(e=>{const r=e.getBoundingClientRect();return {left:r.left,right:r.right};}));
   assert.ok(boxes.every((b,i)=>b.left>=0&&b.right<=width+1&&(!i||b.left>=boxes[i-1].right-1)),theme+' overlapping links '+width);
-  await nav.locator('summary').filter({hasText:'Schedule'}).click();assert.equal(await nav.locator('details[open] a').count(),7);
+  await nav.locator('summary').filter({hasText:'Schedule'}).click();assert.equal(await nav.locator('details[open] a').count(),8);
   const options=await nav.locator('details[open] .header-navigation-options').boundingBox();assert.ok(options.x>=0&&options.x+options.width<=width+1);
   await p.keyboard.press('Escape');assert.equal(await nav.locator('details[open]').count(),0);
  }
@@ -32,5 +32,5 @@ try{
  await p.evaluate(()=>window.scrollTo(0,0));await p.waitForFunction(()=>!document.querySelector('.masthead').classList.contains('is-compact'));
 
  for(const width of [1280,390]){await p.setViewportSize({width,height:900});await p.screenshot({path:'header-navigation-'+width+'.png'});}
- assert.deepEqual(errors,[]);console.log('Primary links, seven schedules, four waitlists, profile, retained menu links, Escape, themed layout and 320/390/768/1280px widths passed.');
+ assert.deepEqual(errors,[]);console.log('Primary links, eight schedules, four waitlists, profile, retained menu links, Escape, themed layout and 320/390/768/1280px widths passed.');
 }finally{await browser.close();}
