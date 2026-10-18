@@ -84,9 +84,15 @@ export function parseWikiHero(html:string,title:string,url:string):WikiHero{
  const info=new Map<string,Element>();for(const tr of doc.querySelectorAll('tr')){const cells=Array.from(tr.children),label=text(cells[0]);if(cells[1]&&!info.has(label))info.set(label,cells[1]);}
  const weapon=text(info.get('Weapon Type')),move=text(info.get('Move Type')||info.get('Movement Type'));
  const weaponType=weapon.match(/sword|lance|axe|staff|beast|bow|breath|dragon|dagger|tome/i)?.[0],color=weapon.match(/red|blue|green|colorless/i)?.[0]||(weaponType?({sword:'Red',lance:'Blue',axe:'Green',staff:'Colorless'}[weaponType.toLowerCase()]||null):null);
- const portraitImage=Array.from(doc.querySelectorAll('img')).find(img=>[img.getAttribute('alt'),img.getAttribute('data-image-name'),img.getAttribute('data-image-key')].some(value=>value&&wikiMatch(value.replace(/\.(webp|png|jpe?g)$/i,'').replace(/_/g,' '),title.replace(':',' ')+' Face FC')));
+ // Renamed heroes can retain their old epithet in the wiki's asset filenames.
+ // Derive an alias only from the identity table's own neutral face artwork.
+ const identityTable=info.get('Weapon Type')?.closest('table');
+ const neutralFace=Array.from(identityTable?.querySelectorAll('img')||[]).map(img=>img.getAttribute('data-image-name')||img.getAttribute('data-image-key')||img.getAttribute('alt')||'').find(value=>/ Face(?:\.(?:webp|png|jpe?g))?$/i.test(value.replace(/_/g,' ')));
+ const portraitNames=[title.replace(':',' ')+' Face FC'];
+ if(neutralFace){const alias=neutralFace.replace(/_/g,' ').replace(/\.(webp|png|jpe?g)$/i,'');if(wikiMatch(alias.split(' ').slice(0,title.split(':')[0].trim().split(' ').length).join(' '),title.split(':')[0]))portraitNames.push(alias+' FC');}
+ const portraitImage=Array.from(doc.querySelectorAll('img')).find(img=>[img.getAttribute('alt'),img.getAttribute('data-image-name'),img.getAttribute('data-image-key')].some(value=>value&&portraitNames.some(name=>wikiMatch(value.replace(/\.(webp|png|jpe?g)$/i,'').replace(/_/g,' '),name))));
  const rawPortrait=portraitImage?.getAttribute('data-src')||portraitImage?.getAttribute('data-original')||portraitImage?.getAttribute('src')||'';
- let portrait:string|null=null;try{const source=new URL(rawPortrait),filename=decodeURIComponent(source.pathname.split('/revision')[0].split('/').at(-1)||'').replace(/\.(webp|png|jpe?g)$/i,'').replace(/_/g,' ');if(source.protocol==='https:'&&source.hostname==='static.wikia.nocookie.net'&&!source.username&&!source.password&&!source.port&&wikiMatch(filename,title.replace(':',' ')+' Face FC'))portrait=source.href.replace(/\/scale-to-width-down\/\d+/,'');}catch{}
+ let portrait:string|null=null;try{const source=new URL(rawPortrait),filename=decodeURIComponent(source.pathname.split('/revision')[0].split('/').at(-1)||'').replace(/\.(webp|png|jpe?g)$/i,'').replace(/_/g,' ');if(source.protocol==='https:'&&source.hostname==='static.wikia.nocookie.net'&&!source.username&&!source.password&&!source.port&&portraitNames.some(name=>wikiMatch(filename,name)))portrait=source.href.replace(/\/scale-to-width-down\/\d+/,'');}catch{}
  if(!version&&!releaseDate&&!weaponType&&!move&&!portrait&&!skills.length)throw Error('This page does not contain recognizable hero information. Check that this is a hero page, or retry once the wiki has added their details.');
  const {heroType,special}=wikiHeroTypes(doc);
  const effect=text(info.get('Legendary Effect')||info.get('Mythic Effect')),blessing=effect.match(/\b(Earth|Fire|Water|Wind|Light|Dark|Astra|Anima)\b/i)?.[0]||null;
