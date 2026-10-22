@@ -10,9 +10,10 @@ export default function HeaderNavigation({active,disabled,onNavigate,profileSlug
  const root=useRef<HTMLElement>(null);
  const close=()=>root.current?.querySelectorAll<HTMLDetailsElement>('details[open]').forEach(d=>{d.open=false;});
  useEffect(()=>{
+  const focusOutside=(e:FocusEvent)=>{if(!root.current?.contains(e.target as Node))close();};
   const outside=(e:PointerEvent)=>{if(!root.current?.contains(e.target as Node))close();};
   const escape=(e:KeyboardEvent)=>{if(e.key!=='Escape')return;const open=root.current?.querySelector<HTMLDetailsElement>('details[open]');if(open){open.open=false;open.querySelector<HTMLElement>('summary')?.focus();}};
-  document.addEventListener('pointerdown',outside);document.addEventListener('keydown',escape);return()=>{document.removeEventListener('pointerdown',outside);document.removeEventListener('keydown',escape);};
+  document.addEventListener('focusin',focusOutside);document.addEventListener('pointerdown',outside);document.addEventListener('keydown',escape);return()=>{document.removeEventListener('focusin',focusOutside);document.removeEventListener('pointerdown',outside);document.removeEventListener('keydown',escape);};
  },[]);
  useEffect(()=>{
   const header=root.current?.closest<HTMLElement>('.masthead');if(!header)return;

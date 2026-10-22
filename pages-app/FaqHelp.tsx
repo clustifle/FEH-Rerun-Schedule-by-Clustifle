@@ -8,7 +8,7 @@ const entries:Entry[]=[
  {
   "section": "Schedules",
   "question": "Which schedule should I use?",
-  "answer": "Open **Schedule** in the navigation menu and choose the view that matches the event you want to track.\n\n- **General:** Recorded rerun months for Legendary, Mythic, Emblem, and Chosen Heroes.\n- **Remix:** Reruns associated with Remix banners.\n- **L/M Revival:** Monthly Legendary and Mythic revival entries.\n- **NH Revival:** Returning New Heroes lineups and Forging Bonds revivals.\n- **HoF Revival:** Returning Hall of Forms lineups."
+  "answer": "Open **Schedule & Waitlist** in the navigation menu and choose the view that matches the event you want to track.\n\n- **General:** Recorded rerun months for Legendary, Mythic, Emblem, and Chosen Heroes.\n- **Remix:** Reruns associated with Remix banners.\n- **L/M Revival:** Monthly Legendary and Mythic revival entries.\n- **NH Revival:** Returning New Heroes lineups and Forging Bonds revivals.\n- **HoF Revival:** Returning Hall of Forms lineups."
  },
  {
   "section": "Schedules",
@@ -33,12 +33,12 @@ const entries:Entry[]=[
  {
   "section": "Schedules",
   "question": "Where can I find Hall of Forms revivals?",
-  "answer": "Open **Schedule → HoF Revival Schedule**, choose an available month, and select a portrait to open the hero’s full profile.\n\n**Hall of Forms is an event lineup.** Appearing in Hall of Forms does not make a Heroic Grails unit summonable on a banner. Use the Grail visibility toggle if you want to hide those units while browsing."
+  "answer": "Open **Schedule & Waitlist → Hall of Forms**, choose an available month, and select a portrait to open the hero’s full profile.\n\n**Hall of Forms is an event lineup.** Appearing in Hall of Forms does not make a Heroic Grails unit summonable on a banner. Use the Grail visibility toggle if you want to hide those units while browsing."
  },
  {
   "section": "Schedules",
-  "question": "Why are there three rerun waitlists?",
-  "answer": "The waitlists separate heroes by the type of rerun being tracked. Open **Rerun Waitlist** in navigation and choose a list.\n\n- **L/M/E Waitlist:** Heroes awaiting a recorded rerun that may involve a Legendary, Mythic, or Emblem banner.\n- **DSH Waitlist:** Heroes awaiting a Double Special Heroes rerun.\n- **NHR Waitlist:** Heroes awaiting a New Heroes Return rerun.\n\nEach list has its own membership and order. Waitlists do not use the month browser."
+  "question": "What are the four rerun waitlists?",
+  "answer": "Open **Schedule & Waitlist**, then choose **Waitlists**. L/M/E, DSH, NHR, and Remix track different rerun groups. Each keeps its own membership and order. Waitlists do not use a month browser."
  },
  {
   "section": "Schedules",
@@ -58,7 +58,7 @@ const entries:Entry[]=[
  {
   "section": "Browsing",
   "question": "What is the difference between Standard and Compact view?",
-  "answer": "**Standard** uses larger portraits and more spacing. **Compact** uses smaller portraits to make dense schedules easier to scan. Both adapt to the browser size, and wide schedules can scroll horizontally.\n\nAll Heroes has its own **Cards, Compact, List, and Table** views, together with ten sorting options.\n\nSelect a hero in any view to open their full **Hero Profile**. You can share that page’s address; the link includes the hero’s name, title, and type."
+  "answer": "Standard and Compact adjust portrait size and spacing on schedules. All Heroes offers cards, list, table, and portrait-only sizes from Small through **Extra large**. Its default sort is **Release · newest**; choose game order to follow the in-game Catalog of Heroes. Your saved view and sorting choices remain on this browser."
  },
  {
   "section": "Browsing",
@@ -68,7 +68,7 @@ const entries:Entry[]=[
  {
   "section": "Browsing",
   "question": "What do the portrait icons mean?",
-  "answer": "Portrait icons identify the hero’s recorded characteristics.\n\n- **Upper left:** Weapon type.\n- **Lower left:** Hero type, where applicable.\n- **Lower right:** Movement type.\n- **Heroic Grails icon:** The hero is marked as a Heroic Grails unit.\n\nGeneral and Special Heroes leave the hero-type corner blank. Desktop hover previews and full Hero Profiles show the recorded labels and notes."
+  "answer": "Portraits show weapon type, movement, hero type, and game origin. Multiple game origins stack above the hero-type mark. General and Special heroes use the available lower-left space. On a full Hero Profile, the main portrait stays clean and the **Overview** lists these details. Choose-a-Hero dialogs and Hero Profiles do not show hover mini profiles."
  },
  {
   "section": "Browsing",
@@ -192,10 +192,52 @@ const entries:Entry[]=[
   ]
  }
 ];
+const finalHelp:Entry[]=[
+ {
+  "section": "Browsing",
+  "question": "What changed in v3.5?",
+  "answer": "Version 3.5 is the final planned feature release. It includes the final design, mobile, keyboard, loading, and portrait-recovery updates. **Schedule and roster updates continue**, together with bug fixes, security fixes, and browser compatibility work.",
+  "sources": [
+   [
+    "Release notes",
+    "https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/blob/main/docs/release-v3.5.md"
+   ],
+   [
+    "Maintenance policy",
+    "https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/blob/main/MAINTENANCE.md"
+   ]
+  ]
+ },
+ {
+  "section": "Browsing",
+  "question": "How do I use My Watchlist and saved schedules?",
+  "answer": "Add heroes from My Watchlist or a Hero Profile, then choose Following, Saving for, Merge project, or Waiting for rerun. Search and sort your list, and choose a grid, list, or icon view. Sort and view choices are saved for this account on this browser. **My Profile → Saved schedules** keeps schedule shortcuts. Earlier follows remain available. Display resets and signing out do not delete saved account records."
+ },
+ {
+  "section": "Browsing",
+  "question": "How do game origins and game order work?",
+  "answer": "In **All Heroes → Filters → Game origin**, choose a Fire Emblem title. **Game order** follows the Catalog of Heroes. Duo, Harmonized, and other heroes with multiple recorded games show both origins. Selecting either origin finds that hero."
+ },
+ {
+  "section": "Schedules",
+  "question": "How do I export schedules and waitlists?",
+  "answer": "Use the share/export control on a schedule or any L/M/E, DSH, NHR, or Remix waitlist. Choose the available image size and appearance options, then download. Rerun dates may change; waitlists do not imply confirmed event dates."
+ },
+ {
+  "section": "Browsing",
+  "question": "Why does Forum ask me to reconnect GitHub?",
+  "answer": "The website session and GitHub posting authorization are separate. When a valid GitHub provider token is available, Forum restores its connection automatically. If GitHub revoked access, choose **Reconnect GitHub** and authorize the same account. Failed posts, replies, and votes are not retried automatically."
+ },
+ {
+  "section": "Browsing",
+  "question": "Can I use the website with a keyboard?",
+  "answer": "Use **Skip to content** to bypass navigation. Tab moves between controls. Arrow keys and Home/End select tabs; Escape closes a dialog when no save is running. Focus has a visible outline. Set **Settings → Personalization → Motion** to reduce animations."
+ }
+];
 function answerText(text:string){return text.split(/(\*\*[^*]+\*\*)/g).map((part,index)=>part.startsWith('**')&&part.endsWith('**')?<strong key={index}>{part.slice(2,-2)}</strong>:part);}
 export function FaqAnswer({answer}:{answer:string}){return <div className="faq-answer">{answer.split('\n\n').map((block,index)=>{const lines=block.split('\n');if(lines.every(line=>line.startsWith('- ')))return <ul key={index}>{lines.map((line,i)=><li key={i}>{answerText(line.slice(2))}</li>)}</ul>;if(lines.every(line=>/^\d+\. /.test(line)))return <ol key={index}>{lines.map((line,i)=><li key={i}>{answerText(line.replace(/^\d+\. /,''))}</li>)}</ol>;return <p key={index}>{answerText(block)}</p>;})}</div>;}
 export default function FaqHelp({canEdit=false}:{canEdit?:boolean}){
- const content=useSiteContent();const currentEntries:Entry[]=content?content.filter(r=>r.kind==='faq').map(r=>({section:r.section,question:r.title,answer:r.body,sources:r.sources})):entries;
+ const content=useSiteContent();const currentEntries:Entry[]=[...finalHelp,...(content?content.filter(r=>r.kind==='faq').map(r=>({section:r.section,question:r.title,answer:r.body,sources:r.sources})):entries)];
  const [query,setQuery]=useState(''),[section,setSection]=useState<Section|'All'>('All');
  useEffect(()=>{if(!canEdit&&section==='Editing')setSection('All');},[canEdit,section]);
  const topics=(['All','Schedules','Browsing','Editing','About'] as const).filter(topic=>canEdit||topic!=='Editing');
