@@ -3,7 +3,8 @@ import {ChevronDown,UserRound} from 'lucide-react';
 import {viewUrl} from './routes';
 import {waitlistViews,waitlistLabel} from './waitlist-types';
 import './HeaderNavigation.css';
-const schedules=[['General','L/M/E Schedule'],['Remix','Remix Schedule'],['Monthly Revival','Monthly Legendary/Mythic Revival'],['Weekly Revivals','Weekly Revival'],['Forging Bonds Revival','New Heroes Revival'],['Hall of Forms Revival','Hall of Forms Revival'],['Refine Predictions','Refine Predictions'],['Schedule Under Consideration','Schedule Under Consideration']];
+import {scheduleViews} from './schedule-context';
+const schedules=scheduleViews;
 export default function HeaderNavigation({active,disabled,onNavigate,profileSlug=''}:{active:string;disabled:boolean;onNavigate:(view:string)=>void;profileSlug?:string}){
  const root=useRef<HTMLElement>(null);
  const close=()=>root.current?.querySelectorAll<HTMLDetailsElement>('details[open]').forEach(d=>{d.open=false;});

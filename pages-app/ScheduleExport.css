@@ -44,6 +44,7 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][dat
 html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .schedule-export-actions a{background:var(--realm-accent);color:var(--realm-deep)}
 
 .schedule-export-preview[hidden]{display:none!important}
+.tracker .schedule-export-launch>button{display:flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:8px 12px}
 
 html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker dialog.schedule-export-dialog{width:min(1080px,calc(100vw - 32px));max-height:min(780px,calc(100dvh - 32px))}
 html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][data-theme] .tracker .schedule-export-body{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);gap:20px;padding:18px 20px}
