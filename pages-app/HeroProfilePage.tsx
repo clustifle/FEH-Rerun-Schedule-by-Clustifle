@@ -6,7 +6,7 @@ import AdminHeroSkills from './AdminHeroSkills';
 import HeroSkills from './HeroSkills';
 import {isBeta} from './beta';
 import './HeroProfilePage.css';
-import {V2HeroInfo} from './V2Workspace';
+import {V2HeroInfo,HeroWatchlist} from './V2Workspace';
 import {useEffect,useRef,useState,type ReactNode} from 'react';
 import {Shield,Pencil,ArrowUpRight,Download} from 'lucide-react';
 import {assetUrl,portraitUrl} from './static-data';
@@ -40,13 +40,13 @@ export default function HeroProfilePage({hero,heroes=[],loading,error,tags,onBac
         <strong>{isWaitlist(hero.schedule)?'Awaiting a rerun':month||'Not scheduled yet'}</strong>
         <a href={viewUrl(hero.schedule,hero.month||'')} onClick={e=>{if(!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&!e.altKey){e.preventDefault();goTo(viewUrl(hero.schedule,hero.month||''));}}}>View {isWaitlist(hero.schedule)&&hero.schedule!=='Schedule Under Consideration'?'waitlist':'schedule'}<ArrowUpRight size={14} aria-hidden="true"/></a>
        </div>}
-       <dl className="hero-detail-facts"><div><dt>Game origin</dt><dd className="hero-profile-origins">{heroOrigin(hero)?.origins.length?[...new Set(heroOrigin(hero)!.origins)].map(id=>{const game=originGames[id];return <span key={id}><img src={assetUrl('images/game-origins/'+game.file)} alt="" width={28} height={28}/>{game.name}</span>}):'Not recorded'}</dd></div><div><dt>Hero type</dt><dd>{hero.category==='Chosen Hero'?'Chosen':hero.category}</dd></div>
+       <dl className="hero-detail-facts"><div><dt>Game origin</dt><dd className="hero-profile-origins">{heroOrigin(hero)?.origins.length?[...new Set(heroOrigin(hero)!.origins)].map(id=>{const game=originGames[id];return <span key={id}><img src={assetUrl('images/game-origins/'+game.file)} alt="" width={28} height={28}/>{game.name}</span>}):'Not recorded'}</dd></div><div><dt>Debut version</dt><dd>{hero.debut_version||'Not recorded'}</dd></div><div><dt>Release date</dt><dd>{hero.release_date||'Not recorded'}</dd></div><div><dt>Hero type</dt><dd>{hero.category==='Chosen Hero'?'Chosen':hero.category}</dd></div>
         <div><dt>Weapon type</dt><dd>{hero.weapon_type?<><img src={assetUrl('weapon-types/'+hero.color.toLowerCase()+'-'+hero.weapon_type.toLowerCase()+'.webp')} alt="" width={24} height={24}/>{hero.color} {hero.weapon_type}</>:<><img src={assetUrl('weapon-orbs/'+hero.color.toLowerCase()+'.webp')} alt="" width={24} height={24}/>{hero.color} · Not assigned</>}</dd></div>
         <div><dt>Movement type</dt><dd>{hero.move_type?<><img src={assetUrl('move-types/'+hero.move_type.toLowerCase()+'.webp')} alt="" width={24} height={24}/>{hero.move_type}</>:'Not assigned'}</dd></div>
         <div><dt>Summon availability</dt><dd>{isStarterHero(hero)?displayPool(hero):hero.heroic_grail?'Heroic Grails':specialRatePools.includes(displayPool(hero))?displayPool(hero):hero.demote?'4–5★ demote':displayPool(hero)}</dd></div>
         {['Legendary','Mythic','Chosen Hero'].includes(hero.category)&&<div><dt>Blessing</dt><dd>{hero.blessing?<><img src={blessingIcon(hero.category,hero.blessing,hero)} alt="" width={24} height={24}/>{hero.blessing}</>:'Not assigned'}</dd></div>}
        </dl>
-       <div className="hero-owner-note" aria-labelledby="hero-note-label"><h3 id="hero-note-label">Notes</h3><p>{hero.notes||'No notes added yet.'}</p></div>
+       <HeroWatchlist hero={hero}/><div className="hero-owner-note" aria-labelledby="hero-note-label"><h3 id="hero-note-label">Notes</h3><p>{hero.notes||'No notes added yet.'}</p></div>
       </section>
       <section className="hero-profile-skills-card hero-profile-card" aria-labelledby="hero-skills-heading">
        <header className="hero-profile-card-heading"><h2 id="hero-skills-heading">Skills</h2>{onEdit&&!isBeta&&<button className="secondary" aria-label="Edit Skills on this unit" onClick={()=>setSkillsEditing(true)}><Pencil size={14} aria-hidden="true"/>Edit skills</button>}</header>
