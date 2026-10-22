@@ -8,11 +8,29 @@ export type PageInfo={endCursor?:string;hasNextPage:boolean};
 export type Comment={upvoteCount?:number;viewerHasUpvoted?:boolean;viewerCanUpvote?:boolean;forumHidden?:boolean;id:string;body:string;url:string;createdAt:string;isAnswer:boolean;viewerCanUpdate?:boolean;viewerCanDelete?:boolean;author:{login:string;avatarUrl:string;websiteProfileId?:string|null;websiteUsername?:string|null}|null;replies?:{nodes:Comment[];totalCount:number;pageInfo?:PageInfo}};
 export type Post={forumHidden?:boolean;flair?:string|null;id:string;number:number;title:string;body:string;url:string;createdAt:string;updatedAt:string;closed:boolean;locked:boolean;upvoteCount:number;viewerHasUpvoted:boolean;viewerCanUpdate:boolean;viewerCanDelete?:boolean;author:{login:string;avatarUrl:string;websiteProfileId?:string|null;websiteUsername?:string|null}|null;category:Category;commentCount:{totalCount:number};comments?:{nodes:Comment[];totalCount:number;pageInfo:PageInfo}};
 export class CommunityApiError extends Error{constructor(message:string,public status:number,public data:unknown){super(message);}}
+const expiredConnections=new Set<string>();
+export function communityNeedsReconnect(accountId?:string){return !!accountId&&expiredConnections.has(accountId);}
+export function isGitHubAuthorizationError(status:number,message:string){return status===401&&/GitHub authorization expired|Enable community posting/i.test(message);}
 export async function communityApi<T>(path:string,body?:unknown,method=body?'POST':'GET',accountId?:string):Promise<T>{
  const {data:{session}}=await supabase.auth.getSession();
  if(accountId&&session?.user.id!==accountId)throw new Error('Sign in to the same account to sync this draft.');
  const r=await fetch(pollApiUrl+'/community'+path,{method,credentials:'omit',referrerPolicy:'no-referrer',headers:{...(session?{Authorization:'Bearer '+session.access_token}:{}),...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(25000)});
- const data=await r.json();if(!r.ok)throw new CommunityApiError(data.error||'Could not load Community. Please try again.',r.status,data);return data;
+ const data=await r.json();
+ if(!r.ok){
+  if(session&&isGitHubAuthorizationError(r.status,String(data.error||''))){
+   expiredConnections.add(session.user.id);
+   window.dispatchEvent(new CustomEvent('community-authorization-change',{detail:{accountId:session.user.id}}));
+   // Only retry public reads. Never replay a post, reply, vote, or draft write.
+   if(method==='GET'&&/^\/(?:categories(?:\?|$)|posts(?:[/?]|$))/.test(path)){
+    const publicResponse=await fetch(pollApiUrl+'/community'+path,{credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(25000)});
+    if(publicResponse.ok)return await publicResponse.json();
+   }
+   throw new CommunityApiError('Reconnect GitHub to restore posting access.',r.status,data);
+  }
+  throw new CommunityApiError(data.error||'Could not load Community. Please try again.',r.status,data);
+ }
+ if(path==='/connect'&&session){expiredConnections.delete(session.user.id);window.dispatchEvent(new CustomEvent('community-authorization-change',{detail:{accountId:session.user.id}}));}
+ return data;
 }
 export async function uploadCommunityImage(file:File,kind:'community'|'hero'='community'){
  if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>10485760)throw Error('Choose a PNG, JPEG, or WebP picture under 10 MB.');
