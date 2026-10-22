@@ -28,6 +28,13 @@ async function readAllHeroRows(){
 }
 export const assetUrl=(value:string)=>{const path=(isBeta&&value==='clustifle-feh-rerun-logo.png'?'clustifle-feh-rerun-beta-logo.png':value).replace(/^\//,'');return import.meta.env.BASE_URL+path+(/^(?:blessings\/(?:fire|water|wind|earth)\.webp|chosen\/(?:fire|water|wind|earth)\.png)$/.test(path)?'?v=blessing-hd-2':'');};
 const deliveryPortraits=portraitManifest as Record<string,{thumb:string;detail:string}>;
+let portraitFallbacks:Map<string,string>|null=null;
+export function portraitFallback(source:string){
+ let path:string;try{const url=new URL(source,location.origin);if(url.origin!==location.origin)return null;path=decodeURIComponent(url.pathname);}catch{return null;}
+ if(!path.startsWith(import.meta.env.BASE_URL+'hero-portraits/'))return null;
+ if(!portraitFallbacks){portraitFallbacks=new Map();for(const [original,delivery]of Object.entries(deliveryPortraits)){portraitFallbacks.set(import.meta.env.BASE_URL+delivery.thumb,original);portraitFallbacks.set(import.meta.env.BASE_URL+delivery.detail,original);}}
+ const original=portraitFallbacks.get(path);return original?supabase.storage.from('portraits').getPublicUrl(original).data.publicUrl:null;
+}
 export const portraitUrl=(value:string,size:'thumb'|'detail'='thumb')=>/^cloudflare\/[a-f0-9-]{36}$/.test(value)?'https://feh-community-polls.shyguyvn.workers.dev/community/images/'+value.slice(11)+'?media=2':value.startsWith('data/')?assetUrl(value):deliveryPortraits[value]?assetUrl(deliveryPortraits[value][size]):supabase.storage.from('portraits').getPublicUrl(value).data.publicUrl;
 export async function ownerSession(){const {data:{session}}=await supabase.auth.getSession();if(!session)return false;const {data,error}=await supabase.rpc('is_tracker_owner');return !error&&data===true;}
 const fail=(error:unknown,status=400)=>jsonResponse({error:error instanceof Error?error.message:String(error)},{status});

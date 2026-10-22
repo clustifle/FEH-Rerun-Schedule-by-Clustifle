@@ -4,6 +4,8 @@ Everyone is welcome to help improve **Fire Emblem Heroes Rerun Schedule**. You d
 
 Please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
+Version 3.5 closes the major feature roadmap. Schedule corrections, bug fixes, security, accessibility, compatibility, and documentation contributions remain welcome. Discuss any new major feature roadmap before implementation; see the [maintenance policy](MAINTENANCE.md).
+
 ## Ways to help
 
 - Submit confirmed rerun dates, banner lineups, or revival information.
@@ -16,7 +18,7 @@ Please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 [Open an issue](https://github.com/clustifle/FEH-Rerun-Schedule-by-Clustifle/issues) with the hero or banner name, schedule category, proposed correction, dates and timezone where relevant, and a source such as an in-game announcement or official notice. Screenshots are welcome; remove personal information.
 
-Clearly distinguish confirmed information from predictions. For waitlist suggestions, identify L/M/E, Double Special Heroes, or New Heroes Return.
+Clearly distinguish confirmed information from predictions. For waitlist suggestions, identify L/M/E, Double Special Heroes, New Heroes Return, or Remix.
 
 Anyone can suggest changes. The Head Administrator and authorized Schedule Managers review and apply changes to the live website. Open-source contributions do not require manager access, and manager permissions are not automatically granted to contributors.
 

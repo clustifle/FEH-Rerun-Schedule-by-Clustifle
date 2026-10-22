@@ -1,13 +1,13 @@
 import {displayPool,specialRatePools,isStarterHero} from './hero-pools';
 import {heroOrigin,originGames} from './hero-origins';
 import {blessingIcon} from './blessing-icons';
-import WikiHeroImport from './WikiHeroImport';
+const WikiHeroImport=lazy(()=>import('./WikiHeroImport'));
 import AdminHeroSkills from './AdminHeroSkills';
 import HeroSkills from './HeroSkills';
 import {isBeta} from './beta';
 import './HeroProfilePage.css';
 import {V2HeroInfo,HeroWatchlist} from './V2Workspace';
-import {useEffect,useRef,useState,type ReactNode} from 'react';
+import {useEffect,useRef,useState,lazy,Suspense,type ReactNode} from 'react';
 import {Shield,Pencil,ArrowUpRight,Download} from 'lucide-react';
 import {assetUrl,portraitUrl} from './static-data';
 import {viewUrl,goTo} from './routes';
@@ -58,6 +58,6 @@ export default function HeroProfilePage({hero,heroes=[],loading,error,tags,onBac
     </div>
    </div>
   </article>:<section className="hero-page-empty"><h1 ref={heading} id="hero-detail-name" tabIndex={-1}>{loading?'Loading hero…':'Hero not found'}</h1><p>{error||(!loading?'This hero link is unavailable. Browse All Heroes to find the current profile.':'')}</p><button className="secondary" onClick={()=>goTo(viewUrl('All Heroes'))}>Browse All Heroes</button></section>}
- {hero&&onEdit&&!isBeta&&wikiImport&&<WikiHeroImport hero={hero} onClose={()=>setWikiImport(false)} onSaved={()=>{setSkillsRevision(n=>n+1);onRefresh?.();}}/>}
+ {hero&&onEdit&&!isBeta&&wikiImport&&<Suspense fallback={<p className="quality-loading" role="status">Loading…</p>}><WikiHeroImport hero={hero} onClose={()=>setWikiImport(false)} onSaved={()=>{setSkillsRevision(n=>n+1);onRefresh?.();}}/></Suspense>}
  {hero&&onEdit&&!isBeta&&<dialog className="hero-editor unit-skills-editor" ref={skillsDialog} aria-labelledby="unit-skills-title" onCancel={e=>{e.preventDefault();if(!skillsSaving)setSkillsEditing(false)}}><form onSubmit={e=>e.preventDefault()}><div className="dialog-top"><h2 id="unit-skills-title">Edit Skills · {hero.name}</h2><button className="secondary" type="button" disabled={skillsSaving} onClick={()=>setSkillsEditing(false)} aria-label="Close unit skills editor">×</button></div><div className="editor-body"><div className="editor-fields">{skillsEditing&&<AdminHeroSkills site heroId={hero.id} onBusyChange={setSkillsSaving} onSaved={()=>setSkillsRevision(n=>n+1)}/>}</div></div></form></dialog>}</main>;
 }

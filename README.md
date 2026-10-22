@@ -21,3 +21,7 @@ I made this fan website as my personal resource tool project that records summon
 - **Schedule references:** In-game announcements, official Fire Emblem Heroes notices, and community sources linked in the FAQ.
 
 This is an unofficial fan project, unaffiliated with Nintendo or INTELLIGENT SYSTEMS. Original code and documentation use the [MIT License](LICENSE); third-party materials retain their respective rights and terms. See [Third-party notices](THIRD_PARTY_NOTICES.md).
+
+## Final feature release
+
+Version **3.5** closes the major feature roadmap and includes the [v3.4 quality pass](docs/release-v3.4.md). See [final release notes](docs/release-v3.5.md), [validation](docs/release-v3.5-validation.md), and the [maintenance policy](MAINTENANCE.md). Schedule and roster updates continue.

@@ -1,8 +1,12 @@
 import './beta-safety';
+import QualityControls from './QualityControls';
+import PortraitRecovery from './PortraitRecovery';
+import ToolBoundary from './ToolBoundary';
+import './Quality.css';
 import React from 'react';
 import {createRoot} from 'react-dom/client';
 import AdministrativeManager from './AdministrativeManager';
 import BetaSession from './BetaSession';
 import './AdministrativeManager.css';
 import './AdministrativeTheme.css';
-createRoot(document.getElementById('root')!).render(<React.StrictMode><BetaSession/><AdministrativeManager/></React.StrictMode>);
+createRoot(document.getElementById('root')!).render(<React.StrictMode><QualityControls/><PortraitRecovery/><BetaSession/><ToolBoundary><AdministrativeManager/></ToolBoundary></React.StrictMode>);
