@@ -1,0 +1,17 @@
+import {useEffect,useRef,useState} from 'react';
+import {Link,Check} from 'lucide-react';
+import {scheduleViews,waitingViews} from './schedule-context';
+import './ScheduleContext.css';
+const shortLabels:Record<string,string>={General:'L/M/E',Remix:'Remix','Monthly Revival':'Monthly revival','Weekly Revivals':'Weekly revival','Forging Bonds Revival':'New Heroes revival','Hall of Forms Revival':'Hall of Forms','Refine Predictions':'Refines','Schedule Under Consideration':'Under consideration',Waitlist:'L/M/E','DSH Waitlist':'Double Special Heroes','NHR Waitlist':'New Heroes','Remix Waitlist':'Remix'};
+const groupFor=(view:string)=>waitingViews.some(([key])=>key===view)?'waitlists':'schedules';
+export default function ScheduleContext({active,disabled,onNavigate}:{active:string;disabled:boolean;onNavigate:(view:string)=>void}){
+ const [message,setMessage]=useState(''),[group,setGroup]=useState(()=>groupFor(active)),request=useRef(0),root=useRef<HTMLElement>(null);
+ useEffect(()=>{request.current++;setMessage('');setGroup(groupFor(active));},[active]);
+ useEffect(()=>{const nav=root.current?.querySelector('.schedule-view-tabs'),item=nav?.querySelector<HTMLElement>('[aria-current="page"]');if(!nav||!item)return;const align=()=>{nav.scrollLeft=Math.max(0,item.offsetLeft-nav.clientWidth/2+item.offsetWidth/2);};align();if(typeof ResizeObserver==='undefined')return;const observer=new ResizeObserver(align);observer.observe(nav);return()=>observer.disconnect();},[active,group]);
+ if(![...scheduleViews,...waitingViews].some(([view])=>view===active))return null;
+ async function copy(){const id=++request.current;try{await navigator.clipboard.writeText(location.href);if(id===request.current)setMessage('Page link copied');}catch{if(id===request.current)setMessage('Copy the page address from your browser to share this view.');}}
+ return <section ref={root} className="schedule-context" aria-label="Schedule tools" data-active={active}>
+ <div className="schedule-context-top"><div role="tablist" aria-label="Schedule group" className="schedule-group-tabs">{[['schedules','Schedules'],['waitlists','Waitlists']].map(([value,label],index)=><button key={value} type="button" role="tab" id={'schedule-group-'+value} aria-controls="schedule-destinations" aria-selected={group===value} tabIndex={group===value?0:-1} disabled={disabled} onClick={()=>setGroup(value)} onKeyDown={e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const next=e.key==='Home'?'schedules':e.key==='End'?'waitlists':index===0?'waitlists':'schedules';setGroup(next);document.getElementById('schedule-group-'+next)?.focus();}}>{label}</button>)}</div><button type="button" className="schedule-copy-link" disabled={disabled} onClick={()=>void copy()}>{message==='Page link copied'?<Check size={15}/>:<Link size={15}/>}Copy link</button></div>
+ <div role="tabpanel" id="schedule-destinations" aria-labelledby={'schedule-group-'+group}><nav className="schedule-view-tabs" aria-label={group==='schedules'?'Schedule views':'Waitlist views'}>{(group==='schedules'?scheduleViews:waitingViews).map(([value,label])=><button type="button" key={value} aria-label={label} aria-current={active===value?'page':undefined} disabled={disabled} onClick={()=>onNavigate(value)}>{shortLabels[value]||label}</button>)}</nav></div>
+ <span role="status" className="schedule-copy-status">{message}</span></section>;
+}
