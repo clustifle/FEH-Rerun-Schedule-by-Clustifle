@@ -2,7 +2,7 @@ import {useEffect,useRef,useState} from 'react';
 import {Link,Check} from 'lucide-react';
 import {scheduleViews,waitingViews} from './schedule-context';
 import './ScheduleContext.css';
-const shortLabels:Record<string,string>={General:'L/M/E',Remix:'Remix','Monthly Revival':'Monthly revival','Weekly Revivals':'Weekly revival','Forging Bonds Revival':'New Heroes revival','Hall of Forms Revival':'Hall of Forms','Refine Predictions':'Refines','Schedule Under Consideration':'Under consideration',Waitlist:'L/M/E','DSH Waitlist':'Double Special Heroes','NHR Waitlist':'New Heroes','Remix Waitlist':'Remix'};
+const shortLabels:Record<string,string>={General:'L/M/E',Remix:'Remix','Monthly Revival':'Monthly','Weekly Revivals':'Weekly','Forging Bonds Revival':'New Heroes','Hall of Forms Revival':'Hall of Forms','Refine Predictions':'Refines','Schedule Under Consideration':'Consideration',Waitlist:'L/M/E','DSH Waitlist':'Double Special Heroes','NHR Waitlist':'New Heroes','Remix Waitlist':'Remix'};
 const groupFor=(view:string)=>waitingViews.some(([key])=>key===view)?'waitlists':'schedules';
 export default function ScheduleContext({active,disabled,onNavigate}:{active:string;disabled:boolean;onNavigate:(view:string)=>void}){
  const [message,setMessage]=useState(''),[group,setGroup]=useState(()=>groupFor(active)),request=useRef(0),root=useRef<HTMLElement>(null);
