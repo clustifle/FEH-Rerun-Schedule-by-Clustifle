@@ -24,7 +24,7 @@ export default function AllHeroes<T extends Hero>({heroes,onView,canEdit,onAdd}:
  const onViewRef=useRef(onView);useLayoutEffect(()=>{onViewRef.current=onView;},[onView]);
  const openHero=useCallback((hero:T)=>onViewRef.current(hero),[]);
  const [version,setVersion]=useState('All');
- const [sort,setSort]=useState('name-asc'),[view,setView]=useState(()=>{try{const saved=localStorage.getItem('feh-all-heroes-view');return viewOptions.some(([key])=>key===saved)?saved!:'medium';}catch{return 'medium';}}),[search,setSearch]=useState('');
+ const [sort,setSort]=useState('release-desc'),[view,setView]=useState(()=>{try{const saved=localStorage.getItem('feh-all-heroes-view');return viewOptions.some(([key])=>key===saved)?saved!:'medium';}catch{return 'medium';}}),[search,setSearch]=useState('');
  const [type,setType]=useState('All heroes'),[color,setColor]=useState('All'),[weapon,setWeapon]=useState('All'),[move,setMove]=useState('All'),[pool,setPool]=useState('All'),[showGrails,setShowGrails]=useState(true),[schedule,setSchedule]=useState('All'),[blessing,setBlessing]=useState('All'),[demote,setDemote]=useState('All');
  const results=useRef<HTMLDivElement>(null);
  const [budget]=useState(resourceBudget),[pageIndex,setPageIndex]=useState(0);
