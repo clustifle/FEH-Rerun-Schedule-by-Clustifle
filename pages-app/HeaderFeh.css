@@ -1,4 +1,4 @@
-.tracker .masthead .header-feh{position:absolute;right:82px;top:50%;transform:translateY(-50%);width:48px;height:48px;min-width:48px;padding:0;display:flex;align-items:center;justify-content:center;border:0!important;border-radius:8px;background:transparent!important;box-shadow:none!important;cursor:pointer;z-index:2}.tracker .header-feh img{width:48px;height:48px;max-width:48px;max-height:48px;object-fit:contain}.header-feh:focus-visible{outline:2px solid var(--realm-accent);outline-offset:2px}.header-feh.owl-happy img{animation:header-feh-hop .45s ease-out}.header-feh.owl-sleepy::after{content:'z';position:absolute;right:-3px;top:-2px;color:var(--realm-accent);font:14px FEHeroes,Georgia,serif;animation:header-feh-doze 2s infinite}
+.tracker .masthead .header-feh{position:absolute;right:82px;top:50%;transform:translateY(-50%);width:48px;height:48px;min-width:48px;padding:0;display:flex;align-items:center;justify-content:center;border:0!important;border-radius:8px;background:transparent!important;box-shadow:none!important;cursor:pointer;z-index:2}.tracker .header-feh img{width:48px;height:48px;max-width:48px;max-height:48px;object-fit:contain}.header-feh:focus-visible{outline:2px solid var(--realm-accent);outline-offset:2px}.header-feh.owl-happy img{animation:header-feh-hop .45s ease-out}
 @keyframes header-feh-hop{0%{transform:none}45%{transform:translateY(-10px) rotate(-5deg)}100%{transform:none}}@keyframes header-feh-doze{0%,100%{opacity:.4;transform:none}50%{opacity:1;transform:translateY(-5px)}}
 html[data-motion=reduced] .header-feh *{animation:none!important;transition:none!important}
 @media(max-width:540px){.tracker .masthead .header-feh{right:72px}.tracker .masthead .feh-wordmark{max-width:calc(100% - 64px)}}
@@ -7,8 +7,22 @@ html[data-motion=reduced] .header-feh *{animation:none!important;transition:none
 .header-feh .header-feh-art img.feh-expression.is-current{opacity:1}
 .header-feh.owl-awake .header-feh-art{animation:header-feh-breathe 4.8s ease-in-out infinite}
 .header-feh.owl-happy .header-feh-art{animation:header-feh-greet .72s cubic-bezier(.22,.61,.36,1) both}
-.header-feh.owl-sleepy .header-feh-art{animation:header-feh-breathe 3.6s ease-in-out infinite}
+.header-feh.owl-sleepy .header-feh-art{animation:header-feh-sleep-breathe 4.2s ease-in-out infinite}
 @keyframes header-feh-breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-1px) scale(1.025)}}
 @keyframes header-feh-greet{0%{transform:translateY(0) rotate(0)}18%{transform:translateY(1px) scale(1.03,.96)}44%{transform:translateY(-6px) rotate(-5deg) scale(.98,1.03)}66%{transform:translateY(0) rotate(3deg)}84%{transform:translateY(-1px) rotate(-1deg)}100%{transform:translateY(0) rotate(0)}}
 @media(prefers-reduced-motion:reduce){.header-feh *,.header-feh::after{animation:none!important;transition:none!important}}
 html[data-motion=reduced] .header-feh::after{animation:none!important}
+
+.header-feh-pose{display:block;width:100%;height:100%;transform:translateY(0) rotate(0) scale(1);transform-origin:50% 85%;transition:transform .9s cubic-bezier(.22,1,.36,1)}
+.header-feh.owl-sleepy .header-feh-pose{transform:translateY(2px) rotate(-4deg) scale(.97);transition-duration:1.1s}
+.header-feh.owl-sleepy .header-feh-art .feh-expression{transition:opacity .65s cubic-bezier(.22,1,.36,1)}
+.header-feh .feh-sleep-indicators{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .55s ease}
+.header-feh.owl-sleepy .feh-sleep-indicators{opacity:1;transition-delay:.3s}
+.feh-sleep-indicators>span{position:absolute;right:0;top:3px;color:var(--realm-accent);font:12px/1 FEHeroes,Georgia,serif;opacity:0;animation:header-feh-sleep-float 3.6s linear infinite;animation-play-state:paused}
+.header-feh.owl-sleepy .feh-sleep-indicators>span{animation-play-state:running}
+.feh-sleep-indicators>span:nth-child(2){animation-delay:1.2s;font-size:10px}
+.feh-sleep-indicators>span:nth-child(3){animation-delay:2.4s;font-size:8px}
+@keyframes header-feh-sleep-breathe{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(-.7px) scale(1.025,.985)}}
+@keyframes header-feh-sleep-float{0%{opacity:0;transform:translate(0,3px) scale(.7)}18%{opacity:.8}72%{opacity:.55}100%{opacity:0;transform:translate(7px,-15px) scale(1.08)}}
+@media(prefers-reduced-motion:reduce){.header-feh .header-feh-pose{transform:none!important}.header-feh .feh-sleep-indicators>span{animation:none!important}.header-feh.owl-sleepy .feh-sleep-indicators>span:first-child{opacity:.65;transform:none}}
+html[data-motion=reduced] .header-feh .header-feh-pose{transform:none!important}html[data-motion=reduced] .header-feh .feh-sleep-indicators>span{animation:none!important}html[data-motion=reduced] .header-feh.owl-sleepy .feh-sleep-indicators>span:first-child{opacity:.65;transform:none}
