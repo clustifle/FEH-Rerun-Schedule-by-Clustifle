@@ -26,3 +26,6 @@ html[data-motion=reduced] .header-feh::after{animation:none!important}
 @keyframes header-feh-sleep-float{0%{opacity:0;transform:translate(0,3px) scale(.7)}18%{opacity:.8}72%{opacity:.55}100%{opacity:0;transform:translate(7px,-15px) scale(1.08)}}
 @media(prefers-reduced-motion:reduce){.header-feh .header-feh-pose{transform:none!important}.header-feh .feh-sleep-indicators>span{animation:none!important}.header-feh.owl-sleepy .feh-sleep-indicators>span:first-child{opacity:.65;transform:none}}
 html[data-motion=reduced] .header-feh .header-feh-pose{transform:none!important}html[data-motion=reduced] .header-feh .feh-sleep-indicators>span{animation:none!important}html[data-motion=reduced] .header-feh.owl-sleepy .feh-sleep-indicators>span:first-child{opacity:.65;transform:none}
+.header-feh.owl-drowsy .header-feh-pose{transform:translateY(1px) rotate(-2deg) scale(.99);transition-duration:.65s}
+.header-feh.owl-happy.owl-drowsy .header-feh-art{animation:header-feh-drowsy-nod .65s cubic-bezier(.4,0,.2,1) both}
+@keyframes header-feh-drowsy-nod{0%{transform:translateY(0) rotate(0)}25%{transform:translateY(-1px) rotate(1deg)}70%{transform:translateY(2px) rotate(-3deg) scale(1.01,.98)}100%{transform:translateY(0) rotate(0)}}
