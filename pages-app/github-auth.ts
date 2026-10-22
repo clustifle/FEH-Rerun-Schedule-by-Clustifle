@@ -16,7 +16,7 @@ export function githubAuthError(error:unknown){
  return 'Could not connect to GitHub. Please try again.';
 }
 export async function startGitHubAuth(userId?:string,community?:{publicReads:boolean}){
- const pending:GitHubPending={intent:community?'community':userId?'link':'signin',path:community?import.meta.env.BASE_URL+'community/':userId?settingsUrl('Account'):safeAuthReturn(location.pathname+location.search),...(userId?{userId}:{}),...(community?{publicReads:community.publicReads}:{})};
+ const pending:GitHubPending={intent:community?'community':userId?'link':'signin',path:community?safeAuthReturn(location.pathname+location.search):userId?settingsUrl('Account'):safeAuthReturn(location.pathname+location.search),...(userId?{userId}:{}),...(community?{publicReads:community.publicReads}:{})};
  try{
   // Check availability before leaving the website for a disabled provider.
   const timeout=requestTimeout(12000);
