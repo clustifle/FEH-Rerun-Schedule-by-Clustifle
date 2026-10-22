@@ -16,9 +16,11 @@ export default function HeaderNavigation({active,disabled,onNavigate,profileSlug
  },[]);
  useEffect(()=>{
   const header=root.current?.closest<HTMLElement>('.masthead');if(!header)return;
-  let frame=0,innerScroll=0;
-  const update=(e?:Event)=>{if(e?.target instanceof HTMLElement&&e.target.matches('.all-heroes-results'))innerScroll=e.target.scrollTop;if(frame)return;frame=requestAnimationFrame(()=>{frame=0;const distance=Math.max(window.scrollY,innerScroll),compact=header.classList.contains('is-compact');if(!compact&&distance>96)header.classList.add('is-compact');else if(compact&&distance<40)header.classList.remove('is-compact');});};
-  const route=()=>{innerScroll=0;update();};document.addEventListener('scroll',update,{capture:true,passive:true});window.addEventListener('route-change',route);update();
+  header.classList.remove('is-compact');
+  if(active==='All Heroes')return;
+  let frame=0;const scrollers=new Map<HTMLElement,number>();
+  const update=(e?:Event)=>{if(e?.target instanceof HTMLElement&&!e.target.closest('dialog,.masthead')&&e.target.closest('.tracker'))scrollers.set(e.target,e.target.scrollTop);if(frame)return;frame=requestAnimationFrame(()=>{frame=0;for(const element of scrollers.keys())if(!element.isConnected)scrollers.delete(element);const distance=Math.max(window.scrollY,...scrollers.values()),compact=header.classList.contains('is-compact');if(!compact&&distance>96)header.classList.add('is-compact');else if(compact&&distance<32)header.classList.remove('is-compact');});};
+  const route=()=>{scrollers.clear();header.classList.remove('is-compact');update();};document.addEventListener('scroll',update,{capture:true,passive:true});window.addEventListener('route-change',route);update();
   return()=>{cancelAnimationFrame(frame);document.removeEventListener('scroll',update,true);window.removeEventListener('route-change',route);header.classList.remove('is-compact');};
  },[active]);
  useEffect(close,[active]);
