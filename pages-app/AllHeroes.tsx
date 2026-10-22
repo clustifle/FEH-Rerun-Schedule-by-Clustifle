@@ -20,7 +20,7 @@ const scheduleName=(s:string)=>({'Weekly Revival':'Weekly Revival','Schedule Und
 const monthFormatter=new Intl.DateTimeFormat('en',{month:'short',year:'numeric',timeZone:'UTC'});
 const monthName=(month?:string|null)=>month&&/^\d{4}-\d{2}/.test(month)?monthFormatter.format(new Date(month.slice(0,7)+'-01T00:00:00Z')):'Not recorded';
 const sortOptions=[['game','Game order · Catalog'],['name-asc','Name · A–Z'],['name-desc','Name · Z–A'],['title','Hero title'],['type','Hero type'],['color','Weapon color'],['weapon','Weapon type'],['movement','Movement type'],['month-asc','Rerun · earliest'],['month-desc','Rerun · latest'],['release-desc','Release · newest'],['release-asc','Release · oldest'],['version-desc','Debut version · newest'],['version-asc','Debut version · oldest'],['updated','Recently updated']];
-const viewOptions=[['small','Small icons'],['medium','Medium icons'],['large','Large icons'],['list','List'],['details','Details'],['tiles','Tiles'],['content','Content']];
+const viewOptions=[['small','Small icons'],['medium','Medium icons'],['large','Large icons'],['extra-large','Extra large icons'],['list','List'],['details','Details'],['tiles','Tiles'],['content','Content']];
 export default function AllHeroes<T extends Hero>({heroes,onView,canEdit,onAdd}:{heroes:T[];onView:(hero:T)=>void;canEdit:boolean;onAdd:()=>void}){
  const onViewRef=useRef(onView);useLayoutEffect(()=>{onViewRef.current=onView;},[onView]);
  const openHero=useCallback((hero:T)=>onViewRef.current(hero),[]);
