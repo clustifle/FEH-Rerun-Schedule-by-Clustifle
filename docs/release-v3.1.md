@@ -1,6 +1,7 @@
 # v3.1 — Schedule navigation and date clarity
 
-- Shared Schedule view selector across rerun schedules, revivals, refine predictions and waiting lists.
+- Single Schedule & Waitlist header dropdown, with grouped destinations.
+- Shared schedule switcher with current-view identity, grouped panels, active-item checkmarks, outside-click and Escape dismissal across reruns, revivals, refines and waiting lists.
 - Copy page link shares the current URL, including recorded month and view parameters.
 - Contextual guidance distinguishes month windows, exact dates, predictions and undated waiting lists.
 - Expandable date guide explains confirmation without assigning new statuses to existing records.
