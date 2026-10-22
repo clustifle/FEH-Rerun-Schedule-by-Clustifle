@@ -1,7 +1,8 @@
 # v3.1 — Schedule navigation and date clarity
 
 - Single Schedule & Waitlist header dropdown, with grouped destinations.
-- Shared schedule switcher with current-view identity, grouped panels, active-item checkmarks, outside-click and Escape dismissal across reruns, revivals, refines and waiting lists.
+- Compact Schedules / Waitlists tabs with short destination labels and an active-view highlight. Destination rows scroll horizontally on small screens. Date guidance is collapsed under About these dates.
+- All schedule pages share the same centered frame and title-before-switcher order, including New Heroes Revival, Hall of Forms and Refines. Nested content uses the frame's padding instead of adding a second inset.
 - Copy page link shares the current URL, including recorded month and view parameters.
 - Contextual guidance distinguishes month windows, exact dates, predictions and undated waiting lists.
 - Expandable date guide explains confirmation without assigning new statuses to existing records.
