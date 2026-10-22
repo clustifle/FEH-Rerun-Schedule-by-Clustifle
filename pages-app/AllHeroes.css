@@ -52,6 +52,7 @@ html[data-theme][data-theme][data-theme] .tracker .all-heroes.directory-workspac
 .directory-workspace :is(.small-view,.medium-view,.large-view) .all-heroes-portrait>.directory-origin-icons{position:absolute;left:3%;bottom:24%;width:max-content;min-height:0;display:flex!important;flex-direction:row;justify-content:flex-start;align-items:center;gap:1px;z-index:4;pointer-events:none}
 .directory-workspace :is(.small-view,.medium-view,.large-view) .all-heroes-portrait>.directory-origin-icons img{display:block;width:20cqw;height:20cqw;margin:0;object-fit:contain;filter:drop-shadow(0 1px 1px #000c)}
 .directory-workspace :is(.small-view,.medium-view,.large-view) .all-heroes-portrait:not(:has(.type-mark))>.directory-origin-icons{bottom:3%}
+.directory-workspace :is(.small-view,.medium-view,.large-view) .all-heroes-portrait:has(.paired-type-mark)>.directory-origin-icons{flex-direction:column;align-items:flex-start}
 .directory-workspace :is(.small-view,.medium-view,.large-view) .all-heroes-portrait{transition:transform .16s ease,filter .16s ease}
 .directory-workspace :is(.small-view,.medium-view,.large-view) .all-heroes-card:is(:hover,:focus-visible) .all-heroes-portrait{transform:translateY(-2px);filter:drop-shadow(0 3px 5px #0005)}
 @media(prefers-reduced-motion:reduce){.directory-workspace :is(.small-view,.medium-view,.large-view) .all-heroes-portrait{transition:none;transform:none!important}}
