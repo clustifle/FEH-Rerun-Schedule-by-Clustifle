@@ -1,1 +1,11 @@
 .portrait-marks img.portrait-mark.type-mark,html[data-theme] .portrait-marks img.portrait-mark.type-mark{width:20%;height:20%;min-width:0;min-height:0;max-width:20%;max-height:20%;bottom:3%;left:3%;object-fit:contain}
+.portrait-marks{container-type:inline-size}
+html .portrait-marks>.directory-origin-icons{position:absolute;left:3%;bottom:3%;width:max-content;min-height:0;display:flex!important;flex-direction:row;justify-content:flex-start;align-items:center;gap:1px;z-index:4;pointer-events:none;opacity:1}
+html .portrait-marks:has(.type-mark)>.directory-origin-icons{bottom:24%}
+html .portrait-marks[data-paired=true]>.directory-origin-icons{flex-direction:column;align-items:flex-start}
+.portrait-marks>.directory-origin-icons img,html[data-theme] .portrait-marks>.directory-origin-icons img{position:static;display:block;flex:none;width:20cqw;height:20cqw;min-width:0;min-height:0;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;object-fit:contain;filter:drop-shadow(0 1px 1px #000c)}
+.shared-hero-portrait{position:relative;display:block;width:56px;height:56px;aspect-ratio:1;flex:none;overflow:visible}
+.shared-hero-portrait>img{position:absolute;inset:0;display:block;width:100%!important;height:100%!important;object-fit:cover;clip-path:inset(6% round 9%)}
+.v2-watch-hero .shared-hero-portrait{width:76px;height:76px}
+:is(.v2-watch-view-list,.v2-watch-view-icons) .shared-hero-portrait{width:56px;height:56px}
+.bulk-roster-list .shared-hero-portrait{width:40px;height:40px}
