@@ -88,3 +88,13 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][dat
 
 .refine-profile-link{display:flex;gap:10px;align-items:center;font-size:14px;border-top:1px solid var(--realm-line);padding-top:12px;margin-top:12px;flex-wrap:wrap}.refine-profile-link a{color:var(--realm-accent)}
 .hero-detail-facts .hero-profile-origins{display:flex;flex-wrap:wrap;gap:8px 14px}.hero-profile-origins>span{display:inline-flex;align-items:center;gap:7px}.hero-profile-origins img{object-fit:contain;flex:none}
+.hero-overview-watchlist{padding-block:12px;border-top:1px solid var(--realm-line)}
+.hero-overview-watchlist .v2-actions{margin:0;gap:8px}
+.hero-variant-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:12px;padding-block:4px}
+.hero-variant-link{display:grid;place-items:center;padding:6px;border-radius:8px;min-width:0;transition:background .15s,transform .15s;text-decoration:none}
+.hero-variant-link:hover{background:var(--realm-field);transform:translateY(-2px)}
+.hero-variant-link:focus-visible{outline:2px solid var(--realm-accent);outline-offset:2px}
+.hero-variant-portrait{position:relative;display:grid;place-items:center;width:64px;height:64px;aspect-ratio:1;flex:none}
+.hero-variant-portrait>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(6% round 9%)}
+@media(max-width:650px){.hero-variant-grid{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px}.hero-variant-portrait{width:56px;height:56px}.hero-overview-watchlist .secondary{flex:1}}
+@media(prefers-reduced-motion:reduce){.hero-variant-link{transition:none;transform:none}}
