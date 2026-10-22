@@ -2,7 +2,7 @@ import {chromium} from 'file:///C:/Users/Admin/.cache/codex-runtimes/codex-prima
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 const source=JSON.parse(fs.readFileSync('scripts/origin-site-heroes.json'));
-const heroes=source.map(h=>({...h,category:'General',color:'Red',schedule:'None',portrait:null,release_date:'2026-01-01',debut_version:'10.0'}));
+const heroes=source.map(h=>({...h,category:h.title==='Cross-Time Duo'?'Harmonized':'General',color:'Red',schedule:'None',portrait:null,release_date:'2026-01-01',debut_version:'10.0'}));
 const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 try{
 const page=await browser.newPage({viewport:{width:1280,height:900}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -15,6 +15,7 @@ assert.match(await directory.locator('.all-heroes-card').first().getAttribute('a
 const search=directory.getByRole('searchbox',{name:'Search all heroes'});
 await search.fill('Cross-Time Duo');await directory.getByRole('status').filter({hasText:'1 of 1427 heroes'}).waitFor();
 assert.equal(await directory.locator('.directory-origin-icons img').count(),2);
+for(const width of [1280,390]){await page.setViewportSize({width,height:900});for(const view of ['small','medium','large','list','details','tiles','content']){await directory.getByRole('combobox',{name:'Hero directory view'}).selectOption(view);const bounds=await directory.locator('.all-heroes-portrait').evaluate(e=>{const type=e.querySelector('.type-mark').getBoundingClientRect(),portrait=e.getBoundingClientRect(),origin=e.closest('button').querySelector('.directory-origin-icons').getBoundingClientRect();return {overlap:Math.min(type.right,origin.right)>Math.max(type.left,origin.left)&&Math.min(type.bottom,origin.bottom)>Math.max(type.top,origin.top),ratio:type.width/portrait.width}});assert.equal(bounds.overlap,false,view+' origin does not cover type badge');assert.ok(bounds.ratio<=.21,view+' compact paired badge');}}await directory.getByRole('combobox',{name:'Hero directory view'}).selectOption('medium');await page.setViewportSize({width:1280,height:900});
 await directory.locator('.filter-launch').click();const dialog=directory.locator('dialog[open]');
 await dialog.getByRole('combobox',{name:'Game origin'}).selectOption('8');await dialog.getByRole('button',{name:/Show heroes/}).click();await dialog.waitFor({state:'hidden'});
 assert.equal(await directory.locator('.all-heroes-card').count(),1);
