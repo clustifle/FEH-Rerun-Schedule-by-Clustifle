@@ -7,4 +7,4 @@ export function scheduleGuidance(view:string){
  if(view==='Monthly Revival')return 'Listed months may not have exact dates yet. Times are shown in your local timezone.';
  return 'Months show rerun windows. Check in-game notices for exact dates.';
 }
-export const uncertainExportNote='Waitlists and entries under consideration: dates not confirmed.';
+export const uncertainExportNote='Rerun dates unconfirmed.';

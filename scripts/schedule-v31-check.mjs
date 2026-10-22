@@ -23,10 +23,10 @@ try{
  await choose('Schedule Under Consideration');
  await p.getByRole('button',{name:'Share or export schedule',exact:true}).click();const dialog=p.getByRole('dialog',{name:'Export schedule image'});
  try{await dialog.getByRole('button',{name:'Download PNG',exact:true}).waitFor();}catch(e){console.log(await dialog.innerText());throw e;}
- assert.ok((await p.evaluate(()=>window.exportText)).includes('Waitlists and entries under consideration: dates not confirmed.'));
+ assert.ok((await p.evaluate(()=>window.exportText)).includes('Rerun dates unconfirmed.'));
  await dialog.getByText('Customize image',{exact:true}).click();await p.evaluate(()=>{window.exportText=[];});await dialog.getByLabel('Show website footer').uncheck();
- await p.waitForFunction(()=>window.exportText.includes('Waitlists and entries under consideration: dates not confirmed.'));
- assert.ok((await p.evaluate(()=>window.exportText)).includes('Waitlists and entries under consideration: dates not confirmed.'));
+ await p.waitForFunction(()=>window.exportText.includes('Rerun dates unconfirmed.'));
+ assert.ok((await p.evaluate(()=>window.exportText)).includes('Rerun dates unconfirmed.'));
  await dialog.getByRole('button',{name:'Close schedule export'}).click();
  for(const width of [320,390,768,1280]){await p.setViewportSize({width,height:960});await p.evaluate(()=>scrollTo(0,0));assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Switcher overflow '+width);await nav.locator('summary').click();assert.ok(await nav.locator('.combined-navigation').evaluate(e=>{const r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth+1;}),'Combined header menu overflow '+width);await p.keyboard.press('Escape');}
  await p.evaluate(()=>scrollTo(0,0));await p.screenshot({path:'v31-schedule-desktop.png'});await p.setViewportSize({width:390,height:844});await p.evaluate(()=>scrollTo(0,0));await p.screenshot({path:'v31-schedule-mobile.png'});
