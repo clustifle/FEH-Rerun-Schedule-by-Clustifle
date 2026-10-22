@@ -1,4 +1,5 @@
 import {displayPool,specialRatePools,isStarterHero} from './hero-pools';
+import {heroOrigin,originGames} from './hero-origins';
 import {blessingIcon} from './blessing-icons';
 import WikiHeroImport from './WikiHeroImport';
 import AdminHeroSkills from './AdminHeroSkills';
@@ -40,7 +41,7 @@ export default function HeroProfilePage({hero,heroes=[],loading,error,tags,onBac
         <strong>{isWaitlist(hero.schedule)?'Awaiting a rerun':month||'Not scheduled yet'}</strong>
         <a href={viewUrl(hero.schedule,hero.month||'')} onClick={e=>{if(!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&!e.altKey){e.preventDefault();goTo(viewUrl(hero.schedule,hero.month||''));}}}>View {isWaitlist(hero.schedule)&&hero.schedule!=='Schedule Under Consideration'?'waitlist':'schedule'}<ArrowUpRight size={14} aria-hidden="true"/></a>
        </div>}
-       <dl className="hero-detail-facts"><div><dt>Hero type</dt><dd>{hero.category==='Chosen Hero'?'Chosen':hero.category}</dd></div>
+       <dl className="hero-detail-facts"><div><dt>Game origin</dt><dd className="hero-profile-origins">{heroOrigin(hero)?.origins.length?[...new Set(heroOrigin(hero)!.origins)].map(id=>{const game=originGames[id];return <span key={id}><img src={assetUrl('images/game-origins/'+game.file)} alt="" width={28} height={28}/>{game.name}</span>}):'Not recorded'}</dd></div><div><dt>Hero type</dt><dd>{hero.category==='Chosen Hero'?'Chosen':hero.category}</dd></div>
         <div><dt>Weapon type</dt><dd>{hero.weapon_type?<><img src={assetUrl('weapon-types/'+hero.color.toLowerCase()+'-'+hero.weapon_type.toLowerCase()+'.webp')} alt="" width={24} height={24}/>{hero.color} {hero.weapon_type}</>:<><img src={assetUrl('weapon-orbs/'+hero.color.toLowerCase()+'.webp')} alt="" width={24} height={24}/>{hero.color} · Not assigned</>}</dd></div>
         <div><dt>Movement type</dt><dd>{hero.move_type?<><img src={assetUrl('move-types/'+hero.move_type.toLowerCase()+'.webp')} alt="" width={24} height={24}/>{hero.move_type}</>:'Not assigned'}</dd></div>
         <div><dt>Summon availability</dt><dd>{isStarterHero(hero)?displayPool(hero):hero.heroic_grail?'Heroic Grails':specialRatePools.includes(displayPool(hero))?displayPool(hero):hero.demote?'4–5★ demote':displayPool(hero)}</dd></div>
