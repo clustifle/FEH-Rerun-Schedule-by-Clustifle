@@ -17,13 +17,14 @@ export default function GlobalHeroHover({heroes}:{heroes:Hero[]}){
   const popup=(value:EventTarget|null)=>value instanceof Element&&!!value.closest('#hero-hover-preview');
   const target=(value:EventTarget|null)=>value instanceof Element?value.closest<HTMLElement>('[data-hero-preview-id]'):null;
   const show=(e:Event)=>{
+   if(e.target instanceof Element&&e.target.closest('.hero-profile-page,.revival-hero-picker')){hide();return;}
    if(e instanceof PointerEvent&&e.pointerType==='touch'){lastTouch=Date.now();hide();return;}
    if(e.type==='focusin'&&Date.now()-lastTouch<1000)return;
    if(popup(e.target)){cancelClose();return;}
    const element=target(e.target);if(!element)return;cancelClose();if(element===anchor)return;
    const hero=map.get(element.dataset.heroPreviewId||'');if(!hero)return;
    clearTimeout(opening);anchor=element;setPreview(null);
-   opening=setTimeout(()=>{opening=undefined;if(!element.isConnected){hide();return;}const rect=element.getBoundingClientRect(),width=Math.min(280,innerWidth-24);setPreview({hero,container:element.closest<HTMLElement>('dialog[open]')||document.body,x:Math.max(12,Math.min(rect.right+14+width<=innerWidth-12?rect.right+14:rect.left-width-14,innerWidth-width-12)),y:Math.max(12,Math.min(rect.top,innerHeight-372))});},180);
+   opening=setTimeout(()=>{opening=undefined;if(!element.isConnected||element.closest('.hero-profile-page,.revival-hero-picker')){hide();return;}const rect=element.getBoundingClientRect(),width=Math.min(280,innerWidth-24);setPreview({hero,container:element.closest<HTMLElement>('dialog[open]')||document.body,x:Math.max(12,Math.min(rect.right+14+width<=innerWidth-12?rect.right+14:rect.left-width-14,innerWidth-width-12)),y:Math.max(12,Math.min(rect.top,innerHeight-372))});},180);
   };
   const leave=(e:Event)=>{
    // Ignore unrelated document events; they must never cancel a pending dismissal.

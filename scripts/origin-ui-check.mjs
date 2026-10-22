@@ -30,5 +30,6 @@ await search.fill('Harmonic');await page.screenshot({path:'origin-directory-desk
 await page.setViewportSize({width:390,height:844});assert.ok(await directory.evaluate(e=>e.scrollWidth<=e.clientWidth+1));await page.screenshot({path:'origin-directory-mobile.png'});
 await search.fill('Cross-Time Duo');await directory.getByRole('status').filter({hasText:'1 of 1427 heroes'}).waitFor();await directory.locator('.all-heroes-card').click();await page.locator('.hero-profile-overview').waitFor();
 const origins=page.locator('.hero-profile-overview .hero-profile-origins');assert.equal(await origins.locator('img').count(),2);assert.match(await origins.innerText(),/Path of Radiance/);assert.match(await origins.innerText(),/Radiant Dawn/);assert.ok(await page.locator('.hero-profile-page').evaluate(e=>e.scrollWidth<=e.clientWidth+1));await page.screenshot({path:'origin-profile-mobile.png'});
+assert.equal(await page.locator('.hero-detail-portrait .portrait-mark,.hero-detail-portrait .directory-origin-icons').count(),0,'profile portrait has no badge overlays');assert.equal(await page.locator('.hero-detail-portrait .hero-portrait-frame').count(),1,'profile frame retained');
 assert.deepEqual(errors,[]);console.log('Passed: default release sort, catalog sort, 1427 mappings, two-origin filters, shared-game deduplication, and mobile layout.');
 }finally{await browser.close();}
