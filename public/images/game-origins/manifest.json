@@ -1,0 +1,141 @@
+{
+  "note": "FEH entry-filter icons. Order is origin-group order, not original game release chronology. Nintendo / Intelligent Systems game artwork; source mirror credited below. Release (newest) remains the directory default.",
+  "icons": [
+    {
+      "order": 1,
+      "assetIndex": 0,
+      "name": "Heroes",
+      "file": "origin-00.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/d/d5/Icon_MiniUnit_Head_0.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 2,
+      "assetIndex": 1,
+      "name": "Shadow Dragon / (New) Mystery",
+      "file": "origin-01.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/1/12/Icon_MiniUnit_Head_1.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 3,
+      "assetIndex": 2,
+      "name": "Echoes: Shadows of Valentia",
+      "file": "origin-02.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/a/a2/Icon_MiniUnit_Head_2.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 4,
+      "assetIndex": 3,
+      "name": "Genealogy of the Holy War",
+      "file": "origin-03.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/6/6e/Icon_MiniUnit_Head_3.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 5,
+      "assetIndex": 4,
+      "name": "Thracia 776",
+      "file": "origin-04.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/1/12/Icon_MiniUnit_Head_4.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 6,
+      "assetIndex": 5,
+      "name": "The Binding Blade",
+      "file": "origin-05.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/c/c8/Icon_MiniUnit_Head_5.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 7,
+      "assetIndex": 6,
+      "name": "The Blazing Blade",
+      "file": "origin-06.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/d/d8/Icon_MiniUnit_Head_6.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 8,
+      "assetIndex": 7,
+      "name": "The Sacred Stones",
+      "file": "origin-07.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/5/57/Icon_MiniUnit_Head_7.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 9,
+      "assetIndex": 8,
+      "name": "Path of Radiance",
+      "file": "origin-08.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/8/80/Icon_MiniUnit_Head_8.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 10,
+      "assetIndex": 9,
+      "name": "Radiant Dawn",
+      "file": "origin-09.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/7/78/Icon_MiniUnit_Head_9.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 11,
+      "assetIndex": 10,
+      "name": "Awakening",
+      "file": "origin-10.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/f/ff/Icon_MiniUnit_Head_10.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 12,
+      "assetIndex": 11,
+      "name": "Fates",
+      "file": "origin-11.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/e/e9/Icon_MiniUnit_Head_11.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 13,
+      "assetIndex": 12,
+      "name": "Three Houses / Three Hopes",
+      "file": "origin-12.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/a/a9/Icon_MiniUnit_Head_12.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 14,
+      "assetIndex": 13,
+      "name": "Tokyo Mirage Sessions ♯FE Encore",
+      "file": "origin-13.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/0/0c/Icon_MiniUnit_Head_13.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 15,
+      "assetIndex": 14,
+      "name": "Engage",
+      "file": "origin-14.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/3/33/Icon_MiniUnit_Head_14.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 16,
+      "assetIndex": 15,
+      "name": "Shadows",
+      "file": "origin-15.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/0/00/Icon_MiniUnit_Head_15.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    },
+    {
+      "order": 17,
+      "assetIndex": 16,
+      "name": "Fortune’s Weave",
+      "file": "origin-16.png",
+      "source": "https://static.wikia.nocookie.net/feheroes_gamepedia_en/images/b/bd/Icon_MiniUnit_Head_16.png/revision/latest",
+      "verifiedFrom": "https://feheroes.fandom.com/wiki/List_of_Heroes"
+    }
+  ]
+}

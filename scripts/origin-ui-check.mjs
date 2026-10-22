@@ -1,0 +1,32 @@
+import {chromium} from 'file:///C:/Users/Admin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const source=JSON.parse(fs.readFileSync('scripts/origin-site-heroes.json'));
+const heroes=source.map(h=>({...h,category:'General',color:'Red',schedule:'None',portrait:null,release_date:'2026-01-01',debut_version:'10.0'}));
+const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+try{
+const page=await browser.newPage({viewport:{width:1280,height:900}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+await page.route('**/rest/v1/**',r=>{const u=new URL(r.request().url());if(u.pathname.endsWith('/heroes')){const start=Number(u.searchParams.get('offset')||0),limit=Number(u.searchParams.get('limit')||1000);return r.fulfill({json:heroes.slice(start,start+limit)});}return r.fulfill({json:[]});});
+await page.goto('http://127.0.0.1:5197/FEH-Rerun-Schedule-by-Clustifle/all-heroes');
+const directory=page.getByRole('region',{name:'All Heroes directory'});const sort=directory.getByRole('combobox',{name:'Sort heroes'});await sort.waitFor();
+assert.equal(await sort.inputValue(),'release-desc');
+await sort.selectOption('game');await directory.locator('.all-heroes-card').first().waitFor();
+assert.match(await directory.locator('.all-heroes-card').first().getAttribute('aria-label'),/Alfonse · Prince of Askr/);
+const search=directory.getByRole('searchbox',{name:'Search all heroes'});
+await search.fill('Cross-Time Duo');await directory.getByRole('status').filter({hasText:'1 of 1427 heroes'}).waitFor();
+assert.equal(await directory.locator('.directory-origin-icons img').count(),2);
+await directory.locator('.filter-launch').click();const dialog=directory.locator('dialog[open]');
+await dialog.getByRole('combobox',{name:'Game origin'}).selectOption('8');await dialog.getByRole('button',{name:/Show heroes/}).click();await dialog.waitFor({state:'hidden'});
+assert.equal(await directory.locator('.all-heroes-card').count(),1);
+await directory.locator('.filter-launch').click();await dialog.getByRole('combobox',{name:'Game origin'}).selectOption('9');await dialog.getByRole('button',{name:/Show heroes/}).click();await dialog.waitFor({state:'hidden'});
+assert.equal(await directory.locator('.all-heroes-card').count(),1);
+await search.fill('Askran Duo');await directory.getByRole('status').filter({hasText:'0 of 1427 heroes'}).waitFor();
+await directory.getByRole('button',{name:'Clear all',exact:true}).click();await search.fill('Askran Duo');await directory.getByRole('status').filter({hasText:'1 of 1427 heroes'}).waitFor();
+assert.equal(await directory.locator('.directory-origin-icons img').count(),1);
+await search.fill('zzzz nonexistent');await directory.getByRole('status').filter({hasText:'0 of 1427 heroes'}).waitFor();
+await search.fill('Harmonic');await page.screenshot({path:'origin-directory-desktop.png'});
+await page.setViewportSize({width:390,height:844});assert.ok(await directory.evaluate(e=>e.scrollWidth<=e.clientWidth+1));await page.screenshot({path:'origin-directory-mobile.png'});
+await search.fill('Cross-Time Duo');await directory.getByRole('status').filter({hasText:'1 of 1427 heroes'}).waitFor();await directory.locator('.all-heroes-card').click();await page.locator('.hero-profile-overview').waitFor();
+const origins=page.locator('.hero-profile-overview .hero-profile-origins');assert.equal(await origins.locator('img').count(),2);assert.match(await origins.innerText(),/Path of Radiance/);assert.match(await origins.innerText(),/Radiant Dawn/);assert.ok(await page.locator('.hero-profile-page').evaluate(e=>e.scrollWidth<=e.clientWidth+1));await page.screenshot({path:'origin-profile-mobile.png'});
+assert.deepEqual(errors,[]);console.log('Passed: default release sort, catalog sort, 1427 mappings, two-origin filters, shared-game deduplication, and mobile layout.');
+}finally{await browser.close();}

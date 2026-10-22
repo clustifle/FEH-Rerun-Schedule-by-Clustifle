@@ -1,0 +1,10060 @@
+{
+  "source": "https://feheroes.fandom.com/wiki/Catalog_of_Heroes",
+  "originsSource": "https://feheroes.fandom.com/wiki/List_of_Heroes",
+  "checked": "2026-10-22",
+  "entries": [
+    {
+      "hero": "Alfonse: Prince of Askr",
+      "position": 0,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Alfonse: Spring Prince",
+      "position": 1,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Alfonse: Askran Duo",
+      "position": 2,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Alfonse: Uplifting Love",
+      "position": 3,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Alfonse: Heir to Openness",
+      "position": 4,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Alfonse: Opening Miracle",
+      "position": 5,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Alfonse: Sunlit Spirit",
+      "position": 6,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Sharena: Princess of Askr",
+      "position": 7,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Sharena: Spring Princess",
+      "position": 8,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Sharena: Pillars of Peace",
+      "position": 9,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Sharena: Hopeful Princess",
+      "position": 10,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Sharena: Borrowed Divinity",
+      "position": 11,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Sharena: Sea of Hope",
+      "position": 12,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Anna: Commander",
+      "position": 13,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Anna: Wealth-Wisher",
+      "position": 14,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Gustav: Majestic Love",
+      "position": 15,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Gustav: Sovereign Slain",
+      "position": 16,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Henriette: Overflowing Love",
+      "position": 17,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Bruno: Masked Hare",
+      "position": 18,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Bruno: Masked Reveler",
+      "position": 19,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Bruno: Masked Knight",
+      "position": 20,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Veronica: Brave Princess",
+      "position": 21,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Veronica: Spring Princess",
+      "position": 22,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Veronica: Harmonic Pirates",
+      "position": 23,
+      "origins": [
+        0,
+        11
+      ]
+    },
+    {
+      "hero": "Veronica: Bestowed Love",
+      "position": 24,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Veronica: Princess Rising",
+      "position": 25,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Veronica: Royal Reception",
+      "position": 26,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Nifl: God of Ice",
+      "position": 27,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Nifl: Tropical Ice God",
+      "position": 28,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Fjorm: Princess of Ice",
+      "position": 29,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Fjorm: New Traditions",
+      "position": 30,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Fjorm: Bride of Rime",
+      "position": 31,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Fjorm: Ice Ascendant",
+      "position": 32,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Fjorm: Seaside Thaw",
+      "position": 33,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Fjorm: Gleaming Ice Pair",
+      "position": 34,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Fjorm: Icy Miracle",
+      "position": 35,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Gunnthrá: Voice of Dreams",
+      "position": 36,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Gunnthrá: Year's First Dream",
+      "position": 37,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Gunnthrá: Beaming Smile",
+      "position": 38,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Hríd: Icy Blade",
+      "position": 39,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Hríd: Resolute Prince",
+      "position": 40,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Hríd: Island Ice Prince",
+      "position": 41,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Hríd: Frigid Ninja",
+      "position": 42,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Ylgr: Fresh Snowfall",
+      "position": 43,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Ylgr: Breaking the Ice",
+      "position": 44,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Múspell: Flame God",
+      "position": 45,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Múspell: Raging Inferno",
+      "position": 46,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Surtr: Ruler of Flame",
+      "position": 47,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Surtr: Pirate of Red Sky",
+      "position": 48,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Laegjarn: Sheathed Steel",
+      "position": 49,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Laegjarn: New Experiences",
+      "position": 50,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Laegjarn: Burning Sun",
+      "position": 51,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Laegjarn: Flame Ascendant",
+      "position": 52,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Laegjarn: Flame and Frost",
+      "position": 53,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Laegjarn: Flame Miracle",
+      "position": 54,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Laevatein: Searing Steel",
+      "position": 55,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Laevatein: Kumade Warrior",
+      "position": 56,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Laevatein: Bonfire's Blaze",
+      "position": 57,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Laevatein: Ninja of Múspell",
+      "position": 58,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Helbindi: Savage Scourge",
+      "position": 59,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Helbindi: Seaside Scourge",
+      "position": 60,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Hel: Death Sovereign",
+      "position": 61,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Eir: Merciful Death",
+      "position": 62,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Eir: Renewed Life",
+      "position": 63,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Eir: Life Ascendant",
+      "position": 64,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Eir: Until Death",
+      "position": 65,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Ymir: Life-Mother",
+      "position": 66,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Ymir: Seasons of Life",
+      "position": 67,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Líf: Lethal Swordsman",
+      "position": 68,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Líf: Undying Ties Duo",
+      "position": 69,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Líf: Arcane Blade",
+      "position": 70,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Thrasir: Omnicidal Witch",
+      "position": 71,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Ganglöt: Death Anew",
+      "position": 72,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Thórr: War God",
+      "position": 73,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Thórr: Sun-Kissed Gods",
+      "position": 74,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Thórr: Spring War God",
+      "position": 75,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Loki: Trickster God",
+      "position": 76,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Loki: The Trickster",
+      "position": 77,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Loki: Spring Trickster",
+      "position": 78,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Peony: Sweet Dream",
+      "position": 79,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Peony: Álfar Dream Duo",
+      "position": 80,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Peony: Cherished Dream",
+      "position": 81,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Peony: Fruitful Dream",
+      "position": 82,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Peony: Interwoven Dream",
+      "position": 83,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Mirabilis: Daydream",
+      "position": 84,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Mirabilis: Sugarplum Vision",
+      "position": 85,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Mirabilis: Spring Daydream",
+      "position": 86,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Triandra: Nightmare",
+      "position": 87,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Triandra: Sunlit Nightmare",
+      "position": 88,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Triandra: Reverent Dream",
+      "position": 89,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Plumeria: Lewd Dream",
+      "position": 90,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Plumeria: Temptation Anew",
+      "position": 91,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Plumeria: Rapturous Dream",
+      "position": 92,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Plumeria: Spring Dance",
+      "position": 93,
+      "origins": [
+        0,
+        10
+      ]
+    },
+    {
+      "hero": "Freyr: Estival Dreams",
+      "position": 94,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Freyr: Dream-King",
+      "position": 95,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Freyja: Lady of Nightmare",
+      "position": 96,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Freyja: Fleeting Summer",
+      "position": 97,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Freyja: Parallel Hearts",
+      "position": 98,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Eitr: Hand of Nothing",
+      "position": 99,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Eitr: Spring Sunrise",
+      "position": 100,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Ginnungagap: Ruler of Nihility",
+      "position": 101,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Niðavellir: Founding King",
+      "position": 102,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Reginn: Bearing Hope",
+      "position": 103,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Reginn: Bearing Dawn",
+      "position": 104,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Reginn: Dvergr Heir",
+      "position": 105,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Reginn: Full-Tilt Bride",
+      "position": 106,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Ótr: Kingsbrother",
+      "position": 107,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Fáfnir: Fresh Ambition",
+      "position": 108,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Fáfnir: King of Desolation",
+      "position": 109,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Þjazi: Ruthless Jötun",
+      "position": 110,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Dagr: Sun's Radiance",
+      "position": 111,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Dagr: New Year Jötnar",
+      "position": 112,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Dagr: Bluster Princess",
+      "position": 113,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Dagr: Sunny Bloom",
+      "position": 114,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Nótt: Moon's Elegance",
+      "position": 115,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Eitri: Youthful Sage",
+      "position": 116,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Askr: God of Openness",
+      "position": 117,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Askr: Renewed Gods",
+      "position": 118,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Askr: Open Harvest",
+      "position": 119,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Vanitas: Hollow God",
+      "position": 120,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Ash: Retainer to Askr",
+      "position": 121,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Ash: Earnest Greetings",
+      "position": 122,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Ash: Borrowed Power",
+      "position": 123,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Ash: Divergent Brides",
+      "position": 124,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Melíai: Warrior Wanderer",
+      "position": 125,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Embla: God of Closure",
+      "position": 126,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Embla: Closed-Off Bride",
+      "position": 127,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Elm: Resolute Grouch",
+      "position": 128,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Elm: Retainer to Embla",
+      "position": 129,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Letizia: Curse Director",
+      "position": 130,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Seiðr: Goddess of Hope",
+      "position": 131,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Seiðr: Time's Goddesses",
+      "position": 132,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Seiðr: Candlelit Hope",
+      "position": 133,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Seiðr: Hope Reborn",
+      "position": 134,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Gullveig: Seer Beyond Time",
+      "position": 135,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Gullveig: Golden Seer",
+      "position": 136,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Gullveig: Glittering Sunlight",
+      "position": 137,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Gullveig: Hidden in Time",
+      "position": 138,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Gullveig: Seer Reborn",
+      "position": 139,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Kvasir: Seer of the Past",
+      "position": 140,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Kvasir: Unknown Future",
+      "position": 141,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Heiðr: Innocent Goddess",
+      "position": 142,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Gróa: Future Daughter",
+      "position": 143,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Nerþuz: God of the Land",
+      "position": 144,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Nerþuz: New-Year Doter",
+      "position": 145,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Nerþuz: Beach Chaperone",
+      "position": 146,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Nerþuz: Divine Abundance",
+      "position": 147,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Ratatoskr: Mending Hand",
+      "position": 148,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Hræsvelgr: Quieting Blade",
+      "position": 149,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Hræsvelgr: Wings of Healing",
+      "position": 150,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Níðhöggr: Quieting Dose",
+      "position": 151,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Níðhöggr: Daze of Healing",
+      "position": 152,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Heiðrún: Healing Nectar",
+      "position": 153,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Heiðrún: Sisters of Healing",
+      "position": 154,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Heiðrún: Peaceful Horizon",
+      "position": 155,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Eikþyrnir: Quieting Strength",
+      "position": 156,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Eikþyrnir: Blessed Strength",
+      "position": 157,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Eikþyrnir: Fit for Waves",
+      "position": 158,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Eikþyrnir: Resolved to Train",
+      "position": 159,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Eikþyrnir: Chiseled Trainer",
+      "position": 160,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Læraðr: Quieting Heart",
+      "position": 161,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Alfaðör: Celestial King",
+      "position": 162,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Baldr: Celestial Sun God",
+      "position": 163,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Baldr: Rays of Judgment",
+      "position": 164,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Baldr: New Year's Elite",
+      "position": 165,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Baldr: Eternal Shimmer",
+      "position": 166,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Höðr: Dusk Shadow God",
+      "position": 167,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Höðr: Twilight Breeze",
+      "position": 168,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Váli: God of Vengeance",
+      "position": 169,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Váli: Devoted Sister",
+      "position": 170,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Heimdallr: God of Foresight",
+      "position": 171,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Heimdallr: New Year's Vision",
+      "position": 172,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Jörmungandr: Dormant God",
+      "position": 173,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Rune: Source of Wisdom",
+      "position": 174,
+      "origins": [
+        0
+      ]
+    },
+    {
+      "hero": "Marth: Altean Prince",
+      "position": 175,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Marth: Altean Groom",
+      "position": 176,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Marth: Hero-King",
+      "position": 177,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Marth: Royal Altean Duo",
+      "position": 178,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Marth: Legacied Hero",
+      "position": 179,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Marth: Prince of Light",
+      "position": 180,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Marth: Of Beginnings",
+      "position": 181,
+      "origins": [
+        1,
+        14
+      ]
+    },
+    {
+      "hero": "Marth: Love and Courage",
+      "position": 182,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Marth: Timeless Warmth",
+      "position": 183,
+      "origins": [
+        1,
+        10
+      ]
+    },
+    {
+      "hero": "Kris: Unknown Hero",
+      "position": 184,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Kris: Ardent Firebrand",
+      "position": 185,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Kris: Unsung Hero",
+      "position": 186,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Elice: Altean Princess",
+      "position": 187,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Jagen: Veteran Knight",
+      "position": 188,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Cain: The Bull",
+      "position": 189,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Abel: The Panther",
+      "position": 190,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Draug: Gentle Giant",
+      "position": 191,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Gordin: Altean Archer",
+      "position": 192,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Luke: Rowdy Squire",
+      "position": 193,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Roderick: Steady Squire",
+      "position": 194,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Norne: The Volunteer",
+      "position": 195,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Norne: Seaside Volunteer",
+      "position": 196,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Caeda: Talys's Heart",
+      "position": 197,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Caeda: Talys's Bride",
+      "position": 198,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Caeda: Princess of Talys",
+      "position": 199,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Caeda: Sea-Blossom Pair",
+      "position": 200,
+      "origins": [
+        0,
+        1
+      ]
+    },
+    {
+      "hero": "Caeda: Beloved Queen",
+      "position": 201,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Caeda: Marth's Faithful",
+      "position": 202,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Caeda: Cleansed Princess",
+      "position": 203,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Ogma: Loyal Blade",
+      "position": 204,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Ogma: Blade on Leave",
+      "position": 205,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Ogma: Former Gladiator",
+      "position": 206,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Barst: The Hatchet",
+      "position": 207,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Darros: Seawalker",
+      "position": 208,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Castor: Loving Son",
+      "position": 209,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Nyna: The Last Princess",
+      "position": 210,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Linde: Light Mage",
+      "position": 211,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Linde: Summer Rays",
+      "position": 212,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Linde: Bound by Fate",
+      "position": 213,
+      "origins": [
+        1,
+        4
+      ]
+    },
+    {
+      "hero": "Jeorge: Perfect Shot",
+      "position": 214,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Astram: Midia's Hero",
+      "position": 215,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Michalis: Ambitious King",
+      "position": 216,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Michalis: Fruiting Ambition",
+      "position": 217,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Minerva: Red Dragoon",
+      "position": 218,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Minerva: Princess-Knight",
+      "position": 219,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Minerva: Verdant Dragoon",
+      "position": 220,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Minerva: Above the Stars",
+      "position": 221,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Maria: Minerva's Sister",
+      "position": 222,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Maria: Sunny Smile",
+      "position": 223,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Maria: Ritual Sacrifice",
+      "position": 224,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Palla: Eldest Whitewing",
+      "position": 225,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Palla: Eldest Bun-Bun",
+      "position": 226,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Palla: Sisterly Trio",
+      "position": 227,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Catria: Middle Whitewing",
+      "position": 228,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Catria: Spring Whitewing",
+      "position": 229,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Catria: Windswept Knight",
+      "position": 230,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Est: Junior Whitewing",
+      "position": 231,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Est: Springtime Flier",
+      "position": 232,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Julian: Tender Thief",
+      "position": 233,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Lena: Tender Angel",
+      "position": 234,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Lena: Bereft Angel",
+      "position": 235,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Matthis: Brother to Lena",
+      "position": 236,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Rickard: Carefree Culprit",
+      "position": 237,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Merric: Wind Mage",
+      "position": 238,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Merric: Changing Winds",
+      "position": 239,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Merric: Wind Pontifex",
+      "position": 240,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Arlen: Mage of Khadein",
+      "position": 241,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Hardin: Dark Emperor",
+      "position": 242,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Hardin: The Coyote",
+      "position": 243,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Wolf: Coyote's Loyal",
+      "position": 244,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Sedgar: Coyote's Dutiful",
+      "position": 245,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Sedgar: Festive Horseman",
+      "position": 246,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Vyland: Coyote's Justice",
+      "position": 247,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Roshea: Coyote's Faithful",
+      "position": 248,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Yuliya: Princess of Grust",
+      "position": 249,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Camus: Sable Knight",
+      "position": 250,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Sirius: Mysterious Knight",
+      "position": 251,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Sheena: Princess of Gra",
+      "position": 252,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Tiki: Dragon Scion",
+      "position": 253,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Tiki: Beachside Scion",
+      "position": 254,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Tiki: Legendary Dragon",
+      "position": 255,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Tiki: Torpid Dragon",
+      "position": 256,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Tiki: Harmonic Hope",
+      "position": 257,
+      "origins": [
+        1,
+        6
+      ]
+    },
+    {
+      "hero": "Tiki: Awakened Blood",
+      "position": 258,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Tiki: Dragon's Progeny",
+      "position": 259,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Nagi: Dragon Avatar",
+      "position": 260,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Nagi: Hopeful Eternity",
+      "position": 261,
+      "origins": [
+        1,
+        5
+      ]
+    },
+    {
+      "hero": "Gotoh: White Sage",
+      "position": 262,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Gotoh: Apostle of Naga",
+      "position": 263,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Xane: Autumn Trickster",
+      "position": 264,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Xane: Desert Mirage",
+      "position": 265,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Xane: Fickle Dragon",
+      "position": 266,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Bantu: Tiki's Guardian",
+      "position": 267,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Eremiya: Bishop of Woe",
+      "position": 268,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Katarina: Wayward One",
+      "position": 269,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Katarina: Torchlit Wanderer",
+      "position": 270,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Clarisse: Sniper in the Dark",
+      "position": 271,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Legion: Masked Maniac",
+      "position": 272,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Navarre: Scarlet Sword",
+      "position": 273,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Navarre: Scarlet Ninja",
+      "position": 274,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Phina: Roving Dancer",
+      "position": 275,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Wrys: Kindly Priest",
+      "position": 276,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Athena: Borderland Sword",
+      "position": 277,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Malice: Deft Sellsword",
+      "position": 278,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Malice: Blooming Blade",
+      "position": 279,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Naga: Harvest Divinity",
+      "position": 280,
+      "origins": [
+        1,
+        10
+      ]
+    },
+    {
+      "hero": "Naga: Ruler of Dragons",
+      "position": 281,
+      "origins": [
+        1,
+        10
+      ]
+    },
+    {
+      "hero": "Medeus: Earth-Dragon King",
+      "position": 282,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Medeus: Last Earth Dragon",
+      "position": 283,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Gharnef: Dark Pontifex",
+      "position": 284,
+      "origins": [
+        1
+      ]
+    },
+    {
+      "hero": "Alm: Hero of Prophecy",
+      "position": 285,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Alm: Saint-King",
+      "position": 286,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Alm: Imperial Ascent",
+      "position": 287,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Alm: Lovebird Duo",
+      "position": 288,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Alm: Powerful Resolve",
+      "position": 289,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Alm: For Others' Sake",
+      "position": 290,
+      "origins": [
+        2,
+        6
+      ]
+    },
+    {
+      "hero": "Lukas: Sharp Soldier",
+      "position": 291,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Lukas: Buffet for One",
+      "position": 292,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Gray: Wry Comrade",
+      "position": 293,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Tobin: The Clueless One",
+      "position": 294,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Kliff: Curious Spirit",
+      "position": 295,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Faye: Devoted Heart",
+      "position": 296,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Faye: Drawn Heartstring",
+      "position": 297,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Silque: Adherent of Mila",
+      "position": 298,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Silque: Selfless Cleric",
+      "position": 299,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Clair: Highborn Flier",
+      "position": 300,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Clive: Idealistic Knight",
+      "position": 301,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Forsyth: Loyal Lieutenant",
+      "position": 302,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Python: Apathetic Archer",
+      "position": 303,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Celica: Caring Princess",
+      "position": 304,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Celica: Imprisoned Soul",
+      "position": 305,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Celica: Warrior Priestess",
+      "position": 306,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Celica: Queen of Valentia",
+      "position": 307,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Celica: Valentia's Hope",
+      "position": 308,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Celica: Of Echoes",
+      "position": 309,
+      "origins": [
+        2,
+        14
+      ]
+    },
+    {
+      "hero": "Celica: Sunlit Priestesses",
+      "position": 310,
+      "origins": [
+        2,
+        6
+      ]
+    },
+    {
+      "hero": "Celica: With Grace",
+      "position": 311,
+      "origins": [
+        0,
+        2
+      ]
+    },
+    {
+      "hero": "Mae: Bundle of Energy",
+      "position": 312,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Mae: Spring Cheer",
+      "position": 313,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Boey: Skillful Survivor",
+      "position": 314,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Genny: Endearing Ally",
+      "position": 315,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Genny: Dressed with Care",
+      "position": 316,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Saber: Driven Mercenary",
+      "position": 317,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Saber: Dune Walker",
+      "position": 318,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Valbar: Open and Honest",
+      "position": 319,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Kamui: Wandering Blade",
+      "position": 320,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Leon: True of Heart",
+      "position": 321,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Mathilda: Legendary Knight",
+      "position": 322,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Luthier: Odd Wayfarer",
+      "position": 323,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Luthier: Spring Hopes",
+      "position": 324,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Delthea: Free Spirit",
+      "position": 325,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Delthea: Tatarrah's Puppet",
+      "position": 326,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Delthea: Prodigy in Bloom",
+      "position": 327,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Palla: Kind Eldest Sister",
+      "position": 328,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Palla: Soaring Summer",
+      "position": 329,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Catria: Mild Middle Sister",
+      "position": 330,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Catria: Azure Wing Pair",
+      "position": 331,
+      "origins": [
+        2,
+        5
+      ]
+    },
+    {
+      "hero": "Est: Sweet Baby Sis",
+      "position": 332,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Atlas: Forest Muscle",
+      "position": 333,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Jesse: Blithe Mercenary",
+      "position": 334,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Sonya: Vengeful Mage",
+      "position": 335,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Sonya: Dazzling Rabbits",
+      "position": 336,
+      "origins": [
+        2,
+        10
+      ]
+    },
+    {
+      "hero": "Sonya: Beautiful Mage",
+      "position": 337,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Deen: Bladed Sandstorm",
+      "position": 338,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Tatiana: Devoted Saint",
+      "position": 339,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Zeke: Past Unknown",
+      "position": 340,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Conrad: Masked Knight",
+      "position": 341,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Conrad: Unmasked Knight",
+      "position": 342,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Mycen: Zofia's Champion",
+      "position": 343,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Nomah: Priest of Mila",
+      "position": 344,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Rudolf: Emperor of Rigel",
+      "position": 345,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Berkut: Prideful Prince",
+      "position": 346,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Berkut: Purgatorial Prince",
+      "position": 347,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Berkut: Debonair Noble",
+      "position": 348,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Rinea: Reminiscent Belle",
+      "position": 349,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Fernand: Traitorous Knight",
+      "position": 350,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Duma: God of Strength",
+      "position": 351,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Duma: Strength and Love",
+      "position": 352,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Mila: Goddess of Love",
+      "position": 353,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Jedah: Priest of Duma",
+      "position": 354,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Marla: Duma's Witch",
+      "position": 355,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Hestia: Duma's Witch",
+      "position": 356,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Nuibaba: Mistress of Fear",
+      "position": 357,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Brigand Boss: Known Criminal",
+      "position": 358,
+      "origins": [
+        2
+      ]
+    },
+    {
+      "hero": "Sigurd: Holy Knight",
+      "position": 359,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Sigurd: Destined Duo",
+      "position": 360,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Sigurd: Fated Holy Knight",
+      "position": 361,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Sigurd: Proper Pourer",
+      "position": 362,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Sigurd: Of the Holy War",
+      "position": 363,
+      "origins": [
+        3,
+        14
+      ]
+    },
+    {
+      "hero": "Sigurd: Honorable Nobles",
+      "position": 364,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Sigurd: Legacy of Justice",
+      "position": 365,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Naoise: Crimson Chivalry",
+      "position": 366,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Arden: Strong and Tough",
+      "position": 367,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Brigid: Orgahil Pirate",
+      "position": 368,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Brigid: Awakened Bow",
+      "position": 369,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Edain: Lady of Yngvi",
+      "position": 370,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Midir: Archer of Yngvi",
+      "position": 371,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Arvis: Emperor of Flame",
+      "position": 372,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Azelle: Youthful Flame",
+      "position": 373,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Claud: Priest of Edda",
+      "position": 374,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Tailtiu: Thunder Noble",
+      "position": 375,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Tailtiu: Teatime Mingler",
+      "position": 376,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Lex: Young Blade",
+      "position": 377,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Quan: Luminous Lancer",
+      "position": 378,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Quan: Lightfoot Prince",
+      "position": 379,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Ethlyn: Spirited Princess",
+      "position": 380,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Ethlyn: Glimmering Lady",
+      "position": 381,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Ayra: Astra's Wielder",
+      "position": 382,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Ayra: Together in Tea",
+      "position": 383,
+      "origins": [
+        3,
+        12
+      ]
+    },
+    {
+      "hero": "Ayra: Supreme Astra",
+      "position": 384,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Chulainn: Unbeaten Warrior",
+      "position": 385,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Chulainn: Leading Gladiator",
+      "position": 386,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Jamke: Prince of Verdane",
+      "position": 387,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Lewyn: Guiding Breeze",
+      "position": 388,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Lewyn: Wind-Song Scion",
+      "position": 389,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Annand: Knight-Defender",
+      "position": 390,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Díthorba: Cutting Knight",
+      "position": 391,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Erinys: Earnest Knight",
+      "position": 392,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Eldigan: Lionheart",
+      "position": 393,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Eldigan: Strutting Lion",
+      "position": 394,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Lachesis: Lionheart's Sister",
+      "position": 395,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Lachesis: Ballroom Bloom",
+      "position": 396,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Lachesis: Loving Sister",
+      "position": 397,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Deirdre: Lady of the Forest",
+      "position": 398,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Deirdre: Fated Saint",
+      "position": 399,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Silvia: Traveling Dancer",
+      "position": 400,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Dew: Benevolent Thief",
+      "position": 401,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Lamia: Hellspawn",
+      "position": 402,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Seliph: Heir of Light",
+      "position": 403,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Seliph: Scion of Light",
+      "position": 404,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Seliph: Enduring Legacy",
+      "position": 405,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Seliph: Light's Legacy",
+      "position": 406,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Larcei: Keen Kin",
+      "position": 407,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Larcei: Scion of Astra",
+      "position": 408,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Larcei: Bride of Astra",
+      "position": 409,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Shannan: Wielder of Astra",
+      "position": 410,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Scáthach: Astra's Wake",
+      "position": 411,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Lana: Benevolent Bride",
+      "position": 412,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Arthur: Furious Mage",
+      "position": 413,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Tine: Rumbling Thunder",
+      "position": 414,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Tine: Determined Bride",
+      "position": 415,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Febail: Mercenary Waif",
+      "position": 416,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Patty: Youthful Thief",
+      "position": 417,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Julia: Naga's Blood",
+      "position": 418,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Julia: Crusader of Light",
+      "position": 419,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Julia: Heart Usurped",
+      "position": 420,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Julia: Scion of the Saint",
+      "position": 421,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Julia: Brides of Light",
+      "position": 422,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Ares: Black Knight",
+      "position": 423,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Lene: Yearning Dancer",
+      "position": 424,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Ced: Hero on the Wind",
+      "position": 425,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Ced: Sage of the Wind",
+      "position": 426,
+      "origins": [
+        3,
+        4
+      ]
+    },
+    {
+      "hero": "Fee: Aspiring Knight",
+      "position": 427,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Travant: King of Thracia",
+      "position": 428,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Arion: Gungnir's Heir",
+      "position": 429,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Altena: Luminous Rider",
+      "position": 430,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Julius: Scion of Darkness",
+      "position": 431,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Ishtar: Thunder Goddess",
+      "position": 432,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Ishtar: Echoing Thunder",
+      "position": 433,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Hilda: Queen of Friege",
+      "position": 434,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Ullr: The Bowmaster",
+      "position": 435,
+      "origins": [
+        3
+      ]
+    },
+    {
+      "hero": "Leif: Prince of Leonster",
+      "position": 436,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Leif: Unifier of Thracia",
+      "position": 437,
+      "origins": [
+        3,
+        4
+      ]
+    },
+    {
+      "hero": "Leif: Destined Scions",
+      "position": 438,
+      "origins": [
+        3,
+        4
+      ]
+    },
+    {
+      "hero": "Leif: Sworn to Country",
+      "position": 439,
+      "origins": [
+        3,
+        4
+      ]
+    },
+    {
+      "hero": "Leif: Of Genealogy",
+      "position": 440,
+      "origins": [
+        4,
+        14
+      ]
+    },
+    {
+      "hero": "Finn: Lance of Legend",
+      "position": 441,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Finn: Devoted Service",
+      "position": 442,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Nanna: Nordion Princess",
+      "position": 443,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Nanna: Mystletainn Scion",
+      "position": 444,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Nanna: Beloved Princess",
+      "position": 445,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Eyvel: Mistress of Fiana",
+      "position": 446,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Mareeta: The Blade's Pawn",
+      "position": 447,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Mareeta: Sword of Stars",
+      "position": 448,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Mareeta: Astra Awakened",
+      "position": 449,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Osian: Scolded Soldier",
+      "position": 450,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Dagdar: Reformed Bandit",
+      "position": 451,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Tanya: Dagdar's Kid",
+      "position": 452,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "August: Astute Tactician",
+      "position": 453,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Linoan: Lady of Tarrah",
+      "position": 454,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Safy: Font of Piety",
+      "position": 455,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Tina: Playful Scamp",
+      "position": 456,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Asbel: Windswept Youth",
+      "position": 457,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Machyua: Blade of Gales",
+      "position": 458,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Lara: Step Lively",
+      "position": 459,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Ronan: Villager of Iz",
+      "position": 460,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Miranda: Willful Princess",
+      "position": 461,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Karin: Driven Knight",
+      "position": 462,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Reinhardt: Thunder's Fist",
+      "position": 463,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Reinhardt: Thunder's Sword",
+      "position": 464,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Reinhardt: Lightning's Rondo",
+      "position": 465,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Reinhardt: Thrud Reborn",
+      "position": 466,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Olwen: Blue Mage Knight",
+      "position": 467,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Olwen: Righteous Knight",
+      "position": 468,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Saias: Bishop of Flame",
+      "position": 469,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Veld: Manfroy's Rock",
+      "position": 470,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Sara: Lady of Loptr",
+      "position": 471,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Salem: Dark Sage",
+      "position": 472,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Canis: Ill Portent",
+      "position": 473,
+      "origins": [
+        3,
+        4
+      ]
+    },
+    {
+      "hero": "Perne: Dacian Scoundrel",
+      "position": 474,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Lifis: Terror of Iz",
+      "position": 475,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Homer: Traveling Bard",
+      "position": 476,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Galzus: Dark Blade of Od",
+      "position": 477,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Ishtar: Thunder's Waltz",
+      "position": 478,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Kempf: Conniving General",
+      "position": 479,
+      "origins": [
+        4
+      ]
+    },
+    {
+      "hero": "Roy: Young Lion",
+      "position": 480,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Roy: Brave Lion",
+      "position": 481,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Roy: Youthful Gifts",
+      "position": 482,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Roy: Blazing Lion",
+      "position": 483,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Roy: Blazing Bachelors",
+      "position": 484,
+      "origins": [
+        5,
+        6
+      ]
+    },
+    {
+      "hero": "Roy: Of Binding",
+      "position": 485,
+      "origins": [
+        5,
+        14
+      ]
+    },
+    {
+      "hero": "Wolt: Sunbeam Archer",
+      "position": 486,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Merlinus: Pherae's Clerk",
+      "position": 487,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Lilina: Delightful Noble",
+      "position": 488,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Lilina: Blush of Youth",
+      "position": 489,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Lilina: Beachside Bloom",
+      "position": 490,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Lilina: Firelight Leader",
+      "position": 491,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Lilina: Beaming Bride",
+      "position": 492,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Lilina: Brilliant Flame",
+      "position": 493,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Bors: Ostia's Bastion",
+      "position": 494,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Gwendolyn: Adorable Knight",
+      "position": 495,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Ogier: Ostia's New Blade",
+      "position": 496,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Lugh: Anima Child",
+      "position": 497,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Raigh: Dark Child",
+      "position": 498,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Chad: Lycian Wildcat",
+      "position": 499,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Perceval: Knightly Ideal",
+      "position": 500,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Cecilia: Etrurian General",
+      "position": 501,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Cecilia: Festive Instructor",
+      "position": 502,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Cecilia: Etrurian Bride",
+      "position": 503,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Klein: Silver Nobleman",
+      "position": 504,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Clarine: Refined Noble",
+      "position": 505,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Zephiel: The Liberator",
+      "position": 506,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Murdock: Loyal General",
+      "position": 507,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Brunnya: Devoted General",
+      "position": 508,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Narcian: Wyvern General",
+      "position": 509,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Narcian: Vernal General",
+      "position": 510,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Guinivere: Princess of Bern",
+      "position": 511,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Guinivere: Queen of Bern",
+      "position": 512,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Melady: Crimson Rider",
+      "position": 513,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Zeiss: Ebon Bolt",
+      "position": 514,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Galle: Azure Rider",
+      "position": 515,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Saul: Minister of Love",
+      "position": 516,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Saul: Loving Shepherd",
+      "position": 517,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Dorothy: Devoted Archer",
+      "position": 518,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Zelot: Avowed Groom",
+      "position": 519,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Noah: Mercenary-Errant",
+      "position": 520,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Juno: Soaring Bride",
+      "position": 521,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Juno: Nimble Grace",
+      "position": 522,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Thea: Stormy Flier",
+      "position": 523,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Thea: Wings of Winter",
+      "position": 524,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Shanna: Sprightly Flier",
+      "position": 525,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Shanna: Bridal Novice",
+      "position": 526,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Niime: Mountain Hermit",
+      "position": 527,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Hugh: Worldly Mage",
+      "position": 528,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Sue: Doe of the Plains",
+      "position": 529,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Bartre: Fearless Warrior",
+      "position": 530,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Bartre: Earsome Warrior",
+      "position": 531,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Fir: Sword Student",
+      "position": 532,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Fir: Student of Spring",
+      "position": 533,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Fir: Swordmaiden",
+      "position": 534,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Fir: Dual Warriors",
+      "position": 535,
+      "origins": [
+        5,
+        6
+      ]
+    },
+    {
+      "hero": "Rutger: Lone Swordsman",
+      "position": 536,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Echidna: Unyielding Idealist",
+      "position": 537,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Elffin: Truth Beholden",
+      "position": 538,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Larum: Sprightly Dancer",
+      "position": 539,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Larum: Dancing Bride",
+      "position": 540,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Dieck: Wounded Tiger",
+      "position": 541,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Geese: A Life at Sea",
+      "position": 542,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Gonzalez: Kindly Bandit",
+      "position": 543,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Sophia: Nabata Prophet",
+      "position": 544,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Sophia: Cobweb Prophet",
+      "position": 545,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Sophia: Prescient Bride",
+      "position": 546,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Fae: Divine Dragon",
+      "position": 547,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Fae: Holiday Dear",
+      "position": 548,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Fae: Childlike Dragon",
+      "position": 549,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Igrene: Nabata Protector",
+      "position": 550,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Igrene: Ninja of Nabata",
+      "position": 551,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Igrene: Sworn Protectors",
+      "position": 552,
+      "origins": [
+        5,
+        6
+      ]
+    },
+    {
+      "hero": "Idunn: Dark Priestess",
+      "position": 553,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Idunn: Dragonkin Duo",
+      "position": 554,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Idunn: Divine Demon",
+      "position": 555,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Cath: Master Thief",
+      "position": 556,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Cath: Caper Captain",
+      "position": 557,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Elimine: Scouring Saint",
+      "position": 558,
+      "origins": [
+        5
+      ]
+    },
+    {
+      "hero": "Mark: Winds of Hope",
+      "position": 559,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Eliwood: Knight of Lycia",
+      "position": 560,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Eliwood: Devoted Love",
+      "position": 561,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Eliwood: Blazing Knight",
+      "position": 562,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Eliwood: Marquess Pherae",
+      "position": 563,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Eliwood: Pledged Friend",
+      "position": 564,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Eliwood: Noble Ablaze",
+      "position": 565,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lyn: Lady of the Plains",
+      "position": 566,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lyn: Bride of the Plains",
+      "position": 567,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lyn: Brave Lady",
+      "position": 568,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lyn: Wind's Embrace",
+      "position": 569,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lyn: Lady of the Wind",
+      "position": 570,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lyn: Lady of the Beach",
+      "position": 571,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lyn: Ninja-Friend Duo",
+      "position": 572,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lyn: Blazing Whirlwind",
+      "position": 573,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lyn: Of Blazing",
+      "position": 574,
+      "origins": [
+        6,
+        14
+      ]
+    },
+    {
+      "hero": "Lyn: Plains Wind",
+      "position": 575,
+      "origins": [
+        6,
+        15
+      ]
+    },
+    {
+      "hero": "Lyn: Glitters of Hope",
+      "position": 576,
+      "origins": [
+        6,
+        10
+      ]
+    },
+    {
+      "hero": "Lyn: Earth and Sky",
+      "position": 577,
+      "origins": [
+        5,
+        6
+      ]
+    },
+    {
+      "hero": "Hector: General of Ostia",
+      "position": 578,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Hector: Just Here to Fight",
+      "position": 579,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Hector: Marquess of Ostia",
+      "position": 580,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Hector: Brave Warrior",
+      "position": 581,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Hector: Dressed-Up Duo",
+      "position": 582,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Hector: Sworn Friend",
+      "position": 583,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Hector: Steel Warrior",
+      "position": 584,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Hector: Into the Fray",
+      "position": 585,
+      "origins": [
+        6,
+        7
+      ]
+    },
+    {
+      "hero": "Marcus: Knight of Pherae",
+      "position": 586,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Harken: Troubled Warrior",
+      "position": 587,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Isadora: Escort of Pherae",
+      "position": 588,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lowen: Apprentice Knight",
+      "position": 589,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Uther: Frugal Militarist",
+      "position": 590,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Oswin: Impregnable Knight",
+      "position": 591,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Matthew: Faithful Spy",
+      "position": 592,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Leila: Rose amid Fangs",
+      "position": 593,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Leila: Keen Lookout",
+      "position": 594,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Leila: Superb Shadow",
+      "position": 595,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Serra: Outspoken Cleric",
+      "position": 596,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Wallace: Crag of Caelin",
+      "position": 597,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Sain: Green Lance",
+      "position": 598,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Kent: Crimson Shield",
+      "position": 599,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Raven: Peerless Fighter",
+      "position": 600,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lucius: The Light",
+      "position": 601,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lucius: Calming Light",
+      "position": 602,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Wil: Unequaled Archer",
+      "position": 603,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Rebecca: Wildflower",
+      "position": 604,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Rebecca: Breezy Scamp",
+      "position": 605,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Rebecca: In the Sun's Rays",
+      "position": 606,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Pent: Fancy Fiancé",
+      "position": 607,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Pent: Mage General",
+      "position": 608,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Louise: Eternal Devotion",
+      "position": 609,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Louise: Lady of Violets",
+      "position": 610,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Erk: Studious Mage",
+      "position": 611,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Priscilla: Delicate Princess",
+      "position": 612,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Dorcas: Serene Warrior",
+      "position": 613,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Dorcas: Pumpkin Smasher",
+      "position": 614,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Zephiel: Winter's Crown",
+      "position": 615,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Vaida: Dracofang General",
+      "position": 616,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Heath: Wandering Knight",
+      "position": 617,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Heath: Wyvern Ninja",
+      "position": 618,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Fiora: Defrosted Ilian",
+      "position": 619,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Fiora: Airborne Warrior",
+      "position": 620,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Farina: The Great Wing",
+      "position": 621,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Florina: Lovely Flier",
+      "position": 622,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Florina: Azure-Sky Knight",
+      "position": 623,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Canas: Wisdom Seeker",
+      "position": 624,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Karel: Sword Demon",
+      "position": 625,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Karla: Sword Vassal",
+      "position": 626,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Karla: Sun-Piercing Steel",
+      "position": 627,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Karla: Spring Reveries",
+      "position": 628,
+      "origins": [
+        0,
+        6
+      ]
+    },
+    {
+      "hero": "Guy: Kutolah Blade",
+      "position": 629,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Rath: Wolf of Sacae",
+      "position": 630,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Hawkeye: Desert Guardian",
+      "position": 631,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Hawkeye: Taciturn Guardian",
+      "position": 632,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Ninian: Oracle of Destiny",
+      "position": 633,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Ninian: Bright-Eyed Bride",
+      "position": 634,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Ninian: Frozen Heart",
+      "position": 635,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Ninian: Ice-Dragon Oracle",
+      "position": 636,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Ninian: Heartfelt Dancer",
+      "position": 637,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Nils: Bright Bard",
+      "position": 638,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Nils: Wandering Star",
+      "position": 639,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Nils: Snowflake Melody",
+      "position": 640,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Nergal: Traitor to Nabata",
+      "position": 641,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Limstella: Living Construct",
+      "position": 642,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Sonia: Inhuman Beauty",
+      "position": 643,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lloyd: White Wolf",
+      "position": 644,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Lloyd: Vengeful Wolf",
+      "position": 645,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Linus: Mad Dog",
+      "position": 646,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Linus: Savage Dog",
+      "position": 647,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Jaffar: Angel of Death",
+      "position": 648,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Jaffar: Angel of Night",
+      "position": 649,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Ursula: Blue Crow",
+      "position": 650,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Ursula: Clear-Blue Crow",
+      "position": 651,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Ursula: Royal-Blue Crow",
+      "position": 652,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Ursula: Blackened Crow",
+      "position": 653,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Nino: Pious Mage",
+      "position": 654,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Nino: Pale Flower",
+      "position": 655,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Nino: Flower of Frost",
+      "position": 656,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Nino: Spirited Sorcerer",
+      "position": 657,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Nino: Fang's Heart",
+      "position": 658,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Nino: Burst of Summer",
+      "position": 659,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Legault: The Hurricane",
+      "position": 660,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Fargus: Badon Buccaneer",
+      "position": 661,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Athos: Omniscient One",
+      "position": 662,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Bramimond: The Enigma",
+      "position": 663,
+      "origins": [
+        6
+      ]
+    },
+    {
+      "hero": "Eirika: Restoration Lady",
+      "position": 664,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Eirika: Anamnesis Lady",
+      "position": 665,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Eirika: Graceful Resolve",
+      "position": 666,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Eirika: Gentle as Snow",
+      "position": 667,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Eirika: Twin Refulgence",
+      "position": 668,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Eirika: Pledged Restorer",
+      "position": 669,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Eirika: Beach Restorer",
+      "position": 670,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Eirika: Resolute Princess",
+      "position": 671,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Eirika: Of the Sacred",
+      "position": 672,
+      "origins": [
+        7,
+        14
+      ]
+    },
+    {
+      "hero": "Eirika: Spring Company",
+      "position": 673,
+      "origins": [
+        7,
+        9
+      ]
+    },
+    {
+      "hero": "Ephraim: Restoration Lord",
+      "position": 674,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Ephraim: Legendary Lord",
+      "position": 675,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Ephraim: Sacred Twin Lord",
+      "position": 676,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Ephraim: Sparkling Gallantly",
+      "position": 677,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Ephraim: Dynastic Duo",
+      "position": 678,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Ephraim: Sunshine Valiant",
+      "position": 679,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Ephraim: Ardent Prince",
+      "position": 680,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Seth: Silver Knight",
+      "position": 681,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Seth: Silver-Sea Knight",
+      "position": 682,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Kyle: Zealous Knight",
+      "position": 683,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Forde: Unfettered Knight",
+      "position": 684,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Franz: The Faithful",
+      "position": 685,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Orson: Passion's Folly",
+      "position": 686,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Colm: Capable Thief",
+      "position": 687,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Neimi: Tearful Archer",
+      "position": 688,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Lute: Prodigy",
+      "position": 689,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Lute: Summer Prodigy",
+      "position": 690,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Lute: Limitless Curiosity",
+      "position": 691,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Artur: Silver Saint",
+      "position": 692,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Garcia: Warrior Reborn",
+      "position": 693,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Ross: His Father's Son",
+      "position": 694,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Innes: Regal Strategician",
+      "position": 695,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Innes: Flawless Form",
+      "position": 696,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Innes: Frelian Moonlight",
+      "position": 697,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Innes: New Year's Aim",
+      "position": 698,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Tana: Winged Princess",
+      "position": 699,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Tana: Noble and Nimble",
+      "position": 700,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Tana: Frelian Starlight",
+      "position": 701,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Tana: Soothing Warmth",
+      "position": 702,
+      "origins": [
+        0,
+        7
+      ]
+    },
+    {
+      "hero": "Tana: Soaring Princess",
+      "position": 703,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Tana: Soaring New Year",
+      "position": 704,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Syrene: Graceful Rider",
+      "position": 705,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Vanessa: Dutiful Rider",
+      "position": 706,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Gilliam: Wall of Silence",
+      "position": 707,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Vigarde: Silent Emperor",
+      "position": 708,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Vigarde: Warmhearted Sire",
+      "position": 709,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Lyon: Shadow Prince",
+      "position": 710,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Lyon: Demon King",
+      "position": 711,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Lyon: Grado's Gaze",
+      "position": 712,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Lyon: Sunlit Prince",
+      "position": 713,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Lyon: Esteemed Royals",
+      "position": 714,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Lyon: Twilight Amends",
+      "position": 715,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Duessel: Obsidian",
+      "position": 716,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Selena: Sandbar Fluorspar",
+      "position": 717,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Selena: Fluorspar",
+      "position": 718,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Selena: Admiring General",
+      "position": 719,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Glen: Sunstone",
+      "position": 720,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Riev: Blood Beryl",
+      "position": 721,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Valter: Dark Moonstone",
+      "position": 722,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Caellach: Tiger Eye",
+      "position": 723,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Cormag: Aloof Lanceman",
+      "position": 724,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Knoll: Darkness Watcher",
+      "position": 725,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Natasha: Sacred Healer",
+      "position": 726,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Amelia: Rose of the War",
+      "position": 727,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Amelia: Blossoming Talent",
+      "position": 728,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Joshua: Tempest King",
+      "position": 729,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Joshua: Tropical Gambler",
+      "position": 730,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Joshua: Resolute Tempest",
+      "position": 731,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Gerik: Desert Tiger",
+      "position": 732,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Marisa: Crimson Flash",
+      "position": 733,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Marisa: Crimson Rabbit",
+      "position": 734,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Marisa: Willful Blades",
+      "position": 735,
+      "origins": [
+        7,
+        12
+      ]
+    },
+    {
+      "hero": "Tethys: Beloved Dancer",
+      "position": 736,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Tethys: Dancing Sands",
+      "position": 737,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Ewan: Eager Student",
+      "position": 738,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "L'Arachel: Princess of Light",
+      "position": 739,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "L'Arachel: Harvest Princess",
+      "position": 740,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "L'Arachel: Seeker of Justice",
+      "position": 741,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "L'Arachel: Summer Princess",
+      "position": 742,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "L'Arachel: Justice-Armed",
+      "position": 743,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Dozla: Harvest Attendant",
+      "position": 744,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Rennac: Rich \"Merchant\"",
+      "position": 745,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Morva: Darkling Warden",
+      "position": 746,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Myrrh: Great Dragon",
+      "position": 747,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Myrrh: Spooky Monster",
+      "position": 748,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Myrrh: Spring Harmony",
+      "position": 749,
+      "origins": [
+        7,
+        10
+      ]
+    },
+    {
+      "hero": "Myrrh: Guardian Dragon",
+      "position": 750,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Myrrh: Adored Dragon",
+      "position": 751,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Saleh: Vernal Sage",
+      "position": 752,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Fomortiis: Demon King",
+      "position": 753,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Fomortiis: Dark of Night",
+      "position": 754,
+      "origins": [
+        7
+      ]
+    },
+    {
+      "hero": "Ike: Young Mercenary",
+      "position": 755,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Ike: Brave Mercenary",
+      "position": 756,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Ike: Stalwart Heart",
+      "position": 757,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Ike: Close-Knit Siblings",
+      "position": 758,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Ike: Desert Mercenary",
+      "position": 759,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Ike: Zealous Inheritors",
+      "position": 760,
+      "origins": [
+        5,
+        8
+      ]
+    },
+    {
+      "hero": "Ike: Full-Tilt Merc",
+      "position": 761,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Titania: Mighty Mercenary",
+      "position": 762,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Titania: Warm Knight",
+      "position": 763,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Soren: Shrewd Strategist",
+      "position": 764,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Soren: Addled Strategist",
+      "position": 765,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Soren: Hushed Voice",
+      "position": 766,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Soren: Isolated Strategist",
+      "position": 767,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Mist: Helpful Sister",
+      "position": 768,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Mist: Purest Spirit",
+      "position": 769,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Greil: Heroic Exemplar",
+      "position": 770,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Oscar: Agile Horseman",
+      "position": 771,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Boyd: Future Great",
+      "position": 772,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Boyd: Intrepid Warrior",
+      "position": 773,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Rolf: Tricky Archer",
+      "position": 774,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Shinon: Scathing Archer",
+      "position": 775,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Gatrie: Armored Amour",
+      "position": 776,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Mia: Lady of Blades",
+      "position": 777,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Mia: Budding Blade",
+      "position": 778,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Mia: Summer Slice",
+      "position": 779,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Elincia: Lost Princess",
+      "position": 780,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Elincia: Hearts of Purity",
+      "position": 781,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Lucia: Loyalty Enrobed",
+      "position": 782,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Nephenee: Fierce Halberdier",
+      "position": 783,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Nephenee: Sincere Dancer",
+      "position": 784,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Nephenee: Festival Harmony",
+      "position": 785,
+      "origins": [
+        8,
+        11
+      ]
+    },
+    {
+      "hero": "Bertram: Dread Cavalier",
+      "position": 786,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Zihark: Ninja Blademaster",
+      "position": 787,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Sanaki: Apostle in White",
+      "position": 788,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Sigrun: Steadfast Bride",
+      "position": 789,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Sigrun: Loyal Protector",
+      "position": 790,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Tanith: Forthright Heart",
+      "position": 791,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Tanith: Bright Blade",
+      "position": 792,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Marcia: Petulant Knight",
+      "position": 793,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Sephiran: Hoary Sovereign",
+      "position": 794,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Astrid: Resolute Damsel",
+      "position": 795,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Jill: Fiery Dracoknight",
+      "position": 796,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Volke: Man of Mysteries",
+      "position": 797,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Stefan: No-Man's-Blade",
+      "position": 798,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Ashnard: Mad King",
+      "position": 799,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Black Knight: Sinister General",
+      "position": 800,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Black Knight: The Night's Blade",
+      "position": 801,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Petrine: Icy Flame-Lancer",
+      "position": 802,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Gromell: Bolt Axe General",
+      "position": 803,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Ilyana: Treat Harvester",
+      "position": 804,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Ilyana: Hungering Mage",
+      "position": 805,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Ilyana: Awakened Appetite",
+      "position": 806,
+      "origins": [
+        8
+      ]
+    },
+    {
+      "hero": "Micaiah: Priestess of Dawn",
+      "position": 807,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Micaiah: Summer's Dawn",
+      "position": 808,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Micaiah: Queen of Dawn",
+      "position": 809,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Micaiah: Dawn Wind's Duo",
+      "position": 810,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Micaiah: Radiant Queen",
+      "position": 811,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Micaiah: Wavecrest Maiden",
+      "position": 812,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Micaiah: Dawning Maiden",
+      "position": 813,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Micaiah: Of Dawn",
+      "position": 814,
+      "origins": [
+        9,
+        14
+      ]
+    },
+    {
+      "hero": "Micaiah: Beyond Conflict",
+      "position": 815,
+      "origins": [
+        9,
+        11
+      ]
+    },
+    {
+      "hero": "Sothe: Zephyr",
+      "position": 816,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Sothe: Rushing Dawn",
+      "position": 817,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Sothe: Dawning Zephyr",
+      "position": 818,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Sothe: In the Breeze",
+      "position": 819,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Edward: Blade of Justice",
+      "position": 820,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Leonardo: Freedom's Arrow",
+      "position": 821,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Soren: Wind of Tradition",
+      "position": 822,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Soren: Radiant Confidant",
+      "position": 823,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Shinon: Sharptongue Ninja",
+      "position": 824,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Rhys: Gentle Basker",
+      "position": 825,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Mia: Moonlit Witch",
+      "position": 826,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Mia: Harmonic Blades",
+      "position": 827,
+      "origins": [
+        9,
+        10
+      ]
+    },
+    {
+      "hero": "Mia: Zenith Challenger",
+      "position": 828,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Jorge: Traveling Peddler",
+      "position": 829,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Pelleas: Ashnard's Orphan",
+      "position": 830,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Ike: Vanguard Legend",
+      "position": 831,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Ike: Zeal Unleashed",
+      "position": 832,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Ike: Of Radiance",
+      "position": 833,
+      "origins": [
+        9,
+        14
+      ]
+    },
+    {
+      "hero": "Elincia: Estival Princess",
+      "position": 834,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Elincia: Seaside Queen",
+      "position": 835,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Elincia: Devoted Queen",
+      "position": 836,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Elincia: Undaunted Queen",
+      "position": 837,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Lucia: Tireless Advisor",
+      "position": 838,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Geoffrey: Realm's Protector",
+      "position": 839,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Bastian: Crimea's Keystone",
+      "position": 840,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Ludveck: Rebellious Duke",
+      "position": 841,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Heather: Wandering Ninja",
+      "position": 842,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Caineghis: Gallia's Lion King",
+      "position": 843,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Skrimir: Echoing Howl",
+      "position": 844,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Ranulf: Friend of Nations",
+      "position": 845,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Ranulf: Considerate Gaze",
+      "position": 846,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Lethe: Gallia's Valkyrie",
+      "position": 847,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Lethe: New Year's Claw",
+      "position": 848,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Lethe: Cat Attack",
+      "position": 849,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Mordecai: Kindhearted Tiger",
+      "position": 850,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Mordecai: Gentle Firetender",
+      "position": 851,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Kyza: Tiger of Fortune",
+      "position": 852,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Lyre: Lap Cat of Luxury",
+      "position": 853,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Dheginsea: Harvest Goldoan",
+      "position": 854,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Kurthnaga: Autumn Goldoan",
+      "position": 855,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Ena: Autumn Tactician",
+      "position": 856,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Tibarn: Lord of the Air",
+      "position": 857,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Tibarn: Shipless Pirate",
+      "position": 858,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Tibarn: Storm King",
+      "position": 859,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Janaff: Treat or Talon",
+      "position": 860,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Rafiel: Blessed Wings",
+      "position": 861,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Reyson: White Prince",
+      "position": 862,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Leanne: Forest's Song",
+      "position": 863,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Naesala: Sky's Shadow",
+      "position": 864,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Naesala: Sea's Shadow",
+      "position": 865,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Tormod: Indomitable Will",
+      "position": 866,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Muarim: Raw Instinct",
+      "position": 867,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Vika: Sea-Dark Wing",
+      "position": 868,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Nailah: Unflinching Eye",
+      "position": 869,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Nailah: Blessed Queen",
+      "position": 870,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Nailah: Hatari Scorcher",
+      "position": 871,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Altina: Dawn's Trueblade",
+      "position": 872,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Altina: Cross-Time Duo",
+      "position": 873,
+      "origins": [
+        8,
+        9
+      ]
+    },
+    {
+      "hero": "Altina: Unrivaled Dawn",
+      "position": 874,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Sanaki: Begnion's Apostle",
+      "position": 875,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Sanaki: Dawnsworn Ninja",
+      "position": 876,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Zelgius: Jet-Black General",
+      "position": 877,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Zelgius: Ninja Knight",
+      "position": 878,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Black Knight: Mortal Legend",
+      "position": 879,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Oliver: Admirer of Beauty",
+      "position": 880,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Jarod: Nevassa General",
+      "position": 881,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Haar: Black Tempest",
+      "position": 882,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Haar: Tempest Runner",
+      "position": 883,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Ashera: Order Goddess",
+      "position": 884,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Yune: Chaos Goddess",
+      "position": 885,
+      "origins": [
+        9
+      ]
+    },
+    {
+      "hero": "Chrom: Exalted Prince",
+      "position": 886,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Chrom: Spring Exalt",
+      "position": 887,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Chrom: Gifted Leader",
+      "position": 888,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Chrom: Knight Exalt",
+      "position": 889,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Chrom: Crowned Exalt",
+      "position": 890,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Chrom: Fate-Defying Duo",
+      "position": 891,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Chrom: Fated Honor",
+      "position": 892,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Chrom: Fell Exalt",
+      "position": 893,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Chrom: Pivotal Blow",
+      "position": 894,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Chrom: Revitalized Fate",
+      "position": 895,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: High Deliverer",
+      "position": 896,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Festive Tactician",
+      "position": 897,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Fell Reincarnation",
+      "position": 898,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Fall Reincarnation",
+      "position": 899,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Exalt's Other Half",
+      "position": 900,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Keen Groom",
+      "position": 901,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Exalt's Deliverer",
+      "position": 902,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Fated Vessel",
+      "position": 903,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Mystery Tactician",
+      "position": 904,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Seaside Tactician",
+      "position": 905,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Fell Vessel",
+      "position": 906,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Fall Vessel",
+      "position": 907,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Tactful Deliverer",
+      "position": 908,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Fell Tactician",
+      "position": 909,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Vessels of Fate",
+      "position": 910,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Exalt's Right Hand",
+      "position": 911,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Robin: Onsen Tactician",
+      "position": 912,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lissa: Sprightly Cleric",
+      "position": 913,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lissa: Pure Joy",
+      "position": 914,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lissa: Sweet Celebrant",
+      "position": 915,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lissa: Littlest Princess",
+      "position": 916,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Emmeryn: Gentle Exalt",
+      "position": 917,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Emmeryn: Selfless Exalt",
+      "position": 918,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Frederick: Polite Knight",
+      "position": 919,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Frederick: Horizon Watcher",
+      "position": 920,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Frederick: Youth in Service",
+      "position": 921,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Sully: Crimson Knight",
+      "position": 922,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Stahl: Viridian Knight",
+      "position": 923,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Sumia: Maid of Flowers",
+      "position": 924,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Maribelle: Dire Damsel",
+      "position": 925,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Vaike: Sunbaked Stunner",
+      "position": 926,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Miriel: Rapier Intellect",
+      "position": 927,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Ricken: Shepherd Novice",
+      "position": 928,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Kellam: Pumpkin Knight",
+      "position": 929,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Cordelia: Knight Paragon",
+      "position": 930,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Cordelia: Perfect Bride",
+      "position": 931,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Cordelia: Knight Paradise",
+      "position": 932,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Cordelia: Unyielding Snow",
+      "position": 933,
+      "origins": [
+        10,
+        11
+      ]
+    },
+    {
+      "hero": "Phila: Pegasus Master",
+      "position": 934,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Libra: Fetching Friar",
+      "position": 935,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Gaius: Candy Stealer",
+      "position": 936,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Gaius: Thief Exposed",
+      "position": 937,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Donnel: Village Hero",
+      "position": 938,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Donnel: Sunny Villager",
+      "position": 939,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Basilio: Feroxi West-Khan",
+      "position": 940,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Flavia: Feroxi East-Khan",
+      "position": 941,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Flavia: Bold Bride",
+      "position": 942,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lon'qu: Solitary Blade",
+      "position": 943,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lon'qu: Spring Jitters",
+      "position": 944,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Olivia: Blushing Beauty",
+      "position": 945,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Olivia: Festival Dancer",
+      "position": 946,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Olivia: Sky-High Dancer",
+      "position": 947,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Olivia: Wavecrest Dancer",
+      "position": 948,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Gangrel: Plegia's Mad King",
+      "position": 949,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Henry: Twisted Mind",
+      "position": 950,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Henry: Happy Vampire",
+      "position": 951,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Henry: Peculiar Egg",
+      "position": 952,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Tharja: Dark Shadow",
+      "position": 953,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Tharja: \"Normal Girl\"",
+      "position": 954,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Tharja: Obsessive Bride",
+      "position": 955,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Tharja: Florid Charmer",
+      "position": 956,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Tharja: Beach Dark Mage",
+      "position": 957,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Tharja: Shadow Ninja",
+      "position": 958,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Tharja: Gloomy Mage",
+      "position": 959,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Tharja: Dour Cheer",
+      "position": 960,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Mustafa: Plegian Champion",
+      "position": 961,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Grima: Tyrant of Ruin",
+      "position": 962,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Grima: Tyrant of Despair",
+      "position": 963,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Validar: Fell Architect",
+      "position": 964,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Aversa: Dark One",
+      "position": 965,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Walhart: The Conqueror",
+      "position": 966,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Cervantes: Invincible General",
+      "position": 967,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Excellus: Conqueror’s Wile",
+      "position": 968,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Yen'fay: Blade Legend",
+      "position": 969,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Say'ri: Chon'sin's Blade",
+      "position": 970,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Say'ri: Righteous Bride",
+      "position": 971,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Virion: Elite Archer",
+      "position": 972,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Cherche: Wyvern Friend",
+      "position": 973,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Cherche: Shaded by Wings",
+      "position": 974,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Tiki: Naga's Voice",
+      "position": 975,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Tiki: Summering Scion",
+      "position": 976,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Tiki: Fated Divinity",
+      "position": 977,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Tiki: Bridal Reflections",
+      "position": 978,
+      "origins": [
+        1,
+        10
+      ]
+    },
+    {
+      "hero": "Tiki: Everlasting Voice",
+      "position": 979,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Gregor: Swell Sword",
+      "position": 980,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Nowi: Eternal Youth",
+      "position": 981,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Nowi: Eternal Witch",
+      "position": 982,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Panne: Proud Taguel",
+      "position": 983,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Panne: Welcoming Dawn",
+      "position": 984,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Priam: Radiant Hero",
+      "position": 985,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Anna: Secret Seller",
+      "position": 986,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Anna: Secret Charmer",
+      "position": 987,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lucina: Future Witness",
+      "position": 988,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lucina: Spring Exalt",
+      "position": 989,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Marth: Enigmatic Blade",
+      "position": 990,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lucina: Brave Princess",
+      "position": 991,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lucina: Glorious Archer",
+      "position": 992,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lucina: Future Fondness",
+      "position": 993,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lucina: Fate's Resolve",
+      "position": 994,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lucina: Shadows of Fate",
+      "position": 995,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Marth: Masked Gladiator",
+      "position": 996,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Lucina: Of Awakening",
+      "position": 997,
+      "origins": [
+        10,
+        14
+      ]
+    },
+    {
+      "hero": "Owain: Chosen One",
+      "position": 998,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Owain: Devoted Defender",
+      "position": 999,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Inigo: Indigo Dancer",
+      "position": 1000,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Inigo: Festival Flower",
+      "position": 1001,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Inigo: Flower Picker",
+      "position": 1002,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Brady: Daunting Priest",
+      "position": 1003,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Gerome: Masked Rider",
+      "position": 1004,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Yarne: Timid Taguel",
+      "position": 1005,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Yarne: Hoppy New Year",
+      "position": 1006,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Yarne: Trick or Taguel",
+      "position": 1007,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Laurent: The Elucidator",
+      "position": 1008,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Morgan: Lad from Afar",
+      "position": 1009,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Morgan: Fated Darkness",
+      "position": 1010,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Morgan: Lass from Afar",
+      "position": 1011,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Morgan: Devoted Darkness",
+      "position": 1012,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Severa: Bitter Blossom",
+      "position": 1013,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Severa: Secret Dreamer",
+      "position": 1014,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Noire: Shade Seeker",
+      "position": 1015,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Noire: Demurely Deft",
+      "position": 1016,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Noire: Of Two Minds",
+      "position": 1017,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Nah: Little Miss",
+      "position": 1018,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Nah: Grateful One",
+      "position": 1019,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Kjelle: Fair Fighter",
+      "position": 1020,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Cynthia: Hero Chaser",
+      "position": 1021,
+      "origins": [
+        10
+      ]
+    },
+    {
+      "hero": "Naga: Dragon Divinity",
+      "position": 1022,
+      "origins": [
+        1,
+        10
+      ]
+    },
+    {
+      "hero": "Corrin: Fateful Prince",
+      "position": 1023,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Enjoying Tradition",
+      "position": 1024,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Dream Prince",
+      "position": 1025,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Bloodbound Beast",
+      "position": 1026,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Daylight Ninja Act",
+      "position": 1027,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Celestial Sorcerer",
+      "position": 1028,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Child of Dawn",
+      "position": 1029,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Young Kinship",
+      "position": 1030,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Fateful Princess",
+      "position": 1031,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Novice Vacationer",
+      "position": 1032,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Dream Princess",
+      "position": 1033,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Wailing Soul",
+      "position": 1034,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Child of Dusk",
+      "position": 1035,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Nightfall Ninja Act",
+      "position": 1036,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Starry Seer",
+      "position": 1037,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Silent Bloodline",
+      "position": 1038,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Corrin: Of Fates",
+      "position": 1039,
+      "origins": [
+        11,
+        14
+      ]
+    },
+    {
+      "hero": "Azura: Lady of the Lake",
+      "position": 1040,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Azura: Lady of Ballads",
+      "position": 1041,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Azura: Celebratory Spirit",
+      "position": 1042,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Azura: Young Songstress",
+      "position": 1043,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Azura: Vallite Songstress",
+      "position": 1044,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Azura: Hatari Duet",
+      "position": 1045,
+      "origins": [
+        8,
+        11
+      ]
+    },
+    {
+      "hero": "Azura: Song's Reflection",
+      "position": 1046,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Azura: Lady of the Sky",
+      "position": 1047,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Azura: Lady of Reflection",
+      "position": 1048,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Gunter: Inveterate Soldier",
+      "position": 1049,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Felicia: Maid Mayhem",
+      "position": 1050,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Felicia: Off the Menu",
+      "position": 1051,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Felicia: Confidently Cold",
+      "position": 1052,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Jakob: Devoted Servant",
+      "position": 1053,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Jakob: Devoted Monster",
+      "position": 1054,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Lilith: Astral Daughter",
+      "position": 1055,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Lilith: Silent Broodling",
+      "position": 1056,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Mikoto: Caring Mother",
+      "position": 1057,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Ryoma: Peerless Samurai",
+      "position": 1058,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Ryoma: Supreme Samurai",
+      "position": 1059,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Ryoma: Dancing Samurai",
+      "position": 1060,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Ryoma: Samurai at Ease",
+      "position": 1061,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Ryoma: Warrior of Bonds",
+      "position": 1062,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Saizo: Angry Ninja",
+      "position": 1063,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Saizo: Hoshido's Flame",
+      "position": 1064,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Kagero: Honorable Ninja",
+      "position": 1065,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Kagero: Spring Ninja",
+      "position": 1066,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Kagero: Beverage Ninja",
+      "position": 1067,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Kagero: Bond Unwavering",
+      "position": 1068,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Hinoka: Warrior Princess",
+      "position": 1069,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Hinoka: Blue Sky Warrior",
+      "position": 1070,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Hinoka: Relaxed Warrior",
+      "position": 1071,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Hinoka: Fair Pirate Pair",
+      "position": 1072,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Hinoka: Thundering Wings",
+      "position": 1073,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Hinoka: Warrior of Gusto",
+      "position": 1074,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Azama: Carefree Monk",
+      "position": 1075,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Setsuna: Absent Archer",
+      "position": 1076,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Takumi: Wild Card",
+      "position": 1077,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Takumi: Prince of Soup",
+      "position": 1078,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Takumi: Empty Vessel",
+      "position": 1079,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Takumi: Prince at Play",
+      "position": 1080,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Takumi: Troubled Heart",
+      "position": 1081,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Takumi: Wishful Spark",
+      "position": 1082,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Takumi: Divine Bow Prince",
+      "position": 1083,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Hinata: Wild Samurai",
+      "position": 1084,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Hinata: Samurai Groom",
+      "position": 1085,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Oboro: Fierce Fighter",
+      "position": 1086,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Oboro: Fierce Bride-to-Be",
+      "position": 1087,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Sakura: Loving Priestess",
+      "position": 1088,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Sakura: Gentle Nekomata",
+      "position": 1089,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Sakura: Hot-Spring Healer",
+      "position": 1090,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Sakura: In Full Bloom",
+      "position": 1091,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Hana: Focused Samurai",
+      "position": 1092,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Hana: Focused Ninja",
+      "position": 1093,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Hana: Striving Heart",
+      "position": 1094,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Subaki: Perfect Expert",
+      "position": 1095,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Kaze: Easygoing Ninja",
+      "position": 1096,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Orochi: Merry Diviner",
+      "position": 1097,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Reina: Sanguine Shinobi",
+      "position": 1098,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Yukimura: Puppet Master",
+      "position": 1099,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Haitaka: Persistent General",
+      "position": 1100,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Mozu: Tragic Start",
+      "position": 1101,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Rinkah: Scion of Flame",
+      "position": 1102,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Rinkah: Consuming Flame",
+      "position": 1103,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Fuga: Force of Gales",
+      "position": 1104,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Hayato: Diviner of Reppu",
+      "position": 1105,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Kaden: Kitsune Braggart",
+      "position": 1106,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Kaden: Refreshed Kitsune",
+      "position": 1107,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Garon: King of Nohr",
+      "position": 1108,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Xander: Paragon Knight",
+      "position": 1109,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Xander: Spring Prince",
+      "position": 1110,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Xander: Student Swimmer",
+      "position": 1111,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Xander: Dancing Knight",
+      "position": 1112,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Xander: Gallant King",
+      "position": 1113,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Xander: Focused Firstborn",
+      "position": 1114,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Laslow: Dancing Duelist",
+      "position": 1115,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Peri: Playful Slayer",
+      "position": 1116,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Camilla: Bewitching Beauty",
+      "position": 1117,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Camilla: Spring Princess",
+      "position": 1118,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Camilla: Holiday Traveler",
+      "position": 1119,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Camilla: Tropical Beauty",
+      "position": 1120,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Camilla: Flower of Fantasy",
+      "position": 1121,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Camilla: Steamy Secrets",
+      "position": 1122,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Camilla: Light of Nohr",
+      "position": 1123,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Camilla: Midnight Bloom",
+      "position": 1124,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Camilla: Alluring Darkness",
+      "position": 1125,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Camilla: Young Beauty",
+      "position": 1126,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Selena: Cutting Wit",
+      "position": 1127,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Beruka: Quiet Assassin",
+      "position": 1128,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Leo: Sorcerous Prince",
+      "position": 1129,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Leo: Seashore's Prince",
+      "position": 1130,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Leo: Extra Tomatoes",
+      "position": 1131,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Leo: Shrouded Heart",
+      "position": 1132,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Leo: Festival Bonds",
+      "position": 1133,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Leo: Dark Sprout",
+      "position": 1134,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Odin: Potent Force",
+      "position": 1135,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Niles: Cruel to Be Kind",
+      "position": 1136,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Niles: Forbidden Tease",
+      "position": 1137,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Elise: Budding Flower",
+      "position": 1138,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Elise: Tropical Flower",
+      "position": 1139,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Elise: Bubbling Flower",
+      "position": 1140,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Elise: Sweetheart Royals",
+      "position": 1141,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Elise: Sparkling Smile",
+      "position": 1142,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Elise: Sincere Sister",
+      "position": 1143,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Arthur: Hapless Hero",
+      "position": 1144,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Effie: Army of One",
+      "position": 1145,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Effie: Dedicated Heart",
+      "position": 1146,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Silas: Loyal Knight",
+      "position": 1147,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Benny: Sensitive Soul",
+      "position": 1148,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Charlotte: Money Maiden",
+      "position": 1149,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Charlotte: Wily Warrior",
+      "position": 1150,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Iago: Nohr's Tactician",
+      "position": 1151,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Hans: Ambitious Brute",
+      "position": 1152,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Flora: Cold as Ice",
+      "position": 1153,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Flora: Signature Dish",
+      "position": 1154,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Flora: Polar-Perfect",
+      "position": 1155,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Keaton: Lupine Collector",
+      "position": 1156,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Keaton: Resolved Wolfskin",
+      "position": 1157,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Nyx: Rulebreaker Mage",
+      "position": 1158,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Shura: Righteous Rebel",
+      "position": 1159,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Scarlet: Rebellious Streak",
+      "position": 1160,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Candace: Sly Snatcher",
+      "position": 1161,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Kana: Dragon Spawn",
+      "position": 1162,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Kana: Rising Dragon",
+      "position": 1163,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Kana: Dragon Princess",
+      "position": 1164,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Kana: Rising Sunlight",
+      "position": 1165,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Shigure: Dark Sky Singer",
+      "position": 1166,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Shigure: Uplifting Artist",
+      "position": 1167,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Dwyer: Sleepy Butler",
+      "position": 1168,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Midori: Reliable Chemist",
+      "position": 1169,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Shiro: Raw Talent",
+      "position": 1170,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Kiragi: Upbeat Archer",
+      "position": 1171,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Selkie: Free Spirit",
+      "position": 1172,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Selkie: New Year's Spirit",
+      "position": 1173,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Caeldori: Perfect Angel",
+      "position": 1174,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Rhajat: Black Magician",
+      "position": 1175,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Siegbert: Future King",
+      "position": 1176,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Forrest: Fashion Forward",
+      "position": 1177,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Velouria: Wolf Cub",
+      "position": 1178,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Velouria: Renewed Wolfpup",
+      "position": 1179,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Ophelia: Dramatic Heroine",
+      "position": 1180,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Ophelia: Starlit Maiden",
+      "position": 1181,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Soleil: Adorable Adorer",
+      "position": 1182,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Nina: Eye Spy",
+      "position": 1183,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Nina: Shadowy Figures",
+      "position": 1184,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Arete: Requiem's Beauty",
+      "position": 1185,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Anankos: Seething Silence",
+      "position": 1186,
+      "origins": [
+        11
+      ]
+    },
+    {
+      "hero": "Byleth: Tested Professor",
+      "position": 1187,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Byleth: The Fódlan Star",
+      "position": 1188,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Byleth: Fount of Learning",
+      "position": 1189,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Byleth: Frosty Professors",
+      "position": 1190,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Byleth: Anchor of Hope",
+      "position": 1191,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Byleth: Of the Academy",
+      "position": 1192,
+      "origins": [
+        12,
+        14
+      ]
+    },
+    {
+      "hero": "Byleth: Ashen Nightmare",
+      "position": 1193,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Byleth: Proven Professor",
+      "position": 1194,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Byleth: Fell Star's Duo",
+      "position": 1195,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Byleth: The Fódlan Light",
+      "position": 1196,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Byleth: Sublime Light",
+      "position": 1197,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Byleth: Vengeance Vessel",
+      "position": 1198,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Byleth: Cheer Power",
+      "position": 1199,
+      "origins": [
+        11,
+        12
+      ]
+    },
+    {
+      "hero": "Sothis: Girl on the Throne",
+      "position": 1200,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Sothis: Silver Specter",
+      "position": 1201,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Sothis: Bound-Spirit Duo",
+      "position": 1202,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Seiros: Saint of Legend",
+      "position": 1203,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Rhea: Witch of Creation",
+      "position": 1204,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Rhea: Immaculate One",
+      "position": 1205,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Rhea: Loving Matriarch",
+      "position": 1206,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Rhea: Aura of Love",
+      "position": 1207,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Rhea: The Final Child",
+      "position": 1208,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Edelgard: The Future",
+      "position": 1209,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Edelgard: Flame Emperor",
+      "position": 1210,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Edelgard: Adrestian Emperor",
+      "position": 1211,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Edelgard: Hegemon Husk",
+      "position": 1212,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Edelgard: Sun Empresses",
+      "position": 1213,
+      "origins": [
+        9,
+        12
+      ]
+    },
+    {
+      "hero": "Edelgard: Snowfall Future",
+      "position": 1214,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Edelgard: Adorned Eagle",
+      "position": 1215,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Edelgard: Of Rivals",
+      "position": 1216,
+      "origins": [
+        12,
+        14
+      ]
+    },
+    {
+      "hero": "Edelgard: Promising Path",
+      "position": 1217,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Edelgard: Beyond Bounds",
+      "position": 1218,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Hubert: Sinister Servant",
+      "position": 1219,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Hubert: Crimson Schemer",
+      "position": 1220,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Ferdinand: Noblest of Nobles",
+      "position": 1221,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Ferdinand: Highborn Sipper",
+      "position": 1222,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Linhardt: Hevring's Heir",
+      "position": 1223,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Linhardt: Spring Snoozer",
+      "position": 1224,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Caspar: Summer Intensity",
+      "position": 1225,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Caspar: Hotheaded Inciter",
+      "position": 1226,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Bernadetta: Eternal Loner",
+      "position": 1227,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Bernadetta: Frosty Shut-In",
+      "position": 1228,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Bernadetta: Late Hibernator",
+      "position": 1229,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Bernadetta: Sheltered Loner",
+      "position": 1230,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dorothea: Solar Songstress",
+      "position": 1231,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dorothea: Twilit Harmony",
+      "position": 1232,
+      "origins": [
+        3,
+        12
+      ]
+    },
+    {
+      "hero": "Dorothea: Yuletide Dancer",
+      "position": 1233,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dorothea: Daring Ex-Singer",
+      "position": 1234,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dorothea: Rosy Songstress",
+      "position": 1235,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Petra: Princess of Brigid",
+      "position": 1236,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Petra: Faraway Sun",
+      "position": 1237,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dimitri: The Protector",
+      "position": 1238,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dimitri: King of Faerghus",
+      "position": 1239,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dimitri: Savior King",
+      "position": 1240,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dimitri: Savage Boar",
+      "position": 1241,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dimitri: Sky-Blue Lion",
+      "position": 1242,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dimitri: Blessed Protector",
+      "position": 1243,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dimitri: Stargazing Lion",
+      "position": 1244,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dimitri: Dual Idealists",
+      "position": 1245,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dedue: Dimitri's Vassal",
+      "position": 1246,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dedue: Loyal Life Guard",
+      "position": 1247,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Dedue: Dauntless Beast",
+      "position": 1248,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Felix: Icy Gift Giver",
+      "position": 1249,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Felix: Lone-Wolf Blade",
+      "position": 1250,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Felix: Sword Savant",
+      "position": 1251,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Felix: Savant's Service",
+      "position": 1252,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Felix: Zealous Yearning",
+      "position": 1253,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Ashe: Fabled Sea Knight",
+      "position": 1254,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Ashe: Budding Chivalry",
+      "position": 1255,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Ashe: Chivalric Amends",
+      "position": 1256,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Sylvain: Hanging with Tens",
+      "position": 1257,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Sylvain: Consummate Flirt",
+      "position": 1258,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Sylvain: Spring Flingster",
+      "position": 1259,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Sylvain: Ladies' Knight",
+      "position": 1260,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Mercedes: Kindly Devotee",
+      "position": 1261,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Mercedes: Unfussed Basker",
+      "position": 1262,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Annette: Overachiever",
+      "position": 1263,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Annette: Festive Helper",
+      "position": 1264,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Ingrid: Solstice Knight",
+      "position": 1265,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Ingrid: Galatea's Heir",
+      "position": 1266,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Ingrid: Beacon of Honor",
+      "position": 1267,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Ingrid: Cordial Teatime",
+      "position": 1268,
+      "origins": [
+        4,
+        12
+      ]
+    },
+    {
+      "hero": "Ingrid: Chivalrous Heart",
+      "position": 1269,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Claude: The Schemer",
+      "position": 1270,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Claude: Almyra's King",
+      "position": 1271,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Claude: King of Unification",
+      "position": 1272,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Claude: Tropical Trouble",
+      "position": 1273,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Claude: Golden Breeze",
+      "position": 1274,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Claude: Yuletide Schemer",
+      "position": 1275,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Claude: Distant Deer",
+      "position": 1276,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Claude: Budding Ambition",
+      "position": 1277,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Lorenz: Highborn Heat",
+      "position": 1278,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Lorenz: Red-Rose Noble",
+      "position": 1279,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Raphael: Muscle-Monger",
+      "position": 1280,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Raphael: Beast of Leicester",
+      "position": 1281,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Ignatz: Snowscape Artist",
+      "position": 1282,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Ignatz: Worldly Artist",
+      "position": 1283,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Lysithea: Child Prodigy",
+      "position": 1284,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Lysithea: Earnest Seeker",
+      "position": 1285,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Lysithea: Gifted Students",
+      "position": 1286,
+      "origins": [
+        7,
+        12
+      ]
+    },
+    {
+      "hero": "Lysithea: Tea Sweetener",
+      "position": 1287,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Lysithea: Duality Prodigy",
+      "position": 1288,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Marianne: Adopted Daughter",
+      "position": 1289,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Marianne: Serene Adherent",
+      "position": 1290,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Marianne: Cursed Blessing",
+      "position": 1291,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Hilda: Idle Maiden",
+      "position": 1292,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Hilda: Holiday Layabout",
+      "position": 1293,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Hilda: Deer's Two-Piece",
+      "position": 1294,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Hilda: Helping Hand",
+      "position": 1295,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Hilda: Skyward Wings",
+      "position": 1296,
+      "origins": [
+        6,
+        12
+      ]
+    },
+    {
+      "hero": "Leonie: Relentless Rays",
+      "position": 1297,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Yuri: Ashen Valiant",
+      "position": 1298,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Yuri: Underground Lord",
+      "position": 1299,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Yuri: Tropical Wolf",
+      "position": 1300,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Balthus: King of Grappling",
+      "position": 1301,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Balthus: Summer's Big Bet",
+      "position": 1302,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Constance: Fallen Noble",
+      "position": 1303,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Hapi: Drawn-Out Sigh",
+      "position": 1304,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Hapi: Eternal Sunlit Pair",
+      "position": 1305,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Aelfric: Custodian Monk",
+      "position": 1306,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Seteth: Seiros Adherent",
+      "position": 1307,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Flayn: Playing Innocent",
+      "position": 1308,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Flayn: Silly Kitty-Cat",
+      "position": 1309,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Manuela: Silver Caroler",
+      "position": 1310,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Catherine: Thunder Knight",
+      "position": 1311,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Shamir: Archer Apart",
+      "position": 1312,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Shamir: Lone-Moon Ninja",
+      "position": 1313,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Shamir: Heartbeats United",
+      "position": 1314,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Shamir: Sniper's Path",
+      "position": 1315,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Cyril: Rhea's Attendant",
+      "position": 1316,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Jeralt: Blade Breaker",
+      "position": 1317,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Rodrigue: Faerghus Shield",
+      "position": 1318,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Gatekeeper: Nothing to Report",
+      "position": 1319,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Gatekeeper: Midwinter Toil",
+      "position": 1320,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Kronya: Gleaming Blade",
+      "position": 1321,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Solon: Church Shadow",
+      "position": 1322,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Cornelia: Saint Consumed",
+      "position": 1323,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Death Knight: The Reaper",
+      "position": 1324,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Miklan: Destitute Rebel",
+      "position": 1325,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Flame Emperor: Bringer of War",
+      "position": 1326,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Metodey: Shrewd Braggart",
+      "position": 1327,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Nemesis: King of Liberation",
+      "position": 1328,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Shez: Rising Mercenary",
+      "position": 1329,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Shez: Mercenary Shade",
+      "position": 1330,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Shez: Dual Sword Master",
+      "position": 1331,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Shez: Ninja Mercenary",
+      "position": 1332,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Shez: Keen Mercenary",
+      "position": 1333,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Shez: Sharpest Blades",
+      "position": 1334,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Shez: Mercenary Shine",
+      "position": 1335,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Shez: Snowfield Envoy",
+      "position": 1336,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Shez: Covert Mercenary",
+      "position": 1337,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Arval: Cycle Keeper",
+      "position": 1338,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Monica: Favored Vassal",
+      "position": 1339,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Holst: Hero of Leicester",
+      "position": 1340,
+      "origins": [
+        12
+      ]
+    },
+    {
+      "hero": "Itsuki: Finding a Path",
+      "position": 1341,
+      "origins": [
+        13
+      ]
+    },
+    {
+      "hero": "Tsubasa: Madcap Idol",
+      "position": 1342,
+      "origins": [
+        13
+      ]
+    },
+    {
+      "hero": "Tsubasa: Summoned Girl",
+      "position": 1343,
+      "origins": [
+        13
+      ]
+    },
+    {
+      "hero": "Mamori: Microwavin' Idol",
+      "position": 1344,
+      "origins": [
+        13
+      ]
+    },
+    {
+      "hero": "Kiria: Cool Façade",
+      "position": 1345,
+      "origins": [
+        13
+      ]
+    },
+    {
+      "hero": "Eleonora: Shooting Starlet",
+      "position": 1346,
+      "origins": [
+        13
+      ]
+    },
+    {
+      "hero": "Alear: Dragon Youth",
+      "position": 1347,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Alear: Engaging Fire",
+      "position": 1348,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Alear: Gifted Dragons",
+      "position": 1349,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Alear: Fell Dragon Child",
+      "position": 1350,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Alear: And Sommie!",
+      "position": 1351,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Alear: Dragon Child",
+      "position": 1352,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Alear: Awoken Divinity",
+      "position": 1353,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Alear: Seaside Dragon",
+      "position": 1354,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Alear: Red Days Past",
+      "position": 1355,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Alear: Casual Duelist",
+      "position": 1356,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Lumera: Dragon Monarch",
+      "position": 1357,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Lumera: In Distant Skies",
+      "position": 1358,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Lumera: Corrupted Dragon",
+      "position": 1359,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Clanne: Summer Fan",
+      "position": 1360,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Framme: Spring Fangirl",
+      "position": 1361,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Alfred: Floral Protector",
+      "position": 1362,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Alfred: Joyous Snowdrop",
+      "position": 1363,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Boucheron: Big Softy",
+      "position": 1364,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Etie: Fitness Fighter",
+      "position": 1365,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Céline: Joyous Royal",
+      "position": 1366,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Céline: Teatime Ninja",
+      "position": 1367,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Céline: Blissful Tea Party",
+      "position": 1368,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Céline: Love's Aroma",
+      "position": 1369,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Louis: Petal Knight",
+      "position": 1370,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Chloé: Fairy-Tale Flier",
+      "position": 1371,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Chloé: Spring Wings",
+      "position": 1372,
+      "origins": [
+        10,
+        14
+      ]
+    },
+    {
+      "hero": "Diamant: Rising Power",
+      "position": 1373,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Diamant: Gallant Ninja",
+      "position": 1374,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Diamant: Fortified King",
+      "position": 1375,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Jade: Iron Wall",
+      "position": 1376,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Alcryst: Tender Archer",
+      "position": 1377,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Alcryst: Tender Groom",
+      "position": 1378,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Lapis: Mighty Flower",
+      "position": 1379,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Lapis: Mighty Bride",
+      "position": 1380,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Lapis: Forager of the Sea",
+      "position": 1381,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Citrinne: Caring Noble",
+      "position": 1382,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Ivy: Tidal Breeze",
+      "position": 1383,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Ivy: Snow Queen",
+      "position": 1384,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Ivy: Flurry Embrace",
+      "position": 1385,
+      "origins": [
+        11,
+        14
+      ]
+    },
+    {
+      "hero": "Ivy: Bewitching Ruler",
+      "position": 1386,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Zelkov: Winter Shadow",
+      "position": 1387,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Kagetsu: Onigiri Samurai",
+      "position": 1388,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Hortensia: Little Charmer",
+      "position": 1389,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Hortensia: Winter's Dearest",
+      "position": 1390,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Hortensia: Cutesplosion",
+      "position": 1391,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Rosado: Adorable Artist",
+      "position": 1392,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Goldmary: Coy Beach Divas",
+      "position": 1393,
+      "origins": [
+        12,
+        14
+      ]
+    },
+    {
+      "hero": "Goldmary: Darling Demon",
+      "position": 1394,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Timerra: Trick or Meat",
+      "position": 1395,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Timerra: Desert Warrior",
+      "position": 1396,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Merrin: Suave Knight",
+      "position": 1397,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Panette: Classy Brawler",
+      "position": 1398,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Fogado: Affable Prince",
+      "position": 1399,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Fogado: Summer of Bliss",
+      "position": 1400,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Pandreo: Party Priest",
+      "position": 1401,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Anna: Twice the Anna",
+      "position": 1402,
+      "origins": [
+        10,
+        14
+      ]
+    },
+    {
+      "hero": "Yunaka: Spirited Envoy",
+      "position": 1403,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Yunaka: Hidden Mask",
+      "position": 1404,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Yunaka: Stealthy Imitator",
+      "position": 1405,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Seadall: Misfortune-Teller",
+      "position": 1406,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Sombron: Fell Dragon King",
+      "position": 1407,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Veyle: Gentle Dragon",
+      "position": 1408,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Veyle: Fell Successor",
+      "position": 1409,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Veyle: Spring Tranquility",
+      "position": 1410,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Veyle: Sister Dragons",
+      "position": 1411,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Zephia: Scheming Dragon",
+      "position": 1412,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Zelestia: Loving Leader",
+      "position": 1413,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Mauvier: Penitent Knight",
+      "position": 1414,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Griss: Indulging Pain",
+      "position": 1415,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Marni: Pining for Praise",
+      "position": 1416,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Nel: Stoic Bride",
+      "position": 1417,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Nel: Stoic Dragon",
+      "position": 1418,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Rafal: Atoning Dragon",
+      "position": 1419,
+      "origins": [
+        14
+      ]
+    },
+    {
+      "hero": "Kurt: Light Seekers",
+      "position": 1420,
+      "origins": [
+        15
+      ]
+    },
+    {
+      "hero": "Shea: Guide to Bounty",
+      "position": 1421,
+      "origins": [
+        15
+      ]
+    },
+    {
+      "hero": "Eshmel: Pale Raven Herald",
+      "position": 1422,
+      "origins": [
+        16
+      ]
+    },
+    {
+      "hero": "Cai: Child of Ribeira",
+      "position": 1423,
+      "origins": [
+        16
+      ]
+    },
+    {
+      "hero": "Dietrich: Alluring Killer",
+      "position": 1424,
+      "origins": [
+        16
+      ]
+    },
+    {
+      "hero": "Theodora: Mighty Queen",
+      "position": 1425,
+      "origins": [
+        16
+      ]
+    },
+    {
+      "hero": "Leda: Rose of Caelus",
+      "position": 1426,
+      "origins": [
+        16
+      ]
+    }
+  ]
+}
