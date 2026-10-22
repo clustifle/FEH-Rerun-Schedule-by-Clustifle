@@ -9,7 +9,6 @@ import './HeroProfilePage.css';
 import {V2HeroInfo} from './V2Workspace';
 import {useEffect,useRef,useState,type ReactNode} from 'react';
 import {Shield,Pencil,ArrowUpRight,Download} from 'lucide-react';
-import HeroPortraitMarks from './HeroPortraitMarks';
 import {assetUrl,portraitUrl} from './static-data';
 import {viewUrl,goTo} from './routes';
 import {isWaitlist,waitlistLabel} from './waitlist-types';
@@ -25,7 +24,7 @@ export default function HeroProfilePage({hero,heroes=[],loading,error,tags,onBac
  return <main className="hero-profile-page" aria-labelledby="hero-detail-name">
   <header className="hero-page-heading"><button className="hero-page-back" aria-label="Back to previous page" onClick={onBack}/><span>Hero profile</span></header>
   {hero?<article className="hero-detail-layout">
-   <section className="hero-detail-top" aria-label="Hero identity"><div className="hero-detail-portrait">{hero.portrait?<img src={portraitUrl(hero.portrait,'detail')} alt={hero.name+' portrait'}/>:<Shield size={64}/>}<HeroPortraitMarks hero={hero}/></div><div className="hero-detail-identity"><h1 ref={heading} id="hero-detail-name" tabIndex={-1}>{hero.name}</h1>{hero.title&&<p className="hero-detail-title">{hero.title}</p>}</div></section>
+   <section className="hero-detail-top" aria-label="Hero identity"><div className="hero-detail-portrait">{hero.portrait?<img src={portraitUrl(hero.portrait,'detail')} alt={hero.name+' portrait'}/>:<Shield size={64}/>}<span className="portrait-marks" aria-hidden="true"><span className={'hero-portrait-frame frame-'+hero.color.toLowerCase()} data-frame-color={hero.color.toLowerCase()}/></span></div><div className="hero-detail-identity"><h1 ref={heading} id="hero-detail-name" tabIndex={-1}>{hero.name}</h1>{hero.title&&<p className="hero-detail-title">{hero.title}</p>}</div></section>
    <div className="hero-profile-content">
     {onEdit&&<div className="hero-profile-actions" aria-label="Hero management">
      {!isBeta&&<button className="secondary" onClick={()=>setWikiImport(true)}><Download size={16} aria-hidden="true"/>Import from FEH Wiki</button>}
