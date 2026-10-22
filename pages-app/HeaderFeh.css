@@ -2,3 +2,13 @@
 @keyframes header-feh-hop{0%{transform:none}45%{transform:translateY(-10px) rotate(-5deg)}100%{transform:none}}@keyframes header-feh-doze{0%,100%{opacity:.4;transform:none}50%{opacity:1;transform:translateY(-5px)}}
 html[data-motion=reduced] .header-feh *{animation:none!important;transition:none!important}
 @media(max-width:540px){.tracker .masthead .header-feh{right:72px}.tracker .masthead .feh-wordmark{max-width:calc(100% - 64px)}}
+.header-feh-art{position:relative;display:block;width:100%;height:100%;transform-origin:50% 85%;will-change:transform}
+.header-feh .header-feh-art img.feh-expression{position:absolute;inset:3px;width:calc(100% - 6px)!important;height:calc(100% - 6px)!important;max-width:none!important;max-height:none!important;object-fit:contain;opacity:0;animation:none;transform:none;transition:opacity .24s ease}
+.header-feh .header-feh-art img.feh-expression.is-current{opacity:1}
+.header-feh.owl-awake .header-feh-art{animation:header-feh-breathe 4.8s ease-in-out infinite}
+.header-feh.owl-happy .header-feh-art{animation:header-feh-greet .72s cubic-bezier(.22,.61,.36,1) both}
+.header-feh.owl-sleepy .header-feh-art{animation:header-feh-breathe 3.6s ease-in-out infinite}
+@keyframes header-feh-breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-1px) scale(1.025)}}
+@keyframes header-feh-greet{0%{transform:translateY(0) rotate(0)}18%{transform:translateY(1px) scale(1.03,.96)}44%{transform:translateY(-6px) rotate(-5deg) scale(.98,1.03)}66%{transform:translateY(0) rotate(3deg)}84%{transform:translateY(-1px) rotate(-1deg)}100%{transform:translateY(0) rotate(0)}}
+@media(prefers-reduced-motion:reduce){.header-feh *,.header-feh::after{animation:none!important;transition:none!important}}
+html[data-motion=reduced] .header-feh::after{animation:none!important}
