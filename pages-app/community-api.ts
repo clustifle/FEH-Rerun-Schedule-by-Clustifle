@@ -9,6 +9,12 @@ export type Comment={upvoteCount?:number;viewerHasUpvoted?:boolean;viewerCanUpvo
 export type Post={forumHidden?:boolean;flair?:string|null;id:string;number:number;title:string;body:string;url:string;createdAt:string;updatedAt:string;closed:boolean;locked:boolean;upvoteCount:number;viewerHasUpvoted:boolean;viewerCanUpdate:boolean;viewerCanDelete?:boolean;author:{login:string;avatarUrl:string;websiteProfileId?:string|null;websiteUsername?:string|null}|null;category:Category;commentCount:{totalCount:number};comments?:{nodes:Comment[];totalCount:number;pageInfo:PageInfo}};
 export class CommunityApiError extends Error{constructor(message:string,public status:number,public data:unknown){super(message);}}
 const expiredConnections=new Set<string>();
+const automaticConnections=new Map<string,{token:string;request:Promise<boolean>}>();
+async function restoreCommunityConnection(accountId:string,token:string,accessToken:string){
+ const existing=automaticConnections.get(accountId);if(existing?.token===token)return existing.request;
+ const request=(async()=>{try{const r=await fetch(pollApiUrl+'/community/connect',{method:'POST',credentials:'omit',referrerPolicy:'no-referrer',headers:{Authorization:'Bearer '+accessToken,'Content-Type':'application/json'},body:JSON.stringify({token,publicReads:false}),signal:AbortSignal.timeout(25000)});if(!r.ok)return false;expiredConnections.delete(accountId);window.dispatchEvent(new CustomEvent('community-authorization-change',{detail:{accountId}}));return true;}catch{return false;}})();
+ automaticConnections.set(accountId,{token,request});return request;
+}
 export function communityNeedsReconnect(accountId?:string){return !!accountId&&expiredConnections.has(accountId);}
 export function isGitHubAuthorizationError(status:number,message:string){return status===401&&/GitHub authorization expired|Enable community posting/i.test(message);}
 export async function communityApi<T>(path:string,body?:unknown,method=body?'POST':'GET',accountId?:string):Promise<T>{
@@ -18,6 +24,12 @@ export async function communityApi<T>(path:string,body?:unknown,method=body?'POS
  const data=await r.json();
  if(!r.ok){
   if(session&&isGitHubAuthorizationError(r.status,String(data.error||''))){
+   if(path!=='/connect'&&session.provider_token&&await restoreCommunityConnection(session.user.id,session.provider_token,session.access_token)){
+    if(method==='GET'){
+     const retry=await fetch(pollApiUrl+'/community'+path,{credentials:'omit',referrerPolicy:'no-referrer',headers:{Authorization:'Bearer '+session.access_token},signal:AbortSignal.timeout(25000)});
+     if(retry.ok)return await retry.json();
+    }else throw new CommunityApiError('GitHub posting access was restored. Please try your action again.',409,data);
+   }
    expiredConnections.add(session.user.id);
    window.dispatchEvent(new CustomEvent('community-authorization-change',{detail:{accountId:session.user.id}}));
    // Only retry public reads. Never replay a post, reply, vote, or draft write.

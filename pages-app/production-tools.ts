@@ -14,6 +14,7 @@ export async function productionRequest(path:string,init?:RequestInit){
  if(path==='watchlist'){
   const {data:{session}}=await supabase.auth.getSession();
   if(!session){if(read)return [];throw Error('Sign in to save heroes to your watchlist.');}
+  if(body.account_id&&body.account_id!==session.user.id)throw Error('Your account changed. Reload your watchlist before saving.');
   if(read)return result(supabase.from('tracker_watchlist').select('hero_id,list_name').eq('user_id',session.user.id));
   if(body.follow)await result(supabase.from('tracker_watchlist').upsert({user_id:session.user.id,hero_id:body.hero_id,list_name:body.list_name},{onConflict:'user_id,hero_id'}));
   else await result(supabase.from('tracker_watchlist').delete().eq('user_id',session.user.id).eq('hero_id',body.hero_id));
