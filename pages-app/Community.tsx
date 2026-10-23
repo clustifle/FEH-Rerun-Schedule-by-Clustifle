@@ -1,6 +1,6 @@
 import {useEffect,useRef,useState,lazy,Suspense,type FormEvent} from 'react';
 import {Plus,Search,RefreshCw,ArrowLeft,MessageSquare,ArrowUp,Bookmark,ExternalLink,ShieldCheck,Link,CheckCircle2,Pencil,Trash2,LockKeyhole,LockKeyholeOpen} from 'lucide-react';
-import {communityApi,communityNeedsReconnect,discussionUrl,type CommunitySession,type Post,type Category,type PageInfo,type Comment} from './community-api';
+import {communityApi,communityNeedsReconnect,type CommunitySession,type Post,type Category,type PageInfo,type Comment} from './community-api';
 import {supabase} from './static-data';
 import {viewUrl,goTo} from './routes';
 import {startGitHubAuth} from './github-auth';
@@ -54,7 +54,7 @@ export default function Community({manage=false}:{manage?:boolean}){
  const filtered=!!(query||category||flairFilter);
  const shown=posts.filter(p=>!savedOnly||bookmarks.includes(p.number));
  return <section className={'community-workspace forum-plus'+(manage?' community-management':'')}>
-  <div className="community-intro"><div className="forum-welcome"><span className="forum-eyebrow">THE ASKR GATHERING PLACE</span><h3>{manage?'Forum management':'Forum'}</h3><p>Talk heroes. Compare predictions. Plan the next summon.</p></div><a className="secondary" href={discussionUrl} target="_blank" rel="noopener noreferrer"><ExternalLink size={16}/>GitHub Discussions</a></div>
+  {manage&&<h3>Forum management</h3>}
   <div className="forum-utility-bar"><details className="forum-rules-panel"><summary>Forum Rules</summary><ForumRules/></details>
   <div className="community-account"><span>{user?(user.username?'@'+user.username:'Website member')+(connected?' · Ready to post':communityNeedsReconnect(user.website_id)?' · GitHub reconnection needed':' · Connect to post'): 'Join the conversation with your GitHub account.'}</span><div>{!user?<button className="secondary" onClick={()=>window.dispatchEvent(new Event('open-owner-login'))}>Sign in</button>:!connected?<button className="secondary" disabled={busy} onClick={()=>void connect()}><Link size={16}/>{communityNeedsReconnect(user.website_id)?'Reconnect GitHub':'Continue with GitHub'}</button>:null}<button className="icon-button" title="Refresh community" aria-label="Refresh community" disabled={busy||loading} onClick={()=>{void account();void load();if(post)void open(post.number,false);}}><RefreshCw size={18}/></button></div></div></div>
   {!connected&&user&&<p className="community-permission-note">Connect GitHub to post, reply, and upvote.</p>}
