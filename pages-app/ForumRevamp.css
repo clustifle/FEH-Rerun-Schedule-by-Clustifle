@@ -1,4 +1,16 @@
 /* Forum: quiet navigation, readable discussions, realm-aware surfaces. */
+.forum-plus .community-main-info .forum-sidebar-rules{display:block;margin-top:10px;padding:14px 12px;border:1px solid var(--border);border-radius:8px;background:var(--panel-bg)}
+.forum-plus .forum-sidebar-rules .forum-rules{margin:0;padding:0;border:0;background:none}
+.forum-plus .forum-sidebar-rules h3{font-size:14px;margin:0 0 12px;font-weight:600}
+.forum-plus .forum-sidebar-rules .forum-rules>p{display:none}
+.forum-plus .forum-sidebar-rules ol{display:grid;gap:12px;list-style:none;counter-reset:sidebar-rule;margin:0;padding:0}
+.forum-plus .forum-sidebar-rules li{counter-increment:sidebar-rule;position:relative;padding-left:22px;margin:0;line-height:1.5;min-width:0;overflow-wrap:anywhere}
+.forum-plus .forum-sidebar-rules li::before{content:counter(sidebar-rule);position:absolute;left:0;top:1px;color:var(--accent);font-size:11px;font-weight:600}
+.forum-plus .forum-sidebar-rules li strong{font-size:12px;font-weight:600}
+.forum-plus .forum-sidebar-rules li p{font-size:11px;line-height:1.6;margin:3px 0 0;opacity:.85}
+.forum-plus .community-main-info:has(.forum-sidebar-rules){position:static}
+@media(max-width:900px){.forum-plus .community-main-layout:has(.forum-sidebar-rules) .community-main-info{display:contents}.forum-plus .community-main-info:has(.forum-sidebar-rules)>nav[aria-label="Forum views"]{grid-column:1;grid-row:1}.forum-plus .community-main-info:has(.forum-sidebar-rules)>h4{grid-column:1;grid-row:2;margin:0}.forum-plus .community-main-info:has(.forum-sidebar-rules)>nav[aria-label="Forum categories"]{grid-column:1;grid-row:3}.forum-plus .community-main-layout:has(.forum-sidebar-rules) .community-main-feed{grid-row:4}.forum-plus .community-main-info .forum-sidebar-rules{grid-column:1;grid-row:5;margin-top:8px}.forum-plus .forum-sidebar-rules ol{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 20px}}
+@media(max-width:600px){.forum-plus .forum-sidebar-rules ol{grid-template-columns:minmax(0,1fr)}}
 .forum-plus>section.forum-rules-panel{padding:20px 22px;border:1px solid var(--border);border-radius:10px;background:var(--panel-bg);font-size:13px}
 .forum-plus>section.forum-rules-panel .forum-rules{margin:0;padding:0;border:0;background:none}
 .forum-plus>section.forum-rules-panel h3{font-size:18px;margin:0 0 5px;font-weight:600}
