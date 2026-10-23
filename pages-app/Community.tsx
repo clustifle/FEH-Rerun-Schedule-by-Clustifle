@@ -55,7 +55,8 @@ export default function Community({manage=false}:{manage?:boolean}){
  const shown=posts.filter(p=>!savedOnly||bookmarks.includes(p.number));
  return <section className={'community-workspace forum-plus'+(manage?' community-management':'')}>
   {manage&&<h3>Forum management</h3>}
-  <div className="forum-utility-bar"><details className="forum-rules-panel"><summary>Forum Rules</summary><ForumRules/></details>
+  <section className="forum-rules-panel" aria-label="Forum rules"><ForumRules/></section>
+  <div className="forum-utility-bar">
   <div className="community-account"><span>{user?(user.username?'@'+user.username:'Website member')+(connected?' · Ready to post':communityNeedsReconnect(user.website_id)?' · GitHub reconnection needed':' · Connect to post'): 'Join the conversation with your GitHub account.'}</span><div>{!user?<button className="secondary" onClick={()=>window.dispatchEvent(new Event('open-owner-login'))}>Sign in</button>:!connected?<button className="secondary" disabled={busy} onClick={()=>void connect()}><Link size={16}/>{communityNeedsReconnect(user.website_id)?'Reconnect GitHub':'Continue with GitHub'}</button>:null}<button className="icon-button" title="Refresh community" aria-label="Refresh community" disabled={busy||loading} onClick={()=>{void account();void load();if(post)void open(post.number,false);}}><RefreshCw size={18}/></button></div></div></div>
   {!connected&&user&&<p className="community-permission-note">Connect GitHub to post, reply, and upvote.</p>}
   {user?.role==='owner'&&!session?.publicReady&&<aside className="community-setup"><ShieldCheck size={22}/><div><strong>Connect the public community feed</strong><p>Authorize GitHub once to let visitors read the repository’s public Discussions. Your encrypted connection will be used for these read requests.</p><button className="primary" disabled={busy} onClick={()=>void connect(true)}>Connect public feed</button></div></aside>}
