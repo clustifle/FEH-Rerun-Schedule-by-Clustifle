@@ -3,6 +3,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '23 1,9,17 * * *'
 permissions:
   contents: read
   pages: write
@@ -33,11 +35,17 @@ jobs:
           path: |
             public/hero-portraits
             pages-app/portrait-manifest.json
-          key: portrait-delivery-v1-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: portrait-delivery-v1-
+            public/public-data
+          key: public-delivery-v2-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            public-delivery-v2-
+            portrait-delivery-v1-
+      - name: Refresh public data and keep the free database active
+        run: node scripts/snapshot-public-data.mjs
       - run: python scripts/test-portrait-sync.py
       - run: python scripts/sync-portraits.py
       - run: pnpm exec tsc -p tsconfig.pages.json
+      - run: node --test scripts/public-data-fallback.test.mjs
       - run: node scripts/check-public-secrets.mjs
       - run: node --test polls-service/worker.test.mjs polls-service/community.test.mjs polls-service/request-body.test.mjs polls-service/wiki-import.test.mjs
       - run: pnpm build:pages

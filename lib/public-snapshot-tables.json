@@ -1,0 +1,13 @@
+{
+ "heroes":{"order":"id","fields":"id,name,title,category,schedule,color,pool,month,blessing,notes,portrait,updated,revision,debut_version,release_date,release_event,heroic_grail,demote,weapon_type,move_type"},
+ "tracker_waitlist":{"order":"hero_id","fields":"hero_id,sort_order"},
+ "tracker_extended_waitlist":{"order":"hero_id","fields":"hero_id,list_kind,sort_order"},
+ "tracker_banners":{"order":"id","fields":"id,name,banner_type,slot_count,starts_on,ends_on,starts_time,ends_time,sort_order,event_type,skills_month,added_skills,coming_soon"},
+ "tracker_banner_heroes":{"order":"banner_id","fields":"banner_id,hero_id,slot_index"},
+ "forging_bonds_revivals":{"order":"month","fields":"month,title,hero_1,hero_2,hero_3,hero_4,ongoing,coming_soon,starts_on,ends_on,starts_time,ends_time"},
+ "hall_of_forms_revivals":{"order":"month","fields":"month,title,hero_1,hero_2,hero_3,hero_4,ongoing,coming_soon,starts_on,ends_on,starts_time,ends_time"},
+ "weekly_revival_banners":{"order":"number","fields":"number,hero_1,hero_2,hero_3,source_url,revision"},
+ "weekly_revival_events":{"order":"id","fields":"id,banner_number,starts_on,ends_on,confirmed,source_url,revision"},
+ "monthly_revival_banners":{"order":"id","fields":"id,kind,number,hero_1,hero_2,hero_3,source_url,revision"},
+ "monthly_revival_events":{"order":"id","fields":"id,banner_id,month,starts_on,ends_on,duration,under_consideration,confirmed,source_url,revision"}
+}
