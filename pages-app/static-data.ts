@@ -5,12 +5,13 @@ import {isWaitlist} from './waitlist-types';
 import {moveTypes} from './move-types';
 import {weaponTypes} from './weapon-types';
 import {createClient} from '@supabase/supabase-js';
+import {createPublicDataFetch} from './public-data-fallback';
 import {jsonResponse,requestTimeout} from './browser-compat';
 import {normalizePool,isStarterHero} from './hero-pools';
 import {upscalePortrait} from './portrait-upscale';
 export const supabaseUrl='https://aknsqeqykjgdyhdroqcx.supabase.co';
 export const supabasePublishableKey='sb_publishable_PiJIst1aSJtrYBiIvwDIVA_KS3c-E3g';
-export const supabase=createClient(supabaseUrl,supabasePublishableKey);
+export const supabase=createClient(supabaseUrl,supabasePublishableKey,{global:{fetch:createPublicDataFetch(supabaseUrl,import.meta.env.BASE_URL+'public-data/snapshot.json')}});
 // Page through the API limit so directories and duplicate checks see every hero.
 let pendingHeroes:ReturnType<typeof readAllHeroRows>|null=null;
 export function loadAllHeroRows(){
