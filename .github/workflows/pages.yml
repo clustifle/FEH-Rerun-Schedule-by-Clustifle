@@ -35,11 +35,13 @@ jobs:
           path: |
             public/hero-portraits
             pages-app/portrait-manifest.json
-            public/public-data
-          key: public-delivery-v2-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            public-delivery-v2-
-            portrait-delivery-v1-
+          key: portrait-delivery-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: portrait-delivery-v1-
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+        with:
+          path: public/public-data
+          key: public-data-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: public-data-v1-
       - name: Refresh public data and keep the free database active
         run: node scripts/snapshot-public-data.mjs
       - run: python scripts/test-portrait-sync.py
