@@ -5,7 +5,9 @@ const url='https://feheroes.fandom.com/wiki/Alm%3A_Saint-King';
 const payload={parse:{title:'Alm: Saint-King',text:'<table>Hero information</table>'}};
 test('wiki proxy accepts only hero pages on the fixed HTTPS wiki host',()=>{
  assert.equal(wikiImportPage(url),'Alm: Saint-King');
- for(const bad of ['https://localhost/wiki/A:_B','https://feheroes.fandom.com.evil.test/wiki/A:_B','http://feheroes.fandom.com/wiki/A:_B','https://user:pass@feheroes.fandom.com/wiki/A:_B','https://feheroes.fandom.com/wiki/File:Image.png','https://feheroes.fandom.com/wiki/A:_B%2FStats','https://feheroes.fandom.com/wiki/A%ZZ:_B',null])assert.throws(()=>wikiImportPage(bad));
+ for(const bad of ['https://localhost/wiki/A:_B','https://feheroes.fandom.com.evil.test/wiki/A:_B','http://feheroes.fandom.com/wiki/A:_B','https://user:pass@feheroes.fandom.com/wiki/A:_B','https://feheroes.fandom.com/wiki/File:Image.png','https://feheroes.fandom.com/wiki/A:_B%2FStats%2FSkills','https://feheroes.fandom.com/wiki/A%ZZ:_B',null])assert.throws(()=>wikiImportPage(bad));
+ assert.equal(wikiImportPage('https://feheroes.fandom.com/wiki/Alexandra:_Sterling/Silver'),'Alexandra: Sterling/Silver');
+ assert.equal(wikiImportPage('https://feheroes.fandom.com/wiki/'+encodeURIComponent('Alexandra: Sterling/Silver')),'Alexandra: Sterling/Silver');
 });
 test('successful public wiki source is bounded, sanitized and cached without user credentials',async()=>{
  const previousFetch=globalThis.fetch,previousCache=globalThis.caches;let calls=0;const entries=new Map();
@@ -27,6 +29,14 @@ test('verification HTML and upstream failures never become cached previews',asyn
  }finally{globalThis.fetch=previousFetch;globalThis.caches=previousCache;}
 });
 
+test('slash-form hero titles reach the FEH Wiki API unchanged',async()=>{
+ const previousFetch=globalThis.fetch,previousCache=globalThis.caches;let requested='';
+ globalThis.caches={default:{match:async()=>null,put:async()=>{}}};
+ globalThis.fetch=async target=>{requested=new URL(target).searchParams.get('page');return Response.json({parse:{title:'Alexandra: Sterling/Silver',text:'<table>Hero information</table>'}});};
+ try{const result=await fetchWikiImport('https://feheroes.fandom.com/wiki/Alexandra:_Sterling/Silver');assert.equal(requested,'Alexandra: Sterling/Silver');assert.deepEqual(result,{parse:{title:'Alexandra: Sterling/Silver',text:payload.parse.text}});}
+ finally{globalThis.fetch=previousFetch;globalThis.caches=previousCache;}
+});
+
 test('special letters, decomposed accents and double-encoded copied links resolve consistently',()=>{
  for(const title of ['Heiðr: Innocent Goddess','Nerþuz: God of the Land','Læraðr: Quieting Heart','Hræsvelgr: Quieting Blade','Gunnthrá: Voice of Dreams','Ótr: Kingsbrother']){
   const encoded=encodeURIComponent(title.replace(/ /g,'_'));
@@ -36,5 +46,6 @@ test('special letters, decomposed accents and double-encoded copied links resolv
  }
  assert.equal(wikiImportPage('https://feheroes.fandom.com/wiki/'+encodeURIComponent('Altina: Dawn’s_Trueblade')),"Altina: Dawn's Trueblade");
  assert.equal(wikiImportPage('https://feheroes.fandom.com/wiki/'+encodeURIComponent('Alm: Saint‑King')),'Alm: Saint-King');
+ assert.equal(wikiImportPage('https://feheroes.fandom.com/wiki/'+encodeURIComponent('Alexandra: Sterling/Silver')),'Alexandra: Sterling/Silver');
  for(const value of ['File%253AImage.png','Hero%253A_Title%252FStats','Hero%253A_Title%2500'])assert.throws(()=>wikiImportPage('https://feheroes.fandom.com/wiki/'+value));
 });

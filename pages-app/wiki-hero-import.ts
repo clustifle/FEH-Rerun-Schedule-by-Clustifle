@@ -6,7 +6,8 @@ export type WikiHero={title:string;version:string|null;releaseDate:string|null;s
 export function wikiPageUrl(value:string){
  let url:URL,page:string;try{url=new URL(value.trim());page=decodeURIComponent(url.pathname.slice(url.pathname.startsWith('/wiki/')?6:url.hostname==='feheroes.gamepedia.com'?1:6));if(/%[0-9a-f]{2}/i.test(page))page=decodeURIComponent(page);if(/[\u0000-\u001f\u007f]/u.test(page))throw Error('Invalid page characters');page=page.normalize('NFC').replace(/[\u2018\u2019\u02bc]/g,"'").replace(/[\u2010-\u2015\u2212]/g,'-').replace(/_/g,' ').replace(/\s+/gu,' ').trim();}catch{throw Error('Use a valid FEH Wiki hero page URL.');}
  if(value.length>2000||url.protocol!=='https:'||!['feheroes.fandom.com','feheroes.gamepedia.com'].includes(url.hostname)||url.username||url.password||url.port||(!url.pathname.startsWith('/wiki/')&&url.hostname!=='feheroes.gamepedia.com'))throw Error('Use an HTTPS hero page from feheroes.fandom.com.');
- if(!page.includes(':')||/^(File|Template|Category|Special|Module|User|Talk):/i.test(page)||page.includes('/')||/[\u0000-\u001f\u007f]/u.test(page))throw Error('Choose a hero page, not an image, category or subpage.');
+ const validHeroSlash=/^[^:/]+:\s*[^/]+\/Silver$/iu.test(page);
+ if(!page.includes(':')||/^(File|Template|Category|Special|Module|User|Talk):/i.test(page)||(page.includes('/')&&!validHeroSlash)||/[\u0000-\u001f\u007f]/u.test(page))throw Error('Choose a valid FEH hero page.');
  return {page,url:'https://feheroes.fandom.com/wiki/'+encodeURIComponent(page.replace(/ /g,'_'))};
 }
 const text=(el:Element|undefined|null)=>el?.textContent?.normalize('NFC').replace(/\s+/g,' ').trim()||'';
