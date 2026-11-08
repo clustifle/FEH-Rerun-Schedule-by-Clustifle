@@ -11,6 +11,7 @@ create policy "Public versions" on public.tracker_feh_versions for select to ano
 create policy "Staff manage versions" on public.tracker_feh_versions for all to authenticated using((select public.tracker_role()) in ('Owner','Manager')) with check((select public.tracker_role()) in ('Owner','Manager'));
 insert into public.tracker_feh_versions(version,sort_order) select n||'.0',n*100 from generate_series(1,10) n;
 alter table public.heroes add column debut_version text references public.tracker_feh_versions(version) on update cascade on delete set null;
+alter table public.heroes add column game_origins integer[] check(game_origins is null or (cardinality(game_origins)<=2 and game_origins <@ array[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]));
 alter table public.heroes add column release_date date;
 alter table public.heroes add column release_event text check(char_length(release_event)<=200);
 alter table public.heroes add column revision integer not null default 1;
@@ -55,7 +56,7 @@ begin
   if old.id is null then
    insert into public.heroes select next.*;
   else
-   update public.heroes set name=next.name,title=next.title,category=next.category,pool=next.pool,color=next.color,weapon_type=next.weapon_type,move_type=next.move_type,blessing=next.blessing,demote=next.demote,heroic_grail=next.heroic_grail,schedule=next.schedule,month=next.month,notes=next.notes,debut_version=next.debut_version,release_date=next.release_date,release_event=next.release_event where id=old.id;
+   update public.heroes set name=next.name,title=next.title,category=next.category,pool=next.pool,color=next.color,weapon_type=next.weapon_type,move_type=next.move_type,blessing=next.blessing,demote=next.demote,heroic_grail=next.heroic_grail,schedule=next.schedule,month=next.month,notes=next.notes,debut_version=next.debut_version,game_origins=next.game_origins,release_date=next.release_date,release_event=next.release_event where id=old.id;
   end if;
   total:=total+1;
  end loop;
@@ -100,3 +101,4 @@ revoke all on function public.tracker_v2_versions(jsonb,text) from anon;
 revoke all on function public.tracker_hero_revision() from anon,authenticated;
 revoke insert,update,delete,truncate,references,trigger on public.tracker_feh_versions from anon;
 revoke truncate,references,trigger on public.tracker_watchlist,public.tracker_feh_versions from authenticated;
+

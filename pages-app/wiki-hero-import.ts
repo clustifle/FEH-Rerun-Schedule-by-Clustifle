@@ -57,7 +57,7 @@ export function highestWikiPassives(candidates:WikiSkill[]){const best=new Map<S
 export function parseWikiHero(html:string,title:string,url:string):WikiHero{
  const doc=new DOMParser().parseFromString(html,'text/html');
  const metadata=new Map<string,string>();for(const tr of doc.querySelectorAll('tr')){const cells=Array.from(tr.children);const label=text(cells[0]).replace(/\[[^\]]*\]/g,'').replace(/:$/,'').trim().toLowerCase();if(['version','release date'].includes(label)&&cells[1])metadata.set(label,text(cells[1]));}
- const version=metadata.get('version')?.match(/(?:^|\s)v?(\d+\.\d+(?:\.\d+)?)(?=\s|\[|$)/i)?.[1]||null;
+ const version=metadata.get('version')?.match(/(?:^|\s)v?(\d{1,2}\.(?:0|[1-9]\d?))(?:\.0)?(?=\s|\[|$)/i)?.[1]||null;
  const rawDate=metadata.get('release date')?.replace(/\[[^\]]*\]/g,'').trim()||'';
  let releaseDate=rawDate.match(/\b\d{4}-\d{2}-\d{2}\b/)?.[0]||null;
  if(!releaseDate&&/^(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}$/i.test(rawDate)){const parsed=new Date(rawDate+' 00:00:00 UTC');if(Number.isFinite(parsed.getTime()))releaseDate=parsed.toISOString().slice(0,10);}
@@ -125,3 +125,4 @@ export async function downloadWikiSkillIcon(skill:WikiSkill){
  }
  throw Error('The wiki icon is unavailable.');
 }
+
