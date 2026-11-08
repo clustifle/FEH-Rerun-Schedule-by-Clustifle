@@ -56,3 +56,12 @@ html[data-theme][data-theme][data-theme][data-theme][data-theme][data-theme][dat
 .wiki-import-refine{flex:1 0 100%;width:100%;box-sizing:border-box}
 .wiki-import-refine-found{box-sizing:border-box;width:100%}
 .wiki-import-refine-found>span{flex:1;overflow-wrap:anywhere}
+
+.wiki-import-origin-choice{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--realm-line);border-radius:9px;background:var(--realm-panel)}
+.wiki-import-origin-choice>input{margin-top:4px;accent-color:var(--realm-accent)}
+.wiki-import-origin-choice>span{display:grid;gap:4px;min-width:0}
+.wiki-import-origin-icons{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px}
+.wiki-import-origin-icons>span{display:flex;align-items:center;gap:5px;font-size:13px}
+.wiki-import-origin-icons img{object-fit:contain;flex:none}
+.wiki-batch-origins{display:grid;gap:5px}.wiki-batch-origins>span{color:var(--realm-muted)}.wiki-batch-origins>div{display:flex;flex-wrap:wrap;gap:8px}.wiki-batch-origins>div>span{display:flex;align-items:center;gap:5px}.wiki-batch-origins img{object-fit:contain;flex:none}
+

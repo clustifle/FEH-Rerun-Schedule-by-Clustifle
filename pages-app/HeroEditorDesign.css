@@ -43,3 +43,11 @@ html[data-theme][data-theme][data-theme][data-theme] .tracker dialog.hero-tabbed
 @media(max-width:650px){html[data-theme][data-theme][data-theme][data-theme] .tracker .hero-tabbed-editor .hero-editor-navigation button{min-width:0;font-size:14px;padding:10px 4px}}
 html[data-theme][data-theme][data-theme][data-theme] .tracker .hero-tabbed-editor :is(h3,.hero-editor-sidebar-heading){background:none!important;box-shadow:none!important;border:0!important}html[data-theme][data-theme][data-theme][data-theme] .tracker .hero-tabbed-editor h3{padding:0!important}
 .hero-editor-wiki-action{padding:12px 22px;border-bottom:1px solid var(--realm-line);display:flex;justify-content:flex-end}.hero-editor-wiki-action .secondary{font-size:16px}
+.hero-game-origin-editor{display:grid;gap:8px;margin:16px 0;padding:12px;border:1px solid var(--edit-line);border-radius:10px;background:var(--edit-panel)}
+.hero-game-origin-editor legend{padding:0 6px;color:var(--edit-accent)}
+.hero-game-origin-editor>small{color:var(--edit-muted)}
+.hero-game-origin-editor>div{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:6px}
+.hero-game-origin-editor>div>label{display:flex;align-items:center;gap:8px;padding:6px;border-radius:7px;background:var(--edit-bg);cursor:pointer}
+.hero-game-origin-editor img{object-fit:contain;flex:none}
+.hero-game-origin-editor input{accent-color:var(--edit-accent)}
+

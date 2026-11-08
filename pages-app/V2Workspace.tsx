@@ -15,7 +15,7 @@ import './V2Workspace.css';
 const BulkEditor=lazy(()=>import('./BulkEditor'));
 const VersionsManagement=lazy(()=>import('./VersionsManagement'));
 const Community=lazy(()=>import('./Community'));
-export type BetaHero={id:string;name:string;title:string;category:string;color:string;portrait:string|null;pool:string|null;schedule:string;month:string|null;notes:string;revision?:number;weapon_type?:string|null;move_type?:string|null;blessing?:string|null;demote?:boolean;heroic_grail?:boolean;debut_version?:string|null;release_date?:string|null;release_event?:string|null};
+export type BetaHero={id:string;name:string;title:string;category:string;color:string;portrait:string|null;pool:string|null;schedule:string;month:string|null;notes:string;revision?:number;weapon_type?:string|null;move_type?:string|null;blessing?:string|null;demote?:boolean;heroic_grail?:boolean;debut_version?:string|null;release_date?:string|null;release_event?:string|null;game_origins?:number[]|null};
 type Props<T extends BetaHero>={section:string;heroes:T[];onView:(hero:T)=>void;onRefresh:()=>Promise<void>};
 const sections=[['My Watchlist','watchlist'],['Forum','community'],['Administrative Manager','FEHRS_AdmManager/']] as const;
 export function BetaNavigation(){return <aside className="beta-navigation"><p><strong>2.0 Beta · Head Admin testing</strong><span>Hero changes stay in the beta database. Other live editing is disabled.</span></p><nav aria-label="Version 2.0 beta tools">{sections.map(([label,path])=><a key={path} href={'/'+path}>{label}</a>)}</nav></aside>;}
@@ -41,3 +41,4 @@ export function V2HeroInfo({hero,heroes=[]}:{hero:BetaHero;heroes?:BetaHero[];co
  if(!variants.length)return null;
  return <section className="hero-profile-card hero-profile-variants" aria-labelledby="other-variants-heading"><header className="hero-profile-card-heading"><h2 id="other-variants-heading">Other variants</h2></header><div className="hero-variant-grid">{variants.map(h=><a className="hero-variant-link" key={h.id} href={heroUrl(h,heroes)} title={h.name+' · '+(h.title||h.category)} aria-label={'View '+h.name+' · '+(h.title||h.category)}><span className="hero-variant-portrait">{h.portrait?<img src={portraitUrl(h.portrait)} alt="" loading="lazy" decoding="async"/>:<Shield size={32}/>}<HeroPortraitMarks hero={h}/></span></a>)}</div></section>;
 }
+
