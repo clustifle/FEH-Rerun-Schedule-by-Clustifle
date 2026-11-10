@@ -1,0 +1,42 @@
+/* Hero profile revamp: banner, rerun strip, grouped details. Older profile rules still style
+   the portrait frame, skills card, and shared cards. */
+.tracker .hero-profile-page .hero-v4{display:flex;flex-direction:column;gap:14px;flex:1 1 auto;width:100%;max-width:1100px;min-width:0;min-height:0;margin:0 auto;padding-right:4px;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-gutter:stable}
+.tracker .hero-profile-page .hero-v4-banner{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:22px;align-items:center;padding:18px;border:1px solid var(--realm-line);border-radius:14px;background:var(--realm-panel);box-shadow:0 3px 12px rgb(0 0 0 / .25)}
+.tracker .hero-profile-page .hero-v4-identity{min-width:0}
+.tracker .hero-profile-page .hero-v4-identity h1{margin:0;font:700 34px/1.1 FEHeroes,Georgia,serif;overflow-wrap:anywhere}
+.tracker .hero-profile-page .hero-v4-kicker{margin:0 0 4px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--realm-accent)}
+.tracker .hero-profile-page .hero-v4-identity .hero-detail-title{margin:4px 0 0;font-size:18px;opacity:.9}
+.tracker .hero-profile-page .hero-v4-chips{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.tracker .hero-profile-page .hero-v4-chips li{display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:4px 11px;border:1px solid var(--realm-line);border-radius:999px;font-size:14px;background:color-mix(in srgb,var(--realm-panel) 70%,transparent)}
+.tracker .hero-profile-page .hero-v4-chips img{width:22px;height:22px;object-fit:contain;flex:none}
+.tracker .hero-profile-page .hero-v4-chip-pool{border-color:var(--realm-accent)!important}
+.tracker .hero-profile-page .hero-v4-actions{display:flex;flex-direction:column;gap:8px;min-width:210px}
+.tracker .hero-profile-page .hero-v4-actions .hero-profile-actions{display:flex;flex-direction:column;gap:8px}
+.tracker .hero-profile-page .hero-v4-actions .hero-profile-actions button{width:100%;justify-content:center}
+.tracker .hero-profile-page .hero-v4-rerun{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 18px;border-radius:12px;border:1px solid var(--realm-accent);background:color-mix(in srgb,var(--realm-accent) 12%,var(--realm-panel))}
+.tracker .hero-profile-page .hero-v4-rerun h2{margin:0;font:22px/1.2 FEHeroes,Georgia,serif}
+.tracker .hero-profile-page .hero-v4-link{display:inline-flex;align-items:center;gap:6px;color:var(--realm-accent);white-space:nowrap}
+.tracker .hero-profile-page .hero-v4-body{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px;align-items:start}
+.tracker .hero-profile-page .hero-v4-details{grid-row:span 2}
+.tracker .hero-profile-page .hero-v4-groups{display:grid;gap:14px}
+.tracker .hero-profile-page .hero-v4-group h3{margin:0 0 4px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--realm-accent)}
+.tracker .hero-profile-page .hero-v4-group dl{margin:0}
+.tracker .hero-profile-page .hero-v4-group dl>div{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:12px;align-items:center;padding:6px 0;border-bottom:1px solid color-mix(in srgb,var(--realm-line) 40%,transparent)}
+.tracker .hero-profile-page .hero-v4-group dl>div:last-child{border-bottom:0}
+.tracker .hero-profile-page .hero-v4-group dt{font-size:14px;color:var(--realm-accent)}
+.tracker .hero-profile-page .hero-v4-group dd{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:0;min-width:0;font-size:15px;overflow-wrap:anywhere}
+.tracker .hero-profile-page .hero-v4-group dd img{width:24px;height:24px;object-fit:contain;flex:none}
+.tracker .hero-profile-page .hero-v4-group .hero-profile-origins{gap:6px 12px}
+.tracker .hero-profile-page .hero-v4-group .hero-profile-origins>span{display:inline-flex;align-items:center;gap:6px}
+.tracker .hero-profile-page .hero-v4-notes p{margin:0;line-height:1.5}
+@media (max-width:900px){
+.tracker .hero-profile-page .hero-v4-body{grid-template-columns:minmax(0,1fr)}
+.tracker .hero-profile-page .hero-v4-details{grid-row:auto}
+}
+@media (max-width:700px){
+.tracker .hero-profile-page .hero-v4-banner{grid-template-columns:84px minmax(0,1fr);gap:12px;padding:12px}
+.tracker .hero-profile-page .hero-v4-actions{grid-column:1/-1;min-width:0}
+.tracker .hero-profile-page .hero-v4-identity h1{font-size:26px}
+.tracker .hero-profile-page .hero-v4-rerun{flex-direction:column;align-items:flex-start}
+.tracker .hero-profile-page .hero-v4-group dl>div{grid-template-columns:minmax(0,1fr)}
+}
