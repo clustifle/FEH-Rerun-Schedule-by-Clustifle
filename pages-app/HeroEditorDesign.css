@@ -51,3 +51,13 @@ html[data-theme][data-theme][data-theme][data-theme] .tracker .hero-tabbed-edito
 .hero-game-origin-editor img{object-fit:contain;flex:none}
 .hero-game-origin-editor input{accent-color:var(--edit-accent)}
 
+
+/* Legacy Add/Edit Hero header: Import from FEH Wiki sits beside the close button */
+.tracker .hero-editor.hero-tabbed-editor .dialog-top{display:flex;align-items:center;gap:12px}
+.tracker .hero-editor.hero-tabbed-editor .dialog-top>div:first-child{flex:1 1 0;min-width:0}
+.tracker .hero-editor.hero-tabbed-editor .dialog-top>.icon-button{flex:0 0 auto}
+.tracker .hero-editor.hero-tabbed-editor .dialog-top>.hero-editor-wiki-button{margin-left:auto;white-space:nowrap}
+@media (max-width:600px){
+.tracker .hero-editor.hero-tabbed-editor .dialog-top{flex-wrap:wrap}
+.tracker .hero-editor.hero-tabbed-editor .dialog-top>.hero-editor-wiki-button{order:3;flex:1 1 100%;width:100%;margin-left:0}
+}
