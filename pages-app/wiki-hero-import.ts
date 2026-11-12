@@ -3,8 +3,6 @@ import {communityApi} from './community-api';
 import {skillSlots,type SkillSlot} from './hero-skills';
 import type {WikiDetails} from './wiki-details-types';
 import {parseWikiDetails as parseWikiDetailsFields} from './wiki-details-parse';
-import type {WikiDetails} from './wiki-details-types';
-import {parseWikiDetails as parseWikiDetailsFields} from './wiki-details-parse';
 export type WikiSkill={slot:SkillSlot;name:string;icon:string|null;thumbnail?:string|null;refineIcon?:string|null;refineThumbnail?:string|null};
 export type WikiHero={title:string;version:string|null;releaseDate:string|null;skills:WikiSkill[];url:string;wikiDetails?:WikiDetails|null;identity?:{name:string;title:string;portrait:string|null;portraitThumbnail?:string|null;moveType:string|null;weaponType:string|null;color:string|null;heroType:string;blessing:string|null;demote?:boolean;heroicGrail?:boolean;isSpecial?:boolean;pool?:string|null;gameOrigins?:number[]}};
 export function wikiPageUrl(value:string){
