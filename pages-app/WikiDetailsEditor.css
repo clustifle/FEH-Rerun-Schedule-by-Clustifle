@@ -1,0 +1,39 @@
+/* WikiDetailsEditor: stats grid for Lv1 / Lv40 inputs */
+.wiki-stats-editor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 14px 0;
+}
+.wiki-stats-editor-grid fieldset {
+  border: 1px solid var(--edit-line, #aaa2b640);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 0;
+}
+.wiki-stats-editor-grid legend {
+  font-size: 12px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  opacity: .7;
+  padding: 0 6px;
+}
+.wiki-stats-editor-grid label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.wiki-stats-editor-grid input[type="number"] {
+  width: 64px;
+  text-align: center;
+  flex: none;
+}
+.wiki-details-editor .v2-actions {
+  margin-top: 16px;
+}
+@media (max-width: 540px) {
+  .wiki-stats-editor-grid { grid-template-columns: 1fr; }
+}

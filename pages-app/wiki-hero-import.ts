@@ -1,8 +1,12 @@
 import {isStarterHero,autoImportPool} from './hero-pools';
 import {communityApi} from './community-api';
 import {skillSlots,type SkillSlot} from './hero-skills';
+import type {WikiDetails} from './wiki-details-types';
+import {parseWikiDetails as parseWikiDetailsFields} from './wiki-details-parse';
+import type {WikiDetails} from './wiki-details-types';
+import {parseWikiDetails as parseWikiDetailsFields} from './wiki-details-parse';
 export type WikiSkill={slot:SkillSlot;name:string;icon:string|null;thumbnail?:string|null;refineIcon?:string|null;refineThumbnail?:string|null};
-export type WikiHero={title:string;version:string|null;releaseDate:string|null;skills:WikiSkill[];url:string;identity?:{name:string;title:string;portrait:string|null;portraitThumbnail?:string|null;moveType:string|null;weaponType:string|null;color:string|null;heroType:string;blessing:string|null;demote?:boolean;heroicGrail?:boolean;isSpecial?:boolean;pool?:string|null;gameOrigins?:number[]}};
+export type WikiHero={title:string;version:string|null;releaseDate:string|null;skills:WikiSkill[];url:string;wikiDetails?:WikiDetails|null;identity?:{name:string;title:string;portrait:string|null;portraitThumbnail?:string|null;moveType:string|null;weaponType:string|null;color:string|null;heroType:string;blessing:string|null;demote?:boolean;heroicGrail?:boolean;isSpecial?:boolean;pool?:string|null;gameOrigins?:number[]}};
 export function wikiPageUrl(value:string){
  let url:URL,page:string;try{url=new URL(value.trim());page=decodeURIComponent(url.pathname.slice(url.pathname.startsWith('/wiki/')?6:url.hostname==='feheroes.gamepedia.com'?1:6));if(/%[0-9a-f]{2}/i.test(page))page=decodeURIComponent(page);if(/[\u0000-\u001f\u007f]/u.test(page))throw Error('Invalid page characters');page=page.normalize('NFC').replace(/[\u2018\u2019\u02bc]/g,"'").replace(/[\u2010-\u2015\u2212]/g,'-').replace(/_/g,' ').replace(/\s+/gu,' ').trim();}catch{throw Error('Use a valid FEH Wiki hero page URL.');}
  if(value.length>2000||url.protocol!=='https:'||!['feheroes.fandom.com','feheroes.gamepedia.com'].includes(url.hostname)||url.username||url.password||url.port||(!url.pathname.startsWith('/wiki/')&&url.hostname!=='feheroes.gamepedia.com'))throw Error('Use an HTTPS hero page from feheroes.fandom.com.');
@@ -108,7 +112,7 @@ export function parseWikiHero(html:string,title:string,url:string):WikiHero{
  const {heroType,special}=wikiHeroTypes(doc);
  const effect=text(info.get('Legendary Effect')||info.get('Mythic Effect')),blessing=effect.match(/\b(Earth|Fire|Water|Wind|Light|Dark|Astra|Anima)\b/i)?.[0]||null;
  const colon=title.indexOf(':');const identity={pool:null as string|null,isSpecial:special,...wikiAvailability(doc),name:title.slice(0,colon).trim(),title:title.slice(colon+1).trim(),portrait,portraitThumbnail:portrait?rawPortrait:null,moveType:(/Flying|Flier/i.test(move)?'Fliers':move.match(/Infantry|Cavalry|Armored/i)?.[0]||null),weaponType:weaponType?weaponType.toLowerCase()==='dragon'?'Breath':weaponType[0].toUpperCase()+weaponType.slice(1).toLowerCase():null,color:color?color[0].toUpperCase()+color.slice(1).toLowerCase():null,heroType:heroType.toLowerCase()==='chosen hero'?'Chosen Hero':heroType[0].toUpperCase()+heroType.slice(1).toLowerCase(),blessing:blessing?blessing[0].toUpperCase()+blessing.slice(1).toLowerCase():null,gameOrigins:wikiGameOrigins(text(info.get('Entry')||info.get('Entries')))};
- if(isStarterHero({name:identity.name,title:identity.title,category:identity.heroType})){identity.demote=false;identity.heroicGrail=false;}identity.pool=autoImportPool({...identity,category:identity.heroType,heroic_grail:identity.heroicGrail});return {title,version,releaseDate,skills,url,identity};
+ if(isStarterHero({name:identity.name,title:identity.title,category:identity.heroType})){identity.demote=false;identity.heroicGrail=false;}identity.pool=autoImportPool({...identity,category:identity.heroType,heroic_grail:identity.heroicGrail});const wikiDetails=parseWikiDetailsFields(doc,url);return {title,version,releaseDate,skills,url,wikiDetails,identity};
 }
 export async function fetchWikiHero(value:string){
  const {page,url}=wikiPageUrl(value);let data:{parse?:{title:string;text:string};error?:{info?:string}};

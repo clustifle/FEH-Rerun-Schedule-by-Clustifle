@@ -1,0 +1,125 @@
+/* Phase 2: HeroWikiDetails component styles */
+
+.hero-wiki-details {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px;
+  border: 1px solid var(--realm-line, #aaa2b6);
+  border-radius: 12px;
+  background: var(--realm-panel, #313b50);
+}
+
+/* Lore / description */
+.wiki-details-description {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: var(--realm-accent, #e4cc94);
+}
+.wiki-details-description svg {
+  flex: none;
+  margin-top: 3px;
+  opacity: .7;
+}
+.wiki-details-description p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  font-style: italic;
+  opacity: .9;
+}
+
+/* Stats table */
+.wiki-details-stats h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  opacity: .7;
+}
+.wiki-stat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.wiki-stat-table th,
+.wiki-stat-table td {
+  padding: 6px 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--realm-line, #aaa2b640);
+}
+.wiki-stat-table th[scope="row"] {
+  text-align: left;
+  font-weight: 600;
+  color: var(--realm-accent, #e4cc94);
+  opacity: .85;
+}
+.wiki-stat-table thead th {
+  font-size: 12px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  opacity: .6;
+}
+.wiki-stat-lv40 { font-weight: 600; }
+.wiki-stat-diff {
+  color: #9fea9e;
+  font-size: 12px;
+}
+
+/* Credits */
+.wiki-details-credits {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+.wiki-details-credits > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.wiki-details-credits dt {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  opacity: .6;
+  min-width: 110px;
+  flex: none;
+}
+.wiki-details-credits dd {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Source link */
+.wiki-details-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--realm-accent, #e4cc94);
+  opacity: .8;
+  text-decoration: none;
+  align-self: flex-start;
+}
+.wiki-details-source:hover,
+.wiki-details-source:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.wiki-details-loading {
+  font-size: 13px;
+  opacity: .6;
+  padding: 8px 0;
+}
+
+@media (max-width: 600px) {
+  .hero-wiki-details { padding: 14px; gap: 14px; }
+  .wiki-details-credits > div { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .wiki-details-credits dt { min-width: 0; }
+}
